@@ -1,17 +1,18 @@
-package org.canay.backend.security;
+package org.canay.backend.jwt;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
-public class JwtUtils {
+public class JwtService {
 
-    private final String jwtSecret = "your_super_secret_key_that_must_be_very_long_for_security_reasons";
-    private final int jwtExpirationMs = 86400000;
+    @Value("${app.jwt.secret}")
+    private String jwtSecret;
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
@@ -21,7 +22,7 @@ public class JwtUtils {
         return Jwts.builder()
                 .subject(identity)
                 .issuedAt(new Date())
-                .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .expiration(new Date((new Date()).getTime() + 86400000))
                 .signWith(getSigningKey())
                 .compact();
     }

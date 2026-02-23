@@ -1,7 +1,6 @@
 package org.canay.backend.mappers.impl;
 
 import org.canay.backend.domain.dto.RegisterRequestDTO;
-import org.canay.backend.domain.dto.UserDTO;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.mappers.Mapper;
 import org.modelmapper.ModelMapper;
@@ -9,17 +8,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapperImpl implements Mapper<User, UserDTO> {
+public class RegisterRequestMapperImpl implements Mapper<User, RegisterRequestDTO> {
     @Autowired
     private ModelMapper modelMapper;
 
     @Override
-    public UserDTO mapTo(User user) {
-        return modelMapper.map(user, UserDTO.class);
+    public RegisterRequestDTO mapTo(User user) {
+        return modelMapper.map(user, RegisterRequestDTO.class);
     }
 
     @Override
-    public User mapFrom(UserDTO userDTO) {
-        return modelMapper.map(userDTO, User.class);
+    public User mapFrom(RegisterRequestDTO registerRequestDTO) {
+        return modelMapper.map(registerRequestDTO, User.class);
     }
 }

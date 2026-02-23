@@ -4,15 +4,13 @@ import org.canay.backend.domain.dto.UserRoleDTO;
 import org.canay.backend.domain.entities.UserRole;
 import org.canay.backend.mappers.Mapper;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserRoleMapper implements Mapper<UserRole, UserRoleDTO> {
-    private final ModelMapper modelMapper;
-
-    public UserRoleMapper(ModelMapper modelMapper) {
-        this.modelMapper = modelMapper;
-    }
+public class UserRoleMapperImpl implements Mapper<UserRole, UserRoleDTO> {
+    @Autowired
+    private  ModelMapper modelMapper;
 
     @Override
     public UserRoleDTO mapTo(UserRole userRole) {

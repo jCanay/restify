@@ -1,33 +1,15 @@
-import { useState, useEffect } from "react";
-import { getAdminDashboard } from "./services/api";
 import { Route, Routes } from "react-router";
 import Login from "../auth/pages/Login";
+import Register from "../auth/pages/Register";
+import "./css/app.css"
 
 function App() {
-    const [adminDashboard, setAdminDashboard] = useState("");
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const loadUsers = async () => {
-            try {
-                await new Promise((r) => setTimeout(r, 1000));
-                const adminDashboard = await getAdminDashboard();
-                setAdminDashboard(adminDashboard);
-            } catch (err) {
-                console.log(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        loadUsers();
-    }, []);
-
     return (
         <>
             <main>
                 <Routes>
-                    <Route element={<Login/>} path="/"></Route>
+                    <Route element={<Login/>} path="/login"></Route>
+                    <Route element={<Register/>} path="/register"></Route>
                 </Routes>
             </main>
         </>

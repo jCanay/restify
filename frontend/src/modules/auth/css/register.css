@@ -1,4 +1,4 @@
-body:has(.login) {
+body:has(.register) {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -7,7 +7,7 @@ body:has(.login) {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-section.login {
+section.register {
 	max-width: 35em;
 	background-color: #ddd;
 	padding: 5em;
@@ -19,26 +19,20 @@ section.login {
 
 	& div {
 		display: flex;
-		/* height: 4em; */
-		align-items: center;
-		gap: 1em;
+		justify-content: space-between;
+		gap: 3em;
 	}
 }
 
-.login button {
+.register button {
 	border: 0;
 	padding: 1em;
 	border-radius: 100vh;
 	aspect-ratio: 1;
-	height: 100%;
+	height: fit-content;
 
 	&:hover {
 		background-color: #bbb;
 		cursor: pointer;
-	}
-
-	& img {
-		width: 2.5em;
-		height: auto;
 	}
 }

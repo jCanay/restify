@@ -1,0 +1,26 @@
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	width: 100%;
+
+	& input {
+		font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+		font-size: 14pt;
+		width: 100%;
+		border-radius: 100dvh;
+		border: 0;
+		corner-shape: squircle;
+		padding: 1em;
+
+		&[type="submit"] {
+			background: #C52031;
+			color: white;
+
+			&:hover {
+				background: #8F1723;
+				cursor: pointer;
+			}
+		}
+	}
+}

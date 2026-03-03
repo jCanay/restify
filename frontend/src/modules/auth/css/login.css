@@ -1,13 +1,12 @@
-body:has(.login) {
+section.login {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 100dvh;
-	margin: 0;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	flex-grow: 1;
+	margin: auto;
 }
 
-section.login {
+section .login-wrapper {
 	max-width: 35em;
 	background-color: #ddd;
 	padding: 5em;
@@ -17,7 +16,7 @@ section.login {
 	border-radius: 5em;
 	corner-shape: squircle;
 
-	& div {
+	& div:not(.login-wrapper) {
 		display: flex;
 		/* height: 4em; */
 		align-items: center;

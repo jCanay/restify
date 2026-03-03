@@ -1,9 +1,10 @@
 import "../css/login.css"
-import { useState} from "react"
-import {Link} from "react-router"
+import { useEffect, useState } from "react"
+import { Link } from "react-router"
 import api from "../../core/api/axios"
 import eyeClosedImg from "../assets/eye-closed.svg"
 import eyedImg from "../assets/eye.svg"
+import Navbar from "../../core/components/Navbar"
 
 const USER_REGEX = /^[A-Za-z][A-Za-z0-9]{2,50}$/
 const PWD_REGEX = /^(?=.*[a-z]).{8,50}/
@@ -15,9 +16,10 @@ function Login() {
 		identifier: "",
 		password: ""
 	})
+	const [admin, setAdmin] = useState({})
 
 	const handleInput = (e) => {
-		setRequest({...request, [e.currentTarget.name]: e.currentTarget.value})
+		setRequest({ ...request, [e.currentTarget.name]: e.currentTarget.value })
 	}
 
 	const handlePwdBtnClick = (e) => {
@@ -26,40 +28,61 @@ function Login() {
 		setShowPwd(!showPwd)
 	}
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 
-		api
-			.post("/auth/login", request)
-			.then((response) => {
-				setToken(response.data.token)
-			})
+		try {
+			const response = await api.post("/auth/login", request)
+			setToken(response.data.token)
 
-		if (token) {
-			cookieStore.set("token", token)
+			console.log(response.data.token)
+			if (response.data.token) {
+				cookieStore.set("token", response.data.token)
+			}
+		} catch (err) {
+			console.log("")
 		}
 	}
-	
-    return (
-        <section className="login">
-            <h1>Iniciar sesión</h1>
-            <form id="login-form" onSubmit={handleSubmit}>
-                <input type="text" value={request.identifier} name="identifier" placeholder="Usuario o email" onChange={handleInput}/>
-                <div>
-					<input type={showPwd ? "text" : "password"} value={request.password} name="password" placeholder="Contraseña" onChange={handleInput}/>
-					<button onClick={handlePwdBtnClick}>
-						<img src={showPwd ? eyedImg : eyeClosedImg} width="25" height="25" alt="" />
-					</button>
+
+	useEffect(() => {
+
+		function loadAdmin() {
+			api.get("admin/dashboard")
+				.then((response) => {
+					setAdmin(response.data)
+				})
+		}
+
+		loadAdmin()
+	}, [token])
+
+	return (
+		<>
+			<Navbar />
+			<section className="login">
+				<div className="login-wrapper">
+					<h1>Iniciar sesión</h1>
+					<form id="login-form" onSubmit={handleSubmit}>
+						<input type="text" value={request.identifier} name="identifier" placeholder="Usuario o email" onChange={handleInput} />
+						<div>
+							<input type={showPwd ? "text" : "password"} value={request.password} name="password" placeholder="Contraseña" onChange={handleInput} />
+							<button onClick={handlePwdBtnClick}>
+								<img src={showPwd ? eyedImg : eyeClosedImg} width="25" height="25" alt="" />
+							</button>
+						</div>
+						<input type="submit" value="Iniciar sesión" />
+						<p>
+							¿No tienes cuenta?
+							<Link to="/register">Registrate aquí</Link>
+						</p>
+						<p>Token: {token}</p>
+						<p>{admin ? admin.message : "None"}</p>
+					</form>
 				</div>
-                <input type="submit" value="Iniciar sesión"/>
-				<p>
-					¿No tienes cuenta? 
-					<Link to="/register">Registrate aquí</Link>
-				</p>
-				<p>Token: {token}</p>
-            </form>
-        </section>
-    )
+			</section>
+		</>
+
+	)
 }
 
 export default Login

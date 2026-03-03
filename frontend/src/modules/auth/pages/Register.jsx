@@ -1,6 +1,6 @@
-
 import { useState } from "react"
 import UserForm from "../components/UserForm"
+import Navbar from "../../core/components/Navbar"
 import "../css/register.css"
 import userImg from "../assets/user.svg"
 import ownerImg from "../assets/owner.svg"
@@ -18,22 +18,28 @@ function Register() {
 	}
 
 	return (
-		<section className="register">
-			<div>
-				<button onClick={handleClick} id="user-btn">
-					<img src={userImg} width="50" height="50" alt="" />
-				</button>
-				<button onClick={handleClick} id="owner-btn">
-					<img src={ownerImg} width="50" height="50" alt="" />
-				</button>
-				<button onClick={handleClick} id="driver-btn">
-					<img src={driverImg} width="50" height="50" alt="" />
-				</button>
+		<>
+			<Navbar />
+			<div className="register">
+				<section className="register-form">
+					<div>
+						<button onClick={handleClick} id="user-btn">
+							<img src={userImg} width="50" height="50" alt="" />
+						</button>
+						<button onClick={handleClick} id="owner-btn">
+							<img src={ownerImg} width="50" height="50" alt="" />
+						</button>
+						<button onClick={handleClick} id="driver-btn">
+							<img src={driverImg} width="50" height="50" alt="" />
+						</button>
+					</div>
+					<UserForm role={option}>
+
+					</UserForm>
+				</section>
 			</div>
-			<UserForm role={option}>
-				
-			</UserForm>
-		</section>
+		</>
+
 	)
 }
 

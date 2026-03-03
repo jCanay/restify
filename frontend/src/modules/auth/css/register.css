@@ -1,13 +1,11 @@
-body:has(.register) {
+div.register {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 100dvh;
-	margin: 0;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	height: 90dvh;
 }
 
-section.register {
+section.register-form {
 	max-width: 35em;
 	background-color: #ddd;
 	padding: 5em;

@@ -19,6 +19,4 @@ public class AdminController {
                 "access", "Granted"
         ));
     }
-
-
 }

@@ -1,24 +1,17 @@
 button.logo {
 	background: transparent;
-	height: fit-content;
-	width: fit-content;
 	display: flex;
 	align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
 
 	&:hover {
 		cursor: pointer;
 	}
 
-	& div {
-		display: flex;
-		align-items: center;
-		gap: 1rem;
-		margin: 1em;
-
 		& svg {
-			height: 2em;
-			width: fit-content;
-			fill: #C52031;
-		}
+			height: 2rem;
+			width: auto;
+        fill: #c52031;
 	}
 }

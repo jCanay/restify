@@ -17,25 +17,26 @@ services:
       - ./init:/docker-entrypoint-initdb.d
     networks:
       - backend-net
-
-#  app:
-#    build: .
-#    container_name: restify-app
-#    depends_on:
-#      - db
-#    restart: on-failure
-#    env_file:
-#      - .env
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      - JWT_SECRET=${JWT_SECRET}
-#      - INITIAL_ADMIN_USERNAME=${INITIAL_ADMIN_USERNAME}
-#      - INITIAL_ADMIN_PASSWORD=${INITIAL_ADMIN_PASSWORD}
-#      - INITIAL_ADMIN_EMAIL=${INITIAL_ADMIN_EMAIL}
-#    networks:
-#      - backend-net
-
+  app:
+    build: .
+    container_name: restify-app
+    depends_on:
+      - db
+    restart: on-failure
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/${DB_NAME}?allowPublicKeyRetrieval=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=${DB_ROOT_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET}
+      - INITIAL_ADMIN_USERNAME=${INITIAL_ADMIN_USERNAME}
+      - INITIAL_ADMIN_PASSWORD=${INITIAL_ADMIN_PASSWORD}
+      - INITIAL_ADMIN_EMAIL=${INITIAL_ADMIN_EMAIL}
+    networks:
+     - backend-net
 volumes:
   db_data:
 

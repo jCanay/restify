@@ -10,7 +10,7 @@ function Navbar() {
 	return (
 		<nav className="navbar">
 			<div className="wrapper container">
-				<Logo/>
+				<Logo route={"/"}/>
 				<ul>
 					<Link className="link active" to="/">Inicio</Link>
 					<Link className="link" to="/">Gestiona tu negocio</Link>

@@ -4,6 +4,13 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+:root {
+	--light200: #eaeaea;
+    --light300: #cacaca;
+    --primary: #c52031 !important;
+    --primary-dark: #8f1723;
+}
+
 * {
 	margin: 0;
 	padding: 0;

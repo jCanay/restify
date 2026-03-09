@@ -2,7 +2,6 @@ div.booking-general-summary {
 	display: flex;
 	flex-direction: column;
 	background-color: white;
-	width: fit-content;
 	padding: 1rem;
 	gap: 1rem;
 	border-radius: 1rem;
@@ -17,6 +16,7 @@ div.booking-general-summary {
 
 		& h3 {
 			font-weight: normal;
+			font-size: 15pt;
 		}
 
 		& .drag-handle {
@@ -26,6 +26,11 @@ div.booking-general-summary {
 			&:active {
 				cursor: grabbing;
 			}
+
+			& svg {
+                height: 14px;
+                aspect-ratio: 1;
+            }
 		}
 	}
 

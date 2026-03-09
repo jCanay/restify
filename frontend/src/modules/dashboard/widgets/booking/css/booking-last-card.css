@@ -1,0 +1,60 @@
+li.booking-last-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--light200);
+    padding: 0.5rem 0.5rem 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+
+    & section.head {
+        display: flex;
+        margin-bottom: 0.33rem;
+
+        & div.time-ago {
+            display: flex;
+            gap: 0.25rem;
+            align-items: center;
+            color: #808080;
+
+            & span {
+                font-size: 10pt;
+            }
+
+            & svg {
+                height: 12px;
+                width: 12px;
+            }
+        }
+
+        .badge {
+            margin-left: auto;
+            padding: 0.25rem 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.33rem;
+        }
+    }
+
+    & h4 {
+        font-size: 14pt;
+    }
+
+    & section.datetime {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        & div.date,
+        & div.time {
+            display: flex;
+            align-items: center;
+            font-size: 10pt;
+            gap: 0.25rem;
+
+            & svg {
+                width: 12px;
+                height: 12px;
+                color: #808080;
+            }
+        }
+    }
+}

@@ -11,4 +11,4 @@
 - Overlay Scrollbars
 - Shadcn
 - Tailwind
-- 
+- Lucide

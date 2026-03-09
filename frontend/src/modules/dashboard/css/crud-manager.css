@@ -1,8 +1,7 @@
-div.booking-manager {
+div.crud-manager {
     display: flex;
     flex-direction: column;
     background-color: white;
-    width: fit-content;
     padding: 1rem;
     gap: 1rem;
     border-radius: 1rem;
@@ -16,6 +15,7 @@ div.booking-manager {
 
         & h3 {
             font-weight: normal;
+            font-size: 15pt;
         }
 
         & .drag-handle {
@@ -24,6 +24,11 @@ div.booking-manager {
 
             &:active {
                 cursor: grabbing;
+            }
+
+            & svg {
+                height: 14px;
+                aspect-ratio: 1;
             }
         }
     }
@@ -35,11 +40,12 @@ div.booking-manager {
         height: 100%;
         width: 100%;
 
-        & div.box {
+        & button.box {
             height: 100%;
             border-radius: 0.5rem;
             text-align: center;
-            background-color: #eaeaea;
+            background-color: var(--light200);
+            cursor: pointer;
 
             display: flex;
             flex-direction: column;
@@ -47,10 +53,18 @@ div.booking-manager {
             justify-content: center;
             gap: 1rem;
             font-size: 9pt;
-            color: #00000075;
+            color: #808080;
 
-            & svg {
-                fill: #00000075;
+            transition-duration: 750ms;
+			transition-timing-function: var(--transition-bounce);
+			transition-property: scale;
+
+            &:hover {
+                background: var(--light300);
+            }
+
+            &:active {
+                scale: 0.9;
             }
         }
     }

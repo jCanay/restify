@@ -11,7 +11,7 @@ div.booking-general-summary {
 
 	& section.header {
 		display: flex;
-		justify-content: space-between;
+		gap: 0.5rem;
 		align-items: center;
 
 		& h3 {
@@ -28,7 +28,7 @@ div.booking-general-summary {
 			}
 
 			& svg {
-                height: 14px;
+                height: 18px;
                 aspect-ratio: 1;
             }
 		}

@@ -8,12 +8,12 @@ div.dashboard-page {
 	flex-direction: column;
 	gap: 2rem;
 	background-color: var(--light200);
-	min-height: calc(100dvh - 3.75rem);
+	height: 100dvh;
 	padding: 2rem;
 	border-radius: 1rem;
-	overflow: visible;
-	height: auto;
 	scrollbar-color: #00000075 transparent;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	& h2 {
 		font-size: 22pt;
@@ -61,10 +61,6 @@ div.dashboard-page {
 	}
 
 	& section.components {
-		& .grid-container {
-			height: fit-content;
-			width: 100%;
-		}
 
 		& .grid {
 			margin: -2rem;
@@ -82,6 +78,10 @@ div.dashboard-page {
 				transition-timing-function: var(--transition-glide);
 			}
 
+			& .react-grid-item {
+				touch-action: none;
+			}
+
 			& .react-grid-item.react-draggable-dragging {
 				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 				z-index: 10;
@@ -92,6 +92,7 @@ div.dashboard-page {
 
 			& .react-grid-item.resizing {
 				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+				user-select: none;
 			}
 
 			& .react-resizable-handle {

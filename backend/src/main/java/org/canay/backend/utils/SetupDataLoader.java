@@ -36,7 +36,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        UserRole adminRole = userRoleRepository.findByName("ADMIN")
+        UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
                 .orElseThrow(() -> new RuntimeException("Error: Role not found in database"));
 
         if (userRepository.findByUsername(adminUsername).isEmpty()) {

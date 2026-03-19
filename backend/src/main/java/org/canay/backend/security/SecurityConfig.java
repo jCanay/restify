@@ -1,4 +1,4 @@
-package org.canay.backend.config;
+package org.canay.backend.security;
 
 import org.canay.backend.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +33,8 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/auth/**").permitAll()
+                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",

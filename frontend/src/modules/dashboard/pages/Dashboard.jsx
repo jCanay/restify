@@ -1,6 +1,5 @@
 import Logo from "../../core/components/Logo";
 import "../css/dashboard.css";
-import searchImg from "../../core/assets/search.svg";
 import { NavLink, Outlet } from "react-router";
 import {
     Group,
@@ -108,7 +107,7 @@ function Dashboard() {
                     <img src="https://i.pravatar.cc/100" alt="" />
                     <div className="info">
                         <h4>Enooc Dominguez Quiroga</h4>
-                        <p>Administrador</p>
+                        <small>Administrador</small>
                     </div>
                 </button>
             </Panel>

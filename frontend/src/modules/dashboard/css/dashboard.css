@@ -134,9 +134,8 @@ d* {
                     line-height: normal;
                 }
 
-                & p {
-                    font-size: 9pt;
-                    opacity: 0.5;
+                & small {
+                    color: #888;
                 }
             }
         }
@@ -178,6 +177,7 @@ d* {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+        overflow: visible !important;
 		
         & .topbar {
             display: flex;

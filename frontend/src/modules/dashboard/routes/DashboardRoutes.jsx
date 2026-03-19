@@ -10,34 +10,17 @@ export const DashboardRoutes = (
     <Route element={<Dashboard />}>
         <Route
             path="dashboard"
-            element={
-                <DashboardPage
-                    widgets={[]}
-                    tabs={[]}
-                    currentPath=""
-                    title="Inicio"
-                />
-            }
+            element={<DashboardPage currentPath="" title="Inicio" />}
         />
         <Route
             path="dashboard/bookings"
             element={
                 <DashboardPage
-                    widgets={[
-                        <CrudManager name="reserva" pluralName="reservas" />,
-                        <BookingGeneralSummary />,
-                        <BookingLast />,
-                    ]}
-                    tabs={[
-                        {
-                            name: "Historial",
-                            path: "history",
-                        },
-                        {
-                            name: "Estadísticas",
-                            path: "stats",
-                        },
-                    ]}
+                    // widgets={[
+                    //     <CrudManager name="reserva" pluralName="reservas" />,
+                    //     <BookingGeneralSummary />,
+                    //     <BookingLast />,
+                    // ]}
                     currentPath="/bookings"
                     title="Reservas"
                 />
@@ -48,56 +31,21 @@ export const DashboardRoutes = (
         </Route>
         <Route
             path="dashboard/orders"
-            element={
-                <DashboardPage
-                    currentPath="/orders"
-                    widgets={[
-                        <CrudManager name="pedido" pluralName="pedidos" />,
-                    ]}
-                    tabs={["Enoc"]}
-                    title="Pedidos"
-                />
-            }
+            element={<DashboardPage currentPath="/orders" title="Pedidos" />}
         />
         <Route
             path="dashboard/restaurant"
             element={
-                <DashboardPage
-                    currentPath="/restaurant"
-                    widgets={[
-                        <CrudManager
-                            name="restaurante"
-                            pluralName="restaurantes"
-                        />,
-                    ]}
-                    tabs={["Enoc"]}
-                    title="Restaurante"
-                />
+                <DashboardPage currentPath="/restaurant" title="Restaurante" />
             }
         />
         <Route
             path="dashboard/menu"
-            element={
-                <DashboardPage
-                    currentPath="/menu"
-                    widgets={[<CrudManager name="carta" pluralName="cartas" />]}
-                    tabs={["Enoc"]}
-                    title="Carta"
-                />
-            }
+            element={<DashboardPage currentPath="/menu" title="Carta" />}
         />
         <Route
             path="dashboard/staff"
-            element={
-                <DashboardPage
-                    currentPath="/staff"
-                    widgets={[
-                        <CrudManager name="empleado" pluralName="empleados" />,
-                    ]}
-                    tabs={["Enoc"]}
-                    title="Plantilla"
-                />
-            }
+            element={<DashboardPage currentPath="/staff" title="Plantilla" />}
         />
     </Route>
 );

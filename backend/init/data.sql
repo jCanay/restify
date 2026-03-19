@@ -1,7 +1,7 @@
-INSERT IGNORE INTO user_roles (name) VALUES ('ADMIN');
-INSERT IGNORE INTO user_roles (name) VALUES ('USER');
-INSERT IGNORE INTO user_roles (name) VALUES ('GUEST');
-INSERT IGNORE INTO user_roles (name) VALUES ('OWNER');
-INSERT IGNORE INTO user_roles (name) VALUES ('WAITER');
-INSERT IGNORE INTO user_roles (name) VALUES ('COOK');
-INSERT IGNORE INTO user_roles (name) VALUES ('DRIVER');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_ADMIN');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_USER');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_GUEST');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_OWNER');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_WAITER');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_COOK');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_DRIVER');

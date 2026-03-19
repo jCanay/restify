@@ -1,36 +1,36 @@
 div.register {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 90dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90dvh;
 }
 
 section.register-form {
-	max-width: 35em;
-	background-color: #ddd;
-	padding: 5em;
-	display: flex;
-	gap: 2em;
-	flex-direction: column;
-	border-radius: 5em;
-	corner-shape: squircle;
+    max-width: 35em;
+    background-color: #ddd;
+    padding: 5em;
+    display: flex;
+    gap: 2em;
+    flex-direction: column;
+    border-radius: 5em;
+    corner-shape: squircle;
 
-	& div {
-		display: flex;
-		justify-content: space-between;
-		gap: 3em;
-	}
+    & div {
+        display: flex;
+        justify-content: space-between;
+        gap: 3em;
+    }
 }
 
 .register button {
-	border: 0;
-	padding: 1em;
-	border-radius: 100vh;
-	aspect-ratio: 1;
-	height: fit-content;
+    border: 0;
+    padding: 1em;
+    border-radius: 100vh;
+    aspect-ratio: 1;
+    height: fit-content;
 
-	&:hover {
-		background-color: #bbb;
-		cursor: pointer;
-	}
+    &:hover {
+        background-color: #bbb;
+        cursor: pointer;
+    }
 }

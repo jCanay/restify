@@ -3,10 +3,12 @@ package org.canay.backend.service.impl;
 import org.canay.backend.domain.dto.AuthResponseDTO;
 import org.canay.backend.domain.dto.LoginRequestDTO;
 import org.canay.backend.domain.dto.RegisterRequestDTO;
+import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.domain.entities.UserRole;
 import org.canay.backend.jwt.JwtService;
 import org.canay.backend.mappers.Mapper;
+import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.UserRepository;
 import org.canay.backend.repository.UserRoleRepository;
 import org.canay.backend.service.AuthService;
@@ -22,12 +24,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AuthServiceImpl implements AuthService {
-
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private UserRoleRepository userRoleRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -51,7 +55,9 @@ public class AuthServiceImpl implements AuthService {
                 new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequestDTO.getPassword())
         );
 
-        return AuthResponseDTO.builder().token(jwtService.generateToken(authentication.getName())).build();
+
+
+        return AuthResponseDTO.builder().token(jwtService.generateToken(authentication.getName())).role(user.getRole().getName()).build();
     }
 
     @Override
@@ -84,6 +90,14 @@ public class AuthServiceImpl implements AuthService {
 
         User savedUserEntity = userRepository.save(userEntity);
 
-        return AuthResponseDTO.builder().token(jwtService.generateToken(savedUserEntity.getUsername())).build();
+        // Crea la cuenta
+        Account accountEntity = Account.builder()
+                .name(registerRequestDTO.getName())
+                .surname(registerRequestDTO.getSurname())
+                .build();
+
+        accountRepository.save(accountEntity);
+
+        return AuthResponseDTO.builder().token(jwtService.generateToken(savedUserEntity.getUsername())).role(userEntity.getRole().getName()).build();
     }
 }

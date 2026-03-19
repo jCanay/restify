@@ -1,49 +1,173 @@
 {
-	"bookings": [
-		{
+	"dashboard": {
+		"restaurant_id": "",
+		"bookings": {
+			"title": "Bookings",
+			"sseEndopint": "/dashboard/bookings/sse",
 			"widgets": [
 				{
-					"id": "w1",
-					"type": "BOOKING_SUMMARY",
-					"x": 0,
-					"y": 0,
-					"w": 1,
-					"h": 1
+					"name": "CRUD_MANAGER",
+					"access": "admin",
+					"layouts": {
+						"lg": {
+							"x": 0,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"md": {
+							"x": 0,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"sm": {
+							"x": 0,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"xs": {
+							"x": 0,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						}
+					},
+					"props": {
+						"pluralName": "reservas",
+						"name": "reserva"
+					}
 				},
 				{
-					"id": "w2",
-					"type": "REVENUE_CHART",
-					"x": 1,
-					"y": 0,
-					"w": 2,
-					"h": 1
+					"name": "BOOKING_GENERAL_SUMMARY",
+					"access": "owner",
+					"layouts": {
+						"lg": {
+							"x": 1,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"md": {
+							"x": 1,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"sm": {
+							"x": 1,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"xs": {
+							"x": 1,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						}
+					},
+					"props": {
+						"pluralName": "reservas",
+						"name": "reserva"
+					}
+				},
+				{
+					"name": "BOOKING_LAST",
+					"access": "admin",
+					"layouts": {
+						"lg": {
+							"x": 2,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"md": {
+							"x": 2,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"sm": {
+							"x": 2,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"xs": {
+							"x": 2,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						}
+					},
+					"props": {
+						"pluralName": "reservas",
+						"name": "reserva"
+					}
 				}
 			],
 			"tabs": [
 				{
-					"name": ""
+					"name": "Historial",
+					"path": "history"
+				},
+				{
+					"name": "Estadísticas",
+					"path": "stats"
+				}
+			]
+		},
+		"orders": {
+			"title": "Orders",
+			"sseEndopint": "/dashboard/orders/sse",
+			"widgets": [
+				{
+					"name": "CRUD_MANAGER",
+					"access": "admin",
+					"layouts": {
+						"lg": {
+							"x": 0,
+							"y": 0,
+							"w": 2,
+							"h": 2
+						},
+						"md": {
+							"x": 0,
+							"y": 0,
+							"w": 2,
+							"h": 2
+						},
+						"sm": {
+							"x": 0,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						},
+						"xs": {
+							"x": 0,
+							"y": 0,
+							"w": 1,
+							"h": 1
+						}
+					},
+					"props": {
+						"pluralName": "pedidos",
+						"name": "pedido"
+					}
+				}
+			],
+			"tabs": [
+				{
+					"name": "Historial",
+					"path": "history"
+				},
+				{
+					"name": "Estadísticas",
+					"path": "stats"
 				}
 			]
 		}
-	],
-	"orders": [
-		{
-			"id": "w3",
-			"type": "ORDER_LIST",
-			"x": 0,
-			"y": 0,
-			"w": 3,
-			"h": 2
-		}
-	],
-	"restaurant": [
-		{
-			"id": "w4",
-			"type": "TABLE_MAP",
-			"x": 0,
-			"y": 0,
-			"w": 2,
-			"h": 2
-		}
-	]
+	}
 }

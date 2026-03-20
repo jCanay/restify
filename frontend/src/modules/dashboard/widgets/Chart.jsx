@@ -1,5 +1,5 @@
-import { ChartContainer } from "@/components/ui/chart"
-import { Bar, BarChart, ResponsiveContainer } from "recharts"
+import { ChartContainer } from "@/components/ui/chart";
+import { Bar, BarChart } from "recharts";
 
 function Chart() {
 	const chartData = [

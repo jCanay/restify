@@ -38,7 +38,4 @@ public class Restaurant {
 
     @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Dashboard dashboard;
-
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<OpeningTime> openingTimes;
 }

@@ -4,7 +4,7 @@ import "./css/restaurant-direction-form.css";
 function RestaurantDirectionForm({ onBackClick }) {
     return (
         <div className="restaurant-direction-form">
-            <h2 className="text-3xl font-semibold">
+            <h2 className="text-2xl font-semibold">
                 <button type="button" onClick={onBackClick}>
                     <ChevronLeft />
                 </button>

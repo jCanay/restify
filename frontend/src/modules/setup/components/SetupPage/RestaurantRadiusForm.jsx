@@ -10,7 +10,7 @@ function RestaurantRadiusForm({ onBackClick }) {
 
     return (
         <div className="restaurant-radius-form">
-            <h2 className="text-3xl font-semibold">
+            <h2 className="text-2xl font-semibold">
                 <button type="button" onClick={onBackClick}>
                     <ChevronLeft />
                 </button>

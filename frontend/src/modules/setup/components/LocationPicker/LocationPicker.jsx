@@ -18,6 +18,7 @@ import OperativeRadiusMapArea from "./OperativeRadiusMapArea";
 // Fix para los iconos de Leaflet en React
 import icon from "leaflet/dist/images/marker-icon.png";
 import iconShadow from "leaflet/dist/images/marker-shadow.png";
+import { Skeleton } from "@/components/ui/skeleton";
 import CurrentLocationButton from "./CurrentLocationButton";
 
 let DefaultIcon = L.icon({
@@ -34,7 +35,6 @@ const RecenterMap = ({ position }) => {
 
     useEffect(() => {
         if (position) {
-            // flyTo hace un desplazamiento suave, setView es instantáneo
             map.flyTo([position.lat, position.lng], map.getZoom(), {
                 duration: 1.5, // Velocidad en segundos (ej: 0.5 es muy rápido, 3.0 es lento)
                 easeLinearity: 0.25, // Suavizado de la curva (0 a 1)
@@ -54,6 +54,16 @@ function LocationPicker({ height, onLocationChange }) {
     const searchWrapperRef = useRef(null);
     const [radius, setRadius] = useState(2000);
     const [mapInstance, setMapInstance] = useState(null);
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            (pos) => {
+                const { latitude, longitude } = pos.coords;
+                setPosition({ lat: latitude, lng: longitude });
+            },
+            () => setPosition({ lat: 40.41, lng: -3.7 }),
+        );
+    }, []);
 
     // Función auxiliar para notificar cambios completos
     const notifyChange = (newPos, newRadius) => {
@@ -106,37 +116,22 @@ function LocationPicker({ height, onLocationChange }) {
         if (onLocationChange) {
             onLocationChange(newCoords);
         }
-        setSearchQuery(label); // Ponemos la dirección completa en el input
-        setResults([]); // Cerramos el desplegable
+        setSearchQuery(label);
+        setResults([]);
     };
 
-    useEffect(() => {
-        // 2. Pedimos la ubicación al cargar el componente
-        navigator.geolocation.getCurrentPosition(
-            (pos) => {
-                const { latitude, longitude } = pos.coords;
-                const newCoords = { lat: latitude, lng: longitude };
-
-                setPosition(newCoords);
-                if (onLocationChange) {
-                    onLocationChange(newCoords);
-                }
-            },
-            (error) => {
-                console.error(
-                    "Error obteniendo ubicación, usando Madrid por defecto",
-                );
-                setPosition({ lat: 40.41, lng: -3.7 });
-            },
-        );
-    }, []);
-
     if (!position) {
-        return;
+        return (
+            <div className="flex flex-col gap-4">
+                <Skeleton className="h-10.75 bg-gray-200"></Skeleton>
+                <Skeleton className="h-50 bg-gray-200"></Skeleton>
+                <Skeleton className="h-22.5 bg-gray-200"></Skeleton>
+            </div>
+        );
     }
 
     return (
-        <div className="location-picker" style={{ position: "relative" }}>
+        <div className="location-picker">
             <div
                 ref={searchWrapperRef}
                 className="custom-search-box"

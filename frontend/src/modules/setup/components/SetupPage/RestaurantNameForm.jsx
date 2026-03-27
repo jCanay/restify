@@ -3,11 +3,9 @@ import MapboxPicker from "../LocationPicker/MapboxPicker";
 import "./css/restaurant-name-form.css";
 
 function RestaurantNameForm() {
-    const handleLocationChange = () => {};
-
     return (
         <div className="restaurant-name-form">
-            <h2 className="text-3xl font-semibold">Configura tu restaurante</h2>
+            <h2 className="text-2xl font-semibold">Configura tu restaurante</h2>
             <p>
                 Introduce los datos de tu restaurante. Podrás crear restaurantes
                 adicionales más tarde.

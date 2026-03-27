@@ -16,14 +16,18 @@ import RestaurantNameForm from "../components/SetupPage/RestaurantNameForm";
 import RestaurantDirectionForm from "../components/SetupPage/RestaurantDirectionForm";
 import { useEffect, useState } from "react";
 import RestaurantRadiusForm from "../components/SetupPage/RestaurantRadiusForm";
+import RestaurantScheduleForm from "../components/SetupPage/RestaurantScheduleForm";
 
 function SetupPage() {
     const [index, setIndex] = useState(0);
     const [hasStarted, setHasStarted] = useState(false);
+    const [direction, setDirection] = useState("forward");
 
     const handleBack = () => {
         if (index > 0) {
             setIndex(index - 1);
+            setHasStarted(true);
+            setDirection("backward");
         }
     };
 
@@ -31,13 +35,20 @@ function SetupPage() {
         <RestaurantNameForm />,
         <RestaurantDirectionForm onBackClick={handleBack} />,
         <RestaurantRadiusForm onBackClick={handleBack} />,
+        <RestaurantScheduleForm />,
     ];
 
     const handleContinue = () => {
         if (index < steps.length - 1) {
             setIndex(index + 1);
             setHasStarted(true);
+            setDirection("forward");
         }
+    };
+
+    const getAnimationClass = () => {
+        if (!hasStarted) return "";
+        return direction === "forward" ? "animate-forward" : "animate-backward";
     };
 
     return (
@@ -49,11 +60,7 @@ function SetupPage() {
                 <div className="setup-container">
                     <div
                         key={index}
-                        className={
-                            hasStarted
-                                ? "step-wrapper animate-fade"
-                                : "step-wrapper"
-                        }
+                        className={`step-wrapper ${getAnimationClass()}`}
                     >
                         {steps[index]}
                         <button

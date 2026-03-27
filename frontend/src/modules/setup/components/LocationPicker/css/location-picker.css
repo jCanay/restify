@@ -1,4 +1,6 @@
 div.location-picker {
+    /* position: relative; */
+
     & .leaflet-attribution-flag {
         display: none !important;
     }

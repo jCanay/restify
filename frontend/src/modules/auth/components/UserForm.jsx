@@ -1,10 +1,12 @@
 import { use, useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import "../css/user-form.css";
 import api from "../../core/api/axios";
+import { useAuthContext } from "../contexts/AuthProvider";
 
-function UserForm({ role }) {
-    const [token, setToken] = useState("");
+function UserForm({ option }) {
+    const { token, setToken, role, setRole } = useAuthContext();
+    const navigate = useNavigate();
 
     const [user, setUser] = useState({
         name: "",
@@ -13,25 +15,28 @@ function UserForm({ role }) {
         email: "",
         password: "",
         role: {
-            name: role,
+            name: option,
         },
     });
 
     useEffect(() => {
-        setUser({ ...user, role: { name: role } });
-    }, [role]);
+        setUser({ ...user, role: { name: option } });
+    }, [option]);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(user);
-
-        api.post("/auth/register", user).then((response) => {
+        try {
+            const response = await api.post("/auth/register", user);
             setToken(response.data.token);
-        });
+            setRole(response.data.role);
 
-        if (token) {
-            cookieStore.set("token", token);
+            if (response.data.token) {
+                cookieStore.set("token", token);
+                navigate("/setup");
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
 
@@ -40,7 +45,11 @@ function UserForm({ role }) {
     };
 
     return (
-        <form id="register-form" onSubmit={handleSubmit}>
+        <form
+            id="register-form"
+            className="register-form"
+            onSubmit={handleSubmit}
+        >
             <input
                 type="text"
                 value={user.name}
@@ -84,7 +93,7 @@ function UserForm({ role }) {
                 ¿Ya tienes una cuenta?
                 <Link to="/login">Inicia sesión</Link>
             </p>
-            <p>Role: {role}</p>
+            <p>Role: {option}</p>
             <p>Token: {token}</p>
         </form>
     );

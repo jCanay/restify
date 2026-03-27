@@ -1,4 +1,10 @@
 # Restify 🍽️
+
+![Status](https://img.shields.io/badge/Estado-En%20Desarrollo-yellow?style=for-the-badge)
+[![SpringBoot](https://img.shields.io/badge/Backend-Spring_Boot-6db33f?style=for-the-badge&logo=springboot)](https://spring.io/projects/spring-boot)
+[![React](https://img.shields.io/badge/Frontend-React-07d8fd?style=for-the-badge&logo=react)](https://react.dev/)
+[![MySQL](https://img.shields.io/badge/Database-MySQL-00608a?style=for-the-badge&logo=mysql)](https://www.mysql.com/)
+
 > **Sistema de Planificación de Recursos (ERP) y Panel de Control para Restaurantes Modernos.**
 
 Restify es una solución integral diseñada para gestionar las operaciones diarias de un restaurante, desde la administración de reservas y pedidos hasta el control de personal y analíticas en tiempo real.

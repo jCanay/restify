@@ -1,6 +1,6 @@
 import { Route } from "react-router";
-import OwnerSetupPage from "../pages/OwnerSetupPage";
+import SetupPage from "../pages/SetupPage";
 
 export const SetupRoutes = (
-    <Route path="/owner/setup" element={<OwnerSetupPage />}></Route>
+    <Route path="/setup" element={<SetupPage />}></Route>
 );

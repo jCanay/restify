@@ -1,10 +1,7 @@
 import { Route } from "react-router";
 import Dashboard from "../pages/Dashboard";
 import DashboardPage from "../pages/DashboardPage";
-import CrudManager from "../widgets/CrudManager";
-import BookingGeneralSummary from "../widgets/booking/BookingGeneralSummary";
 import BookingHistory from "../widgets/booking/BookingHistory";
-import BookingLast from "../widgets/booking/BookingLast";
 
 export const DashboardRoutes = (
     <Route element={<Dashboard />}>

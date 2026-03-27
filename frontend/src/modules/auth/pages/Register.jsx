@@ -16,7 +16,6 @@ function Register() {
         setOption(
             "ROLE_" + e.currentTarget.id.replace("-btn", "").toUpperCase(),
         );
-        console.log(option);
     };
 
     return (
@@ -40,7 +39,7 @@ function Register() {
                             />
                         </button>
                     </div>
-                    <UserForm role={option}></UserForm>
+                    <UserForm option={option}></UserForm>
                 </section>
             </div>
         </>

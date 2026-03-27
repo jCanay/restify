@@ -1,6 +1,6 @@
 import "../css/login.css";
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import api from "../../core/api/axios";
 import eyeClosedImg from "../assets/eye-closed.svg";
 import eyedImg from "../assets/eye.svg";
@@ -16,6 +16,7 @@ function Login() {
         identifier: "",
         password: "",
     });
+    const navigate = useNavigate();
     const [admin, setAdmin] = useState({});
     const { token, setToken, role, setRole } = useAuthContext();
 
@@ -40,12 +41,11 @@ function Login() {
             setToken(response.data.token);
             setRole(response.data.role);
 
-            console.log(response.data.token);
             if (response.data.token) {
                 cookieStore.set("token", response.data.token);
             }
         } catch (err) {
-            console.log("");
+            console.log(err);
         }
     };
 
@@ -65,7 +65,11 @@ function Login() {
             <section className="login">
                 <div className="login-wrapper">
                     <h1>Iniciar sesión</h1>
-                    <form id="login-form" onSubmit={handleSubmit}>
+                    <form
+                        className="register-form"
+                        id="login-form"
+                        onSubmit={handleSubmit}
+                    >
                         <input
                             type="text"
                             value={request.identifier}

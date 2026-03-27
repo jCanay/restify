@@ -31,7 +31,4 @@ public class Account {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToMany(mappedBy = "account")
-    private List<Restaurant> restaurants;
 }

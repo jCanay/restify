@@ -1,0 +1,33 @@
+div.location-picker {
+    & .leaflet-attribution-flag {
+        display: none !important;
+    }
+
+    & div.custom-search-box {
+        & > input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: solid 1.5px var(--color-gray-200);
+        }
+
+        & ul {
+            position: absolute;
+            background-color: white;
+            border-radius: 0.5rem;
+            max-height: 200px;
+            margin-top: 0.5rem;
+            overflow-y: auto;
+            box-shadow: 0 10px 15px 0 rgba(0, 0, 0, 0.1);
+
+            & button {
+                width: 100%;
+                text-align: start;
+
+                &:hover {
+                    background-color: var(--color-gray-100);
+                }
+            }
+        }
+    }
+}

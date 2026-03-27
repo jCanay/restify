@@ -1,87 +1,85 @@
 nav.navbar {
-	position: sticky;
-	z-index: 100;
-	top: 0;
-	display: flex;
-	justify-content: center;
-	width: 100%;
-	background-color: #fff;
+    position: sticky;
+    z-index: 50;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
 
-	& div.wrapper {
-		width: 100%;
-		/* max-width: 80em; */
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+    & div.wrapper {
+        width: 100%;
+        /* max-width: 80em; */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-		& div.logo {
-			display: flex;
-			align-items: center;
-			gap: 1rem;
-			margin: 1em;
+        & div.logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1em;
 
-			&:hover {
-				cursor: pointer;
-			}
+            &:hover {
+                cursor: pointer;
+            }
 
-			& img {
-				color: #C52031;
-				fill: #C52031;
-				background-color: #C52031;
-			}
-		}
+            & img {
+                color: #c52031;
+                fill: #c52031;
+                background-color: #c52031;
+            }
+        }
 
-		& ul {
-			display: flex;
-			align-items: center;
-			gap: 2.5em;
-			margin: 1em;
+        & ul {
+            display: flex;
+            align-items: center;
+            gap: 2.5em;
+            margin: 1em;
 
-			& .link {
-				color: black;
-				font-size: 14pt;
-				text-decoration: none;
+            & .link {
+                color: black;
+                font-size: 14pt;
+                text-decoration: none;
 
-				&:hover,
-				&.active {
-					color: #C52031;
-				}
+                &:hover,
+                &.active {
+                    color: #c52031;
+                }
+            }
+        }
 
-			}
+        & div.auth {
+            margin: 1em;
+            display: flex;
+            align-items: center;
+            gap: 1em;
 
-		}
+            & button {
+                text-wrap: nowrap;
+                border-radius: 0.5rem;
+                background-color: transparent;
+                border: solid black 1.5px;
+                text-rendering: optimizeLegibility;
+                padding: 0.5em 1em;
+                font-size: 12pt;
 
-		& div.auth {
-			margin: 1em;
-			display: flex;
-			align-items: center;
-			gap: 1em;
+                &:hover {
+                    cursor: pointer;
+                    background-color: black;
+                    color: white;
+                }
 
-			& button {
-				text-wrap: nowrap;
-				border-radius: 0.5rem;
-				background-color: transparent;
-				border: solid black 1.5px;
-				text-rendering: optimizeLegibility;
-				padding: 0.5em 1em;
-				font-size: 12pt;
+                &.register-btn {
+                    background-color: black;
+                    color: white;
 
-				&:hover {
-					cursor: pointer;
-					background-color: black;
-					color: white;
-				}
-
-				&.register-btn {
-					background-color: black;
-					color: white;
-
-					&:focus {
-						outline: solid black 2px;
-						outline-offset: 2px;
-					}
-				}
-			}
-		}
-	}
+                    &:focus {
+                        outline: solid black 2px;
+                        outline-offset: 2px;
+                    }
+                }
+            }
+        }
+    }
 }

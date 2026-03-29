@@ -19,7 +19,7 @@ public class Dashboard {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "restaurant")
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 

@@ -24,7 +24,7 @@ public class Widgets {
 
     private String access;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "dashboard_page_id")
     private DashboardPage dashboardPage;
 

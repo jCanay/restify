@@ -3,23 +3,26 @@ package org.canay.backend.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.AvailabilityRuleRequestDTO;
+import org.canay.backend.domain.dto.ScheduleDTO;
+import org.canay.backend.domain.dto.TimeSlotDTO;
 import org.canay.backend.domain.entities.AvailabilityRule;
 import org.canay.backend.domain.entities.AvailabilityRuleType;
 import org.canay.backend.domain.entities.Restaurant;
 import org.canay.backend.repository.AvailabilityRuleRepository;
 import org.canay.backend.repository.AvailabilityRuleTypeRepository;
 import org.canay.backend.repository.RestaurantRepository;
-import org.canay.backend.service.AvailabilityRuleService;
+import org.canay.backend.service.ScheduleService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
-public class AvailabilityRuleServiceImpl implements AvailabilityRuleService {
+public class ScheduleServiceImpl implements ScheduleService {
 
     private final AvailabilityRuleRepository ruleRepository;
     private final AvailabilityRuleTypeRepository typeRepository;
@@ -91,5 +94,30 @@ public class AvailabilityRuleServiceImpl implements AvailabilityRuleService {
         }).toList();
 
         ruleRepository.saveAll(newRules);
+    }
+
+    public List<ScheduleDTO> getRestaurantRoutine(Long restaurantId) {
+        // 1. Buscamos todas las reglas RECURRING vigentes (expiryDate is null)
+        List<AvailabilityRule> rules = ruleRepository
+                .findByRestaurantIdAndType_NameAndExpiryDateIsNull(restaurantId, "RECURRING");
+
+        // 2. Agrupamos por día de la semana (0-6)
+        return IntStream.range(0, 7).mapToObj(dayIndex -> {
+            List<AvailabilityRule> dayRules = rules.stream()
+                    .filter(r -> r.getDayOfWeek().equals(dayIndex))
+                    .toList();
+
+            boolean isClosed = dayRules.isEmpty() || dayRules.stream().anyMatch(AvailabilityRule::getIsClosed);
+
+            return ScheduleDTO.builder()
+                    .dayOfWeek(dayIndex)
+                    .isClosed(isClosed)
+                    .slots(isClosed ? List.of() : dayRules.stream()
+                            .map(r -> new TimeSlotDTO(
+                                    r.getOpenTime().toString().substring(0, 5), // "09:00:00" -> "09:00"
+                                    r.getCloseTime().toString().substring(0, 5)
+                            )).toList())
+                    .build();
+        }).toList();
     }
 }

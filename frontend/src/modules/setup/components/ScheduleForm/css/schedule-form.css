@@ -1,0 +1,146 @@
+div.schedule-form {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 0.5rem;
+
+	&.expanded {
+		display: flex;
+		flex-direction: column;
+
+		& button {
+			font-size: medium;
+		}
+	}
+
+	& button {
+		text-align: start;
+		border: solid 1.5px var(--color-green-100);
+		background-color: var(--color-green-100);
+		color: var(--color-green-600);
+		padding: 0.1rem 0.35rem 0.1rem 0.5rem;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		font-size: smaller;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		transition: 200ms cubic-bezier(0, 0.55, 0.45, 1);
+		transition-property: bacground-color color border;
+
+		&.closed {
+			border-color: var(--color-red-100);
+			background-color: var(--color-red-100);
+			color: var(--color-destructive);
+
+			& svg {
+				color: var(--color-destructive);
+			}
+
+			&:hover {
+				border-color: var(--color-red-600);
+			}
+		}
+
+		& svg {
+			color: var(--color-gray-600);
+			color: var(--color-green-600);
+		}
+
+		&:hover {
+			border-color: var(--color-green-600);
+		}
+	}
+}
+
+div.schedule-form-tooltip {
+
+	& p {
+		padding: 0.5rem 1rem;
+	}
+}
+
+div.schedule-form-content {
+	padding: 0.5rem;
+	width: fit-content;
+	min-width: 0;
+	display: flex;
+	gap: 0.5rem;
+	flex-direction: column;
+	justify-content: center;
+	border-radius: 0.5rem;
+
+	& div.time {
+		display: flex;
+		gap: 0.5rem;
+		font-size: smaller;
+		align-items: center;
+		flex-direction: column;
+		width: 100%;
+
+		&.expanded {
+			font-size: medium;
+		}
+
+		& div.times {
+			width: 100%;
+		}
+
+		& div.opening-times-form {
+			display: flex;
+			width: 100%;
+			gap: 0.5rem;
+			align-items: center;
+
+			& p {
+				color: var(--color-gray-600);
+			}
+
+			& input {
+				/* background-color: var(--color-gray-200); */
+				border: solid 1.5px var(--color-gray-200);
+				border-radius: 0.25rem;
+				padding: 0.1rem 0.35rem;
+				width: 100%;
+			}
+
+			& input[type="time"]::-webkit-calendar-picker-indicator {
+				display: none;
+			}
+
+			& button.delete {
+				cursor: pointer;
+				transition: color 200ms cubic-bezier(0, 0.55, 0.45, 1);
+
+				&:hover {
+					color: var(--color-destructive);
+				}
+			}
+		}
+
+		& div.opening-times {
+			display: flex;
+			justify-content: center;
+			width: 100%;
+			background-color: var(--color-gray-200);
+			padding: 0.25rem 0.5rem;
+			border-radius: 0.25rem;
+		}
+	}
+
+	& button.add {
+		border: solid 1.5px var(--color-gray-200);
+		padding: 0.25rem 0.75rem;
+		font-size: smaller;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		justify-content: center;
+		transition: background-color 200ms cubic-bezier(0, 0.55, 0.45, 1);
+
+		&:hover {
+			background-color: var(--color-gray-200);
+		}
+	}
+}

@@ -3,6 +3,7 @@ package org.canay.backend.domain.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -17,11 +18,14 @@ public class Booking {
     @Column(name = "created_at")
     private ZonedDateTime createdAt;
 
+    @Column(name = "date_time")
+    private LocalDateTime dateTime;
+
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "restaurant_id")
     private Restaurant restaurant;
 }

@@ -19,22 +19,20 @@ public class Address {
 
     private String label;
 
-    @Column(nullable = false)
-    private String fullAddress;
+    @Column(name = "street_address")
+    private String streetAddress;
 
     private String city;
 
+    private String country;
+
     private String zipCode;
 
-    private String state;
+    private String floor;
 
-    @Column(nullable = false)
     private Double latitude;
 
-    @Column(nullable = false)
     private Double longitude;
-
-    private String floor;
 
     private String notes;
 
@@ -43,4 +41,16 @@ public class Address {
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
+    @PrePersist
+    @PreUpdate
+    private void validateOwner() {
+        if ((account == null && restaurant == null) || (account != null && restaurant != null)) {
+            throw new IllegalStateException("La dirección debe pertenecer exactamente a una Cuenta o a un Restaurante");
+        }
+    }
 }

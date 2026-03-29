@@ -1,18 +1,17 @@
-import "./css/restaurant-name-form.css";
+import "./css/register-account-type-form.css";
 import { useStore } from "@nanostores/react";
-import { $setupDataStore, setSetupDataName } from "../../contexts/setupDataStore";
 import { useEffect, useState } from "react";
 
-function RestaurantNameForm({ isValid, shakeTrigger }) {
-	const { name } = useStore($setupDataStore);
+function RegisterAccountTypeForm({ isValid, shakeTrigger }) {
+	// const { name } = useStore($setupDataStore);
 	const [valid, setValid] = useState(true);
 
 	const handleChange = (value) => {
-		setSetupDataName(value);
+		// setSetupDataName(value);
 	};
 
 	const handleBlur = (value) => {
-		setSetupDataName(value.trim());
+		// setSetupDataName(value.trim());
 		setValid(value.trim().length > 2);
 	};
 
@@ -26,18 +25,17 @@ function RestaurantNameForm({ isValid, shakeTrigger }) {
 		};
 
 		validate();
-	}, [shakeTrigger, name]);
+	}, [shakeTrigger]);
 
 	return (
-		<div className="restaurant-name-form">
-			<h2 className="text-2xl font-semibold">Configura tu restaurante</h2>
+		<div className="register-account-type-form">
+			<h2 className="text-2xl font-semibold">Tipo de cuenta</h2>
 			<p>
-				Introduce los datos de tu restaurante. Podrás crear restaurantes
-				adicionales más tarde.
+				Selecciona el tipo de cuenta para registrarte.
 			</p>
 			<form>
-				<label htmlFor="name">Nombre del restaurante*</label>
-				<input
+				<label htmlFor="name">Tipo de cuenta</label>
+				{/* <input
 					key={shakeTrigger}
 					required
 					className={!valid ? "invalid" : ""}
@@ -47,11 +45,11 @@ function RestaurantNameForm({ isValid, shakeTrigger }) {
 					value={name}
 					onChange={(e) => handleChange(e.target.value)}
 					onBlur={(e) => handleBlur(e.target.value)}
-				/>
-				{!isValid && !valid && <p className="error">El nombre debe tener al menos 3 caracteres.</p>}
+				/> */}
+				{!isValid && !valid && <p className="error">Elige una opción.</p>}
 			</form>
 		</div>
 	);
 }
 
-export default RestaurantNameForm;
+export default RegisterAccountTypeForm;

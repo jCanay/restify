@@ -29,4 +29,8 @@ public class DashboardPage {
     @ManyToOne
     @JoinColumn(name = "dashboard_id")
     private Dashboard dashboard;
+
+    @OneToMany(mappedBy = "dashboardPage")
+    @JoinColumn(name = "dashboard_page_id")
+    private Widgets widgets;
 }

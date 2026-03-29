@@ -1,53 +1,54 @@
-import { Link, Navigate, useNavigate } from "react-router";
+import { Link } from "react-router";
 import "../css/navbar.css";
-import logoIcon from "../assets/logo-icon.svg";
-import logoText from "../assets/logo-text.svg";
 import Logo from "./Logo";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import Setup from "../../setup/pages/SetupPage";
+import RegisterModal from "../../auth/components/RegisterModal/RegisterModal";
+import LoginModal from "../../auth/components/LoginModal/LoginModal";
 
 function Navbar() {
-    const navigate = useNavigate();
-
-    return (
-        <nav className="navbar">
-            <div className="wrapper container">
-                <Logo route={"/"} />
-                <ul>
-                    <Link className="link active" to="/">
-                        Inicio
-                    </Link>
-                    <Link className="link" to="/">
-                        Gestiona tu negocio
-                    </Link>
-                    <Link className="link" to="/">
-                        Sobre nosotros
-                    </Link>
-                    <Link className="link" to="/">
-                        Contacto
-                    </Link>
-                </ul>
-                <div className="auth">
-                    <button
-                        className="login-btn"
-                        onClick={() => navigate("/login")}
-                    >
-                        Iniciar sesión
-                    </button>
-                    <Dialog>
-                        <DialogTrigger asChild>
-                            <button
-                                className="register-btn"
-                                // onClick={() => navigate("/register")}
-                            >
-                                Registrarse
-                            </button>
-                        </DialogTrigger>
-                    </Dialog>
-                </div>
-            </div>
-        </nav>
-    );
+	return (
+		<nav className="navbar">
+			<div className="wrapper container">
+				<Logo route={"/"} />
+				<ul>
+					<Link className="link active" to="/">
+						Inicio
+					</Link>
+					<Link className="link" to="/">
+						Gestiona tu negocio
+					</Link>
+					<Link className="link" to="/">
+						Sobre nosotros
+					</Link>
+					<Link className="link" to="/">
+						Contacto
+					</Link>
+				</ul>
+				<div className="auth">
+					<Dialog>
+						<DialogTrigger asChild>
+							<button
+								className="login-btn"
+							>
+								Iniciar sesión
+							</button>
+						</DialogTrigger>
+						<LoginModal />
+					</Dialog>
+					<Dialog>
+						<DialogTrigger asChild>
+							<button
+								className="register-btn"
+							>
+								Registrarse
+							</button>
+						</DialogTrigger>
+						<RegisterModal />
+					</Dialog>
+				</div>
+			</div>
+		</nav>
+	);
 }
 
 export default Navbar;

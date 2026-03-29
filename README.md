@@ -162,4 +162,4 @@ El comando realizará lo siguiente:
 3. `npm run dev` (Disponible en `http://localhost:8000`)
 
 ## 📝 Licencia
-Distribuido bajo la licencia Apache License 2.0. Consulta el archivo `LICENSE` para más información.
+Distribuido bajo la licencia CC BY-NC-ND 4.0. Consulta el archivo `LICENSE` para más información.

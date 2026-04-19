@@ -1,71 +1,100 @@
+import { useStore } from "@nanostores/react";
+import { $loginStore, setLogin } from "../../contexts/LoginStore";
 import "./css/login-form.css";
 import { useEffect, useState } from "react";
+import { DialogTitle, DialogDescription } from "@/components/ui/dialog";
 
-function LoginForm({ isValid, shakeTrigger }) {
-	// const { name } = useStore($setupDataStore);
-	const [valid, setValid] = useState(true);
+function LoginForm({ isValid, shakeTrigger, error }) {
+    const { identifier, password } = useStore($loginStore);
+    const loginStore = useStore($loginStore);
+    const [identifierValid, setIdentifierValid] = useState(true);
+    const [passwordValid, setPasswordValid] = useState(true);
 
-	const handleChange = (value) => {
-		// setSetupDataName(value);
-	};
+    const handleChange = (target) => {
+        setLogin({
+            ...loginStore,
+            [target.id]: target.value,
+        });
+    };
 
-	const handleBlur = (value) => {
-		// setSetupDataName(value.trim());
-		setValid(value.trim().length > 2);
-	};
+    const handleBlur = (target) => {
+        setLogin({
+            ...loginStore,
+            [target.id]: target.value || "",
+        });
 
-	useEffect(() => {
-		const validate = () => {
-			if (shakeTrigger > 0 && name.trim().length <= 2) {
-				setValid(false);
-			} else {
-				setValid(true);
-			}
-		};
+        if (identifier.length > 0) setIdentifierValid(true);
+        else if (shakeTrigger > 0) setIdentifierValid(false);
 
-		validate();
-	}, [shakeTrigger]);
+        if (password.length > 0) setPasswordValid(true);
+        else if (shakeTrigger > 0) setPasswordValid(false);
+    };
 
-	return (
-		<div className="login-form">
-			<h2 className="text-2xl font-semibold">Inicia sesión</h2>
-			<p>
-				Introduce los datos de tu cuenta para iniciar sesión
-			</p>
-			<form>
-				<div>
-					<label htmlFor="name">Usuario o correo electrónico*</label>
-					<input
-						key={shakeTrigger}
-						required
-						className={!valid ? "invalid" : ""}
-						type="text"
-						name="name"
-						id="name"
-						value={name}
-						onChange={(e) => handleChange(e.target.value)}
-						onBlur={(e) => handleBlur(e.target.value)}
-					/>
-					{!isValid && !valid && <p className="error">Este campo es obligatorio.</p>}
-				</div>
-				<div>
-					<label htmlFor="name">Contraseña*</label>
-					<input
-						key={shakeTrigger}
-						required
-						className={!valid ? "invalid" : ""}
-						type="text"
-						name="name"
-						id="name"
-						value={name}
-						onChange={(e) => handleChange(e.target.value)}
-						onBlur={(e) => handleBlur(e.target.value)}
-					/>
-					{!isValid && !valid && <p className="error">Este campo es obligatorio.</p>}
-				</div>
-			</form>
-		</div>
-	);
+    useEffect(() => {
+        const validate = () => {
+            if (shakeTrigger > 0) {
+                setIdentifierValid(identifier.trim().length > 0);
+                setPasswordValid(password.trim().length > 0);
+            }
+        };
+
+        validate();
+    }, [shakeTrigger, identifier, password]);
+
+    return (
+        <div className="login-form">
+            <DialogTitle className="text-2xl font-semibold">
+                Inicia sesión
+            </DialogTitle>
+            <DialogDescription>
+                Introduce los datos de tu cuenta para iniciar sesión
+            </DialogDescription>
+            {error && (
+                <p className="login-error">
+                    No se ha podido iniciar sesión. Comprueba los datos y vuelve
+                    a intentarlo de nuevo.
+                </p>
+            )}
+            <form>
+                <div>
+                    <label htmlFor="identifier">
+                        Usuario o correo electrónico*
+                    </label>
+                    <input
+                        key={shakeTrigger}
+                        required
+                        className={!identifierValid ? "invalid" : ""}
+                        type="text"
+                        name="identifier"
+                        id="identifier"
+                        value={identifier}
+                        onChange={(e) => handleChange(e.target)}
+                        onBlur={(e) => handleBlur(e.target.value)}
+                    />
+                    {!isValid && !identifierValid && (
+                        <p className="error">Este campo es obligatorio.</p>
+                    )}
+                </div>
+                <div>
+                    <label htmlFor="password">Contraseña*</label>
+                    <input
+                        key={shakeTrigger}
+                        required
+                        className={!passwordValid ? "invalid" : ""}
+                        type="text"
+                        name="password"
+                        id="password"
+                        value={password}
+                        onChange={(e) => handleChange(e.target)}
+                        onBlur={(e) => handleBlur(e.target.value)}
+                    />
+                    {!isValid && !passwordValid && (
+                        <p className="error">Este campo es obligatorio.</p>
+                    )}
+                </div>
+            </form>
+        </div>
+    );
 }
 
 export default LoginForm;

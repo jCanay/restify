@@ -26,6 +26,23 @@ public class AuthController {
         return ResponseEntity.ok(authService.login(loginRequestDTO));
     }
 
+    @PostMapping("/logout")
+    public ResponseEntity<?> logoutUser(@RequestBody Map<String, String> payload) {
+        String requestToken = payload.get("refreshToken");
+
+        if (requestToken == null || requestToken.isBlank()) {
+            return ResponseEntity.badRequest().body("Refresh token is required.");
+        }
+
+//        return refreshTokenRepository.findByToken(requestToken)
+//                .map(token -> {
+//                    refreshTokenRepository.delete(token);
+//                    return ResponseEntity.ok("Logged out successfully.");
+//                })
+//                .orElse(ResponseEntity.badRequest().body("Invalid refresh token."));
+        return ResponseEntity.ok().build();
+    }
+
     @PostMapping("/register")
     public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
         return ResponseEntity.ok(authService.register(registerRequestDTO));

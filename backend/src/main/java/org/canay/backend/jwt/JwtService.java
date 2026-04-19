@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public class JwtService {
 
-    @Value("${app.jwt.secret}")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     private SecretKey getSigningKey() {

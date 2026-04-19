@@ -9,6 +9,8 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 import tools.jackson.databind.JsonNode;
 
+import java.util.List;
+
 @Entity
 @Table(name = "dashboard_pages")
 @Data
@@ -31,6 +33,5 @@ public class DashboardPage {
     private Dashboard dashboard;
 
     @OneToMany(mappedBy = "dashboardPage")
-    @JoinColumn(name = "dashboard_page_id")
-    private Widgets widgets;
+    private List<Widgets> widgets;
 }

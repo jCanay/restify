@@ -1,0 +1,85 @@
+@keyframes wiggle {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25%,
+  75% {
+    transform: translateX(-4px);
+  }
+
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+div.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  & h2 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    & button {
+      cursor: pointer;
+      border-radius: 5rem;
+      padding: 0.25rem;
+
+      &:hover {
+        background: var(--color-gray-200);
+      }
+    }
+  }
+
+  & p {
+    /* font-weight: 100; */
+    /* color: black; */
+
+    &.register-error {
+      text-align: center;
+      padding: 0.5rem;
+      background-color: var(--color-red-100);
+      border-radius: 0.5rem;
+      /* border: solid 1.5px var(--color-red-600); */
+      color: var(--color-red-600);
+    }
+  }
+
+  & form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    & div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      & label {
+        font-size: 10pt;
+      }
+
+      & input {
+        width: 100%;
+        background-color: var(--color-white);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        border: solid 1.5px var(--color-gray-200);
+
+        &.invalid {
+          border-color: var(--color-red-600);
+          animation: wiggle 300ms ease-in-out;
+        }
+      }
+
+      & p.error {
+        font-size: smaller;
+        color: var(--color-red-600);
+      }
+    }
+  }
+}

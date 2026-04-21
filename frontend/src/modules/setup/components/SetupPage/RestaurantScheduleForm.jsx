@@ -3,7 +3,6 @@ import ScheduleForm from "../ScheduleForm/ScheduleForm";
 import "./css/restaurant-schedule-form.css";
 
 function RestaurantScheduleForm({ onBackClick }) {
-
 	return (
 		<div className="restaurant-schedule-form">
 			<h2 className="text-2xl font-semibold">

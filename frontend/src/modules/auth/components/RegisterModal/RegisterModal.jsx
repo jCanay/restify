@@ -13,12 +13,16 @@ import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import "./css/register-modal.css";
 import RegisterAccountTypeForm from "./RegisterAccountTypeForm";
+import RegisterForm from "./RegisterForm";
+import { useStore } from "@nanostores/react";
+import { $registerStore } from "../../contexts/RegisterStore";
 
 function RegisterModal() {
 	const [index, setIndex] = useState(0);
 	const [hasStarted, setHasStarted] = useState(false);
 	const [direction, setDirection] = useState("forward");
 	const [shakeTrigger, setShakeTrigger] = useState(0);
+	const { name, surname, username, email, password, role } = useStore($registerStore);
 
 	const handleBack = () => {
 		if (index > 0) {
@@ -28,21 +32,21 @@ function RegisterModal() {
 		}
 	};
 
-	const steps = [
-		<RegisterAccountTypeForm />,
-		<RegisterAccountTypeForm />,
-	];
-
 	const isValid = () => {
 		switch (index) {
 			case 0:
 				return true;
 			case 1:
-				return true;
+				return email.length > 3 && password.length > 8;
 			default:
 				return true;
 		}
 	};
+
+	const steps = [
+		<RegisterAccountTypeForm />,
+		<RegisterForm isValid={isValid()} shakeTrigger={shakeTrigger} onBackClick={handleBack} />
+	];
 
 	const handleContinue = () => {
 		if (!isValid()) {

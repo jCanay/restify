@@ -18,3 +18,16 @@ export const setRegisterRoleName = (roleName) => {
 		role: { name: roleName }
 	});
 };
+
+export const setRegister = ({ name, surname, username, email, password, role }) => {
+	const current = $registerStore.get();
+	$registerStore.set({
+		...current,
+		name: name,
+		surname: surname,
+		username: username,
+		email: email,
+		password: password,
+		role: role
+	});
+};

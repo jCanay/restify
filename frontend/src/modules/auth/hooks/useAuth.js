@@ -1,6 +1,6 @@
 import { useState } from "react";
 import api from "../../core/api/axios";
-import { setLoginResponse } from "../contexts/LoginStore";
+import { setLoginResponse } from "../contexts/loginStore";
 import { useNavigate } from "react-router";
 
 export const useAuth = () => {
@@ -13,20 +13,36 @@ export const useAuth = () => {
         try {
             const response = await api.post("/auth/login", loginRequest);
 
-            const { token } = response.data;
+            const { user, token } = response.data;
             cookieStore.set("token", token);
-            setLoginResponse({ sessionToken: token });
+            setLoginResponse({ user, token });
 
             setError(null);
             navigate("/dashboard");
             return response.data;
         } catch (err) {
-            setError(err.response?.data?.message || "Login failed");
-            throw err;
+            setError(err || "Login failed");
+            console.error(err || "Login failed");
         } finally {
             setLoading(false);
         }
     };
 
-    return { login, loading: loading, error };
+    const register = async (registerRequest) => {
+        setLoading(true);
+        try {
+            const response = await api.post("/auth/register", registerRequest);
+
+            setError(null);
+            navigate("/setup");
+            console.log(response.data);
+        } catch (err) {
+            setError(err.response.data || "Register failed");
+            console.error(err.response.data || "Login failed");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    return { login, register, loading, error };
 };

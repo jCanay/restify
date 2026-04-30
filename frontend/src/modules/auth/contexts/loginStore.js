@@ -2,7 +2,10 @@ import { atom } from "nanostores";
 
 export const $loginStore = atom({ identifier: "", password: "" });
 
-export const $loginResponseStore = atom({ sessionToken: "" });
+export const $loginResponseStore = atom({
+    user: { username: "", password: "", email: "", role: { name: "" } },
+    token: "",
+});
 
 export const setLogin = ({ identifier, password }) => {
     const current = $loginStore.get();
@@ -19,7 +22,7 @@ export const setLoginPassword = (password) => {
     $loginStore.set({ ...current, password: password });
 };
 
-export const setLoginResponse = ({ sessionToken }) => {
+export const setLoginResponse = ({ user, token }) => {
     const current = $loginResponseStore.get();
-    $loginResponseStore.set({ ...current, sessionToken: sessionToken });
+    $loginResponseStore.set({ ...current, user, token });
 };

@@ -1,13 +1,12 @@
 package org.canay.backend.service.impl;
 
-import org.canay.backend.domain.dto.AuthResponseDTO;
-import org.canay.backend.domain.dto.LoginRequestDTO;
-import org.canay.backend.domain.dto.RegisterRequestDTO;
+import org.canay.backend.domain.dto.*;
 import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.domain.entities.UserRole;
 import org.canay.backend.jwt.JwtService;
 import org.canay.backend.mappers.Mapper;
+import org.canay.backend.mappers.impl.UserRoleMapperImpl;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.UserRepository;
 import org.canay.backend.repository.UserRoleRepository;
@@ -43,40 +42,45 @@ public class AuthServiceImpl implements AuthService {
     private Mapper<User, RegisterRequestDTO> registerRequestDTOMapper;
 
     @Autowired
+    private Mapper<UserRole, UserRoleDTO> userRoleUserRoleDTOMapper;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public AuthResponseDTO login(LoginRequestDTO loginRequestDTO) {
+    public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
         User user = userRepository.findByUsername(loginRequestDTO.getIdentifier())
                 .or(() -> userRepository.findByEmail(loginRequestDTO.getIdentifier()))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequestDTO.getPassword())
-        );
-
-
-
-        return AuthResponseDTO.builder().token(jwtService.generateToken(authentication.getName())).role(user.getRole().getName()).build();
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequestDTO.getPassword()));
+        
+        return LoginResponseDTO.builder()
+                .user(UserDTO.builder()
+                        .username(user.getUsername())
+                        .password(user.getPassword())
+                        .email(user.getEmail())
+                        .role(userRoleUserRoleDTOMapper.mapTo(user.getRole()))
+                        .build())
+                .token(jwtService.generateToken(authentication.getName()))
+                .build();
     }
 
     @Override
-    public AuthResponseDTO register(RegisterRequestDTO registerRequestDTO) {
-
+    public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         // Verifica si el nombre de usuario existe
         if (userRepository.findByUsername(registerRequestDTO.getUsername()).isPresent()) {
-            throw new DuplicateResourceException("Username '" + registerRequestDTO.getUsername() + "' is already taken!");
+            throw new DuplicateResourceException("El usuario ya está registrado.");
         }
 
         // Verifica si el email ya existe
         if (userRepository.findByEmail(registerRequestDTO.getEmail()).isPresent()) {
-            throw new DuplicateResourceException("Email '" + registerRequestDTO.getEmail() + "' is already taken!");
+            throw new DuplicateResourceException("El email ya está registrado.");
         }
 
         // Verifica si existe el rol
         String roleName = (registerRequestDTO.getRole() != null) ? registerRequestDTO.getRole().getName() : "";
-        UserRole roleEntity = userRoleRepository.findByName(roleName)
-                .orElse(null);
+        UserRole roleEntity = userRoleRepository.findByName(roleName).orElse(null);
 
         if (roleEntity == null) {
             throw new RoleNotFoundException("Role '" + roleName + "' does not exist");
@@ -98,6 +102,9 @@ public class AuthServiceImpl implements AuthService {
 
         accountRepository.save(accountEntity);
 
-        return AuthResponseDTO.builder().token(jwtService.generateToken(savedUserEntity.getUsername())).role(userEntity.getRole().getName()).build();
+        return RegisterResponseDTO.builder()
+                .token(jwtService.generateToken(savedUserEntity.getUsername()))
+                .role(userEntity.getRole().getName())
+                .build();
     }
 }

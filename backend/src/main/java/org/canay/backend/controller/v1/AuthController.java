@@ -1,6 +1,7 @@
 package org.canay.backend.controller.v1;
 
-import org.canay.backend.domain.dto.AuthResponseDTO;
+import org.canay.backend.domain.dto.LoginResponseDTO;
+import org.canay.backend.domain.dto.RegisterResponseDTO;
 import org.canay.backend.domain.dto.LoginRequestDTO;
 import org.canay.backend.domain.dto.RegisterRequestDTO;
 import org.canay.backend.service.AuthService;
@@ -22,7 +23,7 @@ public class AuthController {
     private RefreshTokenService refreshTokenService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {
         return ResponseEntity.ok(authService.login(loginRequestDTO));
     }
 
@@ -44,7 +45,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
+    public ResponseEntity<RegisterResponseDTO> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
         return ResponseEntity.ok(authService.register(registerRequestDTO));
     }
 

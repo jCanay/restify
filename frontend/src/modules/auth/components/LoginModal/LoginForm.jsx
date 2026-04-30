@@ -1,33 +1,27 @@
 import { useStore } from "@nanostores/react";
-import { $loginStore, setLogin } from "../../contexts/LoginStore";
+import { $loginStore, setLogin } from "../../contexts/loginStore";
 import "./css/login-form.css";
 import { useEffect, useState } from "react";
 import { DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Eye, EyeOff } from "lucide-react";
 
 function LoginForm({ isValid, shakeTrigger, error }) {
     const { identifier, password } = useStore($loginStore);
     const loginStore = useStore($loginStore);
     const [identifierValid, setIdentifierValid] = useState(true);
     const [passwordValid, setPasswordValid] = useState(true);
+    const [showPassword, setShowPassword] = useState(false);
 
-    const handleChange = (target) => {
+    const handleChange = (e) => {
         setLogin({
             ...loginStore,
-            [target.id]: target.value,
+            [e.target.id]: e.target.value,
         });
     };
 
-    const handleBlur = (target) => {
-        setLogin({
-            ...loginStore,
-            [target.id]: target.value || "",
-        });
-
-        if (identifier.length > 0) setIdentifierValid(true);
-        else if (shakeTrigger > 0) setIdentifierValid(false);
-
-        if (password.length > 0) setPasswordValid(true);
-        else if (shakeTrigger > 0) setPasswordValid(false);
+    const handleShowPassword = (e) => {
+        e.preventDefault();
+        setShowPassword(!showPassword);
     };
 
     useEffect(() => {
@@ -55,39 +49,57 @@ function LoginForm({ isValid, shakeTrigger, error }) {
                     a intentarlo de nuevo.
                 </p>
             )}
-            <form>
+            <form id="login-form">
                 <div>
                     <label htmlFor="identifier">
                         Usuario o correo electrónico*
                     </label>
                     <input
                         key={shakeTrigger}
-                        required
                         className={!identifierValid ? "invalid" : ""}
                         type="text"
                         name="identifier"
                         id="identifier"
                         value={identifier}
-                        onChange={(e) => handleChange(e.target)}
-                        onBlur={(e) => handleBlur(e.target.value)}
+                        onChange={handleChange}
+                        onBlur={handleChange}
                     />
                     {!isValid && !identifierValid && (
                         <p className="error">Este campo es obligatorio.</p>
                     )}
                 </div>
-                <div>
+                <div className="password">
                     <label htmlFor="password">Contraseña*</label>
-                    <input
-                        key={shakeTrigger}
-                        required
-                        className={!passwordValid ? "invalid" : ""}
-                        type="text"
-                        name="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => handleChange(e.target)}
-                        onBlur={(e) => handleBlur(e.target.value)}
-                    />
+                    <div>
+                        <input
+                            autoComplete="on"
+                            type={showPassword ? "text" : "password"}
+                            key={shakeTrigger}
+                            className={!passwordValid ? "invalid" : ""}
+                            name="password"
+                            id="password"
+                            value={password}
+                            onChange={handleChange}
+                            onBlur={handleChange}
+                        />
+                        <button
+                            type="button"
+                            className="flex absolute right-0 px-3 w-fit items-center h-full hover:bg-transparent cursor-pointer"
+                            onClick={(e) => handleShowPassword(e)}
+                        >
+                            {showPassword ? (
+                                <EyeOff
+                                    size={20}
+                                    className="w-13 text-muted-foreground"
+                                />
+                            ) : (
+                                <Eye
+                                    size={20}
+                                    className="w-13 text-muted-foreground"
+                                />
+                            )}
+                        </button>
+                    </div>
                     {!isValid && !passwordValid && (
                         <p className="error">Este campo es obligatorio.</p>
                     )}

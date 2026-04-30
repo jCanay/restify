@@ -20,15 +20,11 @@ div.login-form {
     gap: 1rem;
 
     & p {
-        font-weight: 100;
-        color: black;
-
         &.login-error {
             text-align: center;
             padding: 0.5rem;
             background-color: var(--color-red-100);
             border-radius: 0.5rem;
-            /* border: solid 1.5px var(--color-red-600); */
             color: var(--color-red-600);
         }
     }
@@ -42,6 +38,16 @@ div.login-form {
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
+
+            &.password {
+                & div {
+                    position: relative;
+
+                    & input {
+                        padding-right: 3rem;
+                    }
+                }
+            }
 
             & label {
                 font-size: 10pt;

@@ -4,4 +4,4 @@ INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_GUEST');
 INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_OWNER');
 INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_WAITER');
 INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_COOK');
-INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_DRIVER');
+INSERT IGNORE INTO user_roles (name) VALUES ('ROLE_RIDER');

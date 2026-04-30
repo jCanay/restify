@@ -1,13 +1,14 @@
 import {
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogDescription,
-	DialogFooter,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
 } from "@/components/ui/dialog";
+import { Spinner } from "@/components/ui/spinner";
 import darkBg from "../../../setup/assets/dark-bg.png";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
@@ -15,83 +16,110 @@ import "./css/register-modal.css";
 import RegisterAccountTypeForm from "./RegisterAccountTypeForm";
 import RegisterForm from "./RegisterForm";
 import { useStore } from "@nanostores/react";
-import { $registerStore } from "../../contexts/RegisterStore";
+import { $registerStore } from "../../contexts/registerStore";
+import { useAuth } from "../../hooks/useAuth";
 
 function RegisterModal() {
-	const [index, setIndex] = useState(0);
-	const [hasStarted, setHasStarted] = useState(false);
-	const [direction, setDirection] = useState("forward");
-	const [shakeTrigger, setShakeTrigger] = useState(0);
-	const { name, surname, username, email, password, role } = useStore($registerStore);
+    const [index, setIndex] = useState(0);
+    const [hasStarted, setHasStarted] = useState(false);
+    const [direction, setDirection] = useState("forward");
+    const [shakeTrigger, setShakeTrigger] = useState(0);
+    const { name, surname, username, email, password, role } =
+        useStore($registerStore);
+    const { register, loading, error } = useAuth();
 
-	const handleBack = () => {
-		if (index > 0) {
-			setIndex(index - 1);
-			setHasStarted(true);
-			setDirection("backward");
-		}
-	};
+    const handleBack = () => {
+        if (index > 0) {
+            setIndex(index - 1);
+            setHasStarted(true);
+            setDirection("backward");
+        }
+    };
 
-	const isValid = () => {
-		switch (index) {
-			case 0:
-				return true;
-			case 1:
-				return email.length > 3 && password.length > 8;
-			default:
-				return true;
-		}
-	};
+    const isValid = () => {
+        switch (index) {
+            case 0:
+                return true;
+            case 1:
+                return (
+                    username.length > 0 &&
+                    email.length > 0 &&
+                    password.length >= 8
+                );
+            default:
+                return true;
+        }
+    };
 
-	const steps = [
-		<RegisterAccountTypeForm />,
-		<RegisterForm isValid={isValid()} shakeTrigger={shakeTrigger} onBackClick={handleBack} />
-	];
+    const steps = [
+        <RegisterAccountTypeForm />,
+        <RegisterForm
+            isValid={isValid()}
+            shakeTrigger={shakeTrigger}
+            error={error}
+            onBackClick={handleBack}
+        />,
+    ];
 
-	const handleContinue = () => {
-		if (!isValid()) {
-			setShakeTrigger(prev => prev + 1);
-		} else {
-			setShakeTrigger(0);
-		}
+    const handleContinue = async (e) => {
+        e.preventDefault();
 
-		if (index < steps.length - 1 && isValid()) {
-			setIndex(index + 1);
-			setHasStarted(true);
-			setDirection("forward");
-		}
-	};
+        if (!isValid()) {
+            setShakeTrigger((prev) => prev + 1);
+        } else {
+            setShakeTrigger(0);
+        }
 
-	const getAnimationClass = () => {
-		if (!hasStarted) return "";
-		return direction === "forward" ? "animate-forward" : "animate-backward";
-	};
+        if (index < steps.length - 1 && isValid()) {
+            setIndex(index + 1);
+            setHasStarted(true);
+            setDirection("forward");
+        }
 
-	return <DialogContent className="register-modal">
-		<aside>
-			<img src={darkBg} alt="" />
-		</aside>
-		<div className="register-container">
-			<div className={`step-wrapper ${getAnimationClass()}`}>
-				{steps[index]}
-				<button
-					className={`continue ${index != steps.length - 1 && "animation"}`}
-					onClick={handleContinue}
-					type="submit"
-				>
-					<p>
-						{index == steps.length - 1 ? "Finalizar registro" : (
-							<>
-								Continuar
-								<ArrowRight size={14} />
-							</>
-						)}
-					</p>
-				</button>
-			</div>
-		</div>
-	</DialogContent>;
+        if (index == steps.length - 1 && isValid()) {
+            await register({ name, surname, username, email, password, role });
+        }
+    };
 
+    const getAnimationClass = () => {
+        if (!hasStarted) return "";
+        return direction === "forward" ? "animate-forward" : "animate-backward";
+    };
+
+    return (
+        <DialogContent className="register-modal">
+            <aside>
+                <img src={darkBg} alt="" />
+            </aside>
+            <div className="register-container">
+                <div className={`step-wrapper ${getAnimationClass()}`}>
+                    {steps[index]}
+                    <button
+                        form="register-form"
+                        className={`continue ${index != steps.length - 1 && "animation"}`}
+                        onClick={handleContinue}
+                        type="submit"
+                    >
+                        <p>
+                            {index == steps.length - 1 ? (
+                                <>
+                                    Finalizar registro
+                                    {loading && (
+                                        <Spinner data-icon="inline-start" />
+                                    )}
+                                </>
+                            ) : (
+                                <>
+                                    Continuar
+                                    <ArrowRight size={14} />
+                                </>
+                            )}
+                        </p>
+                    </button>
+                </div>
+            </div>
+        </DialogContent>
+    );
 }
 
 export default RegisterModal;

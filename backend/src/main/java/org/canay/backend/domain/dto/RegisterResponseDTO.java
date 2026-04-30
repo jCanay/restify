@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthResponseDTO {
+public class RegisterResponseDTO {
     String token;
     String role;
 }

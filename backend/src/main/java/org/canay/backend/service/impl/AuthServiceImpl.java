@@ -4,9 +4,9 @@ import org.canay.backend.domain.dto.*;
 import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.domain.entities.UserRole;
+import org.canay.backend.exceptions.AccountNotFoundException;
 import org.canay.backend.jwt.JwtService;
 import org.canay.backend.mappers.Mapper;
-import org.canay.backend.mappers.impl.UserRoleMapperImpl;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.UserRepository;
 import org.canay.backend.repository.UserRoleRepository;
@@ -33,53 +33,59 @@ public class AuthServiceImpl implements AuthService {
     private AccountRepository accountRepository;
 
     @Autowired
+    private Mapper<User, UserDTO> userMapper;
+
+    @Autowired
+    private Mapper<Account, AccountDTO> accountMapper;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
     private JwtService jwtService;
 
     @Autowired
-    private Mapper<User, RegisterRequestDTO> registerRequestDTOMapper;
-
-    @Autowired
-    private Mapper<UserRole, UserRoleDTO> userRoleUserRoleDTOMapper;
-
-    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
+        // Buscar usuario
         User user = userRepository.findByUsername(loginRequestDTO.getIdentifier())
                 .or(() -> userRepository.findByEmail(loginRequestDTO.getIdentifier()))
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequestDTO.getPassword()));
-        
+        // Verificar usuario y contraseña
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequestDTO.getPassword()));
+
+        // Buscar cuenta
+        Account account = accountRepository.findByUser(user)
+                .orElseThrow(() -> new AccountNotFoundException("Account not found"));
+
         return LoginResponseDTO.builder()
-                .user(UserDTO.builder()
-                        .username(user.getUsername())
-                        .password(user.getPassword())
-                        .email(user.getEmail())
-                        .role(userRoleUserRoleDTOMapper.mapTo(user.getRole()))
-                        .build())
                 .token(jwtService.generateToken(authentication.getName()))
+                .user(userMapper.mapTo(user))
+                .account(accountMapper.mapTo(account))
                 .build();
     }
 
     @Override
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         // Verifica si el nombre de usuario existe
-        if (userRepository.findByUsername(registerRequestDTO.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(registerRequestDTO.getUser().getUsername()).isPresent()) {
             throw new DuplicateResourceException("El usuario ya está registrado.");
         }
 
         // Verifica si el email ya existe
-        if (userRepository.findByEmail(registerRequestDTO.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(registerRequestDTO.getUser().getEmail()).isPresent()) {
             throw new DuplicateResourceException("El email ya está registrado.");
         }
 
         // Verifica si existe el rol
-        String roleName = (registerRequestDTO.getRole() != null) ? registerRequestDTO.getRole().getName() : "";
+        String roleName = (registerRequestDTO.getUser().getRole() != null) ? registerRequestDTO.getUser()
+                .getRole()
+                .getName() : "";
+
         UserRole roleEntity = userRoleRepository.findByName(roleName).orElse(null);
 
         if (roleEntity == null) {
@@ -87,7 +93,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // Crea el usuario
-        User userEntity = registerRequestDTOMapper.mapFrom(registerRequestDTO);
+        User userEntity = userMapper.mapFrom(registerRequestDTO.getUser());
 
         userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
         userEntity.setRole(roleEntity);

@@ -19,6 +19,8 @@ import {
 	Users,
 	Utensils,
 } from "lucide-react";
+import { useStore } from "@nanostores/react";
+import { $userStore } from "../contexts/userStore";
 
 function Dashboard() {
 	const sidebarRef = useRef(null);
@@ -28,6 +30,13 @@ function Dashboard() {
 		id: { groupId },
 		storage: localStorage,
 	});
+	const { user, account } = useStore($userStore);
+
+	const roles = {
+		ROLE_ADMIN: "Administrador",
+		ROLE_USER: "Usuario",
+		ROLE_RIDER: "Repartidor",
+	};
 
 	const toggleSidebar = () => {
 		const sidebar = sidebarRef.current;
@@ -106,8 +115,8 @@ function Dashboard() {
 				<button className="user">
 					<img src="https://i.pravatar.cc/100" alt="" />
 					<div className="info">
-						<h4>Enooc Dominguez Quiroga</h4>
-						<small>Administrador</small>
+						<h4>{`${account?.name} ${account?.surname}`}</h4>
+						<small>{roles[user?.role.name]}</small>
 					</div>
 				</button>
 			</Panel>

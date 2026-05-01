@@ -5,12 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class RegisterRequestDTO {
-    UserDTO user;
+public class AccountDTO {
     private String name;
     private String surname;
+    private String profilePicture;
+    private List<AddressDTO> addresses;
 }

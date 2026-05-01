@@ -1,48 +1,51 @@
-import { useState } from "react";
-import api from "../../core/api/axios";
-import { setLoginResponse } from "../contexts/loginStore";
-import { useNavigate } from "react-router";
+import { useState } from "react"
+import api from "../../core/api/axios"
+import { setLoginResponse } from "../contexts/loginStore"
+import { useNavigate } from "react-router"
+import { setUser } from "../../dashboard/contexts/userStore"
 
 export const useAuth = () => {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const navigate = useNavigate();
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const navigate = useNavigate()
 
-    const login = async (loginRequest) => {
-        setLoading(true);
-        try {
-            const response = await api.post("/auth/login", loginRequest);
+  const login = async (loginRequest) => {
+    setLoading(true)
+    try {
+      // Llamada a la API
+      const response = await api.post("/auth/login", loginRequest)
+      const { token, user, account } = response.data
 
-            const { user, token } = response.data;
-            cookieStore.set("token", token);
-            setLoginResponse({ user, token });
+      // Establece datos
+      cookieStore.set("token", token)
+      setLoginResponse({ token })
+      setUser({ user, account })
 
-            setError(null);
-            navigate("/dashboard");
-            return response.data;
-        } catch (err) {
-            setError(err || "Login failed");
-            console.error(err || "Login failed");
-        } finally {
-            setLoading(false);
-        }
-    };
+      // Acciones posteriores
+      navigate("/dashboard")
+      setError(null)
+    } catch (err) {
+      setError(err || "Login failed")
+      console.error(err || "Login failed")
+    } finally {
+      setLoading(false)
+    }
+  }
 
-    const register = async (registerRequest) => {
-        setLoading(true);
-        try {
-            const response = await api.post("/auth/register", registerRequest);
+  const register = async (registerRequest) => {
+    setLoading(true)
+    try {
+      const response = await api.post("/auth/register", registerRequest)
 
-            setError(null);
-            navigate("/setup");
-            console.log(response.data);
-        } catch (err) {
-            setError(err.response.data || "Register failed");
-            console.error(err.response.data || "Login failed");
-        } finally {
-            setLoading(false);
-        }
-    };
+      setError(null)
+      navigate("/setup")
+    } catch (err) {
+      setError(err.response.data || "Register failed")
+      console.error(err.response.data || "Login failed")
+    } finally {
+      setLoading(false)
+    }
+  }
 
-    return { login, register, loading, error };
-};
+  return { login, register, loading, error }
+}

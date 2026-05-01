@@ -1,9 +1,11 @@
 package org.canay.backend.utils;
 
 import jakarta.transaction.Transactional;
+import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.AvailabilityRuleType;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.domain.entities.UserRole;
+import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.AvailabilityRuleTypeRepository;
 import org.canay.backend.repository.UserRepository;
 import org.canay.backend.repository.UserRoleRepository;
@@ -13,6 +15,9 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -28,6 +33,9 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
 
     @Autowired
     private UserRoleRepository userRoleRepository;
@@ -50,7 +58,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 .orElseThrow(() -> new RuntimeException("Error: Role not found in database"));
 
         if (userRepository.findByUsername(adminUsername).isEmpty()) {
-
             User admin = User.builder()
                     .username(adminUsername)
                     .email(adminEmail)
@@ -59,13 +66,24 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                     .isEnabled(true)
                     .build();
 
+            Account account = Account.builder()
+                    .name("admin")
+                    .surname("root")
+                    .profilePicture("")
+                    .addresses(List.of())
+                    .user(admin)
+                    .build();
+
             userRepository.save(admin);
+            accountRepository.save(account);
+
+            System.out.println("ACCOUNT: " + accountRepository);
         }
     }
 
     private void createRuleTypeIfNotFound(String name, Integer priority, String description) {
-        ruleTypeRepository.findByName(name).ifPresentOrElse(
-                type -> {}, // Ya existe, no hacemos nada
+        ruleTypeRepository.findByName(name).ifPresentOrElse(type -> {
+                }, // Ya existe, no hacemos nada
                 () -> {
                     AvailabilityRuleType newType = AvailabilityRuleType.builder()
                             .name(name)
@@ -73,7 +91,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                             .description(description)
                             .build();
                     ruleTypeRepository.save(newType);
-                }
-        );
+                });
     }
 }

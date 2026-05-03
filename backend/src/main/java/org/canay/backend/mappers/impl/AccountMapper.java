@@ -1,5 +1,6 @@
 package org.canay.backend.mappers.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.AccountDTO;
 import org.canay.backend.domain.entities.Account;
 import org.canay.backend.mappers.Mapper;
@@ -8,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AccountMapperImpl implements Mapper<Account, AccountDTO> {
-    @Autowired
-    private ModelMapper modelMapper;
+@RequiredArgsConstructor
+public class AccountMapper implements Mapper<Account, AccountDTO> {
+    private final ModelMapper modelMapper;
 
     @Override
     public AccountDTO mapTo(Account account) {

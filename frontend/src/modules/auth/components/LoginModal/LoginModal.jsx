@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "./css/login-modal.css";
 import LoginForm from "./LoginForm";
 import { useStore } from "@nanostores/react";
-import { $loginResponseStore, $loginStore } from "../../contexts/loginStore";
+import { $loginStore } from "../../contexts/loginStore";
 import { useAuth } from "../../hooks/useAuth";
 import { Spinner } from "@/components/ui/spinner";
 
@@ -12,7 +12,6 @@ function LoginModal() {
 	const [shakeTrigger, setShakeTrigger] = useState(0);
 	const { identifier, password } = useStore($loginStore);
 	const { login, loading, error } = useAuth();
-	const { token, user, account } = useStore($loginResponseStore);
 
 	const isValid = () => {
 		return identifier.trim().length > 0 && password.trim().length > 0;
@@ -32,10 +31,6 @@ function LoginModal() {
 		await login({ identifier, password });
 	};
 
-	useEffect(() => {
-		console.log(account);
-	}, [token, user, account]);
-
 	return (
 		<DialogContent className="login-modal">
 			<aside>
@@ -51,11 +46,11 @@ function LoginModal() {
 					<button
 						form="login-form"
 						disabled={loading}
-						className={`continue`}
+						className="continue"
 						onClick={handleContinue}
 						type="submit"
 					>
-						<p>Iniciar sesión</p>
+						<span>Iniciar sesión</span>
 						{loading && <Spinner data-icon="inline-start" />}
 					</button>
 				</div>

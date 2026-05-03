@@ -9,13 +9,16 @@ import RestaurantScheduleForm from "../components/SetupPage/RestaurantScheduleFo
 import RestaurantDataConfirmation from "../components/SetupPage/RestaurantDataConfirmation";
 import { useStore } from "@nanostores/react";
 import { $setupDataStore } from "../contexts/setupDataStore";
+import { useSetup } from "../hooks/useSetup";
+import { Spinner } from "../../../components/ui/spinner";
 
 function SetupPage() {
 	const [index, setIndex] = useState(0);
 	const [hasStarted, setHasStarted] = useState(false);
 	const [direction, setDirection] = useState("forward");
 	const [shakeTrigger, setShakeTrigger] = useState(0);
-	const { name, address } = useStore($setupDataStore);
+	const { name, addresses, deliveryRadius } = useStore($setupDataStore) || {};
+	const { addRestaurant, completeOnboarding, loading, error } = useSetup();
 
 	const handleBack = () => {
 		if (index > 0) {
@@ -28,13 +31,13 @@ function SetupPage() {
 	const isValid = () => {
 		switch (index) {
 			case 0:
-				return name.trim().length > 2;
+				return name?.trim().length > 2;
 			case 1:
 				return (
-					address.city.trim().length > 0 &&
-					address.country.trim().length > 0 &&
-					address.street.trim().length > 0 &&
-					address.zipcode.trim().length > 0
+					addresses[0].city.trim().length > 0 &&
+					addresses[0].country.trim().length > 0 &&
+					addresses[0].streetAddress.trim().length > 0 &&
+					addresses[0].zipCode.trim().length > 0
 				);
 			// case 2:
 			// return address.latitude !== 0;
@@ -59,7 +62,9 @@ function SetupPage() {
 		<RestaurantDataConfirmation onBackClick={handleBack} />,
 	];
 
-	const handleContinue = () => {
+	const handleContinue = async (e) => {
+		e.preventDefault();
+
 		if (!isValid()) {
 			setShakeTrigger((prev) => prev + 1);
 		} else {
@@ -70,6 +75,11 @@ function SetupPage() {
 			setIndex(index + 1);
 			setHasStarted(true);
 			setDirection("forward");
+		}
+
+		if (index == steps.length - 1 && isValid()) {
+			await addRestaurant({ name, deliveryRadius, addresses });
+			await completeOnboarding();
 		}
 	};
 
@@ -91,13 +101,17 @@ function SetupPage() {
 					>
 						{steps[index]}
 						<button
+							form="setup-form"
 							className={`continue ${index != steps.length - 1 && "animation"}`}
 							onClick={handleContinue}
 							type="submit"
 						>
 							<p>
 								{index == steps.length - 1 ? (
-									"Finalizar configuración"
+									<>
+										Finalizar configuración
+										{loading && <Spinner data-icon="inline-start" />}
+									</>
 								) : (
 									<>
 										Continuar

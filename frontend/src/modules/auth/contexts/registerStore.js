@@ -1,14 +1,18 @@
 import { atom } from "nanostores"
 
 export const $registerStore = atom({
-  name: "",
-  surname: "",
-  username: "",
-  email: "",
-  password: "",
-  role: {
-    name: "ROLE_USER",
+  account: {
+    name: "",
+    surname: "",
   },
+  user: {
+    username: "",
+    email: "",
+    role: {
+      name: "ROLE_USER",
+    },
+  },
+  password: "",
 })
 
 // https://shadcn-country-dropdown.vercel.app/
@@ -16,26 +20,16 @@ export const setRegisterRoleName = (name) => {
   const current = $registerStore.get()
   $registerStore.set({
     ...current,
-    role: { name },
+    user: { ...current.user, role: { name } },
   })
 }
 
-export const setRegister = ({
-  name,
-  surname,
-  username,
-  email,
-  password,
-  role,
-}) => {
+export const setRegister = (newValue) => {
   const current = $registerStore.get()
   $registerStore.set({
     ...current,
-    name: name,
-    surname: surname,
-    username: username,
-    email: email,
-    password: password,
-    role: role,
+    ...newValue,
+    user: { ...current.user, ...newValue.user },
+    account: { ...current.account, ...newValue.account },
   })
 }

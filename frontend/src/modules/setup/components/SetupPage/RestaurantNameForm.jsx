@@ -7,7 +7,7 @@ import {
 import { useEffect, useState } from "react";
 
 function RestaurantNameForm({ isValid, shakeTrigger }) {
-	const { name } = useStore($setupDataStore);
+	const { name } = useStore($setupDataStore) || {};
 	const [valid, setValid] = useState(true);
 
 	const handleChange = (value) => {
@@ -38,11 +38,11 @@ function RestaurantNameForm({ isValid, shakeTrigger }) {
 				Introduce los datos de tu restaurante. Podrás crear restaurantes
 				adicionales más tarde.
 			</p>
-			<form>
+			<form id="setup-form">
 				<label htmlFor="name">Nombre del restaurante*</label>
 				<input
 					key={shakeTrigger}
-					required
+					autoFocus
 					className={!valid ? "invalid" : ""}
 					type="text"
 					name="name"

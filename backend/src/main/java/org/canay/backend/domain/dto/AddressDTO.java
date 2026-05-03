@@ -19,5 +19,7 @@ public class AddressDTO {
     private Double latitude;
     private Double longitude;
     private String notes;
+    
+    @Builder.Default
     private Boolean isDefault = false;
 }

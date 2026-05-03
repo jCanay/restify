@@ -36,6 +36,7 @@ public class Address {
 
     private String notes;
 
+    @Builder.Default
     private Boolean isDefault = false;
 
     @ManyToOne

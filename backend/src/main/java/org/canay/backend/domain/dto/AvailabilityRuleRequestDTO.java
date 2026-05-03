@@ -19,5 +19,7 @@ public class AvailabilityRuleRequestDTO {
     private LocalDate endDate;
     private LocalTime openTime;
     private LocalTime closeTime;
-    private Boolean isClosed;
+
+    @Builder.Default
+    private Boolean isClosed = true;
 }

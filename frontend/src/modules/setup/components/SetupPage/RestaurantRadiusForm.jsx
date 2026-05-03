@@ -3,12 +3,11 @@ import "./css/restaurant-radius-form.css";
 import LocationPicker from "../LocationPicker/LocationPicker";
 import "./css/restaurant-name-form.css";
 import { ChevronLeft } from "lucide-react";
-import { useState } from "react";
 import { useStore } from "@nanostores/react";
 import { $setupDataStore, setSetupDataRadius } from "../../contexts/setupDataStore";
 
 function RestaurantRadiusForm({ onBackClick }) {
-	const { radius } = useStore($setupDataStore);
+	const { deliveryRadius } = useStore($setupDataStore) || {};
 
 	const handleLocationChange = () => {
 
@@ -28,7 +27,7 @@ function RestaurantRadiusForm({ onBackClick }) {
 			</p>
 
 			<LocationPicker
-				radius={radius}
+				radius={deliveryRadius}
 				setRadius={setSetupDataRadius}
 				height={"200px"}
 				onLocationChange={handleLocationChange}

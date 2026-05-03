@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 
 function RestaurantDataConfirmation({ onBackClick }) {
-	const { name, address, radius } = useStore($setupDataStore);
+	const { name, addresses, deliveryRadius } = useStore($setupDataStore) || {};
 	const hasAnimated = useStore($hasAnimatedConfirmation);
 	const [shouldAnimate] = useState(!hasAnimated);
 
@@ -31,36 +31,36 @@ function RestaurantDataConfirmation({ onBackClick }) {
 				Revisa los datos de tu restaurante. Puedes volver atrás si lo
 				necesitas.
 			</p>
-			<form className={`${shouldAnimate && "animated"} `}>
+			<form id="setup-form" className={`${shouldAnimate && "animated"} `}>
 				<div className="name">
 					<label>Nombre del restaurante</label>
 					<p>{!name ? "[Nombre del restaurante]" : name}</p>
 				</div>
-				<div className="street">
+				<div className="streetAddress">
 					<label>Dirección de la calle</label>
 					<p>
-						{!address.street
+						{!addresses[0].streetAddress
 							? "[Dirección de la calle]"
-							: address.street}
+							: addresses[0].streetAddress}
 					</p>
 				</div>
 				<div className="city">
 					<label>Ciudad</label>
-					<p>{!address.city ? "[Ciudad]" : address.city}</p>
+					<p>{!addresses[0].city ? "[Ciudad]" : addresses[0].city}</p>
 				</div>
 				<div className="country">
 					<label>País</label>
-					<p>{!address.country ? "[País]" : address.country}</p>
+					<p>{!addresses[0].country ? "[País]" : addresses[0].country}</p>
 				</div>
 				<div className="postalCode">
 					<label>Código postal</label>
 					<p>
-						{!address.zipcode ? "[Código postal]" : address.zipcode}
+						{!addresses[0].zipCode ? "[Código postal]" : addresses[0].zipCode}
 					</p>
 				</div>
 				<div className="radius">
 					<label>Área de entrega</label>
-					<p>{!radius ? "[Área de entrega]" : radius} m</p>
+					<p>{!deliveryRadius ? "[Área de entrega]" : deliveryRadius} m</p>
 				</div>
 				<div className="schedule">
 					<label>Horario</label>

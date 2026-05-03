@@ -5,6 +5,9 @@ import { NavLink, Outlet, useLocation } from "react-router";
 import { Grid2x2Plus, LayoutGrid, SquarePen } from "lucide-react";
 import { WIDGET_REGISTRY } from "../components/WidgetRegistry";
 import { useDashboard } from "../hooks/useDashboard";
+import Widget from "../widgets/general/Widget";
+import { useStore } from "@nanostores/react";
+import { $dashboardStore } from "../contexts/dashboardStore";
 
 const remToPx = (rem) =>
 	rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
@@ -33,15 +36,25 @@ const getResponsiveLayouts = (widgets) => {
 
 function DashboardPage({ title, currentPath }) {
 	const { width, containerRef, mounted } = useContainerWidth();
-	const { data, loading, error } = useDashboard(1);
+	const { loadDashboard, getUsers, loading, error } = useDashboard();
+	const { dashboard, users } = useStore($dashboardStore);
 	const isRootPath = useLocation().pathname === `/dashboard${currentPath}`;
 	const gridBreakpoints = { lg: 1700, md: 1500, sm: 992, xs: 600, xxs: 0 };
 	const gridCols = { lg: 5, md: 4, sm: 3, xs: 2, xxs: 1 };
 	const pageId = currentPath.replace("/", "");
 
+	useEffect(() => {
+		const loadData = () => {
+			loadDashboard(1);
+			getUsers();
+		};
+
+		loadData();
+	}, [loadDashboard, getUsers]);
+
 	const pageData = useMemo(() => {
-		return data?.dashboard?.[pageId];
-	}, [data, pageId]);
+		return dashboard?.[pageId];
+	}, [dashboard, pageId]);
 
 	const widgets = useMemo(() => pageData?.widgets || [], [pageData]);
 	const tabs = useMemo(() => pageData?.tabs || [], [pageData]);
@@ -149,6 +162,13 @@ function DashboardPage({ title, currentPath }) {
 							})}
 						</ResponsiveGridLayout>
 					)}
+					{/* <Widget className="bg-amber-100 w-1/3" title={"Usuarios"}>
+						<div className="flex flex-col">
+							{!loading && !error && users.map((e, i) => (
+								<span key={i}>{e.username}</span>
+							))}
+						</div>
+					</Widget> */}
 				</div>
 			</section>
 		</div>

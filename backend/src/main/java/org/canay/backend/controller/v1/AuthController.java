@@ -1,5 +1,6 @@
 package org.canay.backend.controller.v1;
 
+import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.LoginResponseDTO;
 import org.canay.backend.domain.dto.RegisterResponseDTO;
 import org.canay.backend.domain.dto.LoginRequestDTO;
@@ -13,14 +14,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/auth")
+@RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
-
-    @Autowired
-    private AuthService authService;
-
-    @Autowired
-    private RefreshTokenService refreshTokenService;
+    private final AuthService authService;
+    private final RefreshTokenService refreshTokenService;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO loginRequestDTO) {

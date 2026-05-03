@@ -1,5 +1,6 @@
 package org.canay.backend.domain.entities;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import tools.jackson.databind.JsonNode;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "widgets")
@@ -15,14 +17,18 @@ import tools.jackson.databind.JsonNode;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Widgets {
+public class Widget {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private WidgetType type;
 
-    private String access;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(joinColumns = @JoinColumn(name = "widget_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<UserRole> accessRoles;
 
     @ManyToOne
     @JoinColumn(name = "dashboard_page_id")

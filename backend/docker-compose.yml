@@ -17,11 +17,18 @@ services:
       - ./init:/docker-entrypoint-initdb.d
     networks:
       - backend-net
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
   app:
     build: .
     container_name: restify-app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     restart: on-failure
     env_file:
       - .env
@@ -39,7 +46,6 @@ services:
       - backend-net
 volumes:
   db_data:
-
 
 networks:
   backend-net:

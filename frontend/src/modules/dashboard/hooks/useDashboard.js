@@ -1,41 +1,49 @@
-import { useEffect } from "react"
+import { useCallback, useState } from "react"
+import api from "../../core/api/axios"
 import {
-  addDashboard,
-  dashboardStore,
-  setError,
-  setLoading,
+  $dashboardStore,
+  setDashboard,
+  setDashboardUsers,
 } from "../contexts/dashboardStore"
-import { getDashboard } from "../services/getDashboard"
 import { useStore } from "@nanostores/react"
+import dashboard from "../../../assets/widgets.json"
 
-export const useDashboard = (restaurantId) => {
-  const store = useStore(dashboardStore)
+export const useDashboard = () => {
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const store = useStore($dashboardStore)
 
-  useEffect(() => {
-    const loadData = async () => {
-      if (!restaurantId) return
+  const loadDashboard = useCallback(async (restaurantId) => {
+    try {
+      setLoading(true)
 
-      try {
-        setLoading(true)
-        const response = await getDashboard(restaurantId)
-        addDashboard(response)
-      } catch (error) {
-        console.error(
-          `Error loading the dashboard for restaurant ${restaurantId}`,
-          error,
-        )
-        setError(error)
-      } finally {
-        setLoading(false)
-      }
+      const response = dashboard
+
+      setDashboard(response)
+      setError(null)
+    } catch (err) {
+      setError(err)
+      console.error(err)
+    } finally {
+      setLoading(false)
     }
+  }, [])
 
-    loadData()
-  }, [restaurantId])
+  const getUsers = useCallback(async () => {
+    try {
+      setLoading(true)
 
-  return {
-    data: store.data,
-    loading: store.loading,
-    error: store.error,
-  }
+      const response = await api.get("/users")
+      const users = response.data
+
+      setDashboardUsers({ users })
+    } catch (err) {
+      setError(err)
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  return { loadDashboard, getUsers, loading, error }
 }

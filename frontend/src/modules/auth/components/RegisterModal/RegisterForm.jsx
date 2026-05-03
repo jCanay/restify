@@ -7,8 +7,7 @@ import { $registerStore, setRegister } from "../../contexts/registerStore";
 import { useAuth } from "../../hooks/useAuth";
 
 function RegisterForm({ isValid, shakeTrigger, error, onBackClick }) {
-	const { name, surname, username, email, password, role } =
-		useStore($registerStore);
+	const { user, account, password } = useStore($registerStore);
 	const registerStore = useStore($registerStore);
 	const [emailValid, setEmailValid] = useState(true);
 	const [usernameValid, setUsernameValid] = useState(true);
@@ -16,17 +15,27 @@ function RegisterForm({ isValid, shakeTrigger, error, onBackClick }) {
 	const [showPassword, setShowPassword] = useState(false);
 
 	const handleChange = (e) => {
-		setRegister({
-			...registerStore,
-			[e.target.id]: e.target.value || "",
-		});
+		const { id, value } = e.target;
+
+		if (id === "username" || id === "email") {
+			setRegister({ user: { [id]: value } });
+		} else if (id === "name" || id === "surname") {
+			setRegister({ account: { [id]: value } });
+		} else {
+			setRegister({ [id]: value });
+		}
 	};
 
 	const handleBlur = (e) => {
-		setRegister({
-			...registerStore,
-			[e.target.id]: e.target.value.trim() || "",
-		});
+		const { id, value } = e.target;
+
+		if (id === "username" || id === "email") {
+			setRegister({ user: { [id]: value.trim() } });
+		} else if (id === "name" || id === "surname") {
+			setRegister({ account: { [id]: value.trim() } });
+		} else {
+			setRegister({ [id]: value.trim() });
+		}
 	};
 
 	const handleShowPassword = (e) => {
@@ -37,14 +46,14 @@ function RegisterForm({ isValid, shakeTrigger, error, onBackClick }) {
 	useEffect(() => {
 		const validate = () => {
 			if (shakeTrigger > 0) {
-				setUsernameValid(username.trim().length > 0);
-				setEmailValid(email.trim().length > 0);
+				setUsernameValid(user.username.trim().length > 0);
+				setEmailValid(user.email.trim().length > 0);
 				setPasswordValid(password.trim().length >= 8);
 			}
 		};
 
 		validate();
-	}, [shakeTrigger, username, email, password]);
+	}, [shakeTrigger, user, password]);
 
 	return (
 		<div className="register-form">
@@ -66,7 +75,7 @@ function RegisterForm({ isValid, shakeTrigger, error, onBackClick }) {
 						type="text"
 						name="name"
 						id="name"
-						value={name}
+						value={account.name}
 						onChange={handleChange}
 						onBlur={handleChange}
 					/>
@@ -78,7 +87,7 @@ function RegisterForm({ isValid, shakeTrigger, error, onBackClick }) {
 						type="text"
 						name="surname"
 						id="surname"
-						value={surname}
+						value={account.surname}
 						onChange={handleChange}
 						onBlur={handleChange}
 					/>
@@ -91,7 +100,7 @@ function RegisterForm({ isValid, shakeTrigger, error, onBackClick }) {
 						type="text"
 						name="username"
 						id="username"
-						value={username}
+						value={user.username}
 						onChange={handleChange}
 						onBlur={handleBlur}
 					/>
@@ -107,7 +116,7 @@ function RegisterForm({ isValid, shakeTrigger, error, onBackClick }) {
 						type="text"
 						name="email"
 						id="email"
-						value={email}
+						value={user.email}
 						onChange={handleChange}
 						onBlur={handleChange}
 					/>

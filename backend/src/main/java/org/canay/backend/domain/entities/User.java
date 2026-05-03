@@ -44,7 +44,8 @@ public class User implements UserDetails {
     @JoinColumn(name = "role_id", nullable = false)
     private UserRole role;
 
-    private boolean isEnabled = true;
+    @Builder.Default
+    private Boolean isEnabled = true;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

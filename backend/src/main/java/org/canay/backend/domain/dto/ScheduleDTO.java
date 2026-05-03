@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class ScheduleDTO {
     private Integer dayOfWeek;
-    private boolean isClosed;
+
+    @Builder.Default
+    private Boolean isClosed = true;
     private List<TimeSlotDTO> slots;
 }

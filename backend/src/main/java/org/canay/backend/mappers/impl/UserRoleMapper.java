@@ -1,5 +1,6 @@
 package org.canay.backend.mappers.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.UserRoleDTO;
 import org.canay.backend.domain.entities.UserRole;
 import org.canay.backend.mappers.Mapper;
@@ -8,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserRoleMapperImpl implements Mapper<UserRole, UserRoleDTO> {
-    @Autowired
-    private  ModelMapper modelMapper;
+@RequiredArgsConstructor
+public class UserRoleMapper implements Mapper<UserRole, UserRoleDTO> {
+    private final ModelMapper modelMapper;
 
     @Override
     public UserRoleDTO mapTo(UserRole userRole) {

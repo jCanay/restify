@@ -1,19 +1,20 @@
 package org.canay.backend.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.*;
 import org.canay.backend.domain.entities.Account;
+import org.canay.backend.domain.entities.Restaurant;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.domain.entities.UserRole;
-import org.canay.backend.exceptions.AccountNotFoundException;
+import org.canay.backend.exceptions.DuplicateResourceException;
+import org.canay.backend.exceptions.ResourceNotFoundException;
 import org.canay.backend.jwt.JwtService;
 import org.canay.backend.mappers.Mapper;
 import org.canay.backend.repository.AccountRepository;
+import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.repository.UserRepository;
 import org.canay.backend.repository.UserRoleRepository;
 import org.canay.backend.service.AuthService;
-import org.canay.backend.exceptions.DuplicateResourceException;
-import org.canay.backend.exceptions.RoleNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,31 +22,23 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
+@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+    private final UserRoleRepository userRoleRepository;
+    private final AccountRepository accountRepository;
+    private final RestaurantRepository restaurantRepository;
 
-    @Autowired
-    private UserRoleRepository userRoleRepository;
+    private final Mapper<User, UserDTO> userMapper;
+    private final Mapper<Account, AccountDTO> accountMapper;
+    private final Mapper<Restaurant, RestaurantDTO> restaurantMapper;
 
-    @Autowired
-    private AccountRepository accountRepository;
-
-    @Autowired
-    private Mapper<User, UserDTO> userMapper;
-
-    @Autowired
-    private Mapper<Account, AccountDTO> accountMapper;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private JwtService jwtService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
@@ -58,15 +51,25 @@ public class AuthServiceImpl implements AuthService {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequestDTO.getPassword()));
 
-        // Buscar cuenta
-        Account account = accountRepository.findByUser(user)
-                .orElseThrow(() -> new AccountNotFoundException("Account not found"));
+        // Se asegura de que exista la cuenta antes de continuar
+        Account account = accountRepository.findByUserId(user.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
 
-        return LoginResponseDTO.builder()
+        // Crea la respuesta
+        LoginResponseDTO response = LoginResponseDTO.builder()
                 .token(jwtService.generateToken(authentication.getName()))
                 .user(userMapper.mapTo(user))
                 .account(accountMapper.mapTo(account))
                 .build();
+
+        // Busca restaurante si es ADMIN o OWNER
+        if (account.isManager()) {
+            response.setRestaurants(
+                    restaurantRepository.findAllByAccount(account).stream().map((restaurantMapper::mapTo)).toList()
+            );
+        }
+
+        return response;
     }
 
     @Override
@@ -86,26 +89,23 @@ public class AuthServiceImpl implements AuthService {
                 .getRole()
                 .getName() : "";
 
-        UserRole roleEntity = userRoleRepository.findByName(roleName).orElse(null);
-
-        if (roleEntity == null) {
-            throw new RoleNotFoundException("Role '" + roleName + "' does not exist");
-        }
+        UserRole roleEntity = userRoleRepository.findByName(roleName)
+                .orElseThrow(() -> new ResourceNotFoundException("Role '" + roleName + "' does not exist"));
 
         // Crea el usuario
         User userEntity = userMapper.mapFrom(registerRequestDTO.getUser());
 
-        userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
+        userEntity.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
         userEntity.setRole(roleEntity);
-
-        User savedUserEntity = userRepository.save(userEntity);
 
         // Crea la cuenta
         Account accountEntity = Account.builder()
-                .name(registerRequestDTO.getName())
-                .surname(registerRequestDTO.getSurname())
+                .name(registerRequestDTO.getAccount().getName())
+                .surname(registerRequestDTO.getAccount().getSurname())
+                .user(userEntity)
                 .build();
 
+        User savedUserEntity = userRepository.save(userEntity);
         accountRepository.save(accountEntity);
 
         return RegisterResponseDTO.builder()

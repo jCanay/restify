@@ -12,8 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class AccountDTO {
+    private Long id;
     private String name;
     private String surname;
     private String profilePicture;
     private List<AddressDTO> addresses;
+    private Boolean onboardingCompleted;
 }

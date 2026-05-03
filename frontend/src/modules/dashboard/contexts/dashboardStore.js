@@ -1,18 +1,13 @@
-import { atom } from "nanostores";
+import { atom } from "nanostores"
 
-export const dashboardStore = atom({ data: {}, loading: false, error: "" });
+export const $dashboardStore = atom({ dashboard: {}, users: [] })
 
-export const addDashboard = (data) => {
-	let current = dashboardStore.get();
-	dashboardStore.set({ ...current, data: data });
-};
+export const setDashboard = ({ dashboard }) => {
+  const current = $dashboardStore.get()
+  $dashboardStore.set({ ...current, dashboard })
+}
 
-export const setLoading = (loading) => {
-	let current = dashboardStore.get();
-	dashboardStore.set({ ...current, loading: loading });
-};
-
-export const setError = (error) => {
-	let current = dashboardStore.get();
-	dashboardStore.set({ ...current, error: error });
-};
+export const setDashboardUsers = ({ users }) => {
+  const current = $dashboardStore.get()
+  $dashboardStore.set({ ...current, users })
+}

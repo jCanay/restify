@@ -25,10 +25,21 @@ public class Account {
 
     private String profilePicture;
 
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean onboardingCompleted = false;
+
     @OneToMany(mappedBy = "account")
     private List<Address> addresses;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public boolean isManager() {
+        if (user == null || user.getRole() == null) return false;
+
+        String role = user.getRole().getName();
+        return role.equals("ROLE_ADMIN") || role.equals("ROLE_OWNER");
+    }
 }

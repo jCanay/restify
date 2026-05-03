@@ -1,5 +1,6 @@
 package org.canay.backend.domain.entities;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,7 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import tools.jackson.databind.JsonNode;
 
 import java.util.List;
 
@@ -24,6 +24,8 @@ public class DashboardPage {
 
     private String title;
 
+    private String slug;
+
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)
     private JsonNode tabs;
@@ -33,5 +35,5 @@ public class DashboardPage {
     private Dashboard dashboard;
 
     @OneToMany(mappedBy = "dashboardPage")
-    private List<Widgets> widgets;
+    private List<Widget> widgets;
 }

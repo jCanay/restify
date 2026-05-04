@@ -1,10 +1,7 @@
 package org.canay.backend.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
@@ -20,6 +17,9 @@ public class Restaurant {
     private Long id;
 
     private String name;
+
+    @Builder.Default
+    private Boolean isDefault = false;
 
     @Column(name = "delivery_radius")
     private Double deliveryRadius;

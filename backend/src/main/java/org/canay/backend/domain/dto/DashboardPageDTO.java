@@ -1,15 +1,23 @@
 package org.canay.backend.domain.dto;
 
-import jakarta.persistence.*;
-import org.canay.backend.domain.entities.Widget;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.JsonNode;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class DashboardPageDTO {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+    private String slug;
     private Object tabs;
-    private List<Widget> widgets;
+    private List<WidgetDTO> widgets;
 }

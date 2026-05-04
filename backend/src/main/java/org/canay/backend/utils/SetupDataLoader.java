@@ -5,6 +5,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.entities.*;
 import org.canay.backend.repository.*;
+import org.canay.backend.service.DashboardService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -25,6 +26,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private final AvailabilityRuleTypeRepository ruleTypeRepository;
     private final DashboardRepository dashboardRepository;
     private final DashboardPageRepository dashboardPageRepository;
+    private final DashboardService dashboardService;
     private final WidgetRepository widgetRepository;
 
     private final ObjectMapper objectMapper;
@@ -70,6 +72,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                     .name("admin")
                     .deliveryRadius(2500.0)
                     .account(savedAdminAccount)
+                    .isDefault(true)
                     .build();
             Restaurant savedAdminRestaurant = restaurantRepository.save(adminRestaurant);
 
@@ -93,8 +96,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     private void initializeDashboard(Restaurant restaurant, UserRole adminRole) {
+        dashboardService.initializeDashboard(restaurant);
+
         // 1. Crear el Dashboard si el restaurante no tiene uno
-        Dashboard dashboard = dashboardRepository.findByRestaurant(restaurant)
+        /*Dashboard dashboard = dashboardRepository.findByRestaurant(restaurant)
                 .orElseGet(() -> {
                     Dashboard newDashboard = Dashboard.builder()
                             .restaurant(restaurant)
@@ -115,11 +120,18 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                         return dashboardPageRepository.save(DashboardPage.builder()
                                 .title("Reservas")
                                 .dashboard(dashboard)
+                                .slug("bookings")
                                 .tabs(objectMapper.readTree("""
-                                        {
-                                          "active": "Historial",
-                                          "options": ["Historial", "Estadísticas"]
-                                        }
+                                        [
+                                            {
+                                                "name": "Historial",
+                                                "path": "history"
+                                            },
+                                            {
+                                                "name": "Estadísticas",
+                                                "path": "stats"
+                                            }
+                                        ]
                                         """))
                                 .build());
                     } catch (Exception e) {
@@ -135,7 +147,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                     "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
                     "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
                 }
-                """);
+                """);*/
+
     }
 
     private void createWidgetIfNotFound(WidgetType type, DashboardPage page, Set<UserRole> roles, String layoutJson) {
@@ -155,7 +168,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
     private void createRuleTypeIfNotFound(String name, Integer priority, String description) {
-        ruleTypeRepository.findByName(name).ifPresentOrElse(_ -> {
+        ruleTypeRepository.findByName(name).ifPresentOrElse(
+                _ -> {
                 }, // Ya existe, no hacemos nada
                 () -> {
                     AvailabilityRuleType newType = AvailabilityRuleType.builder()

@@ -1,11 +1,17 @@
 package org.canay.backend.domain.dto;
 
-import org.canay.backend.domain.entities.Restaurant;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class DashboardDTO {
     private Long id;
-    private Restaurant restaurant;
     private List<DashboardPageDTO> pages;
 }

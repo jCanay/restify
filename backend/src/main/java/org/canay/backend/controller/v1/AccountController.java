@@ -19,6 +19,6 @@ public class AccountController {
 
     @PostMapping("/onboarding/complete")
     public ResponseEntity<AccountDTO> completeOnboarding(@AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(accountService.completeOnboarding(user.getId()));
+        return ResponseEntity.ok(accountService.completeOnboarding(user));
     }
 }

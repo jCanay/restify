@@ -1,10 +1,7 @@
 package org.canay.backend.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "addresses")
@@ -39,10 +36,13 @@ public class Address {
     @Builder.Default
     private Boolean isDefault = false;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "account_id")
     private Account account;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;

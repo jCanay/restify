@@ -2,17 +2,19 @@ package org.canay.backend.domain.entities;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.util.List;
 
 @Entity
-@Table(name = "dashboard_pages")
+@Table(name = "dashboard_pages", uniqueConstraints = {
+        @UniqueConstraint(
+                name = "uk_dashboard_slug",
+                columnNames = {"dashboard_id", "slug"}
+        )
+})
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,6 +32,7 @@ public class DashboardPage {
     @JdbcTypeCode(SqlTypes.JSON)
     private JsonNode tabs;
 
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "dashboard_id")
     private Dashboard dashboard;

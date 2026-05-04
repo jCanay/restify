@@ -1,13 +1,17 @@
 package org.canay.backend.service.impl;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.RestaurantDTO;
 import org.canay.backend.domain.entities.Account;
+import org.canay.backend.domain.entities.Dashboard;
 import org.canay.backend.domain.entities.Restaurant;
+import org.canay.backend.domain.entities.User;
 import org.canay.backend.exceptions.ResourceNotFoundException;
 import org.canay.backend.mappers.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.RestaurantRepository;
+import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,14 +24,16 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final AccountRepository accountRepository;
 
+    private final DashboardService dashboardService;
+
     private final Mapper<Restaurant, RestaurantDTO> restaurantMapper;
 
     @Override
-    public ResponseEntity<RestaurantDTO> addRestaurant(RestaurantDTO restaurantDTO, Long userId) {
+    public RestaurantDTO addRestaurant(RestaurantDTO restaurantDTO, User user) {
         Restaurant restaurant = restaurantMapper.mapFrom(restaurantDTO);
 
         // Verifica que exista la cuenta para continuar
-        Account account = accountRepository.findByUserId(userId)
+        Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
 
         restaurant.setAccount(account);
@@ -37,8 +43,15 @@ public class RestaurantServiceImpl implements RestaurantService {
             restaurant.getAddresses().forEach(address -> address.setRestaurant(restaurant));
         }
 
+        if (restaurantRepository.countByAccount(account) == 0) {
+            restaurant.setIsDefault(true);
+        }
+
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
 
-        return new ResponseEntity<>(restaurantMapper.mapTo(savedRestaurant), HttpStatus.CREATED);
+        Dashboard dashboard = dashboardService.initializeDashboard(savedRestaurant);
+        System.out.println(dashboard);
+
+        return restaurantMapper.mapTo(savedRestaurant);
     }
 }

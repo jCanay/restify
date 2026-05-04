@@ -13,118 +13,122 @@ import { useSetup } from "../hooks/useSetup";
 import { Spinner } from "../../../components/ui/spinner";
 
 function SetupPage() {
-	const [index, setIndex] = useState(0);
-	const [hasStarted, setHasStarted] = useState(false);
-	const [direction, setDirection] = useState("forward");
-	const [shakeTrigger, setShakeTrigger] = useState(0);
-	const { name, addresses, deliveryRadius } = useStore($setupDataStore) || {};
-	const { addRestaurant, completeOnboarding, loading, error } = useSetup();
+    const [index, setIndex] = useState(0);
+    const [hasStarted, setHasStarted] = useState(false);
+    const [direction, setDirection] = useState("forward");
+    const [shakeTrigger, setShakeTrigger] = useState(0);
+    const { name, addresses, deliveryRadius } = useStore($setupDataStore) || {};
+    const { addRestaurant, completeOnboarding, loading, error } = useSetup();
 
-	const handleBack = () => {
-		if (index > 0) {
-			setIndex(index - 1);
-			setHasStarted(true);
-			setDirection("backward");
-		}
-	};
+    const handleBack = () => {
+        if (index > 0) {
+            setIndex(index - 1);
+            setHasStarted(true);
+            setDirection("backward");
+        }
+    };
 
-	const isValid = () => {
-		switch (index) {
-			case 0:
-				return name?.trim().length > 2;
-			case 1:
-				return (
-					addresses[0].city.trim().length > 0 &&
-					addresses[0].country.trim().length > 0 &&
-					addresses[0].streetAddress.trim().length > 0 &&
-					addresses[0].zipCode.trim().length > 0
-				);
-			// case 2:
-			// return address.latitude !== 0;
-			default:
-				return true;
-		}
-	};
+    const isValid = () => {
+        switch (index) {
+            case 0:
+                return name?.trim().length > 2;
+            case 1:
+                return (
+                    addresses[0].city.trim().length > 0 &&
+                    addresses[0].country.trim().length > 0 &&
+                    addresses[0].streetAddress.trim().length > 0 &&
+                    addresses[0].zipCode.trim().length > 0
+                );
+            // case 2:
+            // return address.latitude !== 0;
+            default:
+                return true;
+        }
+    };
 
-	const steps = [
-		<RestaurantNameForm isValid={isValid()} shakeTrigger={shakeTrigger} />,
-		<RestaurantAddressForm
-			isValid={isValid()}
-			onBackClick={handleBack}
-			shakeTrigger={shakeTrigger}
-		/>,
-		<RestaurantRadiusForm
-			isValid={isValid()}
-			onBackClick={handleBack}
-			shakeTrigger={shakeTrigger}
-		/>,
-		<RestaurantScheduleForm onBackClick={handleBack} />,
-		<RestaurantDataConfirmation onBackClick={handleBack} />,
-	];
+    const steps = [
+        <RestaurantNameForm isValid={isValid()} shakeTrigger={shakeTrigger} />,
+        <RestaurantAddressForm
+            isValid={isValid()}
+            onBackClick={handleBack}
+            shakeTrigger={shakeTrigger}
+        />,
+        <RestaurantRadiusForm
+            isValid={isValid()}
+            onBackClick={handleBack}
+            shakeTrigger={shakeTrigger}
+        />,
+        <RestaurantScheduleForm onBackClick={handleBack} />,
+        <RestaurantDataConfirmation onBackClick={handleBack} />,
+    ];
 
-	const handleContinue = async (e) => {
-		e.preventDefault();
+    const handleContinue = async (e) => {
+        e.preventDefault();
 
-		if (!isValid()) {
-			setShakeTrigger((prev) => prev + 1);
-		} else {
-			setShakeTrigger(0);
-		}
+        if (!isValid()) {
+            setShakeTrigger((prev) => prev + 1);
+        } else {
+            setShakeTrigger(0);
+        }
 
-		if (index < steps.length - 1 && isValid()) {
-			setIndex(index + 1);
-			setHasStarted(true);
-			setDirection("forward");
-		}
+        if (index < steps.length - 1 && isValid()) {
+            setIndex(index + 1);
+            setHasStarted(true);
+            setDirection("forward");
+        }
 
-		if (index == steps.length - 1 && isValid()) {
-			await addRestaurant({ name, deliveryRadius, addresses });
-			await completeOnboarding();
-		}
-	};
+        console.log(isValid());
 
-	const getAnimationClass = () => {
-		if (!hasStarted) return "";
-		return direction === "forward" ? "animate-forward" : "animate-backward";
-	};
+        if (index == steps.length - 1 && isValid()) {
+            await addRestaurant({ name, deliveryRadius, addresses });
+            await completeOnboarding();
+        }
+    };
 
-	return (
-		<main className="setup-page">
-			<div className="content">
-				<aside>
-					<img src={darkBg} alt="" />
-				</aside>
-				<div className="setup-container">
-					<div
-						key={index}
-						className={`step-wrapper ${getAnimationClass()}`}
-					>
-						{steps[index]}
-						<button
-							form="setup-form"
-							className={`continue ${index != steps.length - 1 && "animation"}`}
-							onClick={handleContinue}
-							type="submit"
-						>
-							<p>
-								{index == steps.length - 1 ? (
-									<>
-										Finalizar configuración
-										{loading && <Spinner data-icon="inline-start" />}
-									</>
-								) : (
-									<>
-										Continuar
-										<ArrowRight size={14} />
-									</>
-								)}
-							</p>
-						</button>
-					</div>
-				</div>
-			</div>
-		</main>
-	);
+    const getAnimationClass = () => {
+        if (!hasStarted) return "";
+        return direction === "forward" ? "animate-forward" : "animate-backward";
+    };
+
+    return (
+        <main className="setup-page">
+            <div className="content">
+                <aside>
+                    <img src={darkBg} alt="" />
+                </aside>
+                <div className="setup-container">
+                    <div
+                        key={index}
+                        className={`step-wrapper ${getAnimationClass()}`}
+                    >
+                        {steps[index]}
+                        <button
+                            form="setup-form"
+                            className={`continue ${index != steps.length - 1 && "animation"}`}
+                            onClick={handleContinue}
+                            type="submit"
+                        >
+                            <p>
+                                {index == steps.length - 1 ? (
+                                    <>
+                                        Finalizar configuración
+                                        {loading && (
+                                            <Spinner data-icon="inline-start" />
+                                        )}
+                                    </>
+                                ) : (
+                                    <>
+                                        Continuar
+                                        <ArrowRight size={14} />
+                                    </>
+                                )}
+                            </p>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    );
 }
 
 export default SetupPage;

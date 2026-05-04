@@ -17,5 +17,8 @@ public class RestaurantDTO {
     private String name;
     private Double deliveryRadius;
     private List<AddressDTO> addresses;
+    
+    @Builder.Default
+    private Boolean isDefault = false;
     //    private Dashboard dashboard;
 }

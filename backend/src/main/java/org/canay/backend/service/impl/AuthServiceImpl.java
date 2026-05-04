@@ -52,7 +52,7 @@ public class AuthServiceImpl implements AuthService {
                 new UsernamePasswordAuthenticationToken(user.getUsername(), loginRequestDTO.getPassword()));
 
         // Se asegura de que exista la cuenta antes de continuar
-        Account account = accountRepository.findByUserId(user.getId())
+        Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
 
         // Crea la respuesta

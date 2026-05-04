@@ -7,7 +7,6 @@ import org.canay.backend.domain.dto.LoginRequestDTO;
 import org.canay.backend.domain.dto.RegisterRequestDTO;
 import org.canay.backend.service.AuthService;
 import org.canay.backend.service.RefreshTokenService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +25,7 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<?> logoutUser(@RequestBody Map<String, String> payload) {
+    public ResponseEntity<?> logout(@RequestBody Map<String, String> payload) {
         String requestToken = payload.get("refreshToken");
 
         if (requestToken == null || requestToken.isBlank()) {

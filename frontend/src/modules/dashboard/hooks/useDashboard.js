@@ -1,49 +1,48 @@
-import { useCallback, useState } from "react"
-import api from "../../core/api/axios"
-import {
-  $dashboardStore,
-  setDashboard,
-  setDashboardUsers,
-} from "../contexts/dashboardStore"
-import { useStore } from "@nanostores/react"
-import dashboard from "../../../assets/widgets.json"
+import { useCallback, useState } from "react";
+import api from "../../core/api/axios";
+import { $dashboardStore, setDashboard } from "../contexts/dashboardStore";
 
 export const useDashboard = () => {
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(null)
-  const store = useStore($dashboardStore)
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-  const loadDashboard = useCallback(async (restaurantId) => {
-    try {
-      setLoading(true)
+    const loadDashboard = useCallback(async (restaurantId) => {
+        try {
+            setLoading(true);
 
-      const response = dashboard
+            const response = await api.get(
+                `/restaurants/${restaurantId}/dashboards`,
+            );
+            const dashboard = response.data;
 
-      setDashboard(response)
-      setError(null)
-    } catch (err) {
-      setError(err)
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+            const dashboardStore = $dashboardStore.get();
+            setDashboard({ ...dashboardStore, dashboard });
+            setError(null);
+        } catch (err) {
+            setError(err);
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
-  const getUsers = useCallback(async () => {
-    try {
-      setLoading(true)
+    const getUsers = useCallback(async () => {
+        try {
+            setLoading(true);
 
-      const response = await api.get("/users")
-      const users = response.data
+            const response = await api.get("/users");
+            const users = response.data;
 
-      setDashboardUsers({ users })
-    } catch (err) {
-      setError(err)
-      console.error(err)
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+            const dashboardStore = $dashboardStore.get();
+            setDashboard({ ...dashboardStore, users });
+            setError(null);
+        } catch (err) {
+            setError(err);
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
-  return { loadDashboard, getUsers, loading, error }
-}
+    return { loadDashboard, getUsers, loading, error };
+};

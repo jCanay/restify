@@ -31,7 +31,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     private JwtService jwtService;
 
     public RefreshToken createRefreshToken(Long userId) {
-        var token = new RefreshToken();
+        RefreshToken token = new RefreshToken();
         Optional<User> user = userRepository.findById(userId);
 
         if (user.isEmpty()) {

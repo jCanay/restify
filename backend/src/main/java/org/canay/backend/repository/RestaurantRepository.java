@@ -9,4 +9,6 @@ import java.util.Optional;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> findAllByAccount(Account account);
+
+    Long countByAccount(Account account);
 }

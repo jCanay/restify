@@ -4,6 +4,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.AccountDTO;
 import org.canay.backend.domain.entities.Account;
+import org.canay.backend.domain.entities.User;
 import org.canay.backend.mappers.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.service.AccountService;
@@ -18,9 +19,9 @@ public class AccountServiceImpl implements AccountService {
     private final Mapper<Account, AccountDTO> accountMapper;
 
     @Override
-    public AccountDTO completeOnboarding(Long userId) {
-        // 1. Buscamos la cuenta directamente por el ID del usuario del token
-        Account account = accountRepository.findByUserId(userId)
+    public AccountDTO completeOnboarding(User user) {
+        // 1. Buscamos la cuenta directamente por el usuario del token
+        Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new EntityNotFoundException("Account not found"));
 
         // 2. Cambiamos el estado

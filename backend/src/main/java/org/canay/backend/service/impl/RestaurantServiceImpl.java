@@ -1,6 +1,5 @@
 package org.canay.backend.service.impl;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.RestaurantDTO;
 import org.canay.backend.domain.entities.Account;
@@ -13,9 +12,6 @@ import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -50,7 +46,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
 
         Dashboard dashboard = dashboardService.initializeDashboard(savedRestaurant);
-        System.out.println(dashboard);
 
         return restaurantMapper.mapTo(savedRestaurant);
     }

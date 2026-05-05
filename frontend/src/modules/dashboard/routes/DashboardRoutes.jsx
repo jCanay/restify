@@ -5,8 +5,8 @@ import BookingHistory from "../widgets/booking/BookingHistory";
 import DashboardPageWrapper from "./DashboardPageWrapper";
 
 export const DashboardRoutes = (
-    <Route element={<Dashboard />}>
-        {/* <Route
+	<Route element={<Dashboard />}>
+		{/* <Route
             path="dashboard"
             element={<DashboardPage currentPath="" title="Inicio" />}
         />
@@ -32,6 +32,6 @@ export const DashboardRoutes = (
             path="dashboard/staff"
             element={<DashboardPage currentPath="/staff" title="Plantilla" />}
         /> */}
-        <Route path="dashboard/:slug?" element={<DashboardPageWrapper />} />
-    </Route>
+		<Route path="dashboard/:slug?/*" element={<DashboardPageWrapper />} />
+	</Route>
 );

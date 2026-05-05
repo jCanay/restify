@@ -1,5 +1,7 @@
 package org.canay.backend.utils;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -149,22 +151,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 }
                 """);*/
 
-    }
-
-    private void createWidgetIfNotFound(WidgetType type, DashboardPage page, Set<UserRole> roles, String layoutJson) {
-        if (widgetRepository.findByTypeAndDashboardPage(type, page).isEmpty()) {
-            try {
-                Widget widget = Widget.builder()
-                        .type(type)
-                        .dashboardPage(page)
-                        .accessRoles(new HashSet<>(roles))
-                        .layouts(objectMapper.readTree(layoutJson))
-                        .build();
-                widgetRepository.save(widget);
-            } catch (Exception e) {
-                throw new RuntimeException("Error creating widget: " + type, e);
-            }
-        }
     }
 
     private void createRuleTypeIfNotFound(String name, Integer priority, String description) {

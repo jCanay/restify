@@ -52,8 +52,7 @@ function LoginForm({ isValid, shakeTrigger, error }) {
 			</DialogDescription>
 			{error && (
 				<p className="login-error">
-					No se ha podido iniciar sesión. Comprueba los datos y vuelve
-					a intentarlo de nuevo.
+					No se ha podido iniciar sesión. Comprueba los datos e inténtalo de nuevo.
 				</p>
 			)}
 			<form id="login-form">

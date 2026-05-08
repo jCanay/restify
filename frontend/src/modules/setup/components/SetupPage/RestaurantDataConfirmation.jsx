@@ -9,7 +9,7 @@ import {
 import { useEffect, useState } from "react";
 
 function RestaurantDataConfirmation({ onBackClick }) {
-    const { name, addresses, deliveryRadius } = useStore($setupDataStore) || {};
+    const { name, address, deliveryRadius } = useStore($setupDataStore) || {};
     const hasAnimated = useStore($hasAnimatedConfirmation);
     const [shouldAnimate] = useState(!hasAnimated);
 
@@ -39,29 +39,25 @@ function RestaurantDataConfirmation({ onBackClick }) {
                 <div className="streetAddress">
                     <label>Dirección de la calle</label>
                     <p>
-                        {!addresses[0].streetAddress
+                        {!address?.streetAddress
                             ? "[Dirección de la calle]"
-                            : addresses[0].streetAddress}
+                            : address?.streetAddress}
                     </p>
                 </div>
                 <div className="city">
                     <label>Ciudad</label>
-                    <p>{!addresses[0].city ? "[Ciudad]" : addresses[0].city}</p>
+                    <p>{!address?.city ? "[Ciudad]" : address?.city}</p>
                 </div>
                 <div className="country">
                     <label>País</label>
-                    <p>
-                        {!addresses[0].country
-                            ? "[País]"
-                            : addresses[0].country}
-                    </p>
+                    <p>{!address?.country ? "[País]" : address?.country}</p>
                 </div>
                 <div className="postalCode">
                     <label>Código postal</label>
                     <p>
-                        {!addresses[0].zipCode
+                        {!address?.zipCode
                             ? "[Código postal]"
-                            : addresses[0].zipCode}
+                            : address?.zipCode}
                     </p>
                 </div>
                 <div className="radius">

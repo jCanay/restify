@@ -1,163 +1,109 @@
 :root {
-  --transition-bounce: linear(
-    0,
-    0.013 0.6%,
-    0.05 1.2%,
-    0.2 2.5%,
-    0.949 6.7%,
-    1.2 8.4%,
-    1.286 9.2%,
-    1.35 10%,
-    1.392 10.8%,
-    1.411 11.6%,
-    1.411 12.2%,
-    1.401 12.8%,
-    1.343 14.2%,
-    1.258 15.5%,
-    1.016 18.7%,
-    0.914 20.4%,
-    0.856 21.9%,
-    0.831 23.5%,
-    0.834 24.7%,
-    0.858 26.1%,
-    0.996 30.7%,
-    1.037 32.4%,
-    1.06 33.9%,
-    1.07 35.4%,
-    1.061 37.7%,
-    0.989 43.8%,
-    0.971 47.2%,
-    1.012 59.1%,
-    0.995 70.8%,
-    1
-  );
-  --transition-glide: linear(
-    0,
-    0.03 1.1%,
-    0.125 2.4%,
-    0.906 9.8%,
-    1.046 12.3%,
-    1.11 15%,
-    1.116 16.3%,
-    1.11 17.8%,
-    1.014 25.8%,
-    0.987 31.2%,
-    1.001 47.2%,
-    1
-  );
+    --transition-bounce: linear(
+        0,
+        0.013 0.6%,
+        0.05 1.2%,
+        0.2 2.5%,
+        0.949 6.7%,
+        1.2 8.4%,
+        1.286 9.2%,
+        1.35 10%,
+        1.392 10.8%,
+        1.411 11.6%,
+        1.411 12.2%,
+        1.401 12.8%,
+        1.343 14.2%,
+        1.258 15.5%,
+        1.016 18.7%,
+        0.914 20.4%,
+        0.856 21.9%,
+        0.831 23.5%,
+        0.834 24.7%,
+        0.858 26.1%,
+        0.996 30.7%,
+        1.037 32.4%,
+        1.06 33.9%,
+        1.07 35.4%,
+        1.061 37.7%,
+        0.989 43.8%,
+        0.971 47.2%,
+        1.012 59.1%,
+        0.995 70.8%,
+        1
+    );
+    --transition-glide: linear(
+        0,
+        0.03 1.1%,
+        0.125 2.4%,
+        0.906 9.8%,
+        1.046 12.3%,
+        1.11 15%,
+        1.116 16.3%,
+        1.11 17.8%,
+        1.014 25.8%,
+        0.987 31.2%,
+        1.001 47.2%,
+        1
+    );
 }
 
 div.dashboard-page {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: var(--light200);
-  height: 100dvh;
-  padding: 2rem;
-  border-radius: 1rem;
-  scrollbar-color: #00000075 transparent;
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  & h2 {
-    font-size: 22pt;
-  }
-
-  & section.tabs {
     display: flex;
-    gap: 0.5rem;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: var(--light200);
+    height: 100dvh;
+    padding: 2rem;
+    border-radius: 1rem;
+    scrollbar-color: #00000075 transparent;
+    overflow-y: auto;
+    overflow-x: hidden;
 
-    & .link {
-      background-color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.25rem 1.25rem;
-      border-radius: 5rem;
-      transition-duration: 750ms;
-      transition-timing-function: var(--transition-bounce);
-      transition-property: scale;
+    & h2 {
+        font-size: 22pt;
+    }
 
-      &:hover {
-        background-color: var(--light300);
-        cursor: pointer;
-      }
+    & section.tabs {
+        display: flex;
+        gap: 0.5rem;
 
-      &:active {
-        scale: 0.9;
-      }
+        & .link {
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0.25rem 1.25rem;
+            border-radius: 5rem;
+            transition-duration: 750ms;
+            transition-timing-function: var(--transition-bounce);
+            transition-property: scale;
 
-      &.active {
-        background-color: black;
-        color: white;
-      }
+            &:hover {
+                background-color: var(--light300);
+                cursor: pointer;
+            }
 
-      &:has(svg) {
-        padding: 0.25rem;
-        aspect-ratio: 1;
+            &:active {
+                scale: 0.9;
+            }
 
-        & svg {
-          height: 1.25rem;
-          aspect-ratio: 1;
+            &.active {
+                background-color: black;
+                color: white;
+            }
+
+            &:has(svg) {
+                padding: 0.25rem;
+                aspect-ratio: 1;
+
+                & svg {
+                    height: 1.25rem;
+                    aspect-ratio: 1;
+                }
+            }
         }
-      }
     }
-  }
 
-  & section.components {
-    & .grid {
-      margin: -2rem;
-      height: 100%;
-
-      & .react-grid-placeholder {
-        background: var(--light300);
-        border-radius: 1rem;
-        opacity: 0.5;
-        border: 2px dashed #00000055;
-        z-index: 2;
-        user-select: none;
-        transition-duration: 1000ms;
-        transition-property: width, height, transform;
-        transition-timing-function: var(--transition-glide);
-      }
-
-      & .react-grid-item {
-        touch-action: none;
-      }
-
-      & .react-grid-item.react-draggable-dragging {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        z-index: 10;
-        transition: box-shadow 200ms;
-        cursor: grabbing;
-        user-select: none;
-      }
-
-      & .react-grid-item.resizing {
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        user-select: none;
-      }
-
-      & .react-resizable-handle {
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        cursor: se-resize;
-        z-index: 10;
-        background: none;
-        user-select: none;
-      }
-
-      & .react-resizable-handle::after {
-        content: "";
-        position: absolute;
-        right: 7.5px;
-        bottom: 7.5px;
-      }
-
-      & div {
-        border-radius: 1rem;
-      }
+    & section.components {
     }
-  }
 }

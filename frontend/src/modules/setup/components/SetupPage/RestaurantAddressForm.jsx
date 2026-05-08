@@ -8,19 +8,19 @@ import { useStore } from "@nanostores/react";
 import { useEffect, useState } from "react";
 
 function RestaurantAddressForm({ onBackClick, isValid, shakeTrigger }) {
-    const { addresses } = useStore($setupDataStore) || [];
+    const { address } = useStore($setupDataStore) || [];
     const [streetAddressValid, setStreetAddressValid] = useState(true);
     const [cityValid, setCityValid] = useState(true);
     const [countryValid, setCountryValid] = useState(true);
     const [zipCodeValid, setZipCodeValid] = useState(true);
 
     const handleChange = (target) => {
-        setSetupDataAddress({ ...addresses?.[0], [target.id]: target.value });
+        setSetupDataAddress({ ...address, [target.id]: target.value });
     };
 
     const handleBlur = (target) => {
         setSetupDataAddress({
-            ...addresses?.[0],
+            ...address,
             [target.id]: target.value.trim(),
         });
     };
@@ -28,17 +28,15 @@ function RestaurantAddressForm({ onBackClick, isValid, shakeTrigger }) {
     useEffect(() => {
         const validate = () => {
             if (shakeTrigger > 0) {
-                setStreetAddressValid(
-                    addresses?.[0].streetAddress.trim().length > 0,
-                );
-                setCityValid(addresses?.[0].city.trim().length > 0);
-                setCountryValid(addresses?.[0].country.trim().length > 0);
-                setZipCodeValid(addresses?.[0].zipCode.trim().length > 0);
+                setStreetAddressValid(address?.streetAddress.trim().length > 0);
+                setCityValid(address?.city.trim().length > 0);
+                setCountryValid(address?.country.trim().length > 0);
+                setZipCodeValid(address?.zipCode.trim().length > 0);
             }
         };
 
         validate();
-    }, [shakeTrigger, addresses]);
+    }, [shakeTrigger, address]);
 
     return (
         <div className="restaurant-direction-form">
@@ -60,7 +58,7 @@ function RestaurantAddressForm({ onBackClick, isValid, shakeTrigger }) {
                         name="streetAddress"
                         className={!streetAddressValid ? "invalid" : ""}
                         id="streetAddress"
-                        value={addresses?.[0].streetAddress}
+                        value={address?.streetAddress}
                         onChange={(e) => handleChange(e.target)}
                         onBlur={(e) => handleBlur(e.target)}
                     />
@@ -76,7 +74,7 @@ function RestaurantAddressForm({ onBackClick, isValid, shakeTrigger }) {
                         name="city"
                         className={!cityValid ? "invalid" : ""}
                         id="city"
-                        value={addresses?.[0].city}
+                        value={address?.city}
                         onChange={(e) => handleChange(e.target)}
                         onBlur={(e) => handleBlur(e.target)}
                     />
@@ -95,7 +93,7 @@ function RestaurantAddressForm({ onBackClick, isValid, shakeTrigger }) {
                         name="country"
                         className={!countryValid ? "invalid" : ""}
                         id="country"
-                        value={addresses?.[0].country}
+                        value={address?.country}
                         onChange={(e) => handleChange(e.target)}
                         onBlur={(e) => handleBlur(e.target)}
                     />
@@ -114,7 +112,7 @@ function RestaurantAddressForm({ onBackClick, isValid, shakeTrigger }) {
                         name="zipCode"
                         className={!zipCodeValid ? "invalid" : ""}
                         id="zipCode"
-                        value={addresses?.[0].zipCode}
+                        value={address?.zipCode}
                         onChange={(e) => handleChange(e.target)}
                         onBlur={(e) => handleBlur(e.target)}
                     />

@@ -13,6 +13,7 @@ import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +25,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     private final Mapper<Restaurant, RestaurantDTO> restaurantMapper;
 
+    @Transactional
     @Override
     public RestaurantDTO addRestaurant(RestaurantDTO restaurantDTO, User user) {
         Restaurant restaurant = restaurantMapper.mapFrom(restaurantDTO);
@@ -34,9 +36,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         restaurant.setAccount(account);
 
-        // Establece el restaurante a las direcciones
-        if (restaurant.getAddresses() != null) {
-            restaurant.getAddresses().forEach(address -> address.setRestaurant(restaurant));
+        // Establece el restaurante a la dirección
+        if (restaurant.getAddress() != null) {
+            if (restaurant.getAddress().getRestaurant() != null) {
+                restaurant.getAddress().setRestaurant(restaurant);
+                restaurant.getAddress().setAccount(null);
+            } else if (restaurant.getAddress().getAccount() != null) {
+                restaurant.getAddress().setAccount(account);
+                restaurant.getAddress().setRestaurant(null);
+            }
+
         }
 
         if (restaurantRepository.countByAccount(account) == 0) {
@@ -45,7 +54,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
 
-        Dashboard dashboard = dashboardService.initializeDashboard(savedRestaurant);
+        dashboardService.initializeDashboard(savedRestaurant);
 
         return restaurantMapper.mapTo(savedRestaurant);
     }

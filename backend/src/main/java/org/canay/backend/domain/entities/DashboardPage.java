@@ -6,6 +6,7 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigInteger;
 import java.util.List;
 
 @Entity
@@ -27,6 +28,8 @@ public class DashboardPage {
     private String title;
 
     private String slug;
+    
+    private Integer sortOrder;
 
     @Column(columnDefinition = "json")
     @JdbcTypeCode(SqlTypes.JSON)

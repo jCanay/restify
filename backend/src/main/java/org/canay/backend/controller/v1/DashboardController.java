@@ -16,10 +16,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class DashboardController {
 
-    private final DashboardService dashboardService;
 
-    @GetMapping("/restaurants/{restaurantId}/dashboards")
-    public ResponseEntity<DashboardDTO> getDashboard(@PathVariable Long restaurantId, @AuthenticationPrincipal User user) {
-        return ResponseEntity.ok(dashboardService.getDashboardForUser(restaurantId, user));
-    }
 }

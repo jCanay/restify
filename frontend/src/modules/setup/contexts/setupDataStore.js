@@ -2,16 +2,15 @@ import { persistentAtom } from "@nanostores/persistent";
 
 const INITIAL_SETUP_DATA = {
     name: "",
-    addresses: [
-        {
-            streetAddress: "",
-            city: "",
-            country: "",
-            zipCode: "",
-            latitude: 0,
-            longitude: 0,
-        },
-    ],
+    address: {
+        streetAddress: "",
+        city: "",
+        country: "",
+        zipCode: "",
+        latitude: 0,
+        longitude: 0,
+    },
+
     deliveryRadius: 2000,
     schedule: [
         {
@@ -87,14 +86,12 @@ export const setSetupDataAddress = ({
     const current = $setupDataStore.get();
     $setupDataStore.set({
         ...current,
-        addresses: [
-            {
-                streetAddress: streetAddress,
-                city: city,
-                country: country,
-                zipCode: zipCode,
-            },
-        ],
+        address: {
+            streetAddress: streetAddress,
+            city: city,
+            country: country,
+            zipCode: zipCode,
+        },
     });
 };
 

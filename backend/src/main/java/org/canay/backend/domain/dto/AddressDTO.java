@@ -18,8 +18,9 @@ public class AddressDTO {
     private String floor;
     private Double latitude;
     private Double longitude;
+    private String zoneId;
     private String notes;
-    
+
     @Builder.Default
     private Boolean isDefault = false;
 }

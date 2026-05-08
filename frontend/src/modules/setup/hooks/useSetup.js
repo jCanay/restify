@@ -39,7 +39,6 @@ export const useSetup = () => {
 
             const response = await api.post("/restaurants", newRestaurant);
             const restaurant = response.data;
-            console.log("RESTAURANTE: ", restaurant);
 
             const currentStore = $userStore.get();
             setUser({

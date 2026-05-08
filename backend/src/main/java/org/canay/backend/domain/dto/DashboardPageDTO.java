@@ -18,6 +18,7 @@ public class DashboardPageDTO {
     private Long id;
     private String title;
     private String slug;
+    private Integer sortOrder;
     private Object tabs;
     private List<WidgetDTO> widgets;
 }

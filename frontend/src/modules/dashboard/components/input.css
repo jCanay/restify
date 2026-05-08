@@ -1,0 +1,37 @@
+div.input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &.password {
+        & div {
+            position: relative;
+
+            & input {
+                padding-right: 3rem;
+            }
+        }
+    }
+
+    & label {
+        font-size: 10pt;
+    }
+
+    & input {
+        width: 100%;
+        background-color: var(--color-white);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        border: solid 1.5px var(--color-gray-200);
+
+        &.invalid {
+            border-color: var(--color-red-600);
+            animation: wiggle 300ms ease-in-out;
+        }
+    }
+
+    & p.error {
+        font-size: smaller;
+        color: var(--color-red-600);
+    }
+}

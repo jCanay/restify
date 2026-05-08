@@ -31,6 +31,8 @@ public class Address {
 
     private Double longitude;
 
+    private String zoneId;
+
     private String notes;
 
     @Builder.Default
@@ -43,7 +45,7 @@ public class Address {
     private Account account;
 
     @ToString.Exclude
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 

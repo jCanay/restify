@@ -1,23 +1,22 @@
 import { persistentAtom } from "@nanostores/persistent";
 
-export const $userStore = persistentAtom(
-    "user",
-    {
-        user: { id: "", username: "", email: "", role: { name: "" } },
-        account: {
-            id: "",
-            name: "",
-            surname: "",
-            profilePicture: "",
-            addresses: [],
-            onboardingCompleted: false,
-        },
-        restaurants: [
-            { id: "", name: "", deliveryRadius: 0, isDefault: false },
-        ],
+const DEFAULT_USER = {
+    user: { id: "", username: "", email: "", role: { name: "" } },
+    account: {
+        id: "",
+        name: "",
+        surname: "",
+        profilePicture: "",
+        address: {},
+        onboardingCompleted: false,
     },
-    { encode: JSON.stringify, decode: JSON.parse },
-);
+    restaurants: [{ id: "", name: "", deliveryRadius: 0, isDefault: false }],
+};
+
+export const $userStore = persistentAtom("user", DEFAULT_USER, {
+    encode: JSON.stringify,
+    decode: JSON.parse,
+});
 
 export const setUser = ({ user, account, restaurants }) => {
     const current = $userStore.get();
@@ -25,10 +24,11 @@ export const setUser = ({ user, account, restaurants }) => {
 };
 
 export const deleteUserKey = () => {
-    $userStore.set(undefined);
+    $userStore.set(DEFAULT_USER);
+    localStorage.removeItem("user");
 };
 
 export const getUserDefaultRestaurant = () => {
     const current = $userStore.get();
-    return current.restaurants.filter((r) => r.isDefault)[0];
+    return current.restaurants?.filter((r) => r.isDefault)[0];
 };

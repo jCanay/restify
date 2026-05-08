@@ -17,7 +17,7 @@ function SetupPage() {
     const [hasStarted, setHasStarted] = useState(false);
     const [direction, setDirection] = useState("forward");
     const [shakeTrigger, setShakeTrigger] = useState(0);
-    const { name, addresses, deliveryRadius } = useStore($setupDataStore) || {};
+    const { name, address, deliveryRadius } = useStore($setupDataStore) || {};
     const { addRestaurant, completeOnboarding, loading, error } = useSetup();
 
     const handleBack = () => {
@@ -34,10 +34,10 @@ function SetupPage() {
                 return name?.trim().length > 2;
             case 1:
                 return (
-                    addresses[0].city.trim().length > 0 &&
-                    addresses[0].country.trim().length > 0 &&
-                    addresses[0].streetAddress.trim().length > 0 &&
-                    addresses[0].zipCode.trim().length > 0
+                    address?.city.trim().length > 0 &&
+                    address?.country.trim().length > 0 &&
+                    address?.streetAddress.trim().length > 0 &&
+                    address?.zipCode.trim().length > 0
                 );
             // case 2:
             // return address.latitude !== 0;
@@ -77,10 +77,8 @@ function SetupPage() {
             setDirection("forward");
         }
 
-        console.log(isValid());
-
         if (index == steps.length - 1 && isValid()) {
-            await addRestaurant({ name, deliveryRadius, addresses });
+            await addRestaurant({ name, deliveryRadius, address });
             await completeOnboarding();
         }
     };

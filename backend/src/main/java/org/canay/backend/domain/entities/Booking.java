@@ -6,7 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.time.ZonedDateTime;
 
 @Entity
@@ -20,22 +22,26 @@ public class Booking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "created_at")
-    private ZonedDateTime createdAt;
+    @Column(nullable = false, updatable = false)
+    private Instant createdAt;
 
-    @Column(name = "date_time")
-    private LocalDateTime dateTime;
-
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    private LocalDateTime bookingDate;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @Builder.Default
     private BookingStatus status = BookingStatus.PENDING;
 
+    @ManyToOne
+    @JoinColumn(name = "account_id")
+    private Account account;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(nullable = false, name = "restaurant_id")
     private Restaurant restaurant;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = Instant.now();
+    }
 }

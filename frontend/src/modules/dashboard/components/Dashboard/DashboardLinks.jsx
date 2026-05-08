@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useStore } from "../../../../node_modules/@nanostores/react/index";
+import { useStore } from "@nanostores/react";
 import {
     Bike,
     BookMarked,
@@ -9,11 +9,14 @@ import {
     Utensils,
 } from "lucide-react";
 
-import { $dashboardStore } from "../contexts/dashboardStore";
+import { $dashboardStore } from "../../contexts/dashboardStore";
 import { NavLink } from "react-router";
 
 export default function DashboardLinks() {
     const { dashboard } = useStore($dashboardStore);
+    const sortedPages = dashboard?.pages?.sort(
+        (p1, p2) => p1.sortOrder - p2.sortOrder,
+    );
 
     const pages = {
         bookings: {
@@ -33,12 +36,12 @@ export default function DashboardLinks() {
         },
     };
 
-    return dashboard?.pages?.map((page, index) => (
+    return sortedPages?.map((page, index) => (
         <NavLink
             key={index}
             to={`/dashboard${page.slug && "/"}${page.slug}`}
             className="link"
-            end
+            end={!page.slug}
         >
             {pages[page.slug]?.icon || <House strokeWidth={2} />}
             <p>{page.title}</p>

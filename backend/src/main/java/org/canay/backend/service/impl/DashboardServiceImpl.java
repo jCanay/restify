@@ -1,7 +1,6 @@
 package org.canay.backend.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
@@ -65,7 +65,7 @@ public class DashboardServiceImpl implements DashboardService {
                 .orElseThrow(() -> new RuntimeException("Error: Role not found in database"));
 
         // 3. Crear la página (ya puede referenciar al dashboard persistido)
-        DashboardPage reservasPage = createPage("Reservas", "bookings", "", dashboard, null);
+        DashboardPage reservasPage = createPage("Reservas", "bookings", "", 2, dashboard, null);
         DashboardPage savedReservasPage = dashboardPageRepository.save(reservasPage);
 
         // 4. Crear y guardar el widget vinculado a la página guardada
@@ -89,28 +89,37 @@ public class DashboardServiceImpl implements DashboardService {
         dashboardPageRepository.save(savedReservasPage);
 
         List<DashboardPage> pages = new ArrayList<>(List.of(
-                createPage("Inicio", "", "", dashboard, List.of()),
+                createPage("Inicio", "", "", 1, dashboard, List.of()),
                 savedReservasPage,
-                createPage("Pedidos", "orders", "", dashboard, List.of()),
-                createPage("Restaurante", "restaurant", "", dashboard, List.of()),
-                createPage("Menú", "menu", "", dashboard, List.of()),
-                createPage("Plantilla", "staff", "", dashboard, List.of())
+                createPage("Pedidos", "orders", "", 3, dashboard, List.of()),
+                createPage("Restaurante", "restaurant", "", 4, dashboard, List.of()),
+                createPage("Menú", "menu", "", 5, dashboard, List.of()),
+                createPage("Plantilla", "staff", "", 6, dashboard, List.of())
         ));
+        pages.sort(Comparator.comparingLong(DashboardPage::getSortOrder));
+
         dashboard.setPages(pages);
 
         // Establecer y guardar el restaurante con el nuevo dashboard
         restaurant.setDashboard(dashboard);
         restaurantRepository.save(restaurant);
 
-        System.out.println(dashboard);
         return dashboardRepository.save(dashboard);
     }
 
-    private DashboardPage createPage(String title, String slug, String tabs, Dashboard dashboard, List<Widget> widgets) {
+    private DashboardPage createPage(
+            String title,
+            String slug,
+            String tabs,
+            Integer order,
+            Dashboard dashboard,
+            List<Widget> widgets
+    ) {
         try {
             return DashboardPage.builder()
                     .title(title)
                     .slug(slug)
+                    .sortOrder(order)
                     .tabs(objectMapper.readTree(tabs))
                     .widgets(widgets)
                     .dashboard(dashboard)

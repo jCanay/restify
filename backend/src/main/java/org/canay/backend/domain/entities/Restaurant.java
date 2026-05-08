@@ -24,8 +24,8 @@ public class Restaurant {
     @Column(name = "delivery_radius")
     private Double deliveryRadius;
 
-    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private List<Address> addresses;
+    @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private Address address;
 
     @ManyToOne
     @JoinColumn(name = "account_id")

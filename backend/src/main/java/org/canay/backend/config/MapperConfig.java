@@ -24,7 +24,7 @@ public class MapperConfig {
         modelMapper.createTypeMap(JsonNode.class, Object.class).setConverter(jsonNodeConverter);
 
         // For nested objects
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.LOOSE);
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
         return modelMapper;
     }

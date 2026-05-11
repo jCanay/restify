@@ -36,12 +36,16 @@ public class Booking {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(nullable = false, name = "restaurant_id")
     private Restaurant restaurant;
 
     @PrePersist
     protected void onCreate() {
         this.createdAt = Instant.now();
+        
+        if (this.status == null) {
+            this.status = BookingStatus.PENDING;
+        }
     }
 }

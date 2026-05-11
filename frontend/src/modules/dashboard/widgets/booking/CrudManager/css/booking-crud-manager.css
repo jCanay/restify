@@ -1,0 +1,14 @@
+.booking-crud-manager {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+
+  & h2 {
+    font-size: 15pt;
+  }
+
+  & button[data-slot="dialog-close"] {
+    cursor: pointer;
+  }
+}

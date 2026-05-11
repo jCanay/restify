@@ -49,12 +49,12 @@ public class BookingServiceImpl implements BookingService {
         Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
 
+        System.out.println(bookingDTO.getBookingDate());
         Booking booking = bookingMapper.mapFrom(bookingDTO);
         booking.setRestaurant(restaurant);
         booking.setAccount(account);
 
         Booking savedBooking = bookingRepository.save(booking);
-
 
         return bookingMapper.mapTo(savedBooking);
     }

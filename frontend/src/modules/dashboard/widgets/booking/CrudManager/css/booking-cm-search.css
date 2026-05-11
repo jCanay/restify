@@ -1,0 +1,8 @@
+.booking-crud-manager.search {
+  width: fit-content;
+
+  & .table {
+    width: 50rem;
+    height: 25rem;
+  }
+}

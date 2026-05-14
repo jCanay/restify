@@ -7,9 +7,15 @@ import { es } from "date-fns/locale";
 import { useEffect, useMemo, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "./css/booking-cm-add.css";
+import { DatesProvider, TimePicker } from "@mantine/dates";
+import '@mantine/core/styles.css';
+import '@mantine/dates/styles.css';
+import { ActionIcon, MantineProvider } from "@mantine/core";
+import { ClockIcon } from "lucide-react";
 import { WheelPicker, WheelPickerWrapper } from "@/@components/wheel-picker";
+import InputTimePicker from "@/modules/dashboard/components/Time/InputTimePicker";
 
-export default function BookingCMAdd({ setOpen = Function }) {
+export default function BookingCMAdd({ setOpen = () => { } }) {
 	const { addBooking, loading, error } = useBookings();
 	const [hours, setHours] = useState("00");
 	const [minutes, setMinutes] = useState("00");
@@ -27,18 +33,18 @@ export default function BookingCMAdd({ setOpen = Function }) {
 		return newDate;
 	};
 
-	const getTimeOptions = (maxNum) => {
-		const hourOptions = [];
+	// const getTimeOptions = (maxNum) => {
+	// 	const hourOptions = [];
 
-		for (let i = 0; i < maxNum; i++) {
-			hourOptions.push({
-				label: i.toString().padStart(2, "0"),
-				value: i.toString().padStart(2, "0"),
-			});
-		}
+	// 	for (let i = 0; i < maxNum; i++) {
+	// 		hourOptions.push({
+	// 			label: i.toString().padStart(2, "0"),
+	// 			value: i.toString().padStart(2, "0"),
+	// 		});
+	// 	}
 
-		return hourOptions;
-	};
+	// 	return hourOptions;
+	// };
 
 	useEffect(() => {
 		bookingDate.setUTCDate(selectedDate?.getDate());
@@ -63,8 +69,15 @@ export default function BookingCMAdd({ setOpen = Function }) {
 		}
 	};
 
+	const handleTimeChange = (value) => {
+		const time = value.split(":");
+		setHours(time[0]);
+		setMinutes(time[1]);
+	};
+
 	return (
 		<DialogContent
+
 			className="booking-crud-manager add"
 			aria-describedby={undefined}
 		>
@@ -72,22 +85,20 @@ export default function BookingCMAdd({ setOpen = Function }) {
 			<DialogDescription>
 				Selecciona la fecha y la hora de la nueva reserva.
 			</DialogDescription>
-			<div className="wrapper">
+			<div className="wrapper" onMouseDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
 				<DayPicker
-					fixedWeeks
-					showOutsideDays
 					locale={es}
-					hidden={{ before: new Date() }}
-					modifiers={{}}
+					mode="single"
+					showOutsideDays
+					disabled={{ before: new Date() }}
 					startMonth={new Date()}
 					endMonth={addMonths(new Date(), 3)}
 					animate
 					selected={selectedDate}
 					onSelect={setSelectedDate}
-					mode="single"
 					footer={dateFooter}
 				/>
-				<WheelPickerWrapper className="time-picker">
+				{/* <WheelPickerWrapper className="time-picker">
 					<WheelPicker
 						options={getTimeOptions(24)}
 						value={hours}
@@ -100,8 +111,8 @@ export default function BookingCMAdd({ setOpen = Function }) {
 						infinite
 						onValueChange={setMinutes}
 					/>
-				</WheelPickerWrapper>
-
+				</WheelPickerWrapper> */}
+				<InputTimePicker readOnly onTimeChange={handleTimeChange} />
 			</div>
 			<button onClick={handleAddClick} disabled={loading} className="btn" type="button">
 				<span>Añadir reserva</span>

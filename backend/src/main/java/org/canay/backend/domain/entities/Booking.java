@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
-import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "bookings")
@@ -43,7 +41,7 @@ public class Booking {
     @PrePersist
     protected void onCreate() {
         this.createdAt = Instant.now();
-        
+
         if (this.status == null) {
             this.status = BookingStatus.PENDING;
         }

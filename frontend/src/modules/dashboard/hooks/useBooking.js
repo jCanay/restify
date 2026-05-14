@@ -26,23 +26,33 @@ export const useBookings = () => {
     }
   }, [])
 
-  const getAllBookings = useCallback(async () => {
-    try {
-      setLoading(true)
+  const getAllBookingsByRestaurantId = useCallback(
+    async (restaurantId, { page, size, sort, search }) => {
+      try {
+        setLoading(true)
 
-      const response = await api.get("/bookings")
-      const bookings = response.data
+        const response = await api.get(
+          `/restaurants/${restaurantId}/bookings?size=${size || 20}&page=${page || 0}&sort=${sort || ""}`,
+        )
+        const bookings = response.data
 
-      setError(null)
-      return bookings
-    } catch (err) {
-      console.log(err.response.message || "Error fetching bookings")
-      setError(err.response.message || "Error fetching bookings")
-      return []
-    } finally {
-      setLoading(false)
-    }
-  }, [])
+        setError(null)
+        return bookings
+      } catch (err) {
+        console.log(err.response.message || "Error fetching bookings")
+        setError(err.response.message || "Error fetching bookings")
+        return []
+      } finally {
+        setLoading(false)
+      }
+    },
+    [],
+  )
 
-  return { addBooking, getAllBookings, loading, error }
+  return {
+    addBooking,
+    getAllBookingsByRestaurantId,
+    loading,
+    error,
+  }
 }

@@ -24,4 +24,5 @@ public class BookingDTO {
     private String status;
     private AccountDTO account;
     private RestaurantDTO restaurant;
+    private UserDTO user;
 }

@@ -39,10 +39,10 @@ function CrudManager({ pageId }) {
 				</button>
 
 				{/* UN SOLO DIALOG PARA TODOS */}
-				<Dialog open={open} onOpenChange={setOpen ?? "[name]"}>
+				<Dialog open={open} onOpenChange={setOpen}>
 					{/* Solo renderizamos el contenido si hay un tipo activo */}
-					{open && activeType && (
-						<Content type={activeType} setOpen={setOpen ?? "[name]"} />
+					{activeType && (
+						<Content type={activeType} setOpen={setOpen} />
 					)}
 				</Dialog>
 			</ul>

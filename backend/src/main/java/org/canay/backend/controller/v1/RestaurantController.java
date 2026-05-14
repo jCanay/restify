@@ -8,6 +8,8 @@ import org.canay.backend.domain.entities.User;
 import org.canay.backend.service.BookingService;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -45,5 +47,14 @@ public class RestaurantController {
             @AuthenticationPrincipal User user
     ) {
         return new ResponseEntity<>(bookingService.create(bookingDTO, restaurantId, user), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{restaurantId}/bookings")
+    public ResponseEntity<Page<BookingDTO>> getAllBookingsByRestaurantId(
+            @PathVariable Long restaurantId,
+            Pageable pageable,
+            @AuthenticationPrincipal User user
+    ) {
+        return new ResponseEntity<>(bookingService.getAllByRestaurantId(restaurantId, pageable, user), HttpStatus.OK);
     }
 }

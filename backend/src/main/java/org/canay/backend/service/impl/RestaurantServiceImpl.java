@@ -2,10 +2,7 @@ package org.canay.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.RestaurantDTO;
-import org.canay.backend.domain.entities.Account;
-import org.canay.backend.domain.entities.Dashboard;
-import org.canay.backend.domain.entities.Restaurant;
-import org.canay.backend.domain.entities.User;
+import org.canay.backend.domain.entities.*;
 import org.canay.backend.exceptions.ResourceNotFoundException;
 import org.canay.backend.mappers.Mapper;
 import org.canay.backend.repository.AccountRepository;
@@ -38,14 +35,10 @@ public class RestaurantServiceImpl implements RestaurantService {
 
         // Establece el restaurante a la dirección
         if (restaurant.getAddress() != null) {
-            if (restaurant.getAddress().getRestaurant() != null) {
-                restaurant.getAddress().setRestaurant(restaurant);
-                restaurant.getAddress().setAccount(null);
-            } else if (restaurant.getAddress().getAccount() != null) {
-                restaurant.getAddress().setAccount(account);
-                restaurant.getAddress().setRestaurant(null);
-            }
+            Address address = restaurant.getAddress();
 
+            address.setRestaurant(restaurant);
+            address.setAccount(null);
         }
 
         if (restaurantRepository.countByAccount(account) == 0) {
@@ -53,7 +46,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
-
         dashboardService.initializeDashboard(savedRestaurant);
 
         return restaurantMapper.mapTo(savedRestaurant);

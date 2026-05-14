@@ -2,6 +2,7 @@ package org.canay.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.BookingDTO;
+import org.canay.backend.domain.dto.UserDTO;
 import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.Booking;
 import org.canay.backend.domain.entities.Restaurant;
@@ -16,7 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.time.ZoneId;
+import java.time.OffsetDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class BookingServiceImpl implements BookingService {
     private final RestaurantRepository restaurantRepository;
     private final AccountRepository accountRepository;
     private final Mapper<Booking, BookingDTO> bookingMapper;
+    private final Mapper<User, UserDTO> userMapper;
 
     @Override
     public Page<BookingDTO> getAll(Pageable pageable, User user) {
@@ -42,6 +45,21 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    public Page<BookingDTO> getAllByRestaurantId(Long restaurantId, Pageable pageable, User user) {
+        Page<Booking> bookings = bookingRepository.findAllByRestaurantId(restaurantId, pageable);
+
+        UserDTO userDto = userMapper.mapTo(user);
+
+        System.out.println(bookings.getNumberOfElements());
+
+        return bookings.map(booking -> {
+            BookingDTO bookingDTO = bookingMapper.mapTo(booking);
+            bookingDTO.setUser(userDto);
+            return bookingDTO;
+        });
+    }
+
+    @Override
     public BookingDTO create(BookingDTO bookingDTO, Long restaurantId, User user) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found"));
@@ -49,8 +67,14 @@ public class BookingServiceImpl implements BookingService {
         Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
 
-        System.out.println(bookingDTO.getBookingDate());
         Booking booking = bookingMapper.mapFrom(bookingDTO);
+
+        if (bookingDTO.getBookingDate() != null) {
+            OffsetDateTime odt = OffsetDateTime.parse(bookingDTO.getBookingDate());
+            booking.setBookingDate(odt.toLocalDateTime());
+        }
+        System.out.println(booking.getBookingDate());
+
         booking.setRestaurant(restaurant);
         booking.setAccount(account);
 

@@ -1,6 +1,6 @@
 import Logo from "../../core/components/Logo";
 import "../css/dashboard.css";
-import { NavLink, Outlet } from "react-router";
+import { Outlet } from "react-router";
 import {
 	Group,
 	Panel,
@@ -9,19 +9,13 @@ import {
 } from "react-resizable-panels";
 import { useEffect, useRef, useState } from "react";
 import {
-	Bike,
-	BookMarked,
-	BookOpenText,
 	CreditCard,
-	House,
 	LogOut,
 	PanelLeftClose,
 	PanelLeftOpen,
 	Search,
 	Settings,
 	User,
-	Users,
-	Utensils,
 } from "lucide-react";
 import {
 	DropdownMenu,
@@ -48,7 +42,6 @@ import { useAuth } from "../../auth/hooks/useAuth";
 import { showToast } from "../components/NotificationToast";
 import DashboardLinks from "../components/Dashboard/DashboardLinks";
 import { useDashboard } from "../hooks/useDashboard";
-import { WheelPicker, WheelPickerWrapper } from "@ncdai/react-wheel-picker";
 
 function Dashboard() {
 	const userPfp = "https://i.pravatar.cc/100?u=0";
@@ -321,7 +314,7 @@ function Dashboard() {
 				</div>
 				<Outlet />
 			</Panel>
-		</Group>
+		</Group >
 	);
 }
 

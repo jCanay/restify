@@ -85,6 +85,7 @@ public class DashboardServiceImpl implements DashboardService {
         savedReservasPage.setTabs(createPageTabs("""
                 [{"name": "Historial","path": "history"},{"name": "Estadísticas","path": "stats"}]
                 """));
+
         savedReservasPage.setWidgets(new ArrayList<>(List.of(savedReservasWidget)));
         dashboardPageRepository.save(savedReservasPage);
 

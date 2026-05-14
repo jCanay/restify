@@ -6,48 +6,55 @@ import Widget from "./Widget";
 import { useState } from "react";
 
 function CrudManager({ pageId }) {
-	const [activeType, setActiveType] = useState(null);
-	const [open, setOpen] = useState(false);
-	const names = {
-		bookings: {
-			singular: "reserva",
-			plural: "reservas",
-			content: BookingCrudManager,
-		},
-	};
+    const [activeType, setActiveType] = useState(null);
+    const [open, setOpen] = useState(false);
+    const names = {
+        bookings: {
+            singular: "reserva",
+            plural: "reservas",
+            content: BookingCrudManager,
+        },
+    };
 
-	const Content = names[pageId]?.content;
-	const openModal = (type) => {
-		setActiveType(type);
-		setOpen(true);
-	};
+    const Content = names[pageId]?.content;
+    const openModal = (type) => {
+        setActiveType(type);
+        setOpen(true);
+    };
 
-	return (
-		<Widget className={"crud-manager"} title={`Gestionar ${names[pageId]?.plural ?? "[name]"}`}>
-			<ul>
-				<button className="box" onClick={() => openModal("add")}>
-					<Plus /> Añadir {names[pageId]?.singular ?? "[name]"}
-				</button>
-				<button className="box" onClick={() => openModal("search")}>
-					<Search /> Buscar {names[pageId]?.singular ?? "[name]"}
-				</button>
-				<button className="box" onClick={() => openModal("edit")}>
-					<Pencil /> Actualizar {names[pageId]?.singular ?? "[name]"}
-				</button>
-				<button className="box" onClick={() => openModal("delete")}>
-					<Trash /> Eliminar {names[pageId]?.singular ?? "[name]"}
-				</button>
+    return (
+        <Widget
+            className={"crud-manager"}
+            title={`Gestionar ${names[pageId]?.plural ?? "[name]"}`}
+        >
+            <ul>
+                <button className="box" onClick={() => openModal("add")}>
+                    <Plus /> Añadir {names[pageId]?.singular ?? "[name]"}
+                </button>
+                <button className="box" onClick={() => openModal("search")}>
+                    <Search /> Buscar {names[pageId]?.singular ?? "[name]"}
+                </button>
+                <button className="box" onClick={() => openModal("edit")}>
+                    <Pencil /> Actualizar {names[pageId]?.singular ?? "[name]"}
+                </button>
+                <button className="box" onClick={() => openModal("delete")}>
+                    <Trash /> Eliminar {names[pageId]?.singular ?? "[name]"}
+                </button>
 
-				{/* UN SOLO DIALOG PARA TODOS */}
-				<Dialog open={open} onOpenChange={setOpen}>
-					{/* Solo renderizamos el contenido si hay un tipo activo */}
-					{activeType && (
-						<Content type={activeType} setOpen={setOpen} />
-					)}
-				</Dialog>
-			</ul>
-		</Widget>
-	);
+                {/* UN SOLO DIALOG PARA TODOS */}
+                <Dialog open={open} onOpenChange={setOpen}>
+                    {/* Solo renderizamos el contenido si hay un tipo activo */}
+                    {activeType && (
+                        <Content
+                            type={activeType}
+                            open={open}
+                            setOpen={setOpen}
+                        />
+                    )}
+                </Dialog>
+            </ul>
+        </Widget>
+    );
 }
 
 export default CrudManager;

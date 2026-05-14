@@ -14,6 +14,7 @@ import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.ScheduleService;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -83,7 +84,7 @@ public class ScheduleServiceImpl implements ScheduleService {
             return AvailabilityRule.builder()
                     .restaurant(restaurant)
                     .type(type)
-                    .dayOfWeek(req.getDayOfWeek())
+                    .dayOfWeek(DayOfWeek.of(req.getDayOfWeek()))
                     .startDate(req.getStartDate())
                     .endDate(req.getEndDate())
                     .openTime(req.getOpenTime())
@@ -102,9 +103,9 @@ public class ScheduleServiceImpl implements ScheduleService {
                 .findByRestaurantIdAndType_NameAndExpiryDateIsNull(restaurantId, "RECURRING");
 
         // 2. Agrupamos por día de la semana (0-6)
-        return IntStream.range(0, 7).mapToObj(dayIndex -> {
+        return IntStream.range(1, 8).mapToObj(dayIndex -> {
             List<AvailabilityRule> dayRules = rules.stream()
-                    .filter(r -> r.getDayOfWeek().equals(dayIndex))
+                    .filter(r -> r.getDayOfWeek().equals(DayOfWeek.of(dayIndex)))
                     .toList();
 
             boolean isClosed = dayRules.isEmpty() || dayRules.stream().anyMatch(AvailabilityRule::getIsClosed);

@@ -24,7 +24,7 @@ public class Widget {
     private WidgetType type;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(joinColumns = @JoinColumn(name = "widget_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "widget_access_roles", joinColumns = @JoinColumn(name = "widget_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<UserRole> accessRoles;
 
     @EqualsAndHashCode.Exclude

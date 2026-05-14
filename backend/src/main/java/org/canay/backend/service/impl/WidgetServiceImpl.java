@@ -12,6 +12,7 @@ import org.canay.backend.service.WidgetService;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -22,19 +23,21 @@ public class WidgetServiceImpl implements WidgetService {
 
     @Override
     public Widget createWidgetIfNotFound(WidgetType type, DashboardPage page, Set<UserRole> roles, String layoutJson) {
-        if (!widgetRepository.findByTypeAndDashboardPage(type, page).isEmpty()) {
-            return null;
+        Widget widget = widgetRepository.findByTypeAndDashboardPage(type, page).orElse(null);
+
+        if (widget != null) {
+            return widget;
         }
 
         try {
-            Widget widget = Widget.builder()
+            Widget newWidget = Widget.builder()
                     .type(type)
                     .dashboardPage(page)
                     .accessRoles(new HashSet<>(roles))
                     .layouts(objectMapper.readTree(layoutJson))
                     .build();
 
-            return widgetRepository.save(widget);
+            return widgetRepository.save(newWidget);
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Error parsing JSON: " + type, e);
         }

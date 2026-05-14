@@ -14,11 +14,6 @@ const INITIAL_SETUP_DATA = {
     deliveryRadius: 2000,
     schedule: [
         {
-            dayOfWeek: 0,
-            isClosed: true,
-            slots: [],
-        },
-        {
             dayOfWeek: 1,
             isClosed: true,
             slots: [],
@@ -45,6 +40,11 @@ const INITIAL_SETUP_DATA = {
         },
         {
             dayOfWeek: 6,
+            isClosed: true,
+            slots: [],
+        },
+        {
+            dayOfWeek: 7,
             isClosed: true,
             slots: [],
         },

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -24,13 +25,14 @@ public class AvailabilityRule {
     @JoinColumn(name = "type_id")
     private AvailabilityRuleType type;
 
-    private Integer dayOfWeek;
-
-    private LocalDate startDate;
-    private LocalDate endDate;
+    @Column(columnDefinition = "TINYINT UNSIGNED")
+    private DayOfWeek dayOfWeek;
 
     private LocalTime openTime;
     private LocalTime closeTime;
+
+    private LocalDate startDate;
+    private LocalDate endDate;
 
     private Boolean isClosed = false;
 

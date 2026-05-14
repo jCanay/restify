@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { ResponsiveGridLayout, useContainerWidth } from "react-grid-layout";
-import { WIDGET_REGISTRY } from "../WidgetRegistry";
+import { WIDGET_REGISTRY } from "../../widgets/general/WidgetRegistry";
 import { useParams } from "react-router";
 import "./css/dashboard-widget-grid.css";
 

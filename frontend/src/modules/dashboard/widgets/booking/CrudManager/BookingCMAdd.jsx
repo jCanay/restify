@@ -1,4 +1,8 @@
-import { DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import {
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
+} from "@/components/ui/dialog";
 import { Spinner } from "@/components/ui/spinner";
 import { getUserDefaultRestaurant } from "@/modules/dashboard/contexts/userStore";
 import { useBookings } from "@/modules/dashboard/hooks/useBooking";
@@ -7,117 +11,120 @@ import { es } from "date-fns/locale";
 import { useEffect, useMemo, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import "./css/booking-cm-add.css";
-import { DatesProvider, TimePicker } from "@mantine/dates";
-import '@mantine/core/styles.css';
-import '@mantine/dates/styles.css';
-import { ActionIcon, MantineProvider } from "@mantine/core";
-import { ClockIcon } from "lucide-react";
-import { WheelPicker, WheelPickerWrapper } from "@/@components/wheel-picker";
-import InputTimePicker from "@/modules/dashboard/components/Time/InputTimePicker";
+import "@mantine/core/styles.css";
+import "@mantine/dates/styles.css";
+import InputTimePicker from "@/modules/dashboard/components/DateTime/InputTimePicker";
+import InputDatePicker from "@/modules/dashboard/components/DateTime/InputDatePicker";
 
-export default function BookingCMAdd({ setOpen = () => { } }) {
-	const { addBooking, loading, error } = useBookings();
-	const [hours, setHours] = useState("00");
-	const [minutes, setMinutes] = useState("00");
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const bookingDate = useMemo(() => new Date(), []);
-	const dateFooter = selectedDate ? (
-		<span>{format(selectedDate, "PPP", { locale: es })}</span>
-	) : (
-		<span>Selecciona una fecha</span>
-	);
+export default function BookingCMAdd({ open, setOpen = () => {} }) {
+    const { addBooking, loading, error } = useBookings();
+    const [hours, setHours] = useState("00");
+    const [minutes, setMinutes] = useState("00");
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const bookingDate = useMemo(() => new Date(), []);
+    const dateFooter = selectedDate ? (
+        <span>{format(selectedDate, "PPP", { locale: es })}</span>
+    ) : (
+        <span>Selecciona una fecha</span>
+    );
 
-	const addMonths = (date, months) => {
-		const newDate = new Date(date);
-		newDate.setMonth(newDate.getMonth() + months);
-		return newDate;
-	};
+    useEffect(() => {
+        bookingDate.setUTCDate(selectedDate?.getDate());
+        bookingDate.setUTCMonth(selectedDate?.getMonth());
+        bookingDate.setUTCFullYear(selectedDate?.getFullYear());
 
-	// const getTimeOptions = (maxNum) => {
-	// 	const hourOptions = [];
+        bookingDate.setUTCHours(hours);
+        bookingDate.setUTCMinutes(minutes);
+        bookingDate.setUTCSeconds(0);
+        bookingDate.setUTCMilliseconds(0);
+        console.log("BOOKING: ", bookingDate);
+        console.log(open);
 
-	// 	for (let i = 0; i < maxNum; i++) {
-	// 		hourOptions.push({
-	// 			label: i.toString().padStart(2, "0"),
-	// 			value: i.toString().padStart(2, "0"),
-	// 		});
-	// 	}
+        return () => {};
+    }, [bookingDate, selectedDate, hours, minutes, open]);
 
-	// 	return hourOptions;
-	// };
+    const isValid = () => {
+        return bookingDate.valueOf();
+    };
 
-	useEffect(() => {
-		bookingDate.setUTCDate(selectedDate?.getDate());
-		bookingDate.setUTCMonth(selectedDate?.getMonth());
-		bookingDate.setUTCFullYear(selectedDate?.getFullYear());
+    useEffect(() => {
+        console.log(isValid());
+    }, [bookingDate, selectedDate, hours, minutes]);
 
-		bookingDate.setUTCHours(hours);
-		bookingDate.setUTCMinutes(minutes);
-		bookingDate.setUTCSeconds(0);
-		bookingDate.setUTCMilliseconds(0);
-	}, [bookingDate, selectedDate, hours, minutes]);
+    const handleAddClick = () => {
+        if (!bookingDate) {
+            return;
+        }
 
-	const handleAddClick = () => {
-		if (!bookingDate) {
-			return;
-		}
+        const newBooking = addBooking(
+            { bookingDate },
+            getUserDefaultRestaurant()?.id,
+        );
 
-		const newBooking = addBooking({ bookingDate }, getUserDefaultRestaurant()?.id);
+        if (newBooking) {
+            setOpen(false);
+        }
+    };
 
-		if (newBooking) {
-			setOpen(false);
-		}
-	};
+    const handleTimeChange = (value) => {
+        console.log("TIME");
 
-	const handleTimeChange = (value) => {
-		const time = value.split(":");
-		setHours(time[0]);
-		setMinutes(time[1]);
-	};
+        const time = value.split(":");
+        setHours(time[0]);
+        setMinutes(time[1]);
+    };
 
-	return (
-		<DialogContent
-
-			className="booking-crud-manager add"
-			aria-describedby={undefined}
-		>
-			<DialogTitle>Añadir reserva</DialogTitle>
-			<DialogDescription>
-				Selecciona la fecha y la hora de la nueva reserva.
-			</DialogDescription>
-			<div className="wrapper" onMouseDown={(e) => e.stopPropagation()} onClick={(e) => e.stopPropagation()}>
-				<DayPicker
-					locale={es}
-					mode="single"
-					showOutsideDays
-					disabled={{ before: new Date() }}
-					startMonth={new Date()}
-					endMonth={addMonths(new Date(), 3)}
-					animate
-					selected={selectedDate}
-					onSelect={setSelectedDate}
-					footer={dateFooter}
-				/>
-				{/* <WheelPickerWrapper className="time-picker">
-					<WheelPicker
-						options={getTimeOptions(24)}
-						value={hours}
-						infinite
-						onValueChange={setHours}
-					/>
-					<WheelPicker
-						options={getTimeOptions(60)}
-						value={minutes}
-						infinite
-						onValueChange={setMinutes}
-					/>
-				</WheelPickerWrapper> */}
-				<InputTimePicker readOnly onTimeChange={handleTimeChange} />
-			</div>
-			<button onClick={handleAddClick} disabled={loading} className="btn" type="button">
-				<span>Añadir reserva</span>
-				{loading && <Spinner data-icon="inline-start" />}
-			</button>
-		</DialogContent>
-	);
+    return (
+        <DialogContent
+            onOpenAutoFocus={(e) => {
+                e.preventDefault();
+                e.currentTarget.focus();
+            }}
+            className="booking-crud-manager add"
+        >
+            <DialogTitle>Añadir reserva</DialogTitle>
+            <DialogDescription>
+                Selecciona la fecha y la hora de la nueva reserva.
+            </DialogDescription>
+            <div
+                className="wrapper"
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* <DayPicker
+                    locale={es}
+                    mode="single"
+                    showOutsideDays
+                    disabled={{ before: new Date() }}
+                    startMonth={new Date()}
+                    endMonth={addMonths(new Date(), 3)}
+                    animate
+                    selected={selectedDate}
+                    onSelect={setSelectedDate}
+                    footer={dateFooter}
+                /> */}
+                <InputDatePicker
+                    label={"Fecha"}
+                    required
+                    placeholder={"Selecciona una fecha"}
+                    onDateChange={setSelectedDate}
+                />
+                <InputTimePicker
+                    label={"Hora"}
+                    required
+                    readOnly
+                    onTimeChange={handleTimeChange}
+                />
+            </div>
+            <button
+                onClick={handleAddClick}
+                disabled={loading}
+                className="btn"
+                type="button"
+            >
+                <span>Añadir reserva</span>
+                {loading && <Spinner data-icon="inline-start" />}
+            </button>
+        </DialogContent>
+    );
 }

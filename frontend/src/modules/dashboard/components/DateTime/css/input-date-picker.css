@@ -1,12 +1,31 @@
 .input-date-picker {
-  width: 100%;
-  min-width: 15rem;
+    width: 100%;
+    min-width: 15rem;
 
-  & button[data-selected="true"] {
-    background-color: var(--color-primary);
-  }
+    & button[data-selected="true"] {
+        background-color: var(--color-primary);
+    }
 
-  & button[data-weekend="true"]:not([data-selected="true"]) {
-    color: var(--color-black);
-  }
+    & button[data-weekend="true"]:not([data-selected="true"]) {
+        color: var(--color-black);
+    }
+
+    &.invalid .mantine-DateInput-wrapper {
+        animation: wiggle 300ms ease-in-out;
+
+        & button {
+            border-color: var(--color-red-300);
+            color: var(--color-red-600);
+        }
+    }
+
+    &.read-only {
+        & .mantine-DateInput-wrapper * {
+            cursor: pointer;
+        }
+
+        & input {
+            caret-color: transparent;
+        }
+    }
 }

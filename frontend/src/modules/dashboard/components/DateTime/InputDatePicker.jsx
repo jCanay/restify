@@ -7,76 +7,114 @@ import { addDays, addMonths, endOfMonth, isSameDay } from "date-fns";
 import "./css/input-date-picker.css";
 
 export default function InputDatePicker({
-	label,
-	description,
-	required = false,
-	disabled = false,
-	clearable = false,
-	readOnly = false,
-	defaultValue,
-	error,
-	placeholder,
-	onDateChange = () => { },
+    label,
+    description,
+    required = false,
+    disabled = false,
+    clearable = false,
+    readOnly = false,
+    defaultValue,
+    excludedDates = [],
+    error,
+    placeholder,
+    onDateChange = () => {},
+    shakeTrigger,
 }) {
-	const [dropdownOpened, setDropdownOpened] = useState(false);
-	const [date, setDate] = useState(defaultValue || undefined);
-	const excludedDates = [addDays(new Date(), 2), addDays(new Date(), 3), addDays(new Date(), 4)];
+    const [dropdownOpened, setDropdownOpened] = useState(false);
+    const [date, setDate] = useState(defaultValue || null);
+    const [isValid, setIsValid] = useState(true);
 
-	useEffect(() => {
-		onDateChange(date);
-	}, [date, onDateChange]);
+    useEffect(() => {
+        onDateChange(date);
 
-	return (
-		<MantineProvider>
-			<DatesProvider settings={{ locale: "es" }}>
-				<DateInput
-					className="input-date-picker"
-					locale="es"
-					label={label}
-					description={description}
-					placeholder={placeholder}
-					required={required}
-					disabled={disabled}
-					minDate={new Date()}
-					maxDate={endOfMonth(addMonths(new Date(), 3))}
-					excludeDate={(date) => excludedDates.some((d => isSameDay(date, d)))}
-					clearable={clearable}
-					highlightToday
-					maxLevel="year"
-					error={error}
-					rightSection={
-						<ActionIcon
-							onClick={(e) => {
-								e.stopPropagation();
-								setDropdownOpened(!dropdownOpened);
-							}}
-							onBlur={() => setDropdownOpened(false)}
-							variant="default"
-						>
-							<Calendar size={18} />
-						</ActionIcon>
-					}
-					popoverProps={{
-						trapFocus: false,
-						withinPortal: false,
-						opened: dropdownOpened,
-					}}
-					value={date}
-					valueFormat="LL"
-					onClick={() => setDropdownOpened(!dropdownOpened)}
-					onBlur={() => setDropdownOpened(false)}
-					onChange={(value) => {
-						setDate(new Date(value));
-						onDateChange(new Date(value));
+        const validate = () => {
+            if (shakeTrigger > 0 && required) {
+                setIsValid(!isNaN(Date.parse(date)));
+            }
+        };
 
-						setDropdownOpened(false);
+        validate();
+    }, [date, onDateChange, shakeTrigger]);
 
-						if (document.activeElement instanceof HTMLElement) {
-							document.activeElement.blur();
-						}
-					}}
-				/>
-			</DatesProvider>
-		</MantineProvider>
-	);
+    const blockKeyboard = (e) => {
+        if (!readOnly) return;
+
+        if (
+            [
+                "Tab",
+                "Escape",
+                "ArrowUp",
+                "ArrowDown",
+                "ArrowLeft",
+                "ArrowRight",
+            ].includes(e.key)
+        ) {
+            return;
+        }
+        e.preventDefault();
+    };
+
+    return (
+        <MantineProvider>
+            <DatesProvider settings={{ locale: "es" }}>
+                <DateInput
+                    key={shakeTrigger}
+                    className={`input-date-picker ${readOnly ? "read-only" : ""} ${!isValid ? "invalid" : ""}`}
+                    locale="es"
+                    label={label}
+                    description={description}
+                    placeholder={placeholder}
+                    required={required}
+                    disabled={disabled}
+                    minDate={new Date()}
+                    maxDate={endOfMonth(addMonths(new Date(), 3))}
+                    excludeDate={(date) =>
+                        excludedDates.some((d) => isSameDay(date, d))
+                    }
+                    clearable={!readOnly && clearable}
+                    highlightToday
+                    maxLevel="year"
+                    error={required ? error : ""}
+                    rightSection={
+                        <ActionIcon
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setDropdownOpened(!dropdownOpened);
+                            }}
+                            onBlur={() => setDropdownOpened(false)}
+                            variant="default"
+                        >
+                            <Calendar size={18} />
+                        </ActionIcon>
+                    }
+                    popoverProps={{
+                        trapFocus: false,
+                        withinPortal: false,
+                        opened: dropdownOpened,
+                    }}
+                    value={date}
+                    valueFormat="LL"
+                    onKeyDown={blockKeyboard}
+                    onClick={() => setDropdownOpened(!dropdownOpened)}
+                    onBlur={() => setDropdownOpened(false)}
+                    onChange={(value) => {
+                        if (!value) {
+                            setDate(null);
+                            onDateChange(null);
+                            return;
+                        }
+
+                        setDate(new Date(value));
+                        onDateChange(new Date(value));
+
+                        setDropdownOpened(false);
+
+                        if (document.activeElement instanceof HTMLElement) {
+                            document.activeElement.blur();
+                        }
+                    }}
+                />
+            </DatesProvider>
+        </MantineProvider>
+    );
 }

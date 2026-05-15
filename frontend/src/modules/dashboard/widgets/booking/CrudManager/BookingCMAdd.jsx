@@ -1,138 +1,146 @@
 import {
-	DialogContent,
-	DialogDescription,
-	DialogTitle,
+    DialogContent,
+    DialogDescription,
+    DialogTitle,
 } from "@/components/ui/dialog";
 import { Spinner } from "@/components/ui/spinner";
+import InputDatePicker from "@/modules/dashboard/components/DateTime/InputDatePicker";
+import InputTimePicker from "@/modules/dashboard/components/DateTime/InputTimePicker";
 import { getUserDefaultRestaurant } from "@/modules/dashboard/contexts/userStore";
 import { useBookings } from "@/modules/dashboard/hooks/useBooking";
-import { addDays, format } from "date-fns";
-import { es } from "date-fns/locale";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { DayPicker } from "react-day-picker";
-import "./css/booking-cm-add.css";
 import "@mantine/core/styles.css";
 import "@mantine/dates/styles.css";
-import InputTimePicker from "@/modules/dashboard/components/DateTime/InputTimePicker";
-import InputDatePicker from "@/modules/dashboard/components/DateTime/InputDatePicker";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import "./css/booking-cm-add.css";
 
-export default function BookingCMAdd({ open, setOpen = () => { } }) {
-	const { addBooking, loading, error } = useBookings();
-	const [hours, setHours] = useState("");
-	const [minutes, setMinutes] = useState("");
-	const [selectedDate, setSelectedDate] = useState(new Date());
-	const [dateError, setDateError] = useState("");
-	const [timeError, setTimeError] = useState("");
-	const bookingDate = useMemo(() => new Date(), []);
-	const dateFooter = selectedDate ? (
-		<span>{format(selectedDate, "PPP", { locale: es })}</span>
-	) : (
-		<span>Selecciona una fecha</span>
-	);
+export default function BookingCMAdd({ open, setOpen = () => {} }) {
+    const { addBooking, loading, error } = useBookings();
+    const [hours, setHours] = useState("");
+    const [minutes, setMinutes] = useState("");
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [dateError, setDateError] = useState("");
+    const [timeError, setTimeError] = useState("");
+    const [shakeTrigger, setShakeTrigger] = useState(0);
+    const bookingDate = useMemo(() => new Date(), []);
 
-	// Parse date and time
-	useEffect(() => {
-		bookingDate.setUTCDate(selectedDate?.getDate());
-		bookingDate.setUTCMonth(selectedDate?.getMonth());
-		bookingDate.setUTCFullYear(selectedDate?.getFullYear());
+    // Parse date and time
+    useEffect(() => {
+        bookingDate.setUTCDate(selectedDate?.getDate());
+        bookingDate.setUTCMonth(selectedDate?.getMonth());
+        bookingDate.setUTCFullYear(selectedDate?.getFullYear());
 
-		bookingDate.setUTCHours(hours);
-		bookingDate.setUTCMinutes(minutes);
-		bookingDate.setUTCSeconds(0);
-		bookingDate.setUTCMilliseconds(0);
-	}, [bookingDate, selectedDate, hours, minutes, open]);
+        bookingDate.setUTCHours(hours);
+        bookingDate.setUTCMinutes(minutes);
+        bookingDate.setUTCSeconds(0);
+        bookingDate.setUTCMilliseconds(0);
+    }, [bookingDate, selectedDate, hours, minutes, open]);
 
-	// Reset errors on open
-	useEffect(() => {
-		const resetErrors = () => {
-			if (!open) return;
+    // Reset errors on open
+    useEffect(() => {
+        const reset = () => {
+            if (!open) return;
 
-			setDateError("");
-			setTimeError("");
-		};
+            setDateError("");
+            setTimeError("");
+            setShakeTrigger(0);
+        };
 
-		resetErrors();
-	}, [open]);
+        reset();
+    }, [open]);
 
-	// Check if date and time are valid
-	const isValid = useCallback(() => {
-		const isDateOk = !isNaN(Date.parse(selectedDate));
-		const isTimeOk = hours !== "" && minutes !== "";
+    // Check if date and time are valid
+    const isValid = useCallback(() => {
+        const isDateValid = !isNaN(Date.parse(selectedDate));
+        const isTimeValid = hours !== "" && minutes !== "";
 
-		setDateError(isDateOk ? "" : "Selecciona una fecha.");
-		setTimeError(isTimeOk ? "" : "Selecciona una hora.");
+        setDateError(isDateValid ? "" : "Selecciona una fecha.");
+        setTimeError(isTimeValid ? "" : "Selecciona una hora.");
 
-		return isDateOk && isTimeOk;
-	}, [hours, minutes, selectedDate]);
+        return isDateValid && isTimeValid;
+    }, [hours, minutes, selectedDate]);
 
-	const handleAddClick = () => {
-		if (!isValid()) {
-			return;
-		}
+    const handleAddClick = () => {
+        setShakeTrigger(!isValid() ? (prev) => prev + 1 : 0);
 
-		const newBooking = addBooking(
-			{ bookingDate },
-			getUserDefaultRestaurant()?.id,
-		);
+        if (!isValid()) return;
 
-		if (newBooking) {
-			setOpen(false);
-		}
-	};
+        const newBooking = addBooking(
+            { bookingDate },
+            getUserDefaultRestaurant()?.id,
+        );
 
-	const handleDateChange = (value) => {
-		setSelectedDate(value);
+        // Close dialog if added successfully
+        if (newBooking) setOpen(false);
+    };
 
-		if (value) setDateError("");
-	};
+    const handleDateChange = useCallback(
+        (value) => {
+            setSelectedDate(value);
 
-	const handleTimeChange = (value) => {
-		const time = value.split(":");
-		setHours(time[0]);
-		setMinutes(time[1]);
+            setDateError(
+                !value && shakeTrigger > 0 ? "Selecciona una fecha." : "",
+            );
+        },
+        [shakeTrigger],
+    );
 
-		if (value) setTimeError("");
-	};
+    const handleTimeChange = useCallback(
+        (value) => {
+            const time = value.split(":");
+            setHours(time[0]);
+            setMinutes(time[1]);
 
-	return (
-		<DialogContent
-			onOpenAutoFocus={(e) => {
-				e.preventDefault();
-				e.currentTarget.focus();
-			}}
-			className="booking-crud-manager add"
-		>
-			<DialogTitle>Añadir reserva</DialogTitle>
-			<DialogDescription>Selecciona la fecha y la hora de la nueva reserva.</DialogDescription>
-			<div
-				className="wrapper"
-				onMouseDown={(e) => e.stopPropagation()}
-				onClick={(e) => e.stopPropagation()}
-			>
-				<InputDatePicker
-					label={"Fecha"}
-					required
-					placeholder={"Selecciona una fecha"}
-					error={dateError}
-					onDateChange={handleDateChange}
-				/>
-				<InputTimePicker
-					label={"Hora"}
-					required
-					readOnly
-					error={timeError}
-					onTimeChange={handleTimeChange}
-				/>
-			</div>
-			<button
-				onClick={handleAddClick}
-				disabled={loading}
-				className="btn"
-				type="button"
-			>
-				<span>Añadir reserva</span>
-				{loading && <Spinner data-icon="inline-start" />}
-			</button>
-		</DialogContent>
-	);
+            setTimeError(
+                !value && shakeTrigger > 0 ? "Selecciona una hora." : "",
+            );
+        },
+        [shakeTrigger],
+    );
+
+    return (
+        <DialogContent
+            onOpenAutoFocus={(e) => {
+                e.preventDefault();
+                e.currentTarget.focus();
+            }}
+            className="booking-crud-manager add"
+        >
+            <DialogTitle>Añadir reserva</DialogTitle>
+            <DialogDescription>
+                Selecciona la fecha y la hora de la nueva reserva.
+            </DialogDescription>
+            <div
+                className="wrapper"
+                onMouseDown={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
+            >
+                <InputDatePicker
+                    label={"Fecha"}
+                    required
+                    readOnly
+                    placeholder={"Selecciona una fecha"}
+                    error={dateError}
+                    onDateChange={handleDateChange}
+                    shakeTrigger={shakeTrigger}
+                />
+                <InputTimePicker
+                    label={"Hora"}
+                    required
+                    readOnly
+                    error={timeError}
+                    onTimeChange={handleTimeChange}
+                    shakeTrigger={shakeTrigger}
+                />
+            </div>
+            <button
+                onClick={handleAddClick}
+                disabled={loading}
+                className="btn"
+                type="button"
+            >
+                <span>Añadir reserva</span>
+                {loading && <Spinner data-icon="inline-start" />}
+            </button>
+        </DialogContent>
+    );
 }

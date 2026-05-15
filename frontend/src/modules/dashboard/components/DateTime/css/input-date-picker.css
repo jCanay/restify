@@ -1,4 +1,12 @@
 .input-date-picker {
-    width: 100%;
-    min-width: 15rem;
+  width: 100%;
+  min-width: 15rem;
+
+  & button[data-selected="true"] {
+    background-color: var(--color-primary);
+  }
+
+  & button[data-weekend="true"]:not([data-selected="true"]) {
+    color: var(--color-black);
+  }
 }

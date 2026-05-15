@@ -3,76 +3,80 @@ import { ActionIcon, MantineProvider } from "@mantine/core";
 import { useEffect, useState } from "react";
 import { Calendar } from "lucide-react";
 import "dayjs/locale/es";
-import { addDays, addMonths } from "date-fns";
+import { addDays, addMonths, endOfMonth, isSameDay } from "date-fns";
 import "./css/input-date-picker.css";
 
 export default function InputDatePicker({
-    label,
-    description,
-    placeholder,
-    required,
-    disabled = false,
-    clearable = false,
-    readOnly = false,
-    defaultValue,
-    onDateChange = () => {},
+	label,
+	description,
+	required = false,
+	disabled = false,
+	clearable = false,
+	readOnly = false,
+	defaultValue,
+	error,
+	placeholder,
+	onDateChange = () => { },
 }) {
-    const [dropdownOpened, setDropdownOpened] = useState(false);
-    const [date, setDate] = useState(defaultValue || undefined);
+	const [dropdownOpened, setDropdownOpened] = useState(false);
+	const [date, setDate] = useState(defaultValue || undefined);
+	const excludedDates = [addDays(new Date(), 2), addDays(new Date(), 3), addDays(new Date(), 4)];
 
-    useEffect(() => {
-        onDateChange(date);
-    }, []);
+	useEffect(() => {
+		onDateChange(date);
+	}, [date, onDateChange]);
 
-    return (
-        <MantineProvider>
-            <DatesProvider settings={{ locale: "es" }}>
-                <DateInput
-                    className="input-date-picker"
-                    locale="es"
-                    label={label}
-                    description={description}
-                    placeholder={placeholder}
-                    required={required}
-                    disabled={disabled}
-                    minDate={new Date()}
-                    maxDate={addMonths(new Date(), 3)}
-                    clearable={clearable}
-                    highlightToday
-                    maxLevel="year"
-                    rightSection={
-                        <ActionIcon
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setDropdownOpened(!dropdownOpened);
-                            }}
-                            onBlur={() => setDropdownOpened(false)}
-                            variant="default"
-                        >
-                            <Calendar size={18} />
-                        </ActionIcon>
-                    }
-                    popoverProps={{
-                        trapFocus: false,
-                        withinPortal: false,
-                        opened: dropdownOpened,
-                    }}
-                    value={date}
-                    valueFormat="LL"
-                    onClick={() => setDropdownOpened(!dropdownOpened)}
-                    onBlur={() => setDropdownOpened(false)}
-                    onChange={(value) => {
-                        setDate(new Date(value));
-                        onDateChange(new Date(value));
+	return (
+		<MantineProvider>
+			<DatesProvider settings={{ locale: "es" }}>
+				<DateInput
+					className="input-date-picker"
+					locale="es"
+					label={label}
+					description={description}
+					placeholder={placeholder}
+					required={required}
+					disabled={disabled}
+					minDate={new Date()}
+					maxDate={endOfMonth(addMonths(new Date(), 3))}
+					excludeDate={(date) => excludedDates.some((d => isSameDay(date, d)))}
+					clearable={clearable}
+					highlightToday
+					maxLevel="year"
+					error={error}
+					rightSection={
+						<ActionIcon
+							onClick={(e) => {
+								e.stopPropagation();
+								setDropdownOpened(!dropdownOpened);
+							}}
+							onBlur={() => setDropdownOpened(false)}
+							variant="default"
+						>
+							<Calendar size={18} />
+						</ActionIcon>
+					}
+					popoverProps={{
+						trapFocus: false,
+						withinPortal: false,
+						opened: dropdownOpened,
+					}}
+					value={date}
+					valueFormat="LL"
+					onClick={() => setDropdownOpened(!dropdownOpened)}
+					onBlur={() => setDropdownOpened(false)}
+					onChange={(value) => {
+						setDate(new Date(value));
+						onDateChange(new Date(value));
 
-                        setDropdownOpened(false);
+						setDropdownOpened(false);
 
-                        if (document.activeElement instanceof HTMLElement) {
-                            document.activeElement.blur();
-                        }
-                    }}
-                />
-            </DatesProvider>
-        </MantineProvider>
-    );
+						if (document.activeElement instanceof HTMLElement) {
+							document.activeElement.blur();
+						}
+					}}
+				/>
+			</DatesProvider>
+		</MantineProvider>
+	);
 }

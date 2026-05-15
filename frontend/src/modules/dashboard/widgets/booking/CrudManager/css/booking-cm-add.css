@@ -1,149 +1,152 @@
 .booking-crud-manager.add {
-    & .wrapper {
-        display: flex;
-        gap: 1rem;
+  & .wrapper {
+    display: flex;
+    gap: 1rem;
+  }
+
+  & .time-picker {
+    min-width: 7.5rem;
+    border: solid 1px var(--color-gray-200);
+    height: fit-content;
+    padding: 0.25rem;
+  }
+
+  & button.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    transition:
+      background-color 200ms cubic-bezier(0.78, 0, 0.22, 1),
+      scale 750ms var(--transition-bounce);
+
+    & span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: 200ms;
+      transition-property: translate opacity;
+      transition-timing-function: cubic-bezier(0.78, 0, 0.22, 1);
+      position: relative;
+
+      & svg {
+        position: absolute;
+        right: 0;
+        translate: 0rem;
+        opacity: 0;
+        transition: 200ms;
+        transition-property: translate opacity;
+        transition-timing-function: cubic-bezier(0.78, 0, 0.22, 1);
+      }
     }
 
-    & .time-picker {
-        min-width: 7.5rem;
-        border: solid 1px var(--color-gray-200);
-        height: fit-content;
-        padding: 0.25rem;
+    &.animation:hover p {
+      translate: -0.75rem;
     }
 
-    & button.btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--color-primary);
-        color: var(--color-white);
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        margin-top: 0.5rem;
-        cursor: pointer;
-        transition: background-color 200ms cubic-bezier(0.78, 0, 0.22, 1);
-
-        & span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: 200ms;
-            transition-property: translate opacity;
-            transition-timing-function: cubic-bezier(0.78, 0, 0.22, 1);
-            position: relative;
-
-            & svg {
-                position: absolute;
-                right: 0;
-                translate: 0rem;
-                opacity: 0;
-                transition: 200ms;
-                transition-property: translate opacity;
-                transition-timing-function: cubic-bezier(0.78, 0, 0.22, 1);
-            }
-        }
-
-        &.animation:hover p {
-            translate: -0.75rem;
-        }
-
-        &.animation:hover svg {
-            translate: 1.5rem;
-            opacity: 1;
-        }
-
-        &:hover {
-            background-color: rgb(
-                from #a8201a calc(r - 2) calc(g - 2) calc(b - 2)
-            );
-        }
-
-        &:disabled {
-            background-color: #a8201a;
-            cursor: not-allowed;
-        }
-
-        & svg {
-            translate: 0.5rem;
-        }
+    &.animation:hover svg {
+      translate: 1.5rem;
+      opacity: 1;
     }
 
-    & div.rdp-root {
-        padding: 1rem;
-        background-color: var(--color-gray-100);
-        border-radius: 0.5rem;
-        width: 100%;
+    &:hover {
+      background-color: rgb(from #a8201a calc(r - 2) calc(g - 2) calc(b - 2));
+    }
 
-        & div.rdp-months {
+    &:active {
+      scale: 0.975;
+    }
+
+    &:disabled {
+      background-color: #a8201a;
+      cursor: not-allowed;
+    }
+
+    & svg {
+      translate: 0.5rem;
+    }
+  }
+
+  & div.rdp-root {
+    padding: 1rem;
+    background-color: var(--color-gray-100);
+    border-radius: 0.5rem;
+    width: 100%;
+
+    & div.rdp-months {
+      padding: 0;
+
+      & nav.rdp-nav {
+        /* gap: 0.5rem; */
+
+        & button {
+          border-radius: 100%;
+          transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1);
+          width: 1.75rem;
+          height: 1.75rem;
+
+          &:hover {
+            background-color: var(--color-gray-200);
+          }
+
+          & svg {
+            width: 1.25rem;
+            fill: var(--color-black);
+          }
+        }
+      }
+
+      & div.rdp-month {
+        & div.rdp-month_caption {
+          padding: 0.5rem;
+        }
+
+        & table {
+          margin-top: 1rem;
+
+          & * {
             padding: 0;
+            margin: 0;
+            width: fit-content;
+            height: fit-content;
+          }
 
-            & nav.rdp-nav {
-                /* gap: 0.5rem; */
+          & .rdp-today {
+            color: var(--primary);
 
-                & button {
-                    border-radius: 100%;
-                    transition: background-color 150ms
-                        cubic-bezier(0.4, 0, 0.2, 1);
-                    width: 1.75rem;
-                    height: 1.75rem;
-
-                    &:hover {
-                        background-color: var(--color-gray-200);
-                    }
-
-                    & svg {
-                        width: 1.25rem;
-                        fill: var(--color-black);
-                    }
-                }
+            & button {
+              border: solid 1px;
             }
+          }
 
-            & div.rdp-month {
-                & div.rdp-month_caption {
-                    padding: 0.5rem;
-                }
+          & .rdp-day {
+            & button {
+              width: 2.25rem;
+              height: 2.25rem;
+              font-size: 11pt;
 
-                & table {
-                    margin-top: 1rem;
+              &:hover {
+                background-color: var(--color-gray-200);
+              }
 
-                    & * {
-                        padding: 0;
-                        margin: 0;
-                        width: fit-content;
-                        height: fit-content;
-                    }
-
-                    & .rdp-today {
-                        color: var(--primary);
-
-                        & button {
-                            border: solid 1px;
-                        }
-                    }
-
-                    & .rdp-day {
-                        & button {
-                            width: 2.25rem;
-                            height: 2.25rem;
-                            font-size: 11pt;
-
-                            &:hover {
-                                background-color: var(--color-gray-200);
-                            }
-
-                            &[aria-label$="selected"] {
-                                background-color: var(--primary);
-                                color: white;
-                                border: 0;
-                            }
-                        }
-                    }
-
-                    & .rdp-outside {
-                        color: var(--color-gray-400);
-                    }
-                }
+              &[aria-label$="selected"] {
+                background-color: var(--primary);
+                color: white;
+                border: 0;
+              }
             }
+          }
+
+          & .rdp-outside {
+            color: var(--color-gray-400);
+          }
         }
+      }
     }
+  }
 }

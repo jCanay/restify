@@ -11,4 +11,12 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> findAllByAccount(Account account);
 
     Long countByAccount(Account account);
+
+    Boolean existsByAddressCountryCodeIgnoreCase(String countryCode);
+
+    Boolean existsByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(String countryCode, String city);
+
+    Long countByAddressCountryCodeIgnoreCase(String countryCode);
+
+    Long countByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(String countryCode, String city);
 }

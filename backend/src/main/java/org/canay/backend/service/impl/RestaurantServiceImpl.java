@@ -1,16 +1,21 @@
 package org.canay.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.canay.backend.domain.dto.LocationStatusDTO;
 import org.canay.backend.domain.dto.RestaurantDTO;
 import org.canay.backend.domain.entities.*;
-import org.canay.backend.exceptions.ResourceNotFoundException;
-import org.canay.backend.mappers.Mapper;
+import org.canay.backend.exception.ResourceNotFoundException;
+import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -49,5 +54,29 @@ public class RestaurantServiceImpl implements RestaurantService {
         dashboardService.initializeDashboard(savedRestaurant);
 
         return restaurantMapper.mapTo(savedRestaurant);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public LocationStatusDTO checkLocationStatus(String countryCode, String city, User user) {
+        boolean countryExists = restaurantRepository.existsByAddressCountryCodeIgnoreCase(countryCode);
+
+        boolean cityExists = restaurantRepository.existsByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(
+                countryCode, city);
+
+        long restaurantCount = 0;
+
+        if (cityExists) {
+            restaurantCount = restaurantRepository.countByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(
+                    countryCode, city);
+        } else if (countryExists) {
+            restaurantCount = restaurantRepository.countByAddressCountryCodeIgnoreCase(countryCode);
+        }
+
+        return LocationStatusDTO.builder()
+                .countryExists(countryExists)
+                .cityExists(cityExists)
+                .restaurantCount(restaurantCount)
+                .build();
     }
 }

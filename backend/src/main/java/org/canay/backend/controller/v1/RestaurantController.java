@@ -3,6 +3,7 @@ package org.canay.backend.controller.v1;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.BookingDTO;
 import org.canay.backend.domain.dto.DashboardDTO;
+import org.canay.backend.domain.dto.LocationStatusDTO;
 import org.canay.backend.domain.dto.RestaurantDTO;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.service.BookingService;
@@ -39,7 +40,6 @@ public class RestaurantController {
         return ResponseEntity.ok(dashboardService.getDashboardForUser(restaurantId, user));
     }
 
-
     @PostMapping("/{restaurantId}/bookings")
     public ResponseEntity<BookingDTO> addBookingToRestaurant(
             @RequestBody BookingDTO bookingDTO,
@@ -56,5 +56,10 @@ public class RestaurantController {
             @AuthenticationPrincipal User user
     ) {
         return new ResponseEntity<>(bookingService.getAllByRestaurantId(restaurantId, pageable, user), HttpStatus.OK);
+    }
+
+    @GetMapping("/locations/{countryCode}/status")
+    public ResponseEntity<LocationStatusDTO> checkLocationStatus(@PathVariable String countryCode, @RequestParam String city, @AuthenticationPrincipal User user) {
+        return ResponseEntity.ok(restaurantService.checkLocationStatus(countryCode, city, user));
     }
 }

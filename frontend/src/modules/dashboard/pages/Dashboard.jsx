@@ -44,7 +44,7 @@ import DashboardLinks from "../components/Dashboard/DashboardLinks";
 import { useDashboard } from "../hooks/useDashboard";
 
 function Dashboard() {
-	const userPfp = "https://i.pravatar.cc/100?u=0";
+	const userPfp = "https://i.pravatar.cc/100?u=24";
 	const sidebarRef = useRef(null);
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	const [groupId, setGroupId] = useState("dashboard-group-id");

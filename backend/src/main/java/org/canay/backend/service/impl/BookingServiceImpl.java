@@ -7,8 +7,8 @@ import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.Booking;
 import org.canay.backend.domain.entities.Restaurant;
 import org.canay.backend.domain.entities.User;
-import org.canay.backend.exceptions.ResourceNotFoundException;
-import org.canay.backend.mappers.Mapper;
+import org.canay.backend.exception.ResourceNotFoundException;
+import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.BookingRepository;
 import org.canay.backend.repository.RestaurantRepository;
@@ -16,9 +16,9 @@ import org.canay.backend.service.BookingService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.OffsetDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,6 +30,7 @@ public class BookingServiceImpl implements BookingService {
     private final Mapper<User, UserDTO> userMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public Page<BookingDTO> getAll(Pageable pageable, User user) {
         Page<Booking> bookings = bookingRepository.findAll(pageable);
 
@@ -37,6 +38,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public BookingDTO getById(Long id, User user) {
         Booking booking = bookingRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
@@ -45,6 +47,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<BookingDTO> getAllByRestaurantId(Long restaurantId, Pageable pageable, User user) {
         Page<Booking> bookings = bookingRepository.findAllByRestaurantId(restaurantId, pageable);
 
@@ -60,6 +63,7 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional
     public BookingDTO create(BookingDTO bookingDTO, Long restaurantId, User user) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found"));
@@ -73,7 +77,6 @@ public class BookingServiceImpl implements BookingService {
             OffsetDateTime odt = OffsetDateTime.parse(bookingDTO.getBookingDate());
             booking.setBookingDate(odt.toLocalDateTime());
         }
-        System.out.println(booking.getBookingDate());
 
         booking.setRestaurant(restaurant);
         booking.setAccount(account);
@@ -84,11 +87,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
+    @Transactional
     public BookingDTO update(Long id, BookingDTO bookingDTO, User user) {
         return null;
     }
 
     @Override
+    @Transactional
     public void delete(Long id, User user) {
 
     }

@@ -5,10 +5,11 @@ import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.AccountDTO;
 import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.User;
-import org.canay.backend.mappers.Mapper;
+import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.service.AccountService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class AccountServiceImpl implements AccountService {
     private final Mapper<Account, AccountDTO> accountMapper;
 
     @Override
+    @Transactional
     public AccountDTO completeOnboarding(User user) {
         // 1. Buscamos la cuenta directamente por el usuario del token
         Account account = accountRepository.findByUser(user)

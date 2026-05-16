@@ -2,7 +2,7 @@ package org.canay.backend.service.impl;
 
 import org.canay.backend.domain.entities.RefreshToken;
 import org.canay.backend.domain.entities.User;
-import org.canay.backend.jwt.JwtService;
+import org.canay.backend.security.jwt.JwtUtil;
 import org.canay.backend.repository.RefreshTokenRepository;
 import org.canay.backend.repository.UserRepository;
 import org.canay.backend.service.RefreshTokenService;
@@ -28,7 +28,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
     private UserRepository userRepository;
 
     @Autowired
-    private JwtService jwtService;
+    private JwtUtil jwtUtil;
 
     public RefreshToken createRefreshToken(Long userId) {
         RefreshToken token = new RefreshToken();
@@ -58,7 +58,7 @@ public class RefreshTokenServiceImpl implements RefreshTokenService {
                         refreshTokenRepository.delete(token);
                         return ResponseEntity.badRequest().body("Refresh token expired. Please login again.");
                     }
-                    String newJwt = jwtService.generateToken(token.getUser().getUsername());
+                    String newJwt = jwtUtil.generateToken(token.getUser().getUsername());
                     return ResponseEntity.ok(Map.of("token", newJwt));
                 })
                 .orElse(ResponseEntity.badRequest().body("Invalid refresh token."));

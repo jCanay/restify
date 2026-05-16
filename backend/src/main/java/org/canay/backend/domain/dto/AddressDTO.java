@@ -14,6 +14,7 @@ public class AddressDTO {
     private String streetAddress;
     private String city;
     private String country;
+    private String countryCode;
     private String zipCode;
     private String floor;
     private Double latitude;

@@ -6,10 +6,10 @@ import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.Restaurant;
 import org.canay.backend.domain.entities.User;
 import org.canay.backend.domain.entities.UserRole;
-import org.canay.backend.exceptions.DuplicateResourceException;
-import org.canay.backend.exceptions.ResourceNotFoundException;
-import org.canay.backend.jwt.JwtService;
-import org.canay.backend.mappers.Mapper;
+import org.canay.backend.exception.DuplicateResourceException;
+import org.canay.backend.exception.ResourceNotFoundException;
+import org.canay.backend.security.jwt.JwtUtil;
+import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.repository.UserRepository;
@@ -21,8 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -37,10 +36,11 @@ public class AuthServiceImpl implements AuthService {
     private final Mapper<Restaurant, RestaurantDTO> restaurantMapper;
 
     private final AuthenticationManager authenticationManager;
-    private final JwtService jwtService;
+    private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional(readOnly = true)
     public LoginResponseDTO login(LoginRequestDTO loginRequestDTO) {
         // Buscar usuario
         User user = userRepository.findByUsername(loginRequestDTO.getIdentifier())
@@ -57,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
 
         // Crea la respuesta
         LoginResponseDTO response = LoginResponseDTO.builder()
-                .token(jwtService.generateToken(authentication.getName()))
+                .token(jwtUtil.generateToken(authentication.getName()))
                 .user(userMapper.mapTo(user))
                 .account(accountMapper.mapTo(account))
                 .build();
@@ -73,6 +73,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    @Transactional
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         // Verifica si el nombre de usuario existe
         if (userRepository.findByUsername(registerRequestDTO.getUser().getUsername()).isPresent()) {
@@ -109,7 +110,7 @@ public class AuthServiceImpl implements AuthService {
         accountRepository.save(accountEntity);
 
         return RegisterResponseDTO.builder()
-                .token(jwtService.generateToken(savedUserEntity.getUsername()))
+                .token(jwtUtil.generateToken(savedUserEntity.getUsername()))
                 .role(userEntity.getRole().getName())
                 .build();
     }

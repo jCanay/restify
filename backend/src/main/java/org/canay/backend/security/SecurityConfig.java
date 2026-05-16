@@ -1,6 +1,6 @@
 package org.canay.backend.security;
 
-import org.canay.backend.jwt.JwtAuthenticationFilter;
+import org.canay.backend.security.jwt.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

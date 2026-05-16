@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.entities.*;
 import org.canay.backend.repository.*;
 import org.canay.backend.service.DashboardService;
+import org.canay.backend.service.LocationService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -28,8 +29,11 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private final AvailabilityRuleTypeRepository ruleTypeRepository;
     private final DashboardRepository dashboardRepository;
     private final DashboardPageRepository dashboardPageRepository;
-    private final DashboardService dashboardService;
     private final WidgetRepository widgetRepository;
+    private final AddressRepository addressRepository;
+
+    private final DashboardService dashboardService;
+    private final LocationService locationService;
 
     private final ObjectMapper objectMapper;
     private final PasswordEncoder passwordEncoder;
@@ -76,6 +80,23 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                     .account(savedAdminAccount)
                     .isDefault(true)
                     .build();
+
+            Address adminRestaurantAddress = Address.builder()
+                    .streetAddress("Calle Admin 1")
+                    .city("Ourense")
+                    .country("Spain")
+                    .countryCode("es")
+                    .zipCode("32002")
+                    .latitude(42.341032)
+                    .longitude(-7.869657)
+                    .zoneId(locationService.getZoneIdByCoordinates(42.341032, -7.869657))
+                    .isDefault(true)
+                    .restaurant(adminRestaurant)
+                    .build();
+
+            Address savedAdminRestaurantAddress = addressRepository.save(adminRestaurantAddress);
+            adminRestaurant.setAddress(savedAdminRestaurantAddress);
+
             Restaurant savedAdminRestaurant = restaurantRepository.save(adminRestaurant);
 
             initializeDashboard(savedAdminRestaurant, adminRole);
@@ -99,58 +120,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     private void initializeDashboard(Restaurant restaurant, UserRole adminRole) {
         dashboardService.initializeDashboard(restaurant);
-
-        // 1. Crear el Dashboard si el restaurante no tiene uno
-        /*Dashboard dashboard = dashboardRepository.findByRestaurant(restaurant)
-                .orElseGet(() -> {
-                    Dashboard newDashboard = Dashboard.builder()
-                            .restaurant(restaurant)
-                            .build();
-                    Dashboard savedDashboard = dashboardRepository.save(newDashboard);
-
-                    // CRUCIAL: Actualizar el restaurante con su nuevo dashboard
-                    restaurant.setDashboard(savedDashboard);
-                    restaurantRepository.save(restaurant);
-
-                    return savedDashboard;
-                });
-
-        // 2. Crear la página "Reservas" si no existe
-        DashboardPage reservationsPage = dashboardPageRepository.findByTitleAndDashboard("Reservas", dashboard)
-                .orElseGet(() -> {
-                    try {
-                        return dashboardPageRepository.save(DashboardPage.builder()
-                                .title("Reservas")
-                                .dashboard(dashboard)
-                                .slug("bookings")
-                                .tabs(objectMapper.readTree("""
-                                        [
-                                            {
-                                                "name": "Historial",
-                                                "path": "history"
-                                            },
-                                            {
-                                                "name": "Estadísticas",
-                                                "path": "stats"
-                                            }
-                                        ]
-                                        """))
-                                .build());
-                    } catch (Exception e) {
-                        throw new RuntimeException("Error parsing tabs JSON", e);
-                    }
-                });
-
-        // 3. Crear Widgets iniciales
-        createWidgetIfNotFound(WidgetType.CRUD_MANAGER, reservationsPage, Set.of(adminRole), """
-                {
-                    "lg": {"x": 0,"y": 0,"w": 1,"h": 1},
-                    "md": {"x": 0,"y": 0,"w": 1,"h": 1},
-                    "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
-                    "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
-                }
-                """);*/
-
     }
 
     private void createRuleTypeIfNotFound(String name, Integer priority, String description) {

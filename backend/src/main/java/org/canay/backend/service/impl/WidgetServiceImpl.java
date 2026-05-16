@@ -10,6 +10,7 @@ import org.canay.backend.domain.entities.WidgetType;
 import org.canay.backend.repository.WidgetRepository;
 import org.canay.backend.service.WidgetService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,7 @@ public class WidgetServiceImpl implements WidgetService {
     private final ObjectMapper objectMapper;
 
     @Override
+    @Transactional
     public Widget createWidgetIfNotFound(WidgetType type, DashboardPage page, Set<UserRole> roles, String layoutJson) {
         Widget widget = widgetRepository.findByTypeAndDashboardPage(type, page).orElse(null);
 

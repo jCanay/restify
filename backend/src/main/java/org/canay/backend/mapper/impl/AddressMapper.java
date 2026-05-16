@@ -1,9 +1,9 @@
-package org.canay.backend.mappers.impl;
+package org.canay.backend.mapper.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.AddressDTO;
 import org.canay.backend.domain.entities.Address;
-import org.canay.backend.mappers.Mapper;
+import org.canay.backend.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

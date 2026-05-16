@@ -14,13 +14,13 @@ export default function InputDatePicker({
 	clearable = false,
 	readOnly = false,
 	defaultValue,
+	excludedDates,
 	error,
 	placeholder,
 	onDateChange = () => { },
 }) {
 	const [dropdownOpened, setDropdownOpened] = useState(false);
 	const [date, setDate] = useState(defaultValue || undefined);
-	const excludedDates = [addDays(new Date(), 2), addDays(new Date(), 3), addDays(new Date(), 4)];
 
 	useEffect(() => {
 		onDateChange(date);
@@ -39,7 +39,7 @@ export default function InputDatePicker({
 					disabled={disabled}
 					minDate={new Date()}
 					maxDate={endOfMonth(addMonths(new Date(), 3))}
-					excludeDate={(date) => excludedDates.some((d => isSameDay(date, d)))}
+					excludeDate={(date) => excludedDates?.some((d => isSameDay(date, d)))}
 					clearable={clearable}
 					highlightToday
 					maxLevel="year"

@@ -1,9 +1,9 @@
-package org.canay.backend.mappers.impl;
+package org.canay.backend.mapper.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.BookingDTO;
 import org.canay.backend.domain.entities.Booking;
-import org.canay.backend.mappers.Mapper;
+import org.canay.backend.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 

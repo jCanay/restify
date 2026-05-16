@@ -1,4 +1,4 @@
-package org.canay.backend.service.impl;
+package org.canay.backend.security;
 
 import org.canay.backend.repository.UserRepository;
 import org.jspecify.annotations.NonNull;

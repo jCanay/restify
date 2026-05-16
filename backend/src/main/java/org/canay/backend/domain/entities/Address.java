@@ -3,6 +3,8 @@ package org.canay.backend.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.ZoneId;
+
 @Entity
 @Table(name = "addresses")
 @Data
@@ -23,6 +25,8 @@ public class Address {
 
     private String country;
 
+    private String countryCode;
+
     private String zipCode;
 
     private String floor;
@@ -31,7 +35,7 @@ public class Address {
 
     private Double longitude;
 
-    private String zoneId;
+    private ZoneId zoneId;
 
     private String notes;
 

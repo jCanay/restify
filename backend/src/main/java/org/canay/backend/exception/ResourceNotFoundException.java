@@ -1,4 +1,4 @@
-package org.canay.backend.exceptions;
+package org.canay.backend.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

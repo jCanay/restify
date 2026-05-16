@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.DashboardDTO;
 import org.canay.backend.domain.entities.*;
-import org.canay.backend.exceptions.ResourceNotFoundException;
-import org.canay.backend.mappers.Mapper;
+import org.canay.backend.exception.ResourceNotFoundException;
+import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.*;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.WidgetService;
@@ -36,6 +36,7 @@ public class DashboardServiceImpl implements DashboardService {
     private final ObjectMapper objectMapper;
 
     @Override
+    @Transactional(readOnly = true)
     public DashboardDTO getDashboardForUser(Long restaurantId, User user) {
         Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
@@ -57,7 +58,7 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     @Transactional
-    public Dashboard initializeDashboard(Restaurant restaurant) {
+    public void initializeDashboard(Restaurant restaurant) {
         Dashboard dashboard = Dashboard.builder().restaurant(restaurant).build();
         dashboard = dashboardRepository.save(dashboard);
 
@@ -105,7 +106,7 @@ public class DashboardServiceImpl implements DashboardService {
         restaurant.setDashboard(dashboard);
         restaurantRepository.save(restaurant);
 
-        return dashboardRepository.save(dashboard);
+        dashboardRepository.save(dashboard);
     }
 
     private DashboardPage createPage(

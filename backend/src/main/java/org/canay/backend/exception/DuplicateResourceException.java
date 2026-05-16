@@ -1,4 +1,4 @@
-package org.canay.backend.exceptions;
+package org.canay.backend.exception;
 
 public class DuplicateResourceException extends RuntimeException {
     public DuplicateResourceException(String message) {

@@ -14,23 +14,52 @@ export default function InputDatePicker({
 	clearable = false,
 	readOnly = false,
 	defaultValue,
-	excludedDates,
+	excludedDates = [],
 	error,
 	placeholder,
 	onDateChange = () => { },
+	shakeTrigger,
 }) {
 	const [dropdownOpened, setDropdownOpened] = useState(false);
-	const [date, setDate] = useState(defaultValue || undefined);
+	const [date, setDate] = useState(defaultValue || null);
+	const [isValid, setIsValid] = useState(true);
 
 	useEffect(() => {
 		onDateChange(date);
-	}, [date, onDateChange]);
+
+		const validate = () => {
+			if (shakeTrigger > 0 && required) {
+				setIsValid(!isNaN(Date.parse(date)));
+			}
+		};
+
+		validate();
+	}, [date, onDateChange, shakeTrigger]);
+
+	const blockKeyboard = (e) => {
+		if (!readOnly) return;
+
+		if (
+			[
+				"Tab",
+				"Escape",
+				"ArrowUp",
+				"ArrowDown",
+				"ArrowLeft",
+				"ArrowRight",
+			].includes(e.key)
+		) {
+			return;
+		}
+		e.preventDefault();
+	};
 
 	return (
 		<MantineProvider>
 			<DatesProvider settings={{ locale: "es" }}>
 				<DateInput
-					className="input-date-picker"
+					key={shakeTrigger}
+					className={`input-date-picker ${readOnly ? "read-only" : ""} ${!isValid ? "invalid" : ""}`}
 					locale="es"
 					label={label}
 					description={description}
@@ -39,11 +68,13 @@ export default function InputDatePicker({
 					disabled={disabled}
 					minDate={new Date()}
 					maxDate={endOfMonth(addMonths(new Date(), 3))}
-					excludeDate={(date) => excludedDates?.some((d => isSameDay(date, d)))}
-					clearable={clearable}
+					excludeDate={(date) =>
+						excludedDates.some((d) => isSameDay(date, d))
+					}
+					clearable={!readOnly && clearable}
 					highlightToday
 					maxLevel="year"
-					error={error}
+					error={required ? error : ""}
 					rightSection={
 						<ActionIcon
 							onClick={(e) => {
@@ -63,9 +94,16 @@ export default function InputDatePicker({
 					}}
 					value={date}
 					valueFormat="LL"
+					onKeyDown={blockKeyboard}
 					onClick={() => setDropdownOpened(!dropdownOpened)}
 					onBlur={() => setDropdownOpened(false)}
 					onChange={(value) => {
+						if (!value) {
+							setDate(null);
+							onDateChange(null);
+							return;
+						}
+
 						setDate(new Date(value));
 						onDateChange(new Date(value));
 

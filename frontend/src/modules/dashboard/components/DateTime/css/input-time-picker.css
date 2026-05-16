@@ -1,63 +1,76 @@
 .input-time-picker {
-  &.clearable {
-    min-width: 8rem;
-  }
+    &.invalid .mantine-TimePicker-wrapper {
+        animation: wiggle 300ms ease-in-out;
 
-  & .mantine-TimePicker-fieldsRoot {
-    margin-right: 0.5rem;
-  }
+        & button {
+            border-color: var(--color-red-300);
+            color: var(--color-red-600);
+        }
 
-  & [data-combined-clear-section="true"] {
-    right: 0.2rem;
-    position: relative;
-  }
-
-  & button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  & .mantine-ActionIcon-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  & .m_7be09d0c:where([data-active]) {
-    background-color: #fff !important;
-  }
-
-  &.read-only {
-    & .preset-button:hover {
-      background-color: #a8201a !important;
-      color: white;
+        & .mantine-TimePicker-input {
+            color: var(--color-red-600) !important;
+        }
     }
 
-    & .preset-button {
-      transition: background-color 0.2s ease;
-      font-family: inherit;
-      font-size: 14px;
+    &.clearable {
+        min-width: 8rem;
     }
 
-    & .mantine-TimePicker-field {
-      background-color: transparent !important;
-      color: var(--color-black) !important;
+    & .mantine-TimePicker-fieldsRoot {
+        margin-right: 0.5rem;
     }
 
-    & .mantine-TimePicker-wrapper * {
-      cursor: pointer !important;
-      /* caret-color: transparent; */
-    }
-  }
-
-  & ~ .mantine-TimePicker-dropdown {
-    & [data-active] {
-      background-color: var(--color-primary);
+    & [data-combined-clear-section="true"] {
+        right: 0.2rem;
+        position: relative;
     }
 
-    & .mantine-SimpleGrid-root {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    & button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
-  }
+
+    & .mantine-ActionIcon-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    & .m_7be09d0c:where([data-active]) {
+        background-color: #fff !important;
+    }
+
+    &.read-only {
+        & .preset-button:hover {
+            background-color: #a8201a !important;
+            color: white;
+        }
+
+        & .preset-button {
+            transition: background-color 0.2s ease;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        & .mantine-TimePicker-field {
+            background-color: transparent !important;
+            color: var(--color-black) !important;
+        }
+
+        & .mantine-TimePicker-wrapper * {
+            cursor: pointer !important;
+            /* caret-color: transparent; */
+        }
+    }
+
+    & ~ .mantine-TimePicker-dropdown {
+        & [data-active] {
+            background-color: var(--color-primary);
+        }
+
+        & .mantine-SimpleGrid-root {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
 }

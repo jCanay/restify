@@ -34,7 +34,7 @@ export default function InputDatePicker({
 		};
 
 		validate();
-	}, [date, onDateChange, shakeTrigger]);
+	}, [date, onDateChange, shakeTrigger, required]);
 
 	const blockKeyboard = (e) => {
 		if (!readOnly) return;

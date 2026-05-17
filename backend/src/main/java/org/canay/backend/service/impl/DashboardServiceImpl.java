@@ -11,14 +11,13 @@ import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.*;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.WidgetService;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -35,22 +34,29 @@ public class DashboardServiceImpl implements DashboardService {
     private final Mapper<Dashboard, DashboardDTO> dashboardMapper;
     private final ObjectMapper objectMapper;
 
+    private final MessageSource messageSource;
+
     @Override
     @Transactional(readOnly = true)
     public DashboardDTO getDashboardForUser(Long restaurantId, User user) {
         Account account = accountRepository.findByUser(user)
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.account", null,
+                        LocaleContextHolder.getLocale())));
 
         Restaurant restaurant = restaurantRepository.findAllByAccount(account)
                 .stream()
                 .filter(r -> r.getId().equals(restaurantId))
                 .findFirst()
-                .orElseThrow(() -> new AccessDeniedException("You do not have access to this restaurant"));
+                .orElseThrow(() -> new AccessDeniedException(messageSource.getMessage("access-denied",
+                        new String[]{messageSource.getMessage("http.get", null,
+                                LocaleContextHolder.getLocale())},
+                        LocaleContextHolder.getLocale())));
 
         Dashboard dashboard = restaurant.getDashboard();
 
         if (dashboard == null) {
-            throw new ResourceNotFoundException("Dashboard not configured for this restaurant");
+            throw new ResourceNotFoundException(messageSource.getMessage("not-found.dashboard", null,
+                    LocaleContextHolder.getLocale()));
         }
 
         return dashboardMapper.mapTo(dashboard);
@@ -58,19 +64,24 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     @Transactional
-    public void initializeDashboard(Restaurant restaurant) {
+    public void initializeDashboard(Restaurant restaurant, UserRole role) {
         Dashboard dashboard = Dashboard.builder().restaurant(restaurant).build();
-        dashboard = dashboardRepository.save(dashboard);
+        Dashboard savedDashboard = dashboardRepository.save(dashboard);
+        restaurant.setDashboard(savedDashboard);
 
         UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
-                .orElseThrow(() -> new RuntimeException("Error: Role not found in database"));
+                .orElseThrow(() -> new RuntimeException(messageSource.getMessage("not-found.user.role", null,
+                        LocaleContextHolder.getLocale())));
 
-        // 3. Crear la página (ya puede referenciar al dashboard persistido)
-        DashboardPage reservasPage = createPage("Reservas", "bookings", "", 2, dashboard, null);
+        // Crear las páginas
+        DashboardPage reservasPage = createPage("Reservas", "bookings", "", 2, savedDashboard, null);
+        reservasPage.setTabs(createPageTabs("""
+                [{"name": "Historial","path": "history"},{"name": "Estadísticas","path": "stats"}]
+                """));
         DashboardPage savedReservasPage = dashboardPageRepository.save(reservasPage);
 
-        // 4. Crear y guardar el widget vinculado a la página guardada
-        Widget savedReservasWidget = widgetService.createWidgetIfNotFound(
+        // Crear y guardar el widget vinculado a la página guardada
+        Optional<Widget> savedReservasWidgetOpt = widgetService.createWidgetIfNotFound(
                 WidgetType.CRUD_MANAGER,
                 savedReservasPage,
                 Set.of(adminRole),
@@ -81,15 +92,15 @@ public class DashboardServiceImpl implements DashboardService {
                             "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
                             "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
                         }
-                        """
+                        """,
+                role
         );
-        savedReservasPage.setTabs(createPageTabs("""
-                [{"name": "Historial","path": "history"},{"name": "Estadísticas","path": "stats"}]
-                """));
 
-        savedReservasPage.setWidgets(new ArrayList<>(List.of(savedReservasWidget)));
-        dashboardPageRepository.save(savedReservasPage);
+        List<Widget> widgets = new ArrayList<>();
+        savedReservasWidgetOpt.ifPresent(widgets::add);
+        savedReservasPage.setWidgets(widgets);
 
+        // Agrupar las páginas
         List<DashboardPage> pages = new ArrayList<>(List.of(
                 createPage("Inicio", "", "", 1, dashboard, List.of()),
                 savedReservasPage,
@@ -99,14 +110,9 @@ public class DashboardServiceImpl implements DashboardService {
                 createPage("Plantilla", "staff", "", 6, dashboard, List.of())
         ));
         pages.sort(Comparator.comparingLong(DashboardPage::getSortOrder));
+        savedDashboard.setPages(pages);
 
-        dashboard.setPages(pages);
-
-        // Establecer y guardar el restaurante con el nuevo dashboard
-        restaurant.setDashboard(dashboard);
         restaurantRepository.save(restaurant);
-
-        dashboardRepository.save(dashboard);
     }
 
     private DashboardPage createPage(

@@ -2,6 +2,8 @@ package org.canay.backend.repository;
 
 import org.canay.backend.domain.entities.Account;
 import org.canay.backend.domain.entities.Restaurant;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -19,4 +21,15 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Long countByAddressCountryCodeIgnoreCase(String countryCode);
 
     Long countByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(String countryCode, String city);
+
+    Page<Restaurant> findByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(
+            String countryCode,
+            String city,
+            Pageable pageable
+    );
+
+    Page<Restaurant> findByAddressCountryCodeIgnoreCase(
+            String countryCode,
+            Pageable pageable
+    );
 }

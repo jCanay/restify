@@ -31,6 +31,4 @@ public class Dashboard {
 
     @OneToMany(mappedBy = "dashboard", cascade = CascadeType.ALL)
     private List<DashboardPage> pages;
-
-
 }

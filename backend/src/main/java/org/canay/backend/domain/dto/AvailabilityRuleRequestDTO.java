@@ -13,7 +13,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AvailabilityRuleRequestDTO {
-    private String typeName;      // "RECURRING", "VACATION", "SPECIFIC_DATE"
+    private String name;      // "RECURRING", "VACATION", "SPECIFIC_DATE"
     private Integer dayOfWeek;    // 0-6
     private LocalDate startDate;
     private LocalDate endDate;

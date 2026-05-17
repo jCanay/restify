@@ -3,7 +3,7 @@ import RestaurantsPageWrapper from "./RestaurantsPageWrapper";
 
 export const RestaurantRoutes = (
 	<Route
-		path=":country?/:city?"
+		path=":countryCode?/:city?"
 		element={<RestaurantsPageWrapper />}
 	/>
 );

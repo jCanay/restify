@@ -2,22 +2,23 @@
 import { useParams, useNavigate } from "react-router";
 import { useEffect, useState } from "react";
 import RestaurantsPage from "../pages/RestaurantsPage";
+import { useRestaurantsLocation } from "../hooks/useRestaurantsLocation";
 
 export default function RestaurantsPageWrapper() {
-	const { country, city } = useParams();
+	const { countryCode, city } = useParams();
 	const navigate = useNavigate();
+	const { checkLocationStatus, loading, error } = useRestaurantsLocation();
 
 	// Estados para controlar la validación del backend
 	const [isValid, setIsValid] = useState(null);
-	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		// TRANFORMAR URL A LOWERCASE
-		const hasUppercaseCountry = country && country !== country.toLowerCase();
+		const hasUppercaseCountry = countryCode && countryCode !== countryCode.toLowerCase();
 		const hasUppercaseCity = city && city !== city.toLowerCase();
 
 		if (hasUppercaseCountry || hasUppercaseCity) {
-			const cleanCountry = country ? country.toLowerCase() : "";
+			const cleanCountry = countryCode ? countryCode.toLowerCase() : "";
 			const cleanCity = city ? city.toLowerCase() : "";
 
 			// Construimos la ruta limpia dependiente de si hay ciudad o no
@@ -28,21 +29,16 @@ export default function RestaurantsPageWrapper() {
 			return; // Cortamos la ejecución aquí, el re-render por el cambio de URL se encargará del resto
 		}
 
-		checkLocationExists(country, city)
-			.then(({ matchCountry, matchCity }) => {
-				const isLocationValid = country && matchCountry && (matchCity || !city);
+		const checkLocation = async () => {
+			const { countryExists, cityExists, restaurantCount } = await checkLocationStatus({ countryCode, city });
+			const isLocationValid = countryCode && countryExists && (cityExists || !city);
 
-				setIsValid(isLocationValid);
-				return;
-			})
-			.catch(() => {
-				setIsValid(false);
-			})
-			.finally(() => {
-				setLoading(false);
-			});
+			setIsValid(isLocationValid);
+			return;
+		};
 
-	}, [country, city, navigate]);
+		checkLocation();
+	}, [countryCode, city, navigate, checkLocationStatus]);
 
 	if (loading) return <div>Loading</div>;
 
@@ -50,28 +46,9 @@ export default function RestaurantsPageWrapper() {
 
 	return (
 		<RestaurantsPage
-			key={`${country?.toLowerCase()}-${city?.toLowerCase()}`}
-			country={country?.toLowerCase()}
+			key={`${countryCode?.toLowerCase()}-${city?.toLowerCase()}`}
+			countryCode={countryCode?.toLowerCase()}
 			city={city?.toLowerCase()}
 		/>
 	);
 }
-
-// -----------------------------------------------------------------------------
-// Función auxiliar de ejemplo para simular la petición a tu API
-const checkLocationExists = async (country, city) => {
-	// Aquí iría tu fetch/axios. De momento simulamos con un delay:
-	return new Promise((resolve) => {
-		setTimeout(() => {
-			const mock = {
-				es: ["ourense", "madrid"],
-				pt: ["lisboa", "oporto"]
-			};
-
-			const matchCountry = !!mock[country?.toLowerCase()]?.length;
-			const matchCity = mock[country?.toLowerCase()]?.includes(city?.toLowerCase());
-
-			resolve({ matchCountry, matchCity });
-		}, 300);
-	});
-};

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -24,12 +24,14 @@ public class WidgetServiceImpl implements WidgetService {
 
     @Override
     @Transactional
-    public Widget createWidgetIfNotFound(WidgetType type, DashboardPage page, Set<UserRole> roles, String layoutJson) {
-        Widget widget = widgetRepository.findByTypeAndDashboardPage(type, page).orElse(null);
+    public Optional<Widget> createWidgetIfNotFound(WidgetType type, DashboardPage page, Set<UserRole> roles, String layoutJson, UserRole accessRole) {
+        Optional<Widget> widgetOpt = widgetRepository.findByTypeAndDashboardPage(type, page);
 
-        if (widget != null) {
-            return widget;
+        if (widgetOpt.isPresent()) {
+            return widgetOpt.get().getAccessRoles().contains(accessRole) ? widgetOpt : Optional.empty();
         }
+
+        if (!roles.contains(accessRole)) return Optional.empty();
 
         try {
             Widget newWidget = Widget.builder()
@@ -39,7 +41,7 @@ public class WidgetServiceImpl implements WidgetService {
                     .layouts(objectMapper.readTree(layoutJson))
                     .build();
 
-            return widgetRepository.save(newWidget);
+            return Optional.of(widgetRepository.save(newWidget));
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Error parsing JSON: " + type, e);
         }

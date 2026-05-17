@@ -28,7 +28,7 @@ public class DashboardPage {
     private String title;
 
     private String slug;
-    
+
     private Integer sortOrder;
 
     @Column(columnDefinition = "json")

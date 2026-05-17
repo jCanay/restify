@@ -10,6 +10,7 @@ import org.canay.backend.repository.*;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.LocationService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +22,7 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
-public class SetupDataLoader implements ApplicationListener<ContextRefreshedEvent> {
+public class SetupDataLoader implements CommandLineRunner {
     private final UserRepository userRepository;
     private final AccountRepository accountRepository;
     private final UserRoleRepository userRoleRepository;
@@ -48,8 +49,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     private String adminEmail;
 
     @Override
-    @Transactional
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    public void run(String... args) throws Exception {
         // 1. Inicializar Tipos de Reglas de Disponibilidad
         createRuleTypeIfNotFound("VACATION", 1, "Cierres por vacaciones o reformas.");
         createRuleTypeIfNotFound("SPECIFIC_DATE", 2, "Excepciones para días concretos (Festivos, eventos).");
@@ -81,6 +81,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                     .isDefault(true)
                     .build();
 
+            Restaurant savedAdminRestaurant = restaurantRepository.save(adminRestaurant);
+
             Address adminRestaurantAddress = Address.builder()
                     .streetAddress("Calle Admin 1")
                     .city("Ourense")
@@ -97,9 +99,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
             Address savedAdminRestaurantAddress = addressRepository.save(adminRestaurantAddress);
             adminRestaurant.setAddress(savedAdminRestaurantAddress);
 
-            Restaurant savedAdminRestaurant = restaurantRepository.save(adminRestaurant);
 
-            initializeDashboard(savedAdminRestaurant, adminRole);
+            dashboardService.initializeDashboard(savedAdminRestaurant, adminRole);
         }
 
         // Setup user
@@ -118,10 +119,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         }
     }
 
-    private void initializeDashboard(Restaurant restaurant, UserRole adminRole) {
-        dashboardService.initializeDashboard(restaurant);
-    }
-
     private void createRuleTypeIfNotFound(String name, Integer priority, String description) {
         ruleTypeRepository.findByName(name).ifPresentOrElse(
                 _ -> {
@@ -136,4 +133,6 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                 }
         );
     }
+
+
 }

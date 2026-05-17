@@ -178,7 +178,7 @@ function Dashboard() {
 			defaultLayout={defaultLayout}
 			onLayoutChanged={onLayoutChanged}
 			autoSave="enooc"
-			className={`dashboard ${isCollapsed && "collapsed"}`}
+			className={`dashboard ${isCollapsed ? "collapsed" : ""}`}
 		>
 			<Panel
 				panelRef={sidebarRef}
@@ -255,13 +255,14 @@ function Dashboard() {
 								<AlertDialogTrigger asChild>
 									<DropdownMenuItem
 										onSelect={(e) => e.preventDefault()}
-										className="menu-item logout"
+										className="menu-item logout-btn"
 									>
 										<LogOut size={18} />
 										<span>Cerrar sesión</span>
 									</DropdownMenuItem>
 								</AlertDialogTrigger>
 								<AlertDialogContent
+									onCloseAutoFocus={(e) => e.preventDefault()}
 									className="logout-dialog"
 									size="sm"
 								>

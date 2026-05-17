@@ -78,8 +78,8 @@ public class ScheduleServiceImpl implements ScheduleService {
 
         // 2. Mapear y guardar las nuevas reglas
         List<AvailabilityRule> newRules = requests.stream().map(req -> {
-            AvailabilityRuleType type = typeRepository.findByName(req.getTypeName())
-                    .orElseThrow(() -> new RuntimeException("Tipo de regla no existe: " + req.getTypeName()));
+            AvailabilityRuleType type = typeRepository.findByName(req.getName())
+                    .orElseThrow(() -> new RuntimeException("Tipo de regla no existe: " + req.getName()));
 
             return AvailabilityRule.builder()
                     .restaurant(restaurant)

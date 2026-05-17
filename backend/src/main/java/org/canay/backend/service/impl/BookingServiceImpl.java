@@ -13,6 +13,8 @@ import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.BookingRepository;
 import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.BookingService;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,6 +31,8 @@ public class BookingServiceImpl implements BookingService {
     private final Mapper<Booking, BookingDTO> bookingMapper;
     private final Mapper<User, UserDTO> userMapper;
 
+    private final MessageSource messageSource;
+
     @Override
     @Transactional(readOnly = true)
     public Page<BookingDTO> getAll(Pageable pageable, User user) {
@@ -41,7 +45,8 @@ public class BookingServiceImpl implements BookingService {
     @Transactional(readOnly = true)
     public BookingDTO getById(Long id, User user) {
         Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Booking not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.booking", null,
+                        LocaleContextHolder.getLocale())));
 
         return bookingMapper.mapTo(booking);
     }
@@ -52,8 +57,6 @@ public class BookingServiceImpl implements BookingService {
         Page<Booking> bookings = bookingRepository.findAllByRestaurantId(restaurantId, pageable);
 
         UserDTO userDto = userMapper.mapTo(user);
-
-        System.out.println(bookings.getNumberOfElements());
 
         return bookings.map(booking -> {
             BookingDTO bookingDTO = bookingMapper.mapTo(booking);
@@ -66,10 +69,12 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingDTO create(BookingDTO bookingDTO, Long restaurantId, User user) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.restaurant", null,
+                        LocaleContextHolder.getLocale())));
 
         Account account = accountRepository.findByUser(user)
-                .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.account", null,
+                        LocaleContextHolder.getLocale())));
 
         Booking booking = bookingMapper.mapFrom(bookingDTO);
 

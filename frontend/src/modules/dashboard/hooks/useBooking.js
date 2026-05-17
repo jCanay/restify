@@ -27,12 +27,12 @@ export const useBookings = () => {
   }, [])
 
   const getAllBookingsByRestaurantId = useCallback(
-    async (restaurantId, { page, size, sort, search }) => {
+    async (restaurantId, { page, size, sort, search } = {}) => {
       try {
         setLoading(true)
 
         const response = await api.get(
-          `/restaurants/${restaurantId}/bookings?size=${size || 20}&page=${page || 0}&sort=${sort || ""}`,
+          `/restaurants/${restaurantId}/bookings?page=${page || 0}&size=${size || 20}&sort=${sort || ""}`,
         )
         const bookings = response.data
 

@@ -14,6 +14,7 @@ public class OpenApiConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         final String securitySchemeName = "bearerAuth";
+        
         return new OpenAPI()
                 .info(new Info()
                         .title("Restify API")

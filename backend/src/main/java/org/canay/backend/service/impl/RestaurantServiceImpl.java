@@ -4,18 +4,21 @@ import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.LocationStatusDTO;
 import org.canay.backend.domain.dto.RestaurantDTO;
 import org.canay.backend.domain.entities.*;
+import org.canay.backend.exception.AccessDeniedException;
+import org.canay.backend.exception.IllegalArgumentException;
 import org.canay.backend.exception.ResourceNotFoundException;
 import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,6 +27,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final AccountRepository accountRepository;
 
     private final DashboardService dashboardService;
+    private final MessageSource messageSource;
 
     private final Mapper<Restaurant, RestaurantDTO> restaurantMapper;
 
@@ -51,7 +55,8 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
 
         Restaurant savedRestaurant = restaurantRepository.save(restaurant);
-        dashboardService.initializeDashboard(savedRestaurant);
+        System.out.println(user.getRole());
+        dashboardService.initializeDashboard(savedRestaurant, user.getRole());
 
         return restaurantMapper.mapTo(savedRestaurant);
     }
@@ -78,5 +83,38 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .cityExists(cityExists)
                 .restaurantCount(restaurantCount)
                 .build();
+    }
+
+    @Override
+    public Page<RestaurantDTO> getRestaurants(String countryCode, String city, Pageable pageable, User user) {
+        boolean countryCodeEmpty = countryCode == null || countryCode.trim().isEmpty();
+        boolean cityEmpty = city == null || city.trim().isEmpty();
+
+        if (countryCodeEmpty && !cityEmpty) {
+            throw new IllegalArgumentException(
+                    messageSource.getMessage("illegal-argument.restaurant.location-filter", null,
+                            LocaleContextHolder.getLocale()));
+        }
+
+        if (countryCodeEmpty) {
+            if (user == null) {
+                throw new AccessDeniedException(messageSource.getMessage("access-denied",
+                        new String[]{messageSource.getMessage("http.get", null,
+                                LocaleContextHolder.getLocale())},
+                        LocaleContextHolder.getLocale()));
+            }
+
+            return restaurantRepository.findAll(pageable).map(restaurantMapper::mapTo);
+        }
+
+        if (!cityEmpty) {
+            return restaurantRepository
+                    .findByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(countryCode, city, pageable)
+                    .map(restaurantMapper::mapTo);
+        }
+
+        return restaurantRepository
+                .findByAddressCountryCodeIgnoreCase(countryCode, pageable)
+                .map(restaurantMapper::mapTo);
     }
 }

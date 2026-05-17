@@ -1,0 +1,56 @@
+nav.restaurants-navbar {
+  position: sticky;
+  z-index: 50;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background-color: #fff;
+  transition: box-shadow 200ms;
+
+  &.scrolled {
+    box-shadow: 0 0 10px var(--light200);
+  }
+
+  & div.wrapper {
+    width: 100%;
+    display: flex;
+    gap: 3rem;
+    justify-content: space-between;
+    align-items: center;
+
+    & input[type="search"] {
+      width: 100%;
+      background-color: var(--light200);
+      height: fit-content;
+      border-radius: 10rem;
+      padding: 0.5rem 1.25rem;
+    }
+
+    & div.auth {
+      display: flex;
+      gap: 1rem;
+
+      & button {
+        cursor: pointer;
+        padding: 0.25rem 1rem;
+        border-radius: 0.5rem;
+        text-wrap: nowrap;
+
+        &.login {
+          border: solid 1.5px var(--color-black);
+
+          &:hover {
+            background-color: var(--color-black);
+            color: var(--color-white);
+          }
+        }
+
+        &.register {
+          background-color: var(--color-black);
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+}

@@ -11,8 +11,10 @@ import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +26,7 @@ public class RestaurantController {
     private final DashboardService dashboardService;
     private final BookingService bookingService;
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     @PostMapping
     public ResponseEntity<RestaurantDTO> addRestaurant(
             @RequestBody RestaurantDTO restaurantDTO,
@@ -40,6 +43,7 @@ public class RestaurantController {
         return ResponseEntity.ok(dashboardService.getDashboardForUser(restaurantId, user));
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/{restaurantId}/bookings")
     public ResponseEntity<BookingDTO> addBookingToRestaurant(
             @RequestBody BookingDTO bookingDTO,
@@ -49,6 +53,7 @@ public class RestaurantController {
         return new ResponseEntity<>(bookingService.create(bookingDTO, restaurantId, user), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER', 'WAITER', 'COOK')")
     @GetMapping("/{restaurantId}/bookings")
     public ResponseEntity<Page<BookingDTO>> getAllBookingsByRestaurantId(
             @PathVariable Long restaurantId,
@@ -59,7 +64,21 @@ public class RestaurantController {
     }
 
     @GetMapping("/locations/{countryCode}/status")
-    public ResponseEntity<LocationStatusDTO> checkLocationStatus(@PathVariable String countryCode, @RequestParam String city, @AuthenticationPrincipal User user) {
+    public ResponseEntity<LocationStatusDTO> checkLocationStatus(
+            @PathVariable String countryCode,
+            @RequestParam(required = false) String city,
+            @AuthenticationPrincipal User user
+    ) {
         return ResponseEntity.ok(restaurantService.checkLocationStatus(countryCode, city, user));
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<RestaurantDTO>> getRestaurants(
+            @RequestParam(required = false) String countryCode,
+            @RequestParam(required = false) String city,
+            Pageable pageable,
+            @AuthenticationPrincipal User user
+    ) {
+        return ResponseEntity.ok(restaurantService.getRestaurants(countryCode, city, pageable, user));
     }
 }

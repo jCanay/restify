@@ -21,7 +21,7 @@ import java.io.IOException;
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private JwtUtils jwtUtils;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -41,13 +41,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        username = jwtUtil.getUsernameFromToken(token);
+        username = jwtUtils.getUsernameFromToken(token);
 
         // 2. Si hay usuario y no está ya autenticado en el contexto
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-            if (jwtUtil.validateToken(token)) {
+            if (jwtUtils.validateToken(token)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,

@@ -1,4 +1,4 @@
-package org.canay.backend.domain.entities;
+package org.canay.backend.domain.entity;
 
 public enum WidgetType {
     CRUD_MANAGER,

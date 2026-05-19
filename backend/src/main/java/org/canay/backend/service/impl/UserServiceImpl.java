@@ -1,7 +1,7 @@
 package org.canay.backend.service.impl;
 
 import org.canay.backend.domain.dto.UserDTO;
-import org.canay.backend.domain.entities.User;
+import org.canay.backend.domain.entity.User;
 import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.UserRepository;
 import org.canay.backend.service.UserService;

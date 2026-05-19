@@ -39,6 +39,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/*/auth/**").permitAll()
                         .requestMatchers("/actuator/mappings").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/restaurants/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/location/search").permitAll()
                         .requestMatchers(
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",

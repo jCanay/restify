@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.DashboardDTO;
-import org.canay.backend.domain.entities.*;
+import org.canay.backend.domain.entity.*;
 import org.canay.backend.exception.ResourceNotFoundException;
 import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.*;

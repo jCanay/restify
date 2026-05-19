@@ -1,9 +1,7 @@
-package org.canay.backend.domain.entities;
+package org.canay.backend.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Entity
 @Table(name = "restaurants")

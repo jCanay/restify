@@ -1,7 +1,7 @@
 package org.canay.backend.service.impl;
 
-import org.canay.backend.domain.entities.RefreshToken;
-import org.canay.backend.domain.entities.User;
+import org.canay.backend.domain.entity.RefreshToken;
+import org.canay.backend.domain.entity.User;
 import org.canay.backend.security.jwt.JwtUtils;
 import org.canay.backend.repository.RefreshTokenRepository;
 import org.canay.backend.repository.UserRepository;

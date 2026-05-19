@@ -2,7 +2,7 @@ package org.canay.backend.mapper.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.DashboardPageDTO;
-import org.canay.backend.domain.entities.DashboardPage;
+import org.canay.backend.domain.entity.DashboardPage;
 import org.canay.backend.mapper.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

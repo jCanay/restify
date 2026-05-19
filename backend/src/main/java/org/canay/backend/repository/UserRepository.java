@@ -1,7 +1,7 @@
 package org.canay.backend.repository;
 
-import org.canay.backend.domain.entities.Restaurant;
-import org.canay.backend.domain.entities.User;
+import org.canay.backend.domain.entity.Restaurant;
+import org.canay.backend.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

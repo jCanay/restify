@@ -1,4 +1,4 @@
-package org.canay.backend.domain.entities;
+package org.canay.backend.domain.entity;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;
@@ -6,7 +6,6 @@ import lombok.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
-import java.math.BigInteger;
 import java.util.List;
 
 @Entity

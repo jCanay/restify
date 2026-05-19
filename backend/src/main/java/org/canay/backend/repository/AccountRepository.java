@@ -1,7 +1,7 @@
 package org.canay.backend.repository;
 
-import org.canay.backend.domain.entities.Account;
-import org.canay.backend.domain.entities.User;
+import org.canay.backend.domain.entity.Account;
+import org.canay.backend.domain.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

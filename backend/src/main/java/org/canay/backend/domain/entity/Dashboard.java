@@ -1,4 +1,4 @@
-package org.canay.backend.domain.entities;
+package org.canay.backend.domain.entity;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import jakarta.persistence.*;

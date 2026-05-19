@@ -1,24 +1,15 @@
-package org.canay.backend.utils;
+package org.canay.backend.util;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.canay.backend.domain.entities.*;
+import org.canay.backend.domain.entity.*;
 import org.canay.backend.repository.*;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.LocationService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Component
 @RequiredArgsConstructor

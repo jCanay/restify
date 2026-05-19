@@ -2,7 +2,7 @@ package org.canay.backend.controller.v1;
 
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.AccountDTO;
-import org.canay.backend.domain.entities.User;
+import org.canay.backend.domain.entity.User;
 import org.canay.backend.service.AccountService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

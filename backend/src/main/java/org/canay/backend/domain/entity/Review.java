@@ -1,4 +1,4 @@
-package org.canay.backend.domain.entities;
+package org.canay.backend.domain.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;

@@ -1,6 +1,6 @@
 package org.canay.backend.repository;
 
-import org.canay.backend.domain.entities.UserRole;
+import org.canay.backend.domain.entity.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -2,10 +2,10 @@ package org.canay.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.*;
-import org.canay.backend.domain.entities.Account;
-import org.canay.backend.domain.entities.Restaurant;
-import org.canay.backend.domain.entities.User;
-import org.canay.backend.domain.entities.UserRole;
+import org.canay.backend.domain.entity.Account;
+import org.canay.backend.domain.entity.Restaurant;
+import org.canay.backend.domain.entity.User;
+import org.canay.backend.domain.entity.UserRole;
 import org.canay.backend.exception.DuplicateResourceException;
 import org.canay.backend.exception.ResourceNotFoundException;
 import org.canay.backend.security.jwt.JwtUtils;

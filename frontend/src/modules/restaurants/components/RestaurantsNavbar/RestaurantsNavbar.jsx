@@ -4,33 +4,38 @@ import { useEffect, useState } from "react";
 import AccountMenu from "@/modules/core/components/AccountMenu/AccountMenu";
 
 export default function RestaurantsNavbar({ city, onInputChange }) {
-	const [isScrolled, setIsScrolled] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setIsScrolled(window.scrollY > 10);
-		};
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 10);
+        };
 
-		window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll);
 
-		// Limpieza del evento cuando el componente se desmonte para evitar memory leaks
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
-	const capitalize = (str) => {
-		if (!str) return '';
-		return str.charAt(0).toUpperCase() + str.slice(1);
-	};
+    const capitalize = (str) => {
+        if (!str) return "";
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    };
 
-	return (
-		<nav className={`restaurants-navbar ${isScrolled ? "scrolled" : ""}`}>
-			<div className="wrapper container">
-				<Logo route={"/"} />
-				<input type="search" name="" id="" placeholder={`Buscar restaurantes${city ? ` en ${capitalize(city)}` : ""}`} onChange={e => onInputChange(e.target.value)} />
-				<AccountMenu />
-			</div>
-		</nav>
-	);
+    return (
+        <nav className={`restaurants-navbar ${isScrolled ? "scrolled" : ""}`}>
+            <div className="wrapper container">
+                <Logo route={"/"} />
+                <input
+                    type="search"
+                    name=""
+                    id=""
+                    placeholder={`Buscar restaurantes${city ? ` en ${capitalize(city)}` : ""}`}
+                    onChange={(e) => onInputChange(e.target.value)}
+                />
+                <AccountMenu />
+            </div>
+        </nav>
+    );
 }

@@ -8,7 +8,7 @@ import { $loginStore } from "../../contexts/loginStore";
 import { useAuth } from "../../hooks/useAuth";
 import { Spinner } from "@/components/ui/spinner";
 
-function LoginModal() {
+function LoginModal({ setOpen = () => {}, onLogged = () => {} }) {
     const [shakeTrigger, setShakeTrigger] = useState(0);
     const { identifier, password } = useStore($loginStore);
     const { login, loading, error } = useAuth();
@@ -24,7 +24,12 @@ function LoginModal() {
 
         if (!isValid()) return;
 
-        await login({ identifier, password });
+        try {
+            await login({ identifier, password });
+
+            setOpen(false);
+            onLogged(true);
+        } catch (err) {}
     };
 
     return (

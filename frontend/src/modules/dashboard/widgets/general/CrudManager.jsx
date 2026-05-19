@@ -41,9 +41,7 @@ function CrudManager({ pageId }) {
                     <Trash /> Eliminar {names[pageId]?.singular ?? "[name]"}
                 </button>
 
-                {/* UN SOLO DIALOG PARA TODOS */}
                 <Dialog open={open} onOpenChange={setOpen}>
-                    {/* Solo renderizamos el contenido si hay un tipo activo */}
                     {activeType && (
                         <Content
                             type={activeType}

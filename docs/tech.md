@@ -14,6 +14,7 @@
 - Tailwind
 - Lucide
 - React Country State City
+- Lodash
 
 # APIs Externas
 - MapboxTiler

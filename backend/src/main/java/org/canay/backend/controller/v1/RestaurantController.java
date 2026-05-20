@@ -3,9 +3,7 @@ package org.canay.backend.controller.v1;
 import lombok.RequiredArgsConstructor;
 import org.canay.backend.domain.dto.*;
 import org.canay.backend.domain.entity.User;
-import org.canay.backend.service.BookingService;
-import org.canay.backend.service.DashboardService;
-import org.canay.backend.service.RestaurantService;
+import org.canay.backend.service.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -21,6 +19,8 @@ public class RestaurantController {
     private final RestaurantService restaurantService;
     private final DashboardService dashboardService;
     private final BookingService bookingService;
+    private final OrderService orderService;
+    private final ProductService productService;
 
     @PreAuthorize("hasAnyRole('ADMIN', 'OWNER')")
     @PostMapping
@@ -49,6 +49,16 @@ public class RestaurantController {
         return new ResponseEntity<>(bookingService.create(bookingDTO, restaurantId, user), HttpStatus.CREATED);
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/{restaurantId}/orders")
+    public ResponseEntity<OrderDTO> addOrderToRestaurant(
+            @RequestBody OrderDTO orderDTO,
+            @PathVariable Long restaurantId,
+            @AuthenticationPrincipal User user
+    ) {
+        return new ResponseEntity<>(orderService.create(orderDTO, restaurantId, user), HttpStatus.CREATED);
+    }
+
     @PreAuthorize("hasAnyRole('ADMIN', 'OWNER', 'WAITER', 'COOK')")
     @GetMapping("/{restaurantId}/bookings")
     public ResponseEntity<Page<BookingDTO>> getAllBookingsByRestaurantId(
@@ -58,7 +68,17 @@ public class RestaurantController {
     ) {
         return new ResponseEntity<>(bookingService.getAllByRestaurantId(restaurantId, pageable, user), HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER', 'WAITER', 'COOK')")
+    @GetMapping("/{restaurantId}/orders")
+    public ResponseEntity<Page<OrderDTO>> getAllOrdersByRestaurantId(
+            @PathVariable Long restaurantId,
+            Pageable pageable,
+            @AuthenticationPrincipal User user
+    ) {
+        return new ResponseEntity<>(orderService.getAllByRestaurantId(restaurantId, pageable, user), HttpStatus.OK);
+    }
+
     @GetMapping
     public ResponseEntity<Page<RestaurantDTO>> getRestaurants(
             @RequestParam(required = false) String countryCode,
@@ -77,5 +97,14 @@ public class RestaurantController {
             @AuthenticationPrincipal User user
     ) {
         return ResponseEntity.ok(restaurantService.findNearbyRestaurants(latitude, longitude, pageable, user));
+    }
+
+    @GetMapping("/{restaurantId}/products")
+    public ResponseEntity<Page<ProductDTO>> getProductsByRestaurantId(
+            @PathVariable Long restaurantId,
+            Pageable pageable,
+            @AuthenticationPrincipal User user
+    ) {
+        return ResponseEntity.ok(productService.getProductsByRestaurant(restaurantId, pageable, user));
     }
 }

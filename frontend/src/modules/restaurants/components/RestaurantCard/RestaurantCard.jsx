@@ -1,6 +1,6 @@
 import "./css/restaurant-card.css";
 
-export default function RestaurantCard({ id, name }) {
+export default function RestaurantCard({ id, name, onClick }) {
 	const RESTAURANT_IMAGES = [
 		"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=350&fit=crop&q=80",
 		"https://images.unsplash.com/photo-1513104890138-7c749659a591?w=500&h=350&fit=crop&q=80",
@@ -27,7 +27,7 @@ export default function RestaurantCard({ id, name }) {
 	const img = RESTAURANT_IMAGES[id % RESTAURANT_IMAGES.length];
 
 	return (
-		<button className="restaurant-card">
+		<button className="restaurant-card" onClick={onClick}>
 			<img src={img} alt="" />
 			<h4>{capitalize(name)}</h4>
 		</button>

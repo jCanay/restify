@@ -12,6 +12,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class SetupDataLoader implements CommandLineRunner {
@@ -24,6 +27,7 @@ public class SetupDataLoader implements CommandLineRunner {
     private final DashboardPageRepository dashboardPageRepository;
     private final WidgetRepository widgetRepository;
     private final AddressRepository addressRepository;
+    private final ProductRepository productRepository;
 
     private final DashboardService dashboardService;
     private final LocationService locationService;
@@ -75,6 +79,8 @@ public class SetupDataLoader implements CommandLineRunner {
 
             Restaurant savedAdminRestaurant = restaurantRepository.save(adminRestaurant);
 
+            createAndSaveProducts(savedAdminRestaurant);
+
             Address adminRestaurantAddress = Address.builder()
                     .streetAddress("Calle Admin 1")
                     .city("Ourense")
@@ -109,6 +115,92 @@ public class SetupDataLoader implements CommandLineRunner {
             userRepository.save(setup);
             accountRepository.save(setupAccount);
         }
+    }
+
+    public void createAndSaveProducts(Restaurant restaurant) {
+        List<Product> products = List.of(
+                // --- ENTRANTES (Starters) ---
+                Product.builder()
+                        .name("Bacon Cheese Fries")
+                        .description("Crispy french fries topped with melted cheddar cheese and crispy bacon bits.")
+                        .category("Starters")
+                        .price(BigDecimal.valueOf(6.50))
+                        .restaurant(restaurant)
+                        .build(),
+                Product.builder()
+                        .name("BBQ Chicken Wings")
+                        .description("8 pieces of juicy chicken wings tossed in our homemade smoky BBQ sauce.")
+                        .category("Starters")
+                        .price(BigDecimal.valueOf(7.90))
+                        .restaurant(restaurant)
+                        .build(),
+                Product.builder()
+                        .name("Onion Rings")
+                        .description("Golden and crunchy beer-battered onion rings served with barbecue dip.")
+                        .category("Starters")
+                        .price(BigDecimal.valueOf(5.00))
+                        .restaurant(restaurant)
+                        .build(),
+
+                // --- HAMBURGUESAS (Burgers) ---
+                Product.builder()
+                        .name("Classic Cheeseburger")
+                        .description(
+                                "180g of premium beef, cheddar cheese, lettuce, tomato, and our secret house sauce.")
+                        .category("Burgers")
+                        .price(BigDecimal.valueOf(9.50))
+                        .restaurant(restaurant)
+                        .build(),
+                Product.builder()
+                        .name("Smoky Bacon Burger")
+                        .description("180g beef, crispy bacon, cheddar cheese, caramelized onions, and BBQ sauce.")
+                        .category("Burgers")
+                        .price(BigDecimal.valueOf(11.20))
+                        .restaurant(restaurant)
+                        .build(),
+                Product.builder()
+                        .name("Trifásica Burger")
+                        .description(
+                                "Double beef patty (360g), triple cheddar, triple bacon, and fried egg. Only for the brave.")
+                        .category("Burgers")
+                        .price(BigDecimal.valueOf(14.90))
+                        .restaurant(restaurant)
+                        .build(),
+                Product.builder()
+                        .name("Veggie Crunch")
+                        .description("Crispy plant-based patty, vegan mayo, lettuce, avocado, and fresh tomato.")
+                        .category("Burgers")
+                        .price(BigDecimal.valueOf(10.50))
+                        .restaurant(restaurant)
+                        .build(),
+
+                // --- POSTRES (Desserts) ---
+                Product.builder()
+                        .name("Chocolate Brownie")
+                        .description("Warm chocolate brownie with walnuts, served with a scoop of vanilla ice cream.")
+                        .category("Desserts")
+                        .price(BigDecimal.valueOf(5.50))
+                        .restaurant(restaurant)
+                        .build(),
+                Product.builder()
+                        .name("New York Cheesecake")
+                        .description("Classic creamy baked cheesecake with a sweet raspberry coulis on top.")
+                        .category("Desserts")
+                        .price(BigDecimal.valueOf(6.00))
+                        .restaurant(restaurant)
+                        .build(),
+
+                // --- BEBIDAS (Drinks) ---
+                Product.builder()
+                        .name("Coca-Cola Original")
+                        .description("Cold 330ml can of refreshing Coca-Cola.")
+                        .category("Drinks")
+                        .price(BigDecimal.valueOf(2.20))
+                        .restaurant(restaurant)
+                        .build()
+        );
+
+        productRepository.saveAll(products);
     }
 
     private void createRuleTypeIfNotFound(String name, Integer priority, String description) {

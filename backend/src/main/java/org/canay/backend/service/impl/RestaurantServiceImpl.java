@@ -146,5 +146,4 @@ public class RestaurantServiceImpl implements RestaurantService {
         // OJO: En JTS, el orden de los argumentos de Coordinate SIEMPRE es (X, Y) -> (Longitud, Latitud)
         return geometryFactory.createPoint(new Coordinate(longitude, latitude));
     }
-
 }

@@ -61,14 +61,15 @@ function RegisterAccountTypeForm() {
 							htmlFor={e.type}
 							className="field-label"
 						>
-							<Field orientation="horizontal">
-								<FieldContent className="content">
+							<Field orientation="horizontal" data-disabled={e.type == "ROLE_RIDER"}>
+								<FieldContent className="content" >
 									<FieldTitle>{e.title}</FieldTitle>
 									<FieldDescription>
 										{e.description}
 									</FieldDescription>
 								</FieldContent>
 								<RadioGroupItem
+									disabled={e.type == "ROLE_RIDER"}
 									className="radio"
 									value={e.type}
 									id={e.type}

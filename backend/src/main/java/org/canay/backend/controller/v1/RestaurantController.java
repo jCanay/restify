@@ -1,10 +1,7 @@
 package org.canay.backend.controller.v1;
 
 import lombok.RequiredArgsConstructor;
-import org.canay.backend.domain.dto.BookingDTO;
-import org.canay.backend.domain.dto.DashboardDTO;
-import org.canay.backend.domain.dto.LocationStatusDTO;
-import org.canay.backend.domain.dto.RestaurantDTO;
+import org.canay.backend.domain.dto.*;
 import org.canay.backend.domain.entity.User;
 import org.canay.backend.service.BookingService;
 import org.canay.backend.service.DashboardService;
@@ -61,16 +58,7 @@ public class RestaurantController {
     ) {
         return new ResponseEntity<>(bookingService.getAllByRestaurantId(restaurantId, pageable, user), HttpStatus.OK);
     }
-
-    @GetMapping("/locations/{countryCode}/status")
-    public ResponseEntity<LocationStatusDTO> checkLocationStatus(
-            @PathVariable String countryCode,
-            @RequestParam(required = false) String city,
-            @AuthenticationPrincipal User user
-    ) {
-        return ResponseEntity.ok(restaurantService.checkLocationStatus(countryCode, city, user));
-    }
-
+    
     @GetMapping
     public ResponseEntity<Page<RestaurantDTO>> getRestaurants(
             @RequestParam(required = false) String countryCode,
@@ -79,5 +67,15 @@ public class RestaurantController {
             @AuthenticationPrincipal User user
     ) {
         return ResponseEntity.ok(restaurantService.getRestaurants(countryCode, city, pageable, user));
+    }
+
+    @GetMapping("/nearby")
+    public ResponseEntity<NearbyRestaurantsResponseDTO> findNearbyRestaurants(
+            @RequestParam Double latitude,
+            @RequestParam Double longitude,
+            Pageable pageable,
+            @AuthenticationPrincipal User user
+    ) {
+        return ResponseEntity.ok(restaurantService.findNearbyRestaurants(latitude, longitude, pageable, user));
     }
 }

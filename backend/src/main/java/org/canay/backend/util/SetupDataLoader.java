@@ -6,6 +6,7 @@ import org.canay.backend.domain.entity.*;
 import org.canay.backend.repository.*;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.LocationService;
+import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,7 +41,7 @@ public class SetupDataLoader implements CommandLineRunner {
     private String adminEmail;
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String @NonNull ... args) {
         // 1. Inicializar Tipos de Reglas de Disponibilidad
         createRuleTypeIfNotFound("VACATION", 1, "Cierres por vacaciones o reformas.");
         createRuleTypeIfNotFound("SPECIFIC_DATE", 2, "Excepciones para días concretos (Festivos, eventos).");
@@ -67,7 +68,7 @@ public class SetupDataLoader implements CommandLineRunner {
 
             Restaurant adminRestaurant = Restaurant.builder()
                     .name("admin")
-                    .deliveryRadius(2500.0)
+                    .deliveryRadiusMeters(10000.0)
                     .account(savedAdminAccount)
                     .isDefault(true)
                     .build();

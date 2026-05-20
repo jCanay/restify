@@ -19,8 +19,8 @@ public class Restaurant {
     @Builder.Default
     private Boolean isDefault = false;
 
-    @Column(name = "delivery_radius")
-    private Double deliveryRadius;
+    @Column(name = "delivery_radius_meters")
+    private Double deliveryRadiusMeters;
 
     @OneToOne(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private Address address;

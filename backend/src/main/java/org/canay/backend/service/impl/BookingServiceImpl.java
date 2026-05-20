@@ -45,8 +45,10 @@ public class BookingServiceImpl implements BookingService {
     @Transactional(readOnly = true)
     public BookingDTO getById(Long id, User user) {
         Booking booking = bookingRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.booking", null,
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage(
+                        "not-found.booking", null,
+                        LocaleContextHolder.getLocale()
+                )));
 
         return bookingMapper.mapTo(booking);
     }
@@ -69,12 +71,16 @@ public class BookingServiceImpl implements BookingService {
     @Transactional
     public BookingDTO create(BookingDTO bookingDTO, Long restaurantId, User user) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
-                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.restaurant", null,
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage(
+                        "not-found.restaurant", null,
+                        LocaleContextHolder.getLocale()
+                )));
 
         Account account = accountRepository.findByUser(user)
-                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.account", null,
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage(
+                        "not-found.account", null,
+                        LocaleContextHolder.getLocale()
+                )));
 
         Booking booking = bookingMapper.mapFrom(bookingDTO);
 

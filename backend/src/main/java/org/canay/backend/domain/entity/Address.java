@@ -2,6 +2,10 @@ package org.canay.backend.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.PrecisionModel;
 
 import java.time.ZoneId;
 
@@ -35,6 +39,9 @@ public class Address {
 
     private Double longitude;
 
+    @Column(columnDefinition = "POINT SRID 4326")
+    private Point location;
+
     private ZoneId zoneId;
 
     private String notes;
@@ -59,5 +66,8 @@ public class Address {
         if ((account == null && restaurant == null) || (account != null && restaurant != null)) {
             throw new IllegalStateException("La dirección debe pertenecer exactamente a una Cuenta o a un Restaurante");
         }
+
+        GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
+        this.location = geometryFactory.createPoint(new Coordinate(longitude, latitude));
     }
 }

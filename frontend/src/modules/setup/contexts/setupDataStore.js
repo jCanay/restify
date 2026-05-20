@@ -11,7 +11,7 @@ const INITIAL_SETUP_DATA = {
         longitude: 0,
     },
 
-    deliveryRadius: 2000,
+    deliveryRadiusMeters: 2000,
     schedule: [
         {
             dayOfWeek: 1,
@@ -69,11 +69,11 @@ export const setSetupDataName = (name) => {
     });
 };
 
-export const setSetupDataRadius = (deliveryRadius) => {
+export const setSetupDataRadius = (deliveryRadiusMeters) => {
     const current = $setupDataStore.get();
     $setupDataStore.set({
         ...current,
-        deliveryRadius: deliveryRadius,
+        deliveryRadiusMeters: deliveryRadiusMeters,
     });
 };
 
@@ -87,6 +87,7 @@ export const setSetupDataAddress = ({
     $setupDataStore.set({
         ...current,
         address: {
+            ...current.address,
             streetAddress: streetAddress,
             city: city,
             country: country,

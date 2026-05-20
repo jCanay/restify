@@ -7,13 +7,16 @@ import com.github.bfsmith.geotimezone.TimeZoneResult;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.canay.backend.domain.dto.LocationDTO;
+import org.canay.backend.domain.dto.LocationStatusDTO;
+import org.canay.backend.domain.entity.User;
 import org.canay.backend.exception.ExternalServiceException;
 import org.canay.backend.exception.IllegalArgumentException;
 import org.canay.backend.exception.ResourceNotFoundException;
+import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.LocationService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -25,12 +28,12 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
 
+    private final RestaurantRepository restaurantRepository;
+
     @Value("${maptiler.api.key}")
     private String maptilerKey;
 
     private final TimeZoneLookup zoneLookup;
-
-    private final MessageSource messageSource;
 
     private final WebClient.Builder webClientBuilder;
 
@@ -48,7 +51,39 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationDTO getLocationByCoordinates(double latitude, double longitude) {
+    @Transactional(readOnly = true)
+    public LocationStatusDTO checkLocationStatus(String countryCode, String city, User user) {
+        boolean countryExists = restaurantRepository.existsByAddressCountryCodeIgnoreCase(countryCode);
+
+        boolean cityExists = restaurantRepository.existsByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(
+                countryCode, city);
+
+        long restaurantCount = 0;
+
+        if (cityExists) {
+            restaurantCount = restaurantRepository.countByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(
+                    countryCode, city);
+        } else if (countryExists) {
+            restaurantCount = restaurantRepository.countByAddressCountryCodeIgnoreCase(countryCode);
+        }
+
+        return LocationStatusDTO.builder()
+                .countryExists(countryExists)
+                .cityExists(cityExists)
+                .restaurantCount(restaurantCount)
+                .build();
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public LocationStatusDTO checkLocationStatusByCoordinates(Double latitude, Double longitude, User user) {
+        LocationDTO locationDTO = getLocationByCoordinates(latitude, longitude, user);
+
+        return checkLocationStatus(locationDTO.countryCode(), locationDTO.city(), user);
+    }
+
+    @Override
+    public LocationDTO getLocationByCoordinates(double latitude, double longitude, User user) {
         WebClient webClient = webClientBuilder
                 .baseUrl("https://api.maptiler.com")
                 .defaultHeader("Origin", "http://localhost:8080")

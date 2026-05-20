@@ -17,7 +17,8 @@ function SetupPage() {
     const [hasStarted, setHasStarted] = useState(false);
     const [direction, setDirection] = useState("forward");
     const [shakeTrigger, setShakeTrigger] = useState(0);
-    const { name, address, deliveryRadius } = useStore($setupDataStore) || {};
+    const { name, address, deliveryRadiusMeters } =
+        useStore($setupDataStore) || {};
     const { addRestaurant, completeOnboarding, loading, error } = useSetup();
 
     const handleBack = () => {
@@ -78,7 +79,11 @@ function SetupPage() {
         }
 
         if (index == steps.length - 1 && isValid()) {
-            await addRestaurant({ name, deliveryRadius, address });
+            console.log(address);
+
+            console.log(deliveryRadiusMeters);
+
+            await addRestaurant({ name, deliveryRadiusMeters, address });
             await completeOnboarding();
         }
     };

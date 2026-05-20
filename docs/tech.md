@@ -13,3 +13,7 @@
 - Shadcn
 - Tailwind
 - Lucide
+- React Country State City
+
+# APIs Externas
+- MapboxTiler

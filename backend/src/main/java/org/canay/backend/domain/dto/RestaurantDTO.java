@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class RestaurantDTO {
     private Long id;
     private String name;
-    private Double deliveryRadius;
+    private Double deliveryRadiusMeters;
     private AddressDTO address;
 
     @Builder.Default

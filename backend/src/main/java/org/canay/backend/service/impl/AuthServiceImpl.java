@@ -49,8 +49,10 @@ public class AuthServiceImpl implements AuthService {
         // Buscar usuario
         User user = userRepository.findByUsername(loginRequestDTO.getIdentifier())
                 .or(() -> userRepository.findByEmail(loginRequestDTO.getIdentifier()))
-                .orElseThrow(() -> new UsernameNotFoundException(messageSource.getMessage("not-found.user", null,
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new UsernameNotFoundException(messageSource.getMessage(
+                        "not-found.user", null,
+                        LocaleContextHolder.getLocale()
+                )));
 
         // Verificar usuario y contraseña
         Authentication authentication = authenticationManager.authenticate(
@@ -58,8 +60,10 @@ public class AuthServiceImpl implements AuthService {
 
         // Se asegura de que exista la cuenta antes de continuar
         Account account = accountRepository.findByUser(user)
-                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.account", null,
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage(
+                        "not-found.account", null,
+                        LocaleContextHolder.getLocale()
+                )));
 
         // Crea la respuesta
         LoginResponseDTO response = LoginResponseDTO.builder()
@@ -83,14 +87,18 @@ public class AuthServiceImpl implements AuthService {
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
         // Verifica si el nombre de usuario existe
         if (userRepository.findByUsername(registerRequestDTO.getUser().getUsername()).isPresent()) {
-            throw new DuplicateResourceException(messageSource.getMessage("duplicate.user.username", null,
-                    LocaleContextHolder.getLocale()));
+            throw new DuplicateResourceException(messageSource.getMessage(
+                    "duplicate.user.username", null,
+                    LocaleContextHolder.getLocale()
+            ));
         }
 
         // Verifica si el email ya existe
         if (userRepository.findByEmail(registerRequestDTO.getUser().getEmail()).isPresent()) {
-            throw new DuplicateResourceException(messageSource.getMessage("duplicate.user.email", null,
-                    LocaleContextHolder.getLocale()));
+            throw new DuplicateResourceException(messageSource.getMessage(
+                    "duplicate.user.email", null,
+                    LocaleContextHolder.getLocale()
+            ));
         }
 
         // Verifica si existe el rol
@@ -99,8 +107,10 @@ public class AuthServiceImpl implements AuthService {
                 .getName() : "";
 
         UserRole roleEntity = userRoleRepository.findByName(roleName)
-                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.user.role", null,
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage(
+                        "not-found.user.role", null,
+                        LocaleContextHolder.getLocale()
+                )));
 
         // Crea el usuario
         User userEntity = userMapper.mapFrom(registerRequestDTO.getUser());

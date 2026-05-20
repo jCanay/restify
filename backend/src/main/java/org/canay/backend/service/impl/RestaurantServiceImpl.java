@@ -1,7 +1,8 @@
 package org.canay.backend.service.impl;
 
 import lombok.RequiredArgsConstructor;
-import org.canay.backend.domain.dto.LocationStatusDTO;
+import org.apache.commons.lang3.StringUtils;
+import org.canay.backend.domain.dto.NearbyRestaurantsResponseDTO;
 import org.canay.backend.domain.dto.RestaurantDTO;
 import org.canay.backend.domain.entity.*;
 import org.canay.backend.exception.AccessDeniedException;
@@ -12,6 +13,10 @@ import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Point;
+import org.locationtech.jts.geom.PrecisionModel;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.data.domain.Page;
@@ -34,10 +39,13 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public RestaurantDTO addRestaurant(RestaurantDTO restaurantDTO, User user) {
         Restaurant restaurant = restaurantMapper.mapFrom(restaurantDTO);
+        System.out.println(restaurantDTO);
+        System.out.println(restaurant);
 
         // Verifica que exista la cuenta para continuar
         Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
+
 
         restaurant.setAccount(account);
 
@@ -61,47 +69,31 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public LocationStatusDTO checkLocationStatus(String countryCode, String city, User user) {
-        boolean countryExists = restaurantRepository.existsByAddressCountryCodeIgnoreCase(countryCode);
-
-        boolean cityExists = restaurantRepository.existsByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(
-                countryCode, city);
-
-        long restaurantCount = 0;
-
-        if (cityExists) {
-            restaurantCount = restaurantRepository.countByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(
-                    countryCode, city);
-        } else if (countryExists) {
-            restaurantCount = restaurantRepository.countByAddressCountryCodeIgnoreCase(countryCode);
-        }
-
-        return LocationStatusDTO.builder()
-                .countryExists(countryExists)
-                .cityExists(cityExists)
-                .restaurantCount(restaurantCount)
-                .build();
-    }
-
-    @Override
     public Page<RestaurantDTO> getRestaurants(String countryCode, String city, Pageable pageable, User user) {
         boolean countryCodeEmpty = countryCode == null || countryCode.trim().isEmpty();
         boolean cityEmpty = city == null || city.trim().isEmpty();
 
         if (countryCodeEmpty && !cityEmpty) {
             throw new IllegalArgumentException(
-                    messageSource.getMessage("illegal-argument.restaurant.location-filter", null,
-                            LocaleContextHolder.getLocale()));
+                    messageSource.getMessage(
+                            "illegal-argument.restaurant.location-filter", null,
+                            LocaleContextHolder.getLocale()
+                    ));
         }
 
         if (countryCodeEmpty) {
             if (user == null) {
-                throw new AccessDeniedException(messageSource.getMessage("access-denied",
-                        new String[]{messageSource.getMessage("http.get", null,
-                                LocaleContextHolder.getLocale())},
-                        LocaleContextHolder.getLocale()));
+                throw new AccessDeniedException(messageSource.getMessage(
+                        "access-denied",
+                        new String[]{messageSource.getMessage(
+                                "http.get", null,
+                                LocaleContextHolder.getLocale()
+                        )},
+                        LocaleContextHolder.getLocale()
+                ));
             }
+
+            restaurantRepository.findAll(pageable).getContent().forEach(System.out::println);
 
             return restaurantRepository.findAll(pageable).map(restaurantMapper::mapTo);
         }
@@ -116,4 +108,43 @@ public class RestaurantServiceImpl implements RestaurantService {
                 .findByAddressCountryCodeIgnoreCase(countryCode, pageable)
                 .map(restaurantMapper::mapTo);
     }
+
+    @Override
+    public NearbyRestaurantsResponseDTO findNearbyRestaurants(
+            Double latitude,
+            Double longitude,
+            Pageable pageable,
+            User user
+    ) {
+        Point location = createPoint(latitude, longitude);
+        Page<Restaurant> restaurants = restaurantRepository.findNearbyRestaurants(location, pageable);
+
+        if (restaurants.isEmpty()) {
+            return new NearbyRestaurantsResponseDTO(null, null, Page.empty(), true);
+        }
+
+        String rawCity = restaurants.getContent().getFirst().getAddress().getCity();
+        String city = "";
+        String countryCode = restaurants.getContent().getFirst().getAddress().getCountryCode();
+
+        if (rawCity != null) {
+            String noAccents = StringUtils.stripAccents(rawCity);
+
+            // 2. Pasamos a minúsculas, cambiamos espacios por guiones y limpiamos extremos
+            city = noAccents.toLowerCase()
+                    .trim()
+                    .replaceAll("\\s+", "-"); // Convierte "A Coruña" en "a-coruna"
+        }
+
+        return new NearbyRestaurantsResponseDTO(countryCode, city, restaurants.map(restaurantMapper::mapTo), false);
+    }
+
+    private Point createPoint(Double latitude, Double longitude) {
+        // Definimos el mismo sistema espacial (SRID 4326)
+        GeometryFactory geometryFactory = new GeometryFactory(new PrecisionModel(), 4326);
+
+        // OJO: En JTS, el orden de los argumentos de Coordinate SIEMPRE es (X, Y) -> (Longitud, Latitud)
+        return geometryFactory.createPoint(new Coordinate(longitude, latitude));
+    }
+
 }

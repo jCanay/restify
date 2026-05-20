@@ -11,7 +11,7 @@ public abstract class LocalizedException extends RuntimeException {
     protected LocalizedException(String messageKey, Throwable cause) {
         super(messageKey, cause);
     }
-    
+
     @Override
     public String getLocalizedMessage() {
         return MessageTranslator.getMessage(super.getMessage());

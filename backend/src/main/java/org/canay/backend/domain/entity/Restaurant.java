@@ -3,6 +3,8 @@ package org.canay.backend.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import static org.canay.backend.util.StringFormatter.normalizeStringUrl;
+
 @Entity
 @Table(name = "restaurants")
 @Data
@@ -15,6 +17,8 @@ public class Restaurant {
     private Long id;
 
     private String name;
+
+    private String slug;
 
     @Builder.Default
     private Boolean isDefault = false;
@@ -32,4 +36,13 @@ public class Restaurant {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "dashboard_id")
     private Dashboard dashboard;
+
+    @PreUpdate
+    protected void onCreate() {
+        if (this.name != null) {
+            this.slug = normalizeStringUrl(this.name)
+                    .concat("-")
+                    .concat(normalizeStringUrl(this.address.getCity()));
+        }
+    }
 }

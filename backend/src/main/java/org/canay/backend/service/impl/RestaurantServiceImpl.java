@@ -3,13 +3,16 @@ package org.canay.backend.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.canay.backend.domain.dto.NearbyRestaurantsResponseDTO;
+import org.canay.backend.domain.dto.ProductDTO;
 import org.canay.backend.domain.dto.RestaurantDTO;
+import org.canay.backend.domain.dto.RestaurantDetailDTO;
 import org.canay.backend.domain.entity.*;
 import org.canay.backend.exception.AccessDeniedException;
 import org.canay.backend.exception.IllegalArgumentException;
 import org.canay.backend.exception.ResourceNotFoundException;
 import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.AccountRepository;
+import org.canay.backend.repository.ProductRepository;
 import org.canay.backend.repository.RestaurantRepository;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
@@ -24,16 +27,20 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final AccountRepository accountRepository;
+    private final ProductRepository productRepository;
 
     private final DashboardService dashboardService;
     private final MessageSource messageSource;
 
     private final Mapper<Restaurant, RestaurantDTO> restaurantMapper;
+    private final Mapper<Product, ProductDTO> productMapper;
 
     @Transactional
     @Override
@@ -45,7 +52,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         // Verifica que exista la cuenta para continuar
         Account account = accountRepository.findByUser(user)
                 .orElseThrow(() -> new ResourceNotFoundException("Account not found"));
-
 
         restaurant.setAccount(account);
 
@@ -103,7 +109,9 @@ public class RestaurantServiceImpl implements RestaurantService {
                     .findByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCase(countryCode, city, pageable)
                     .map(restaurantMapper::mapTo);
         }
-
+        System.out.println(restaurantRepository
+                .findByAddressCountryCodeIgnoreCase(countryCode, pageable)
+                .map(restaurantMapper::mapTo));
         return restaurantRepository
                 .findByAddressCountryCodeIgnoreCase(countryCode, pageable)
                 .map(restaurantMapper::mapTo);
@@ -120,7 +128,12 @@ public class RestaurantServiceImpl implements RestaurantService {
         Page<Restaurant> restaurants = restaurantRepository.findNearbyRestaurants(location, pageable);
 
         if (restaurants.isEmpty()) {
-            return new NearbyRestaurantsResponseDTO(null, null, Page.empty(), true);
+            return NearbyRestaurantsResponseDTO.builder()
+                    .countryCode(null)
+                    .city(null)
+                    .restaurants(Page.empty())
+                    .empty(true)
+                    .build();
         }
 
         String rawCity = restaurants.getContent().getFirst().getAddress().getCity();
@@ -136,7 +149,12 @@ public class RestaurantServiceImpl implements RestaurantService {
                     .replaceAll("\\s+", "-"); // Convierte "A Coruña" en "a-coruna"
         }
 
-        return new NearbyRestaurantsResponseDTO(countryCode, city, restaurants.map(restaurantMapper::mapTo), false);
+        return NearbyRestaurantsResponseDTO.builder()
+                .countryCode(countryCode)
+                .city(city)
+                .restaurants(restaurants.map(restaurantMapper::mapTo))
+                .empty(false)
+                .build();
     }
 
     private Point createPoint(Double latitude, Double longitude) {
@@ -146,4 +164,21 @@ public class RestaurantServiceImpl implements RestaurantService {
         // OJO: En JTS, el orden de los argumentos de Coordinate SIEMPRE es (X, Y) -> (Longitud, Latitud)
         return geometryFactory.createPoint(new Coordinate(longitude, latitude));
     }
+
+    @Override
+    public RestaurantDetailDTO getRestaurantDetail(String countryCode, String city, String slug, User user) {
+        Restaurant restaurant = restaurantRepository.findByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCaseAndSlugIgnoreCase(
+                countryCode,
+                city,
+                slug
+        ).orElseThrow(() -> new ResourceNotFoundException("not-found.restaurant"));
+
+        List<Product> products = productRepository.findByRestaurantId(restaurant.getId());
+
+        return RestaurantDetailDTO.builder()
+                .restaurant(restaurantMapper.mapTo(restaurant))
+                .products(products.stream().map(productMapper::mapTo).toList())
+                .build();
+    }
+
 }

@@ -71,7 +71,7 @@ public class SetupDataLoader implements CommandLineRunner {
             Account savedAdminAccount = accountRepository.save(adminAccount);
 
             Restaurant adminRestaurant = Restaurant.builder()
-                    .name("admin")
+                    .name("Admin Restaurant")
                     .deliveryRadiusMeters(10000.0)
                     .account(savedAdminAccount)
                     .isDefault(true)

@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<Restaurant> findAllByAccount(Account account);
@@ -33,6 +34,10 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     Page<Restaurant> findByAddressCountryCodeIgnoreCase(
             String countryCode,
             Pageable pageable
+    );
+
+    Optional<Restaurant> findByAddressCountryCodeIgnoreCaseAndAddressCityIgnoreCaseAndSlugIgnoreCase(
+            String countryCode, String city, String slug
     );
 
     @Query(value = "SELECT r.* FROM restaurants r " +

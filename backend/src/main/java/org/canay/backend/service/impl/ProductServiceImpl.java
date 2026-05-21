@@ -7,9 +7,9 @@ import org.canay.backend.domain.entity.User;
 import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.ProductRepository;
 import org.canay.backend.service.ProductService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
     private final Mapper<Product, ProductDTO> productMapper;
 
     @Override
-    public Page<ProductDTO> getProductsByRestaurant(Long restaurantId, Pageable pageable, User user) {
-        return productRepository.findByRestaurantId(restaurantId, pageable).map(productMapper::mapTo);
+    public List<ProductDTO> getProductsByRestaurant(Long restaurantId, User user) {
+        return productRepository.findByRestaurantId(restaurantId).stream().map(productMapper::mapTo).toList();
     }
 }

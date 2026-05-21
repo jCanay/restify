@@ -12,6 +12,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/restaurants")
 @RequiredArgsConstructor
@@ -89,6 +91,16 @@ public class RestaurantController {
         return ResponseEntity.ok(restaurantService.getRestaurants(countryCode, city, pageable, user));
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<RestaurantDetailDTO> getRestaurants(
+            @RequestParam String countryCode,
+            @RequestParam String city,
+            @RequestParam String slug,
+            @AuthenticationPrincipal User user
+    ) {
+        return ResponseEntity.ok(restaurantService.getRestaurantDetail(countryCode, city, slug, user));
+    }
+
     @GetMapping("/nearby")
     public ResponseEntity<NearbyRestaurantsResponseDTO> findNearbyRestaurants(
             @RequestParam Double latitude,
@@ -100,11 +112,10 @@ public class RestaurantController {
     }
 
     @GetMapping("/{restaurantId}/products")
-    public ResponseEntity<Page<ProductDTO>> getProductsByRestaurantId(
+    public ResponseEntity<List<ProductDTO>> getProductsByRestaurantId(
             @PathVariable Long restaurantId,
-            Pageable pageable,
             @AuthenticationPrincipal User user
     ) {
-        return ResponseEntity.ok(productService.getProductsByRestaurant(restaurantId, pageable, user));
+        return ResponseEntity.ok(productService.getProductsByRestaurant(restaurantId, user));
     }
 }

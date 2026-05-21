@@ -3,7 +3,7 @@ import "./css/restaurants-navbar.css";
 import { useEffect, useState } from "react";
 import AccountMenu from "@/modules/core/components/AccountMenu/AccountMenu";
 
-export default function RestaurantsNavbar({ city, onInputChange }) {
+export default function RestaurantsNavbar({ placeholder, onInputChange }) {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function RestaurantsNavbar({ city, onInputChange }) {
                     type="search"
                     name=""
                     id=""
-                    placeholder={`Buscar restaurantes${city ? ` en ${capitalize(city)}` : ""}`}
+                    placeholder={placeholder}
                     onChange={(e) => onInputChange(e.target.value)}
                 />
                 <AccountMenu />

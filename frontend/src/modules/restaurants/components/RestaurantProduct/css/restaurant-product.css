@@ -1,0 +1,101 @@
+div.restaurant-product {
+  border-radius: 1.5rem;
+  overflow: hidden;
+  display: flex;
+  gap: 0;
+  flex-direction: column;
+  background-color: transparent;
+
+  & button.close {
+    position: absolute;
+    background-color: var(--color-white);
+    right: 0.5rem;
+    top: 0.5rem;
+    border-radius: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-neutral-200);
+    }
+  }
+
+  & h2 {
+    font-size: 16pt;
+    font-weight: 600;
+  }
+
+  & img {
+    height: 17.5rem;
+    object-fit: cover;
+  }
+
+  & div.content {
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+
+    & span.price {
+      font-weight: 600;
+      font-size: 14pt;
+      margin-bottom: 0.5rem;
+    }
+
+    & section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+
+      & div.quantity {
+        align-self: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        background-color: var(--light200);
+        border-radius: 5rem;
+        overflow: hidden;
+        width: fit-content;
+
+        & span {
+          font-weight: 500;
+        }
+
+        & button {
+          padding: 0.5rem;
+          cursor: pointer;
+
+          &:disabled {
+            color: var(--color-neutral-500);
+            cursor: not-allowed;
+          }
+
+          &:hover:not(:disabled) {
+            background-color: var(--light300);
+            border-radius: 5rem;
+          }
+        }
+      }
+
+      & button.add-to-cart {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border-radius: 10rem;
+        padding: 0.5rem 1.5rem;
+        flex-grow: 1;
+        cursor: pointer;
+        font-size: 11pt;
+        font-weight: 500;
+
+        &:hover {
+          background-color: rgb(
+            from #a8201a calc(r - 2) calc(g - 2) calc(b - 2)
+          );
+        }
+      }
+    }
+  }
+}

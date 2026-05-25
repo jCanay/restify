@@ -1,0 +1,90 @@
+article.product-card {
+  border: solid 1px var(--light200);
+  border-radius: 1rem;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  transition:
+    scale 750ms var(--transition-bounce),
+    rotate 750ms var(--transition-bounce);
+
+  &:active:not(:has(button:hover)) {
+    scale: 0.975;
+    rotate: 1deg;
+  }
+
+  &:hover:not(:has(button:hover)) {
+    background-color: var(--color-gray-100);
+  }
+
+  & div.content {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    flex: 1;
+    gap: 0.5rem;
+
+    & > header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    & h4 {
+      font-weight: 450;
+    }
+
+    & p {
+      color: var(--color-gray-500);
+      font-size: 10pt;
+    }
+  }
+
+  & img {
+    width: 10rem;
+    aspect-ratio: 1;
+    height: auto;
+    object-fit: cover;
+  }
+
+  & > button {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background-color: var(--color-white);
+    border-radius: 100%;
+    padding: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 5px 0 #0003;
+    transition: scale 750ms var(--transition-bounce);
+
+    &:hover {
+      background-color: var(--light200);
+    }
+
+    &:active {
+      scale: 0.9;
+      rotate: 10deg;
+    }
+  }
+
+  & .stepper {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+    background-color: #fff;
+    cursor: default;
+
+    & button:hover:not(:disabled) {
+      background-color: var(--light200);
+      border-radius: 5rem;
+
+      &.delete {
+        color: var(--color-red-600);
+        background-color: var(--color-red-200);
+      }
+    }
+  }
+}

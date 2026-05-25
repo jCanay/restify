@@ -8,56 +8,58 @@ import { $loginStore } from "../../contexts/loginStore";
 import { useAuth } from "../../hooks/useAuth";
 import { Spinner } from "@/components/ui/spinner";
 
-function LoginModal({ setOpen = () => {}, onLogged = () => {} }) {
-    const [shakeTrigger, setShakeTrigger] = useState(0);
-    const { identifier, password } = useStore($loginStore);
-    const { login, loading, error } = useAuth();
+function LoginModal({ setOpen = () => { }, onLogged = () => { } }) {
+	const [shakeTrigger, setShakeTrigger] = useState(0);
+	const { identifier, password } = useStore($loginStore);
+	const { login, loading, error } = useAuth();
 
-    const isValid = () => {
-        return identifier.trim().length > 0 && password.trim().length > 0;
-    };
+	const isValid = () => {
+		return identifier.trim().length > 0 && password.trim().length > 0;
+	};
 
-    const handleContinue = async (e) => {
-        e.preventDefault();
+	const handleContinue = async (e) => {
+		e.preventDefault();
 
-        setShakeTrigger(!isValid() ? (prev) => prev + 1 : 0);
+		setShakeTrigger(!isValid() ? (prev) => prev + 1 : 0);
 
-        if (!isValid()) return;
+		if (!isValid()) return;
 
-        try {
-            await login({ identifier, password });
+		try {
+			await login({ identifier, password });
 
-            setOpen(false);
-            onLogged(true);
-        } catch (err) {}
-    };
+			setOpen(false);
+			onLogged(true);
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
-    return (
-        <DialogContent className="login-modal">
-            <aside>
-                <img src={darkBg} alt="" />
-            </aside>
-            <div className="login-container">
-                <div className="step-wrapper">
-                    <LoginForm
-                        isValid={isValid()}
-                        shakeTrigger={shakeTrigger}
-                        error={error}
-                    />
-                    <button
-                        form="login-form"
-                        disabled={loading}
-                        className="continue"
-                        onClick={handleContinue}
-                        type="submit"
-                    >
-                        <span>Iniciar sesión</span>
-                        {loading && <Spinner data-icon="inline-start" />}
-                    </button>
-                </div>
-            </div>
-        </DialogContent>
-    );
+	return (
+		<DialogContent className="login-modal">
+			<aside>
+				<img src={darkBg} alt="" />
+			</aside>
+			<div className="login-container">
+				<div className="step-wrapper">
+					<LoginForm
+						isValid={isValid()}
+						shakeTrigger={shakeTrigger}
+						error={error}
+					/>
+					<button
+						form="login-form"
+						disabled={loading}
+						className="continue"
+						onClick={handleContinue}
+						type="submit"
+					>
+						<span>Iniciar sesión</span>
+						{loading && <Spinner data-icon="inline-start" />}
+					</button>
+				</div>
+			</div>
+		</DialogContent>
+	);
 }
 
 export default LoginModal;

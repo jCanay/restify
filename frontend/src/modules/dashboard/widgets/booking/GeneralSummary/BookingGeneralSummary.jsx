@@ -1,6 +1,6 @@
 import { GripVertical } from "lucide-react";
 import "./css/booking-general-summary.css";
-import Chart from "../Chart";
+import Chart from "../../Chart";
 
 function BookingGeneralSummary() {
 	return (

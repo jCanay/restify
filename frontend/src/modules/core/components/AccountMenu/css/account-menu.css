@@ -1,26 +1,28 @@
 .account-menu {
   display: flex;
   align-items: center;
-  gap: 1em;
+  gap: 0.5em;
 
   & button:not(.user-btn) {
     text-wrap: nowrap;
-    border-radius: 0.5rem;
+    border-radius: 2rem;
     background-color: transparent;
-    border: solid black 1.5px;
     text-rendering: optimizeLegibility;
-    padding: 0.5em 1em;
+    padding: 0.5em 1.25em;
     font-size: 12pt;
 
     &:hover {
       cursor: pointer;
-      background-color: black;
-      color: white;
+      background-color: var(--light200);
     }
 
     &.register-btn {
-      background-color: black;
-      color: white;
+      background-color: var(--light200);
+      color: var(--color-black);
+
+      &:hover {
+        background-color: var(--light300);
+      }
 
       &:focus {
         outline: solid black 2px;

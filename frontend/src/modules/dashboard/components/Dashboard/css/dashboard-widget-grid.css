@@ -1,56 +1,56 @@
 div.dashboard-widget-grid {
-    & .grid {
-        margin: -2rem;
-        height: 100%;
+  & .grid {
+    margin: -2rem;
+    height: 100%;
 
-        & .react-grid-placeholder {
-            background: var(--light300);
-            border-radius: 1rem;
-            opacity: 0.5;
-            border: 2px dashed #00000055;
-            z-index: 2;
-            user-select: none;
-            transition-duration: 1000ms;
-            transition-property: width, height, transform;
-            transition-timing-function: var(--transition-glide);
-        }
-
-        & .react-grid-item {
-            touch-action: none;
-        }
-
-        & .react-grid-item.react-draggable-dragging {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            z-index: 10;
-            transition: box-shadow 200ms;
-            cursor: grabbing;
-            user-select: none;
-        }
-
-        & .react-grid-item.resizing {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-            user-select: none;
-        }
-
-        & .react-resizable-handle {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            cursor: se-resize;
-            z-index: 10;
-            background: none;
-            user-select: none;
-        }
-
-        & .react-resizable-handle::after {
-            content: "";
-            position: absolute;
-            right: 7.5px;
-            bottom: 7.5px;
-        }
-
-        & div {
-            border-radius: 1rem;
-        }
+    & .react-grid-placeholder {
+      background: var(--light300);
+      border-radius: 1rem;
+      opacity: 0.5;
+      border: 2px dashed #00000055;
+      z-index: 2;
+      user-select: none;
+      transition-duration: 1000ms;
+      transition-property: width, height, transform;
+      transition-timing-function: var(--transition-glide);
     }
+
+    & .react-grid-item {
+      touch-action: none;
+    }
+
+    & .react-grid-item.react-draggable-dragging {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      z-index: 10;
+      transition: box-shadow 200ms;
+      cursor: grabbing;
+      user-select: none;
+    }
+
+    & .react-grid-item.resizing {
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      user-select: none;
+    }
+
+    & .react-resizable-handle {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      cursor: se-resize;
+      z-index: 10;
+      background: none;
+      user-select: none;
+    }
+
+    & .react-resizable-handle::after {
+      content: "";
+      position: absolute;
+      right: 7.5px;
+      bottom: 7.5px;
+    }
+
+    & div {
+      border-radius: 1rem;
+    }
+  }
 }

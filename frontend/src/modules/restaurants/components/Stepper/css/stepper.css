@@ -1,0 +1,45 @@
+div.stepper {
+  align-self: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--light200);
+  border-radius: 5rem;
+  overflow: hidden;
+  width: 6.75rem;
+  transition: width 150ms;
+
+  z-index: 10;
+
+  &.zero {
+    width: fit-content;
+  }
+
+  & span {
+    font-weight: 500;
+  }
+
+  & button {
+    padding: 0.5rem;
+    cursor: pointer;
+
+    &.delete {
+      padding: 0.7rem;
+    }
+
+    &:disabled {
+      color: var(--color-neutral-500);
+      cursor: not-allowed;
+    }
+
+    &:hover:not(:disabled) {
+      background-color: var(--light300);
+      border-radius: 5rem;
+
+      &.delete {
+        color: var(--color-red-600);
+        background-color: var(--color-red-200);
+      }
+    }
+  }
+}

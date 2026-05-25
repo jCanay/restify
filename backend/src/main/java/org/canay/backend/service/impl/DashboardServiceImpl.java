@@ -69,44 +69,41 @@ public class DashboardServiceImpl implements DashboardService {
         Dashboard savedDashboard = dashboardRepository.save(dashboard);
         restaurant.setDashboard(savedDashboard);
 
-        UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
-                .orElseThrow(() -> new RuntimeException(messageSource.getMessage("not-found.user.role", null,
-                        LocaleContextHolder.getLocale())));
-
         // Crear las páginas
-        DashboardPage reservasPage = createPage("Reservas", "bookings", "", 2, savedDashboard, null);
-        reservasPage.setTabs(createPageTabs("""
-                [{"name": "Historial","path": "history"},{"name": "Estadísticas","path": "stats"}]
+        DashboardPage homePage = createPage("Inicio", "", "", 1, savedDashboard, null);
+        homePage.setTabs(createPageTabs("""
+                [{"name": "","path": ""}]
                 """));
-        DashboardPage savedReservasPage = dashboardPageRepository.save(reservasPage);
+        DashboardPage savedHomePage = dashboardPageRepository.save(homePage);
 
-        // Crear y guardar el widget vinculado a la página guardada
-        Optional<Widget> savedReservasWidgetOpt = widgetService.createWidgetIfNotFound(
-                WidgetType.CRUD_MANAGER,
-                savedReservasPage,
-                Set.of(adminRole),
-                """
-                        {
-                            "lg": {"x": 0,"y": 0,"w": 1,"h": 1},
-                            "md": {"x": 0,"y": 0,"w": 1,"h": 1},
-                            "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
-                            "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
-                        }
-                        """,
-                role
-        );
+        DashboardPage bookingPage = createPage("Reservas", "bookings", "", 2, savedDashboard, null);
+        bookingPage.setTabs(createPageTabs("""
+                [{"name": "","path": ""},{"name": "Historial","path": "history"},{"name": "Estadísticas","path": "stats"}]
+                """));
+        DashboardPage savedBookingPage = dashboardPageRepository.save(bookingPage);
+        savedBookingPage.setWidgets(createBookingWidgets(savedBookingPage, role));
 
-        List<Widget> widgets = new ArrayList<>();
-        savedReservasWidgetOpt.ifPresent(widgets::add);
-        savedReservasPage.setWidgets(widgets);
+        DashboardPage orderPage = createPage("Pedidos", "orders", "", 3, savedDashboard, null);
+        orderPage.setTabs(createPageTabs("""
+                [{"name": "","path": ""},{"name": "Historial","path": "history"},{"name": "Estadísticas","path": "stats"}]
+                """));
+        DashboardPage savedOrderPage = dashboardPageRepository.save(orderPage);
+        savedOrderPage.setWidgets(createOrderWidgets(savedOrderPage, role));
 
-        // Agrupar las páginas
+        DashboardPage menuPage = createPage("Menú", "menu", "", 5, savedDashboard, null);
+        menuPage.setTabs(createPageTabs("""
+                [{"name": "Products","path": ""}, {"name": "Estadísticas","path": "stats"}]
+                """));
+        DashboardPage savedMenuPage = dashboardPageRepository.save(menuPage);
+        savedMenuPage.setWidgets(createMenuWidgets(savedMenuPage, role));
+
+        // Agrupar y ordenar las páginas
         List<DashboardPage> pages = new ArrayList<>(List.of(
-                createPage("Inicio", "", "", 1, dashboard, List.of()),
-                savedReservasPage,
-                createPage("Pedidos", "orders", "", 3, dashboard, List.of()),
+                savedHomePage,
+                savedBookingPage,
+                savedOrderPage,
                 createPage("Restaurante", "restaurant", "", 4, dashboard, List.of()),
-                createPage("Menú", "menu", "", 5, dashboard, List.of()),
+                savedMenuPage,
                 createPage("Plantilla", "staff", "", 6, dashboard, List.of())
         ));
         pages.sort(Comparator.comparingLong(DashboardPage::getSortOrder));
@@ -143,5 +140,201 @@ public class DashboardServiceImpl implements DashboardService {
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private List<Widget> createBookingWidgets(DashboardPage page, UserRole role) {
+        UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("not-found.user.role"));
+
+        UserRole ownerRole = userRoleRepository.findByName("ROLE_OWNER")
+                .orElseThrow(() -> new ResourceNotFoundException("not-found.user.role"));
+
+        List<Widget> widgets = new ArrayList<>();
+
+        Optional<Widget> wBookingCrud = widgetService.createWidgetIfNotFound(
+                WidgetType.CRUD_MANAGER,
+                page,
+                Set.of(adminRole),
+                """
+                        {
+                            "lg": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "md": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wBookingCrud.ifPresent(widgets::add);
+
+        Optional<Widget> wBookingGeneral = widgetService.createWidgetIfNotFound(
+                WidgetType.BOOKING_GENERAL_SUMMARY,
+                page,
+                Set.of(adminRole, ownerRole),
+                """
+                        {
+                            "lg": {"x": 1,"y": 0,"w": 1,"h": 1},
+                            "md": {"x": 1,"y": 0,"w": 1,"h": 1},
+                            "sm": {"x": 1,"y": 0,"w": 1,"h": 1},
+                            "xs": {"x": 1,"y": 0,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wBookingGeneral.ifPresent(widgets::add);
+
+        Optional<Widget> wBookingLast = widgetService.createWidgetIfNotFound(
+                WidgetType.BOOKING_LAST,
+                page,
+                Set.of(adminRole, ownerRole),
+                """
+                        {
+                            "lg": {"x": 2,"y": 0,"w": 1,"h": 2},
+                            "md": {"x": 2,"y": 0,"w": 1,"h": 2},
+                            "sm": {"x": 2,"y": 0,"w": 1,"h": 2},
+                            "xs": {"x": 2,"y": 0,"w": 1,"h": 2}
+                        }
+                        """,
+                role
+        );
+        wBookingLast.ifPresent(widgets::add);
+
+        Optional<Widget> wBookingToday = widgetService.createWidgetIfNotFound(
+                WidgetType.BOOKING_TODAY,
+                page,
+                Set.of(adminRole, ownerRole),
+                """
+                        {
+                            "lg": {"x": 0,"y": 0,"w": 2,"h": 1, "minW": 2},
+                            "md": {"x": 0,"y": 0,"w": 2,"h": 1, "minW": 2},
+                            "sm": {"x": 0,"y": 0,"w": 2,"h": 1, "minW": 2},
+                            "xs": {"x": 0,"y": 0,"w": 2,"h": 1, "minW": 2}
+                        }
+                        """,
+                role
+        );
+        wBookingToday.ifPresent(widgets::add);
+
+        return widgets;
+    }
+
+    private List<Widget> createOrderWidgets(DashboardPage page, UserRole role) {
+        UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("not-found.user.role"));
+
+        UserRole ownerRole = userRoleRepository.findByName("ROLE_OWNER")
+                .orElseThrow(() -> new ResourceNotFoundException("not-found.user.role"));
+
+        List<Widget> widgets = new ArrayList<>();
+
+        Optional<Widget> wOrderCrud = widgetService.createWidgetIfNotFound(
+                WidgetType.CRUD_MANAGER,
+                page,
+                Set.of(adminRole),
+                """
+                        {
+                            "lg": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "md": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wOrderCrud.ifPresent(widgets::add);
+
+        Optional<Widget> wOrderGeneral = widgetService.createWidgetIfNotFound(
+                WidgetType.ORDER_GENERAL_SUMMARY,
+                page,
+                Set.of(adminRole, ownerRole),
+                """
+                        {
+                            "lg": {"x": 1,"y": 0,"w": 1,"h": 1},
+                            "md": {"x": 1,"y": 0,"w": 1,"h": 1},
+                            "sm": {"x": 1,"y": 0,"w": 1,"h": 1},
+                            "xs": {"x": 1,"y": 0,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wOrderGeneral.ifPresent(widgets::add);
+
+        Optional<Widget> wOrderBest = widgetService.createWidgetIfNotFound(
+                WidgetType.ORDER_BEST_SELLING,
+                page,
+                Set.of(adminRole, ownerRole),
+                """
+                        {
+                            "lg": {"x": 1,"y": 1,"w": 1,"h": 1},
+                            "md": {"x": 1,"y": 1,"w": 1,"h": 1},
+                            "sm": {"x": 1,"y": 1,"w": 1,"h": 1},
+                            "xs": {"x": 1,"y": 1,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wOrderBest.ifPresent(widgets::add);
+
+        Optional<Widget> wOrderLast = widgetService.createWidgetIfNotFound(
+                WidgetType.ORDER_LAST,
+                page,
+                Set.of(adminRole, ownerRole),
+                """
+                        {
+                            "lg": {"x": 2,"y": 0,"w": 1,"h": 2},
+                            "md": {"x": 2,"y": 0,"w": 1,"h": 2},
+                            "sm": {"x": 2,"y": 0,"w": 1,"h": 2},
+                            "xs": {"x": 2,"y": 0,"w": 1,"h": 2}
+                        }
+                        """,
+                role
+        );
+        wOrderLast.ifPresent(widgets::add);
+
+        Optional<Widget> wOrderSales = widgetService.createWidgetIfNotFound(
+                WidgetType.ORDER_SALES_PERFORMANCE,
+                page,
+                Set.of(adminRole, ownerRole),
+                """
+                        {
+                            "lg": {"x": 0,"y": 1,"w": 1,"h": 1},
+                            "md": {"x": 0,"y": 1,"w": 1,"h": 1},
+                            "sm": {"x": 0,"y": 1,"w": 1,"h": 1},
+                            "xs": {"x": 0,"y": 1,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wOrderSales.ifPresent(widgets::add);
+
+        return widgets;
+    }
+
+    private List<Widget> createMenuWidgets(DashboardPage page, UserRole role) {
+        UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("not-found.user.role"));
+
+        UserRole ownerRole = userRoleRepository.findByName("ROLE_OWNER")
+                .orElseThrow(() -> new ResourceNotFoundException("not-found.user.role"));
+
+        List<Widget> widgets = new ArrayList<>();
+
+        Optional<Widget> wOrderCrud = widgetService.createWidgetIfNotFound(
+                WidgetType.CRUD_MANAGER,
+                page,
+                Set.of(adminRole),
+                """
+                        {
+                            "lg": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "md": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wOrderCrud.ifPresent(widgets::add);
+
+        return widgets;
     }
 }

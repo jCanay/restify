@@ -42,6 +42,7 @@ import { useAuth } from "../../auth/hooks/useAuth";
 import { showToast } from "../components/NotificationToast";
 import DashboardLinks from "../components/Dashboard/DashboardLinks";
 import { useDashboard } from "../hooks/useDashboard";
+import { $dashboardStore } from "../contexts/dashboardStore";
 
 function Dashboard() {
 	const userPfp = "https://i.pravatar.cc/100?u=24";
@@ -54,6 +55,7 @@ function Dashboard() {
 	});
 	const { user, account, restaurants } = useStore($userStore) || {};
 	const { loadDashboard, getUsers, loading, error } = useDashboard();
+	const { dashboard } = useStore($dashboardStore) || {};
 	const { logout } = useAuth();
 
 	const roles = {
@@ -91,6 +93,26 @@ function Dashboard() {
 		logout();
 	};
 
+	const handleSearch = (e) => {
+		const targetType = "BOOKING_TODAY";
+
+		const widgetWithParentData = dashboard.pages
+			.flatMap(view =>
+				(view.widgets || []).map(widget => ({
+					...widget,
+					parentTitle: view.title,
+					slug: view.slug
+				}))
+			)
+			.find(widget => widget.type.toLowerCase().replaceAll("_", " ").includes(e.target.value.toLowerCase()));
+
+		const matchedViews = dashboard.pages.filter(view =>
+			view.widgets?.some(widget => widget.type.toLowerCase().replaceAll("_", " ").includes(e.target.value.toLowerCase()))
+		);
+
+		console.log(matchedViews);
+	};
+
 	return (
 		<Group
 			defaultLayout={defaultLayout}
@@ -122,7 +144,7 @@ function Dashboard() {
 					<DashboardLinks />
 				</ul>
 				<div className="notifications">
-					enoo
+					Notificaciones
 				</div>
 				<hr />
 				<DropdownMenu>
@@ -212,7 +234,7 @@ function Dashboard() {
 			{/* <Separator className="separator" /> */}
 			<Panel className="main">
 				<div className="topbar">
-					<search>
+					<search onChange={handleSearch}>
 						<button>
 							<Search size={22} />
 						</button>

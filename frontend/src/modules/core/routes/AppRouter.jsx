@@ -8,6 +8,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import { useAuth } from "../../auth/hooks/useAuth";
 import { $userStore } from "../../dashboard/contexts/userStore";
 import { useStore } from "@nanostores/react";
+import { ScrollTop } from "../components/Scroll/ScrollTop";
 
 function AppRouter() {
 	const { authenticated, needsOnboarding } = useAuth();
@@ -18,6 +19,7 @@ function AppRouter() {
 	return (
 		<Routes>
 			{/* <Route path="*" element={<h1>Not Found</h1>} /> */}
+
 			<Route path="/" element={<Homepage />} />
 			{RestaurantRoutes}
 			{AuthRoutes}

@@ -4,55 +4,66 @@ import BookingCrudManager from "../booking/CrudManager/BookingCrudManager";
 import "./css/crud-manager.css";
 import Widget from "./Widget";
 import { useState } from "react";
+import OrderCrudManager from "../order/CrudManager/OrderCrudManager";
 
 function CrudManager({ pageId }) {
-    const [activeType, setActiveType] = useState(null);
-    const [open, setOpen] = useState(false);
-    const names = {
-        bookings: {
-            singular: "reserva",
-            plural: "reservas",
-            content: BookingCrudManager,
-        },
-    };
+	const [activeType, setActiveType] = useState(null);
+	const [open, setOpen] = useState(false);
+	const names = {
+		bookings: {
+			singular: "reserva",
+			plural: "reservas",
+			content: BookingCrudManager,
+		},
+		orders: {
+			singular: "pedido",
+			plural: "pedidos",
+			content: OrderCrudManager,
+		},
+		menu: {
+			singular: "menú",
+			plural: "producto",
+			content: OrderCrudManager,
+		},
+	};
 
-    const Content = names[pageId]?.content;
-    const openModal = (type) => {
-        setActiveType(type);
-        setOpen(true);
-    };
+	const Content = names[pageId]?.content;
+	const openModal = (type) => {
+		setActiveType(type);
+		setOpen(true);
+	};
 
-    return (
-        <Widget
-            className={"crud-manager"}
-            title={`Gestionar ${names[pageId]?.plural ?? "[name]"}`}
-        >
-            <ul>
-                <button className="box" onClick={() => openModal("add")}>
-                    <Plus /> Añadir {names[pageId]?.singular ?? "[name]"}
-                </button>
-                <button className="box" onClick={() => openModal("search")}>
-                    <Search /> Buscar {names[pageId]?.singular ?? "[name]"}
-                </button>
-                <button className="box" onClick={() => openModal("edit")}>
-                    <Pencil /> Actualizar {names[pageId]?.singular ?? "[name]"}
-                </button>
-                <button className="box" onClick={() => openModal("delete")}>
-                    <Trash /> Eliminar {names[pageId]?.singular ?? "[name]"}
-                </button>
+	return (
+		<Widget
+			className={"crud-manager"}
+			title={`Gestionar ${names[pageId]?.plural ?? "[name]"}`}
+		>
+			<ul>
+				<button className="box" onClick={() => openModal("add")}>
+					<Plus /> Añadir {names[pageId]?.singular ?? "[name]"}
+				</button>
+				<button className="box" onClick={() => openModal("search")}>
+					<Search /> Buscar {names[pageId]?.singular ?? "[name]"}
+				</button>
+				<button className="box" onClick={() => openModal("edit")}>
+					<Pencil /> Actualizar {names[pageId]?.singular ?? "[name]"}
+				</button>
+				<button className="box" onClick={() => openModal("delete")}>
+					<Trash /> Eliminar {names[pageId]?.singular ?? "[name]"}
+				</button>
 
-                <Dialog open={open} onOpenChange={setOpen}>
-                    {activeType && (
-                        <Content
-                            type={activeType}
-                            open={open}
-                            setOpen={setOpen}
-                        />
-                    )}
-                </Dialog>
-            </ul>
-        </Widget>
-    );
+				<Dialog open={open} onOpenChange={setOpen}>
+					{activeType && (
+						<Content
+							type={activeType}
+							open={open}
+							setOpen={setOpen}
+						/>
+					)}
+				</Dialog>
+			</ul>
+		</Widget>
+	);
 }
 
 export default CrudManager;

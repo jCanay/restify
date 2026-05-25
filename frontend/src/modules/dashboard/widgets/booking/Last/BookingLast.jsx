@@ -16,61 +16,61 @@ function BookingLast() {
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T13:18:44+01:00"}
 					bookingDateTime={"2026-03-09T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T13:25:44+01:00"}
 					bookingDateTime={"2026-03-10T14:30:00+01:00"}
-					status={"canceled"}
+					status={"CANCELLED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T10:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-07T13:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-02T13:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T13:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T13:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T13:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T13:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 				<BookingLastCard
 					name={"Enooc Domínguez"}
 					createdAt={"2026-03-09T13:18:44+01:00"}
 					bookingDateTime={"2026-03-12T14:30:00+01:00"}
-					status={"accepted"}
+					status={"ACCEPTED"}
 				></BookingLastCard>
 
 			</section>

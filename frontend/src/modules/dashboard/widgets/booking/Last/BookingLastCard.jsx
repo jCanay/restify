@@ -6,23 +6,23 @@ import {
 	Clock,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
-import RelativeTime from "../../components/RelativeTime";
+import RelativeTime from "../../../components/RelativeTime";
 import "./css/booking-last-card.css";
 
 const STATUS_CONFIG = {
-	accepted: {
+	ACCEPTED: {
 		label: "Aceptada",
 		className:
 			"bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
 		icon: <BadgeCheck strokeWidth={3.25} />,
 	},
-	canceled: {
+	CANCELLED: {
 		label: "Cancelada",
 		className:
 			"bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
 		icon: <BadgeX strokeWidth={3.25} />,
 	},
-	unknown: {
+	UNKNOWN: {
 		label: "Desconocido",
 		className:
 			"bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300",
@@ -30,8 +30,19 @@ const STATUS_CONFIG = {
 	},
 };
 
-function BookingLastCard({ name, status, createdAt, bookingDateTime }) {
-	const config = STATUS_CONFIG[status] || STATUS_CONFIG.unknown;
+/**
+ * 
+ * @param {object} props
+ * @param {"ACCEPTED" | "CANCELLED"} [props.status]
+ * @param {string} [props.name]
+ * @param {Date} [props.createdAt]
+ * @param {Date} [props.bookingDateTime]
+ * @param {"compact" | "normal"} [props.size]
+ * @param {boolean} [props.hideDay]
+ * @param {boolean} [props.hideRelativeTime]
+ */
+function BookingLastCard({ name, status, createdAt, bookingDateTime, size = "normal", hideDay = false, hideRelativeTime = false }) {
+	const config = STATUS_CONFIG[status] || STATUS_CONFIG.UNKNOWN;
 	const bookingDate = new Date(bookingDateTime);
 	const now = new Date();
 
@@ -40,14 +51,14 @@ function BookingLastCard({ name, status, createdAt, bookingDateTime }) {
 		d1.getMonth() === d2.getMonth() &&
 		d1.getFullYear() === d2.getFullYear();
 
-	// English: Calculate relative dates
+	// Calculate relative dates
 	const yesterday = new Date(now);
 	yesterday.setDate(now.getDate() - 1);
 
 	const tomorrow = new Date(now);
 	tomorrow.setDate(now.getDate() + 1);
 
-	// English: Determine the label
+	// Determine the label
 	let formattedDate;
 	if (isSameDay(bookingDate, now)) {
 		formattedDate = "Hoy";
@@ -68,23 +79,23 @@ function BookingLastCard({ name, status, createdAt, bookingDateTime }) {
 	}).format(bookingDate);
 
 	return (
-		<li className="booking-last-card">
+		<li className={`booking-last-card ${hideRelativeTime ? "relative-time-hidden" : ""}`}>
 			<section className="head">
-				<div className="time-ago">
+				{!hideRelativeTime && <div className="time-ago">
 					<Clock strokeWidth={2.5} />
 					<span><RelativeTime timestamp={createdAt} /></span>
-				</div>
-				<Badge className={`badge ${config.className}`}>
-					{config.icon}
-					{config.label}
+				</div>}
+				<Badge className={`badge ${config?.className} ${size === "compact" ? "compact" : ""}`}>
+					{config?.icon}
+					{size !== "compact" && config?.label}
 				</Badge>
 			</section>
 			<h4>{name}</h4>
 			<section className="datetime">
-				<div className="date">
+				{!hideDay && <div className="date">
 					<Calendar strokeWidth={2.5} />
 					{formattedDate}
-				</div>
+				</div>}
 				<div className="time">
 					<Clock strokeWidth={2.5} />
 					{formattedTime}

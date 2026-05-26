@@ -1,0 +1,53 @@
+---
+config:
+  theme: forest
+  fontFamily: '''Inter Variable'', sans-serif'
+---
+gantt
+    title Restify 2026 (16/02 --> 31/05)
+    dateFormat DD-MM-YYYY
+    axisFormat %d-%m
+
+    section Definición
+        Planificación          :active, a1, 16-02-2026, 2d 
+        Análisis de requisitos     :a2, after a1, 4d
+    section Análisis y diseño
+        Análisis y diseño : vert, v1, after a2, 1m
+        Software y tecnologías : a3, after a2, 2d
+        Modelo Entidad-Relación : after a3, 2d
+        Modelo Relacional : a4, after a3, 2d
+        Diagrama de clases : a5, after a4, 2d
+        Diagramas de Casos de uso : after a5, 3d
+        Diagramas de Secuencia: a6, after a5, 5d
+        Diseño de interfaz (mockups): a7, after a6, 7d
+    section Desarrollo Backend
+        Desarrollo : vert, v1, after a7, 2d
+        Configuración Spring Boot + JWT : a8, after a7, 7d
+        Desarrollo de endpoints y servicios: a9, after a8, 20d
+        Configuración WebSockets : a10, after a9, 7d
+        API de Mapas/GPS : a11, after a10, 4d
+        Traducción con i18n : a12, after a11, 4d
+        Carga de datos : a13, after a12, 3d
+        Comprobación requisitos : a14, after a13, 4d
+    section Desarrollo Frontend
+        Configuración React + Tailwind : a108, after a7, 2d
+        Autenticación y setup : a109, after a108, 5d
+        Dashboard : a110, after a109, 16d
+        Landing page : a111, after a110, 6d
+        Motor de búsqueda: a112, after a111, 5d
+        Página de restaurante: a113, after a112, 6d
+        Pasarela de pagos : a114, after a113, 4d
+        Comprobación requisitos : after a114, 5d
+    section Implementacion
+        Implementación : vert, v1, after a14, 2d
+        Diagrama de despliegue : a15, after a14, 1d
+        Despliegue: a16, after a15, 4d
+        Depuración: a17, after a16, 5d
+    section Documentación
+        Documentación : vert, v1, after a17, 2d
+        API Swagger: a18, after a17, 2d
+        React JSDoc: a19, after a18, 4d
+        Manual de usuario: a20, after a19, 5d
+        Manual de instalación: a21, after a20, 5d
+        Memoria: a22, after a21, 3d
+        Presentación: after a22, 2d

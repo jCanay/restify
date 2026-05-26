@@ -1,0 +1,1691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="1275px"
+	height="745px" viewBox="-0.5 -0.5 1275 745"
+	animation="{&quot;meta&quot;:{&quot;version&quot;:20230504,&quot;patch&quot;:1},&quot;page&quot;:{&quot;animationInfo&quot;:{}},&quot;infos&quot;:[{&quot;cell&quot;:{&quot;id&quot;:&quot;0&quot;,&quot;parentId&quot;:null,&quot;childrenIds&quot;:[&quot;1&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:null,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;1&quot;,&quot;parentId&quot;:&quot;0&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;mgmv79S6W2BxHVh3LVs6-85&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:null,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;parentId&quot;:&quot;1&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-57&quot;,&quot;mgmv79S6W2BxHVh3LVs6-84&quot;,&quot;mgmv79S6W2BxHVh3LVs6-72&quot;,&quot;mgmv79S6W2BxHVh3LVs6-66&quot;,&quot;mgmv79S6W2BxHVh3LVs6-1&quot;,&quot;mgmv79S6W2BxHVh3LVs6-91&quot;,&quot;mgmv79S6W2BxHVh3LVs6-94&quot;,&quot;mgmv79S6W2BxHVh3LVs6-101&quot;,&quot;mgmv79S6W2BxHVh3LVs6-110&quot;,&quot;mgmv79S6W2BxHVh3LVs6-111&quot;,&quot;mgmv79S6W2BxHVh3LVs6-117&quot;,&quot;mgmv79S6W2BxHVh3LVs6-118&quot;,&quot;mgmv79S6W2BxHVh3LVs6-119&quot;,&quot;mgmv79S6W2BxHVh3LVs6-122&quot;,&quot;mgmv79S6W2BxHVh3LVs6-123&quot;,&quot;mgmv79S6W2BxHVh3LVs6-124&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Node&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;DeviceNode\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-57&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-53&quot;,&quot;mgmv79S6W2BxHVh3LVs6-60&quot;,&quot;mgmv79S6W2BxHVh3LVs6-63&quot;,&quot;mgmv79S6W2BxHVh3LVs6-112&quot;,&quot;mgmv79S6W2BxHVh3LVs6-116&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Node&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Node\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-53&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-57&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-58&quot;,&quot;mgmv79S6W2BxHVh3LVs6-59&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Node&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;ExecutionEnvironmentNode\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-58&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-53&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Artifact&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Artifact\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-59&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-53&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Component&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Component\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-60&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-57&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-61&quot;,&quot;mgmv79S6W2BxHVh3LVs6-62&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Node&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;ExecutionEnvironmentNode\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-61&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-60&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Artifact&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Artifact\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-62&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-60&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Component&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Component\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-63&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-57&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-64&quot;,&quot;mgmv79S6W2BxHVh3LVs6-92&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Node&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;ExecutionEnvironmentNode\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-64&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-63&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Artifact&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Artifact\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-92&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-63&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Component&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Component\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-112&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-57&quot;,&quot;childrenIds&quot;:[],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Dependency&quot;,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Dependency\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-116&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-57&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;GeneralPalette\&quot;,\&quot;paletteUiId\&quot;:\&quot;general\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;DirectionalConnector\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-84&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-79&quot;,&quot;mgmv79S6W2BxHVh3LVs6-80&quot;,&quot;mgmv79S6W2BxHVh3LVs6-81&quot;,&quot;mgmv79S6W2BxHVh3LVs6-83&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:null,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:{&quot;name&quot;:&quot;Element&quot;,&quot;startTime&quot;:1,&quot;duration&quot;:1,&quot;loopForever&quot;:false,&quot;animations&quot;:[{&quot;id&quot;:&quot;dAQZpnmHysSc_wIK&quot;,&quot;startTime&quot;:0,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null},{&quot;id&quot;:&quot;dAQZpnmHysSc_wIL&quot;,&quot;startTime&quot;:1.5,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null}]}},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-79&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-84&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;DeploymentSpecification&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;DeploymentSpecification\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-80&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-84&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Note&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Note\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-81&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-84&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Note&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Note\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-83&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-84&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Note&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Note\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-72&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-68&quot;,&quot;mgmv79S6W2BxHVh3LVs6-71&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:null,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:{&quot;name&quot;:&quot;Element&quot;,&quot;startTime&quot;:1,&quot;duration&quot;:1,&quot;loopForever&quot;:false,&quot;animations&quot;:[{&quot;id&quot;:&quot;ySWJpnmHysSc_wHf&quot;,&quot;startTime&quot;:0,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null},{&quot;id&quot;:&quot;ySWJpnmHysSc_wHg&quot;,&quot;startTime&quot;:1.5,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null}]}},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-68&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-72&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;DeploymentSpecification&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;DeploymentSpecification\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-71&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-72&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Note&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Note\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-66&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Node&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Node\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-1&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-10&quot;,&quot;mgmv79S6W2BxHVh3LVs6-16&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Node&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Node\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-10&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-1&quot;,&quot;childrenIds&quot;:[],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Component&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Component\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-16&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-1&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;paletteTabs\&quot;:[\&quot;palette-tab-text\&quot;]}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:true,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-91&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:[&quot;mgmv79S6W2BxHVh3LVs6-86&quot;,&quot;mgmv79S6W2BxHVh3LVs6-87&quot;,&quot;mgmv79S6W2BxHVh3LVs6-89&quot;],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:null,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:{&quot;name&quot;:&quot;Element&quot;,&quot;startTime&quot;:1,&quot;duration&quot;:1,&quot;loopForever&quot;:false,&quot;animations&quot;:[{&quot;id&quot;:&quot;5.JlpnmHysSc_wIw&quot;,&quot;startTime&quot;:0,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null},{&quot;id&quot;:&quot;5.JlpnmHysSc_wIx&quot;,&quot;startTime&quot;:1.5,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null}]}},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-86&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-91&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;DeploymentSpecification&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;DeploymentSpecification\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-87&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-91&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Note&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Note\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-89&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-91&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Note&quot;,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;deployment\&quot;,\&quot;libraryTitle\&quot;:\&quot;Deployment\&quot;,\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Note\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-94&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Dependency&quot;,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Dependency\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-101&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;general\&quot;,\&quot;libraryTitle\&quot;:\&quot;General\&quot;,\&quot;paletteLoadId\&quot;:\&quot;GeneralPalette\&quot;,\&quot;paletteUiId\&quot;:\&quot;general\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Text\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:true,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-110&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;GeneralPalette\&quot;,\&quot;paletteUiId\&quot;:\&quot;general\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;DirectionalConnector\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-111&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;general\&quot;,\&quot;libraryTitle\&quot;:\&quot;General\&quot;,\&quot;paletteLoadId\&quot;:\&quot;GeneralPalette\&quot;,\&quot;paletteUiId\&quot;:\&quot;general\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Text\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:true,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-117&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;GeneralPalette\&quot;,\&quot;paletteUiId\&quot;:\&quot;general\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;DirectionalConnector\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-118&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;general\&quot;,\&quot;libraryTitle\&quot;:\&quot;General\&quot;,\&quot;paletteLoadId\&quot;:\&quot;GeneralPalette\&quot;,\&quot;paletteUiId\&quot;:\&quot;general\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Text\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:true,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-119&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:&quot;{\&quot;product\&quot;:\&quot;diagram\&quot;,\&quot;libraryId\&quot;:\&quot;general\&quot;,\&quot;libraryTitle\&quot;:\&quot;General\&quot;,\&quot;paletteLoadId\&quot;:\&quot;GeneralPalette\&quot;,\&quot;paletteUiId\&quot;:\&quot;general\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Text\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:true,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-122&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Dependency&quot;,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Dependency\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-123&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:null,&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Dependency&quot;,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Dependency\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-124&quot;,&quot;parentId&quot;:&quot;mgmv79S6W2BxHVh3LVs6-41&quot;,&quot;childrenIds&quot;:[],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:&quot;Dependency&quot;,&quot;origin&quot;:&quot;{\&quot;paletteLoadId\&quot;:\&quot;DeploymentDiagram\&quot;,\&quot;paletteUiId\&quot;:\&quot;deployment\&quot;,\&quot;paletteItemUiId\&quot;:\&quot;Dependency\&quot;}&quot;,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:false,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:null},{&quot;cell&quot;:{&quot;id&quot;:&quot;mgmv79S6W2BxHVh3LVs6-85&quot;,&quot;parentId&quot;:&quot;1&quot;,&quot;childrenIds&quot;:[],&quot;groupParentId&quot;:null,&quot;groupChildrenIds&quot;:null,&quot;shapeType&quot;:null,&quot;origin&quot;:null,&quot;fromLibraryId&quot;:null,&quot;vertex&quot;:true,&quot;maskedCell&quot;:false,&quot;textCell&quot;:false,&quot;calloutCell&quot;:false,&quot;imageShape&quot;:false,&quot;webComponentType&quot;:null},&quot;animationInfo&quot;:{&quot;name&quot;:&quot;Element&quot;,&quot;startTime&quot;:1,&quot;duration&quot;:1,&quot;loopForever&quot;:false,&quot;animations&quot;:[{&quot;id&quot;:&quot;YhN5pnmHysSc_wIe&quot;,&quot;startTime&quot;:0,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null},{&quot;id&quot;:&quot;YhN5pnmHysSc_wIf&quot;,&quot;startTime&quot;:1.5,&quot;duration&quot;:1,&quot;type&quot;:&quot;Always Show&quot;,&quot;animationId&quot;:null,&quot;animationOptions&quot;:null,&quot;animationJsonData&quot;:null}]}}],&quot;pageMeta&quot;:{&quot;audios&quot;:[],&quot;videos&quot;:[],&quot;assets&quot;:[],&quot;video_duration&quot;:1,&quot;page_width&quot;:1100,&quot;page_height&quot;:850,&quot;page_hash&quot;:&quot;cc9e4707-5c7d-4327-a5a1-ebab76fbd55c&quot;}}"
+	threeDAnimation="{&quot;pageSize&quot;:{&quot;x&quot;:0,&quot;y&quot;:0,&quot;width&quot;:1100,&quot;height&quot;:850},&quot;characters&quot;:[],&quot;assetIdInfoMap&quot;:{}}">
+	<defs>
+		<style type="text/css">
+			ul {
+				margin-top: 0px;
+				margin-bottom: 10px;
+			}
+
+			&#xa;
+
+			ol {
+				margin-top: 0px;
+				margin-bottom: 10px;
+			}
+
+			&#xa;
+
+			.h1,
+			.h2,
+			.h3,
+			.h4,
+			.h5,
+			.h6,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin-bottom: .5rem;
+				font-weight: 500;
+				line-height: 1.2;
+			}
+
+			&#xa;
+
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6 {
+				margin-top: 0;
+				margin-bottom: .5rem;
+			}
+
+			&#xa;
+
+			.h1,
+			h1 {
+				font-size: 2.5rem;
+			}
+
+			&#xa;
+
+			h2 {
+				font-size: 1.5em;
+				font-weight: bold;
+			}
+
+			&#xa;
+
+			h3 {
+				font-size: 1.17em;
+				font-weight: bold;
+			}
+
+			&#xa;
+
+			.h4,
+			h4 {
+				font-size: 1.5rem;
+			}
+
+			&#xa;
+
+			.h5,
+			h5 {
+				font-size: 1.25rem;
+			}
+
+			&#xa;
+
+			.h6,
+			h6 {
+				font-size: 1rem;
+			}
+
+			&#xa;
+
+			p {
+				margin-top: 0;
+				margin-bottom: 1rem;
+			}
+
+			&#xa;
+
+			a {
+				color: #007bff;
+			}
+
+			&#xa;
+		</style>
+		<style type="text/css">
+			@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap");
+			&#xa;
+			@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap");
+			&#xa;
+		</style>
+	</defs>
+	<g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-41"
+				d="M 0 9.5 L 1263 9.5 L 1263 743 L 0 743 L 0 9.5 M 10 -0.5 L 1273 -0.5 L 1263 9.5 L 0 9.5 L 10 -0.5 M 1273 -0.5 L 1273 733 L 1263 743 L 1263 9.5"
+				fill="#dfefca" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-41"
+				d="M 0 9.5 L 1263 9.5 L 1263 743 L 0 743 L 0 9.5 M 10 -0.5 L 1273 -0.5 L 1263 9.5 L 0 9.5 L 10 -0.5 M 1273 -0.5 L 1273 733 L 1263 743 L 1263 9.5"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-41" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-41">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-41" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 1261px; height: 1px; padding-top: 23px; margin-left: 1px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;device&gt;&gt;<br />localhost</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="AGtDpnmHysSc_wPE"
+								d="M598.7926025390625,35.59715805053711 h65.3977279663086 M598.7926025390625,49.99715805053711 h65.3977279663086" />
+							<path id="gGtDpnmHysSc_wPF"
+								d="M598.7926025390625,35.59715805053711 h65.3977279663086 M598.7926025390625,49.99715805053711 h65.3977279663086" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#AGtDpnmHysSc_wPE">
+								<tspan xml:space="preserve">&lt;&lt;device&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">localhost</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#gGtDpnmHysSc_wPF">
+								<tspan xml:space="preserve">&lt;&lt;device&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">localhost</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-57"
+				d="M 456.1 86 L 857.98 86 L 857.98 714.5 L 456.1 714.5 L 456.1 86 M 466.1 76 L 867.98 76 L 857.98 86 L 456.1 86 L 466.1 76 M 867.98 76 L 867.98 704.5 L 857.98 714.5 L 857.98 86"
+				fill="#90e0f3" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-57"
+				d="M 456.1 86 L 857.98 86 L 857.98 714.5 L 456.1 714.5 L 456.1 86 M 466.1 76 L 867.98 76 L 857.98 86 L 456.1 86 L 466.1 76 M 867.98 76 L 867.98 704.5 L 857.98 714.5 L 857.98 86"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-57" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-57">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-57" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 400px; height: 1px; padding-top: 99px; margin-left: 457px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									Docker Engine</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="QGtDpnmHysSc_wPG" d="M614.9715576171875,111.59147033691406 h84.03408813476562" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#QGtDpnmHysSc_wPG" startOffset="50%" text-anchor="middle">
+								<tspan xml:space="preserve">Docker Engine</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-53"
+				d="M 491.1 133 L 677.1 133 L 677.1 296 L 491.1 296 L 491.1 133 M 501.1 123 L 687.1 123 L 677.1 133 L 491.1 133 L 501.1 123 M 687.1 123 L 687.1 286 L 677.1 296 L 677.1 133"
+				fill="#d1f5ff" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-53"
+				d="M 491.1 133 L 677.1 133 L 677.1 296 L 491.1 296 L 491.1 133 M 501.1 123 L 687.1 123 L 677.1 133 L 491.1 133 L 501.1 123 M 687.1 123 L 687.1 286 L 677.1 296 L 677.1 133"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-53" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-53">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-53" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 184px; height: 1px; padding-top: 146px; margin-left: 492px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;executionEnvironment&gt;&gt;<br />Frontend</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="wGtDpnmHysSc_wPH"
+								d="M505.2840576171875,158.59430847167968 h157.4005584716797 M505.2840576171875,172.9943084716797 h157.4005584716797" />
+							<path id="IGtDpnmHysSc_wPI"
+								d="M505.2840576171875,158.59430847167968 h157.4005584716797 M505.2840576171875,172.9943084716797 h157.4005584716797" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#wGtDpnmHysSc_wPH">
+								<tspan xml:space="preserve">&lt;&lt;executionEnvironment&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Frontend</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#IGtDpnmHysSc_wPI">
+								<tspan xml:space="preserve">&lt;&lt;executionEnvironment&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Frontend</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-58" x="513.1" y="183" width="144" height="40" fill="#90e0f3"
+				stroke="#000000" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-58" x="513.1" y="183" width="144" height="40" fill="none"
+				stroke="#000000" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-58" d="M 642.1 188 L 648.1 188" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-58" d="M 648.1 188 L 652.1 192" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-58" d="M 652.1 192 L 652.1 200" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-58" d="M 652.1 200 L 642.1 200" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-58" d="M 642.1 200 L 642.1 188" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-58" d="M 648.1 188 L 648.1 192" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-58" d="M 648.1 192 L 652.1 192" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-58" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-58">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-58" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 123px; height: 1px; padding-top: 188px; margin-left: 514px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;artifact&gt;&gt;<br />dist/</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="oGtDpnmHysSc_wPJ"
+								d="M541.4630737304688,200.5971466064453 h68.0539779663086 M541.4630737304688,214.9971466064453 h68.0539779663086" />
+							<path id="YGtDpnmHysSc_wPK"
+								d="M541.4630737304688,200.5971466064453 h68.0539779663086 M541.4630737304688,214.9971466064453 h68.0539779663086" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#oGtDpnmHysSc_wPJ">
+								<tspan xml:space="preserve">&lt;&lt;artifact&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">dist/</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#YGtDpnmHysSc_wPK">
+								<tspan xml:space="preserve">&lt;&lt;artifact&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">dist/</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-59" x="513.1" y="238" width="144" height="40" fill="#90e0f3"
+				stroke="#000000" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-59" x="513.1" y="238" width="144" height="40" fill="none"
+				stroke="#000000" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-59" d="M 642.1 243 L 652.1 243" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-59" d="M 652.1 243 L 652.1 259" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-59" d="M 642.1 259 L 652.1 259" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-59" d="M 642.1 243 L 642.1 246" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-59" x="639.1" y="246" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-59" d="M 642.1 250 L 642.1 252" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-59" x="639.1" y="252" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-59" d="M 642.1 256 L 642.1 259" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-59" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-59">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-59" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 123px; height: 1px; padding-top: 243px; margin-left: 514px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;component&gt;&gt;<br />React App</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="4GtDpnmHysSc_wPL"
+								d="M529.1334838867188,255.5971466064453 h92.69886016845703 M529.1334838867188,269.9971466064453 h92.69886016845703" />
+							<path id="EGtDpnmHysSc_wPM"
+								d="M529.1334838867188,255.5971466064453 h92.69886016845703 M529.1334838867188,269.9971466064453 h92.69886016845703" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#4GtDpnmHysSc_wPL">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">React App</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#EGtDpnmHysSc_wPM">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">React App</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-60"
+				d="M 491.1 329 L 677.1 329 L 677.1 492 L 491.1 492 L 491.1 329 M 501.1 319 L 687.1 319 L 677.1 329 L 491.1 329 L 501.1 319 M 687.1 319 L 687.1 482 L 677.1 492 L 677.1 329"
+				fill="#d1f5ff" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-60"
+				d="M 491.1 329 L 677.1 329 L 677.1 492 L 491.1 492 L 491.1 329 M 501.1 319 L 687.1 319 L 677.1 329 L 491.1 329 L 501.1 319 M 687.1 319 L 687.1 482 L 677.1 492 L 677.1 329"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-60" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-60">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-60" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 184px; height: 1px; padding-top: 342px; margin-left: 492px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;executionEnvironment&gt;&gt;<br />Backend (Server)</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="kGtDpnmHysSc_wPN"
+								d="M505.2840576171875,354.5886169433594 h157.4005584716797 M505.2840576171875,368.9886169433594 h157.4005584716797" />
+							<path id="UGtDpnmHysSc_wPO"
+								d="M505.2840576171875,354.5886169433594 h157.4005584716797 M505.2840576171875,368.9886169433594 h157.4005584716797" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#kGtDpnmHysSc_wPN">
+								<tspan xml:space="preserve">&lt;&lt;executionEnvironment&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Backend (Server)</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#UGtDpnmHysSc_wPO">
+								<tspan xml:space="preserve">&lt;&lt;executionEnvironment&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Backend (Server)</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-61" x="513.1" y="379" width="144" height="40" fill="#90e0f3"
+				stroke="#000000" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-61" x="513.1" y="379" width="144" height="40" fill="none"
+				stroke="#000000" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-61" d="M 642.1 384 L 648.1 384" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-61" d="M 648.1 384 L 652.1 388" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-61" d="M 652.1 388 L 652.1 396" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-61" d="M 652.1 396 L 642.1 396" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-61" d="M 642.1 396 L 642.1 384" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-61" d="M 648.1 384 L 648.1 388" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-61" d="M 648.1 388 L 652.1 388" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-61" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-61">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-61" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 123px; height: 1px; padding-top: 384px; margin-left: 514px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;artifact&gt;&gt;<br />backend.jar</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="0GtDpnmHysSc_wPP"
+								d="M541.4630737304688,396.591455078125 h68.0539779663086 M541.4630737304688,410.991455078125 h68.0539779663086" />
+							<path id="0GtDpnmHysSc_wPQ"
+								d="M541.4630737304688,396.591455078125 h68.0539779663086 M541.4630737304688,410.991455078125 h68.0539779663086" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#0GtDpnmHysSc_wPP">
+								<tspan xml:space="preserve">&lt;&lt;artifact&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">backend.jar</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#0GtDpnmHysSc_wPQ">
+								<tspan xml:space="preserve">&lt;&lt;artifact&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">backend.jar</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-62" x="513.1" y="434" width="144" height="40" fill="#90e0f3"
+				stroke="#000000" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-62" x="513.1" y="434" width="144" height="40" fill="none"
+				stroke="#000000" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-62" d="M 642.1 439 L 652.1 439" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-62" d="M 652.1 439 L 652.1 455" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-62" d="M 642.1 455 L 652.1 455" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-62" d="M 642.1 439 L 642.1 442" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-62" x="639.1" y="442" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-62" d="M 642.1 446 L 642.1 448" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-62" x="639.1" y="448" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-62" d="M 642.1 452 L 642.1 455" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-62" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-62">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-62" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 123px; height: 1px; padding-top: 439px; margin-left: 514px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;component&gt;&gt;<br />Spring Boot App</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="sGtDpnmHysSc_wPR"
+								d="M528.053955078125,451.591455078125 h94.87215423583984 M528.053955078125,465.991455078125 h94.87215423583984" />
+							<path id="sGtDpnmHysSc_wPS"
+								d="M528.053955078125,451.591455078125 h94.87215423583984 M528.053955078125,465.991455078125 h94.87215423583984" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#sGtDpnmHysSc_wPR">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Spring Boot App</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#sGtDpnmHysSc_wPS">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Spring Boot App</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-63"
+				d="M 491.1 529 L 677.1 529 L 677.1 692 L 491.1 692 L 491.1 529 M 501.1 519 L 687.1 519 L 677.1 529 L 491.1 529 L 501.1 519 M 687.1 519 L 687.1 682 L 677.1 692 L 677.1 529"
+				fill="#d1f5ff" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-63"
+				d="M 491.1 529 L 677.1 529 L 677.1 692 L 491.1 692 L 491.1 529 M 501.1 519 L 687.1 519 L 677.1 529 L 491.1 529 L 501.1 519 M 687.1 519 L 687.1 682 L 677.1 692 L 677.1 529"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-63" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-63">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-63" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 184px; height: 1px; padding-top: 542px; margin-left: 492px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;executionEnvironment&gt;&gt;<br />Base de datos (MySQL)</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="cGtDpnmHysSc_wPT"
+								d="M505.2840576171875,554.5886474609375 h157.4005584716797 M505.2840576171875,568.9886474609375 h157.4005584716797" />
+							<path id="8GtDpnmHysSc_wPU"
+								d="M505.2840576171875,554.5886474609375 h157.4005584716797 M505.2840576171875,568.9886474609375 h157.4005584716797" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#cGtDpnmHysSc_wPT">
+								<tspan xml:space="preserve">&lt;&lt;executionEnvironment&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Base de datos (MySQL)</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#8GtDpnmHysSc_wPU">
+								<tspan xml:space="preserve">&lt;&lt;executionEnvironment&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">Base de datos (MySQL)</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-64" x="513.1" y="583.72" width="144" height="37.81" fill="#90e0f3"
+				stroke="#000000" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-64" x="513.1" y="583.72" width="144" height="37.81" fill="none"
+				stroke="#000000" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-64" d="M 642.1 588.72 L 648.1 588.72" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-64" d="M 648.1 588.72 L 652.1 592.72" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-64" d="M 652.1 592.72 L 652.1 600.72" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-64" d="M 652.1 600.72 L 642.1 600.72" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-64" d="M 642.1 600.72 L 642.1 588.72" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-64" d="M 648.1 588.72 L 648.1 592.72" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-64" d="M 648.1 592.72 L 652.1 592.72" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-64" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-64">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-64" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 123px; height: 1px; padding-top: 589px; margin-left: 514px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;artifact&gt;&gt;<br />data files</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="CGtDpnmHysSc_wPV"
+								d="M541.4630737304688,601.591455078125 h68.0539779663086 M541.4630737304688,615.991455078125 h68.0539779663086" />
+							<path id="iGtDpnmHysSc_wPW"
+								d="M541.4630737304688,601.591455078125 h68.0539779663086 M541.4630737304688,615.991455078125 h68.0539779663086" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#CGtDpnmHysSc_wPV">
+								<tspan xml:space="preserve">&lt;&lt;artifact&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">data files</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#iGtDpnmHysSc_wPW">
+								<tspan xml:space="preserve">&lt;&lt;artifact&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">data files</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-92" x="513.1" y="636" width="144" height="37.81" fill="#90e0f3"
+				stroke="#000000" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-92" x="513.1" y="636" width="144" height="37.81" fill="none"
+				stroke="#000000" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-92" d="M 642.1 641 L 652.1 641" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-92" d="M 652.1 641 L 652.1 657" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-92" d="M 642.1 657 L 652.1 657" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-92" d="M 642.1 641 L 642.1 644" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-92" x="639.1" y="644" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-92" d="M 642.1 648 L 642.1 650" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-92" x="639.1" y="650" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="all" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-92" d="M 642.1 654 L 642.1 657" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="all" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-92" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-92">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-92" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 123px; height: 1px; padding-top: 641px; margin-left: 514px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: all; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;component&gt;&gt;<br />InnoDB Engine</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="SGtDpnmHysSc_wPX"
+								d="M529.1334838867188,653.5943237304688 h92.69886016845703 M529.1334838867188,667.9943237304688 h92.69886016845703" />
+							<path id="yGtDpnmHysSc_wPY"
+								d="M529.1334838867188,653.5943237304688 h92.69886016845703 M529.1334838867188,667.9943237304688 h92.69886016845703" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#SGtDpnmHysSc_wPX">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">InnoDB Engine</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#yGtDpnmHysSc_wPY">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">InnoDB Engine</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-79" x="1006.98" y="322.5" width="228.25" height="263" fill="#90e0f3"
+				stroke="#000000" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-79" d="M 1006.98 360.5 L 1235.23 360.5" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-79" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-79">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-79" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 226px; height: 1px; padding-top: 330px; margin-left: 1008px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;deployment spec&gt;&gt;<br />application.properties</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="KGtDpnmHysSc_wPZ"
+								d="M1057.9544677734375,342.6 h126.06533813476562 M1057.9544677734375,357 h126.06533813476562" />
+							<path id="qGtDpnmHysSc_wPa"
+								d="M1057.9544677734375,342.6 h126.06533813476562 M1057.9544677734375,357 h126.06533813476562" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#KGtDpnmHysSc_wPZ">
+								<tspan xml:space="preserve">&lt;&lt;deployment spec&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">application.properties</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#qGtDpnmHysSc_wPa">
+								<tspan xml:space="preserve">&lt;&lt;deployment spec&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">application.properties</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-80"
+				d="M 1020.98 371 L 1206.23 371 L 1206.23 386 L 1221.23 386 L 1221.23 418.5 L 1020.98 418.5 Z"
+				fill="#d1f5ff" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-80"
+				d="M 1020.98 371 L 1206.23 371 L 1221.23 386 L 1206.23 386 L 1206.23 371 L 1221.23 386 L 1221.23 418.5 L 1020.98 418.5 Z"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-80" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-80">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-80" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 161px; height: 1px; padding-top: 381px; margin-left: 1035px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									<div style="text-align: left"><span style="letter-spacing: 0px">C</span><span
+											style="letter-spacing: 0px">onfiguración de la conexión de la base de
+											datos.</span></div>
+									<div style="text-align: left ; font-size: 12px"></div>
+								</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="aGtDpnmHysSc_wPb" d="M1035,393.59429321289065 h8.678977012634277" />
+							<path id="6GtDpnmHysSc_wPc"
+								d="M1035,393.59429321289065 h154.78692626953125 M1035,407.9942932128906 h154.78692626953125" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#aGtDpnmHysSc_wPb">
+								<tspan xml:space="preserve">C</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#6GtDpnmHysSc_wPc">
+								<tspan xml:space="preserve">onfiguración de la conexión de la base de datos.</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-81"
+				d="M 1020.98 429.25 L 1206.23 429.25 L 1206.23 444.25 L 1221.23 444.25 L 1221.23 476.75 L 1020.98 476.75 Z"
+				fill="#d1f5ff" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-81"
+				d="M 1020.98 429.25 L 1206.23 429.25 L 1221.23 444.25 L 1206.23 444.25 L 1206.23 429.25 L 1221.23 444.25 L 1221.23 476.75 L 1020.98 476.75 Z"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-81" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-81">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-81" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 161px; height: 1px; padding-top: 439px; margin-left: 1035px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									<div style="text-align: left"><span style="letter-spacing: 0px">C</span><span
+											style="letter-spacing: 0px">onfiguración de <b>Hibernate </b>para
+											MySQL</span></div>
+									<div style="text-align: left ; font-size: 12px"></div>
+								</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="GGtDpnmHysSc_wPd" d="M1035,451.591455078125 h8.678977012634277" />
+							<path id="mGtDpnmHysSc_wPe"
+								d="M1035,451.591455078125 h149.4318084716797 M1035,465.991455078125 h149.4318084716797" />
+							<path id="mGtDpnmHysSc_wPf" d="M1129.07666015625,451.591455078125 h55.35511016845703" />
+							<path id="WGtDpnmHysSc_wPg"
+								d="M1035,451.591455078125 h149.4318084716797 M1035,465.991455078125 h149.4318084716797" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#GGtDpnmHysSc_wPd">
+								<tspan xml:space="preserve">C</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#mGtDpnmHysSc_wPe">
+								<tspan xml:space="preserve">onfiguración de </tspan>
+								<tspan xml:space="preserve">
+									<tspan xml:space="preserve">Hibernate </tspan>
+								</tspan>
+								<tspan xml:space="preserve">para MySQL</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#mGtDpnmHysSc_wPf">
+								<tspan xml:space="preserve">Hibernate </tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#WGtDpnmHysSc_wPg">
+								<tspan xml:space="preserve">onfiguración de </tspan>
+								<tspan xml:space="preserve">
+									<tspan xml:space="preserve">Hibernate </tspan>
+								</tspan>
+								<tspan xml:space="preserve">para MySQL</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-83"
+				d="M 1020.98 487 L 1206.23 487 L 1206.23 502 L 1221.23 502 L 1221.23 571.5 L 1020.98 571.5 Z"
+				fill="#d1f5ff" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-83"
+				d="M 1020.98 487 L 1206.23 487 L 1221.23 502 L 1206.23 502 L 1206.23 487 L 1221.23 502 L 1221.23 571.5 L 1020.98 571.5 Z"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-83" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-83">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-83" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 161px; height: 1px; padding-top: 501px; margin-left: 1035px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									<div style="text-align: left"><span style="letter-spacing: 0px">Clave secreta y
+											tiempo de expiración para la firma y validación de los tokens JWT de
+										</span><span
+											style="letter-spacing: 0px ; font-weight: bolder ; text-align: left">Spring
+											Security</span><span style="letter-spacing: 0px ; text-align: left">.</span>
+									</div>
+									<div style="text-align: left"></div>
+									<div style="text-align: left ; font-size: 12px"></div>
+								</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="2GtDpnmHysSc_wPh"
+								d="M1035,513.5942932128906 h155.1988525390625 M1035,527.9942932128906 h155.1988525390625 M1035,542.3942932128906 h155.1988525390625 M1035,556.7942932128906 h155.1988525390625" />
+							<path id="OGtDpnmHysSc_wPi" d="M1051.6903076171875,556.8045288085938 h88.69317626953125" />
+							<path id="uGtDpnmHysSc_wPj" d="M1140.3834228515625,556.8045288085938 h3.3380680084228516" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#2GtDpnmHysSc_wPh">
+								<tspan xml:space="preserve">Clave secreta y tiempo de expiración para la firma y
+									validación de los tokens JWT de </tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#OGtDpnmHysSc_wPi">
+								<tspan xml:space="preserve">Spring Security</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#uGtDpnmHysSc_wPj">
+								<tspan xml:space="preserve">.</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-68" x="1006.98" y="76" width="228.25" height="166" fill="#90e0f3"
+				stroke="#000000" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-68" d="M 1006.98 110 L 1235.23 110" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-68" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-68">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-68" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 226px; height: 1px; padding-top: 79px; margin-left: 1008px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;deployment spec&gt;&gt;<br />docker-compose.yml</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="eGtDpnmHysSc_wPk"
+								d="M1057.9544677734375,91.59147796630859 h126.06533813476562 M1057.9544677734375,105.9914779663086 h126.06533813476562" />
+							<path id=".GtDpnmHysSc_wPl"
+								d="M1057.9544677734375,91.59147796630859 h126.06533813476562 M1057.9544677734375,105.9914779663086 h126.06533813476562" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#eGtDpnmHysSc_wPk">
+								<tspan xml:space="preserve">&lt;&lt;deployment spec&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">docker-compose.yml</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#.GtDpnmHysSc_wPl">
+								<tspan xml:space="preserve">&lt;&lt;deployment spec&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">docker-compose.yml</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-71"
+				d="M 1020.98 124.5 L 1206.23 124.5 L 1206.23 139.5 L 1221.23 139.5 L 1221.23 227.5 L 1020.98 227.5 Z"
+				fill="#d1f5ff" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-71"
+				d="M 1020.98 124.5 L 1206.23 124.5 L 1221.23 139.5 L 1206.23 139.5 L 1206.23 124.5 L 1221.23 139.5 L 1221.23 227.5 L 1020.98 227.5 Z"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-71" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-71">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-71" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 174px; height: 1px; padding-top: 140px; margin-left: 1035px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									<div style="text-align: left ; font-size: 12px"><span
+											style="font-size: 12px ; letter-spacing: 0px">Define la creación de
+											la</span> <span style="font-size: 12px ; letter-spacing: 0px">red interna de
+											Docker </span><span style="font-size: 12px ; letter-spacing: 0px">para que
+											Spring Boot pueda hablar con MySQL usando su nombre de contenedor.</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="BGtDpnmHysSc_wPm" d="M1035,152.6 h125.41192626953125" />
+							<path id="hGtDpnmHysSc_wPn"
+								d="M1035,152.6 h173.99147033691406 M1035,167 h173.99147033691406 M1035,181.4 h173.99147033691406 M1035,195.8 h173.99147033691406 M1035,210.20000000000002 h173.99147033691406" />
+							<path id="hGtDpnmHysSc_wPo" d="M1035,152.6 h146.09375 M1035,167 h146.09375" />
+							<path id="RGtDpnmHysSc_wPp"
+								d="M1035,167.0033966064453 h158.97726440429688 M1035,181.4033966064453 h158.97726440429688 M1035,195.80339660644532 h158.97726440429688 M1035,210.20339660644532 h158.97726440429688" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#BGtDpnmHysSc_wPm">
+								<tspan xml:space="preserve">Define la creación de la</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#hGtDpnmHysSc_wPn">
+								<tspan xml:space="preserve" style="font-size: 12px ; letter-spacing: 0px">
+									<tspan xml:space="preserve">Define la creación de la</tspan>
+								</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve" style="font-size: 12px ; letter-spacing: 0px">
+									<tspan xml:space="preserve">red interna de Docker </tspan>
+								</tspan>
+								<tspan xml:space="preserve" style="font-size: 12px ; letter-spacing: 0px">
+									<tspan xml:space="preserve">para que Spring Boot pueda hablar con MySQL usando su
+										nombre de contenedor.</tspan>
+								</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#hGtDpnmHysSc_wPo">
+								<tspan xml:space="preserve">red interna de Docker </tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#RGtDpnmHysSc_wPp">
+								<tspan xml:space="preserve">para que Spring Boot pueda hablar con MySQL usando su nombre
+									de contenedor.</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-66"
+				d="M 1006.98 637 L 1126.98 637 L 1126.98 692 L 1006.98 692 L 1006.98 637 M 1016.98 627 L 1136.98 627 L 1126.98 637 L 1006.98 637 L 1016.98 627 M 1136.98 627 L 1136.98 682 L 1126.98 692 L 1126.98 637"
+				fill="#90e0f3" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-66"
+				d="M 1006.98 637 L 1126.98 637 L 1126.98 692 L 1006.98 692 L 1006.98 637 M 1016.98 627 L 1136.98 627 L 1126.98 637 L 1006.98 637 L 1016.98 627 M 1136.98 627 L 1136.98 682 L 1126.98 692 L 1126.98 637"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-66" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-66">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-66" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 118px; height: 1px; padding-top: 650px; margin-left: 1008px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									Volúmen Docker (Disco local)</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="xGtDpnmHysSc_wPq"
+								d="M1007.9971313476562,662.6 h117.99715423583984 M1007.9971313476562,677 h117.99715423583984" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#xGtDpnmHysSc_wPq">
+								<tspan xml:space="preserve">Volúmen Docker (Disco local)</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-1"
+				d="M 68.98 248 L 279.98 248 L 279.98 375.5 L 68.98 375.5 L 68.98 248 M 78.98 238 L 289.98 238 L 279.98 248 L 68.98 248 L 78.98 238 M 289.98 238 L 289.98 365.5 L 279.98 375.5 L 279.98 248"
+				fill="#facc8d" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-1"
+				d="M 68.98 248 L 279.98 248 L 279.98 375.5 L 68.98 375.5 L 68.98 248 M 78.98 238 L 289.98 238 L 279.98 248 L 68.98 248 L 78.98 238 M 289.98 238 L 289.98 365.5 L 279.98 375.5 L 279.98 248"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-1" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-1">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-1" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 209px; height: 1px; padding-top: 260px; margin-left: 70px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									Navegador (Cliente)</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="JGtDpnmHysSc_wPr" d="M117.81249237060547,272.6 h113.36647033691406" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#JGtDpnmHysSc_wPr" startOffset="50%" text-anchor="middle">
+								<tspan xml:space="preserve">Navegador (Cliente)</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-10" x="94.98" y="317" width="162" height="44"
+				fill="rgba(255, 230, 196, 1)" stroke="#000000" pointer-events="none" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-10" x="94.98" y="317" width="162" height="44" fill="none"
+				stroke="#000000" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-10" d="M 241.98 322 L 251.98 322" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-10" d="M 251.98 322 L 251.98 338" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-10" d="M 241.98 338 L 251.98 338" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-10" d="M 241.98 322 L 241.98 325" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-10" x="238.98" y="325" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-10" d="M 241.98 329 L 241.98 331" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-10" x="238.98" y="331" width="7" height="4" fill="none" stroke="#000000"
+				pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-10" d="M 241.98 335 L 241.98 338" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-10" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-10">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-10" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 141px; height: 1px; padding-top: 322px; margin-left: 96px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;component&gt;&gt;<br />React App</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="pGtDpnmHysSc_wPs"
+								d="M120.14204406738281,334.5886169433594 h92.69886016845703 M120.14204406738281,348.9886169433594 h92.69886016845703" />
+							<path id="ZGtDpnmHysSc_wPt"
+								d="M120.14204406738281,334.5886169433594 h92.69886016845703 M120.14204406738281,348.9886169433594 h92.69886016845703" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#pGtDpnmHysSc_wPs">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">React App</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#ZGtDpnmHysSc_wPt">
+								<tspan xml:space="preserve">&lt;&lt;component&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">React App</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-16" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-16">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-16" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 190px; height: 1px; padding-top: 279px; margin-left: 81px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 10px; font-family: &quot;Open Sans&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									<font style="font-size: 10px">(Experiencia de usuario del cliente, Google Chrome,
+										Firefox, Safari)</font>
+								</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="5GtDpnmHysSc_wPu"
+								d="M95.15625,288.5823669433594 h161.66192626953125 M95.15625,300.5823669433594 h161.66192626953125" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="10px"
+							font-family="&quot;Open Sans&quot;, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#5GtDpnmHysSc_wPu">
+								<tspan xml:space="preserve">(Experiencia de usuario del cliente, Google Chrome, Firefox,
+									Safari)</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<rect cell-id="mgmv79S6W2BxHVh3LVs6-86" x="68.98" y="427.5" width="221" height="228" fill="#facc8d"
+				stroke="#000000" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-86" d="M 68.98 465.5 L 289.98 465.5" fill="none" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-86" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-86">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-86" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 219px; height: 1px; padding-top: 435px; margin-left: 70px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; font-weight: bold; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;deployment spec&gt;&gt;<br />browser storage</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="FGtDpnmHysSc_wPv"
+								d="M116.46306610107422,447.5999694824219 h126.06533813476562 M116.46306610107422,461.9999694824219 h126.06533813476562" />
+							<path id="lGtDpnmHysSc_wPw"
+								d="M116.46306610107422,447.5999694824219 h126.06533813476562 M116.46306610107422,461.9999694824219 h126.06533813476562" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#FGtDpnmHysSc_wPv">
+								<tspan xml:space="preserve">&lt;&lt;deployment spec&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">browser storage</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#lGtDpnmHysSc_wPw">
+								<tspan xml:space="preserve">&lt;&lt;deployment spec&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">browser storage</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-87"
+				d="M 82.54 476 L 261.42 476 L 261.42 491 L 276.42 491 L 276.42 541 L 82.54 541 Z"
+				fill="rgba(255, 230, 196, 1)" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-87"
+				d="M 82.54 476 L 261.42 476 L 276.42 491 L 261.42 491 L 261.42 476 L 276.42 491 L 276.42 541 L 82.54 541 Z"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-87" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-87">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-87" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 156px; height: 1px; padding-top: 488px; margin-left: 96px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									<div style="text-align: left"><span style="letter-spacing: 0px">Almacena el <b>token
+												JWT</b> tras iniciar sesión  para usarlo en futuras peticiones.</span>
+									</div>
+									<div style="text-align: left"></div>
+									<div style="text-align: left ; font-size: 12px"></div>
+								</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="VGtDpnmHysSc_wPx"
+								d="M95.99431610107422,500.5971313476563 h153.39488220214844 M95.99431610107422,514.9971313476562 h153.39488220214844 M95.99431610107422,529.3971313476562 h153.39488220214844" />
+							<path id="1GtDpnmHysSc_wPy" d="M165.3693084716797,500.5971313476563 h60.68181610107422" />
+							<path id="NGtDpnmHysSc_wPz"
+								d="M95.99431610107422,500.5971313476563 h153.39488220214844 M95.99431610107422,514.9971313476562 h153.39488220214844 M95.99431610107422,529.3971313476562 h153.39488220214844" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#VGtDpnmHysSc_wPx">
+								<tspan xml:space="preserve">Almacena el </tspan>
+								<tspan xml:space="preserve">
+									<tspan xml:space="preserve">token JWT</tspan>
+								</tspan>
+								<tspan xml:space="preserve"> tras iniciar sesión  para usarlo en futuras peticiones.
+								</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#1GtDpnmHysSc_wPy">
+								<tspan xml:space="preserve">token JWT</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#NGtDpnmHysSc_wPz">
+								<tspan xml:space="preserve">Almacena el </tspan>
+								<tspan xml:space="preserve">
+									<tspan xml:space="preserve">token JWT</tspan>
+								</tspan>
+								<tspan xml:space="preserve"> tras iniciar sesión  para usarlo en futuras peticiones.
+								</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-89"
+				d="M 82.54 556.5 L 261.43 556.5 L 261.43 571.5 L 276.43 571.5 L 276.43 639.5 L 82.54 639.5 Z"
+				fill="rgba(255, 230, 196, 1)" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-89"
+				d="M 82.54 556.5 L 261.43 556.5 L 276.43 571.5 L 261.43 571.5 L 261.43 556.5 L 276.43 571.5 L 276.43 639.5 L 82.54 639.5 Z"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-89" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-89">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-89" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe flex-start; justify-content: unsafe center; width: 156px; height: 1px; padding-top: 570px; margin-left: 96px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									<div style="text-align: left"><span style="letter-spacing: 0px">Actúa como una caché
+											simple usando <b>nanostores </b>para no sobrecargar el backend.</span></div>
+									<div style="text-align: left"></div>
+									<div style="text-align: left"></div>
+									<div style="text-align: left ; font-size: 12px"></div>
+								</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="tGtDpnmHysSc_wP0"
+								d="M95.99431610107422,582.6 h145.41192626953125 M95.99431610107422,597 h145.41192626953125 M95.99431610107422,611.4 h145.41192626953125 M95.99431610107422,625.8 h145.41192626953125" />
+							<path id="dGtDpnmHysSc_wP1" d="M176.71875,597.0033813476563 h64.6875" />
+							<path id="dGtDpnmHysSc_wP2"
+								d="M95.99431610107422,582.6 h145.41192626953125 M95.99431610107422,597 h145.41192626953125 M95.99431610107422,611.4 h145.41192626953125 M95.99431610107422,625.8 h145.41192626953125" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#tGtDpnmHysSc_wP0">
+								<tspan xml:space="preserve">Actúa como una caché simple usando </tspan>
+								<tspan xml:space="preserve">
+									<tspan xml:space="preserve">nanostores </tspan>
+								</tspan>
+								<tspan xml:space="preserve">para no sobrecargar el backend.</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="700">
+							<textPath xlink:href="#dGtDpnmHysSc_wP1">
+								<tspan xml:space="preserve">nanostores </tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#dGtDpnmHysSc_wP2">
+								<tspan xml:space="preserve">Actúa como una caché simple usando </tspan>
+								<tspan xml:space="preserve">
+									<tspan xml:space="preserve">nanostores </tspan>
+								</tspan>
+								<tspan xml:space="preserve">para no sobrecargar el backend.</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-101" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-101">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-101" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 120px; height: 1px; padding-top: 194px; margin-left: 308px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;protocol&gt;&gt;<br />HTTP (REST)</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="9GtDpnmHysSc_wP3"
+								d="M330.76702880859375,192.18805847167968 h74.4460220336914 M330.76702880859375,206.5880584716797 h74.4460220336914" />
+							<path id="DGtDpnmHysSc_wP4"
+								d="M330.76702880859375,192.18805847167968 h74.4460220336914 M330.76702880859375,206.5880584716797 h74.4460220336914" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#9GtDpnmHysSc_wP3">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">HTTP (REST)</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#DGtDpnmHysSc_wP4">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">HTTP (REST)</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-111" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-111">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-111" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 120px; height: 1px; padding-top: 226px; margin-left: 308px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;port&gt;&gt;<br />5173</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="jGtDpnmHysSc_wP5"
+								d="M343.6363525390625,224.1908966064453 h48.721588134765625 M343.6363525390625,238.5908966064453 h48.721588134765625" />
+							<path id="TGtDpnmHysSc_wP6"
+								d="M343.6363525390625,224.1908966064453 h48.721588134765625 M343.6363525390625,238.5908966064453 h48.721588134765625" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#jGtDpnmHysSc_wP5">
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">5173</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#TGtDpnmHysSc_wP6">
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">5173</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-118" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-118">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-118" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 120px; height: 1px; padding-top: 392px; margin-left: 323px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;protocol&gt;&gt;<br />HTTP (REST)</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="zGtDpnmHysSc_wP7"
+								d="M345.76702880859375,390.185205078125 h74.4460220336914 M345.76702880859375,404.585205078125 h74.4460220336914" />
+							<path id="LGtDpnmHysSc_wP8"
+								d="M345.76702880859375,390.185205078125 h74.4460220336914 M345.76702880859375,404.585205078125 h74.4460220336914" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#zGtDpnmHysSc_wP7">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">HTTP (REST)</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#LGtDpnmHysSc_wP8">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">HTTP (REST)</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-119" transform="translate(-0.5 -0.5)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-119">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-119" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 120px; height: 1px; padding-top: 424px; margin-left: 323px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: normal; word-wrap: normal; ">
+									&lt;&lt;port&gt;&gt;<br />8080</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="rGtDpnmHysSc_wP9"
+								d="M358.6363525390625,422.18804321289065 h48.721588134765625 M358.6363525390625,436.5880432128906 h48.721588134765625" />
+							<path id="rGtDpnmHysSc_wP."
+								d="M358.6363525390625,422.18804321289065 h48.721588134765625 M358.6363525390625,436.5880432128906 h48.721588134765625" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#rGtDpnmHysSc_wP9">
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">8080</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#rGtDpnmHysSc_wP.">
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">8080</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-112"
+				d="M 656.53 453.82 L 799.12 453.82 Q 809.12 453.82 809.12 463.82 L 809.12 645 Q 809.12 655 799.12 655 L 658.77 655"
+				fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="5" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-112" d="M 669.65 649 L 657.65 655 L 669.65 661" fill="none"
+				stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-112" fill="#000000" font-family="Helvetica" pointer-events="none"
+				text-anchor="middle" font-size="12px" transform="rotate(270,809.12,562.41)"><text
+					cell-id="mgmv79S6W2BxHVh3LVs6-112" pointer-events="none" x="808.62"
+					y="545.91">&lt;&lt;dependency&gt;&gt;</text><text cell-id="mgmv79S6W2BxHVh3LVs6-112"
+					pointer-events="none" x="808.62" y="559.91">JDBC</text><text cell-id="mgmv79S6W2BxHVh3LVs6-112"
+					pointer-events="none" x="808.62" y="573.91">&lt;&lt;driver&gt;&gt;</text><text
+					cell-id="mgmv79S6W2BxHVh3LVs6-112" pointer-events="none" x="808.62"
+					y="587.91">mysql-connector-j</text></g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-116"
+				d="M 687.12 405.59 L 732.1 405.59 Q 742.1 405.59 742.1 415.59 L 742.1 595.59 Q 742.1 605.59 732.1 605.59 L 693.49 605.59"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-116"
+				d="M 688.24 605.59 L 695.24 602.09 L 693.49 605.59 L 695.24 609.09 Z" fill="#000000" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-116"
+				transform="translate(-0.5 -0.5)rotate(270 742.0999999999999 503.5470588235298)">
+				<switch cell-id="mgmv79S6W2BxHVh3LVs6-116">
+					<foreignObject cell-id="mgmv79S6W2BxHVh3LVs6-116" style="overflow: visible; text-align: left;"
+						pointer-events="none" width="100%" height="100%"
+						requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility">
+						<div xmlns="http://www.w3.org/1999/xhtml"
+							style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 1px; height: 1px; padding-top: 504px; margin-left: 742px;">
+							<div style="box-sizing: border-box; font-size: 0; text-align: center; ">
+								<div ani=""
+									style="display: inline-block; font-size: 12px; font-family: &quot;Helvetica&quot;, &quot;VP Default&quot;; color: #000000; line-height: 1.2; word-break: normal; pointer-events: none; white-space: nowrap; ">
+									&lt;&lt;protocol&gt;&gt;<br />TCP/IP<br />&lt;&lt;port&gt;&gt;<br />3306</div>
+							</div>
+						</div>
+					</foreignObject><svg width="100%" height="100%">
+						<defs>
+							<path id="7GtDpnmHysSc_wP_"
+								d="M707.1306762695312,487.7846313476563 h70.72442626953125 M707.1306762695312,502.18463134765625 h70.72442626953125 M707.1306762695312,516.5846313476562 h70.72442626953125 M707.1306762695312,530.9846313476562 h70.72442626953125" />
+							<path id="HGtDpnmHysSc_wQA"
+								d="M707.1306762695312,487.7846313476563 h70.72442626953125 M707.1306762695312,502.18463134765625 h70.72442626953125 M707.1306762695312,516.5846313476562 h70.72442626953125 M707.1306762695312,530.9846313476562 h70.72442626953125" />
+							<path id="HGtDpnmHysSc_wQB"
+								d="M707.1306762695312,487.7846313476563 h70.72442626953125 M707.1306762695312,502.18463134765625 h70.72442626953125 M707.1306762695312,516.5846313476562 h70.72442626953125 M707.1306762695312,530.9846313476562 h70.72442626953125" />
+							<path id="nGtDpnmHysSc_wQC"
+								d="M707.1306762695312,487.7846313476563 h70.72442626953125 M707.1306762695312,502.18463134765625 h70.72442626953125 M707.1306762695312,516.5846313476562 h70.72442626953125 M707.1306762695312,530.9846313476562 h70.72442626953125" />
+						</defs><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#7GtDpnmHysSc_wP_">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">TCP/IP</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">3306</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#HGtDpnmHysSc_wQA">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">TCP/IP</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">3306</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#HGtDpnmHysSc_wQB">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">TCP/IP</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">3306</tspan>
+							</textPath>
+						</text><text fill="rgb(0, 0, 0)" font-size="12px"
+							font-family="Helvetica, &quot;VP Default&quot;" font-weight="400">
+							<textPath xlink:href="#nGtDpnmHysSc_wQC">
+								<tspan xml:space="preserve">&lt;&lt;protocol&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">TCP/IP</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">&lt;&lt;port&gt;&gt;</tspan>
+								<tspan xml:space="preserve" />
+								<tspan xml:space="preserve">3306</tspan>
+							</textPath>
+						</text>
+					</svg>
+				</switch>
+			</g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-94"
+				d="M 69.47 542.06 L 47 542.06 Q 37 542.06 37 532.06 L 37 349.47 Q 37 339.47 47 339.47 L 93.12 339.47"
+				fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="5" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-94" d="M 82.23 345.47 L 94.23 339.47 L 82.23 333.47" fill="none"
+				stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-94" fill="#000000" font-family="Helvetica" pointer-events="none"
+				text-anchor="middle" font-size="12px" transform="rotate(270,24,438.06)"><text
+					cell-id="mgmv79S6W2BxHVh3LVs6-94" pointer-events="none" x="23.5"
+					y="442.56">&lt;&lt;dependency&gt;&gt;</text></g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-110"
+				d="M 179.47 238 L 179.47 219.47 Q 179.47 209.47 189.47 209.47 L 484.73 209.47" fill="none"
+				stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-110"
+				d="M 489.98 209.47 L 482.98 212.97 L 484.73 209.47 L 482.98 205.97 Z" fill="#000000" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-117"
+				d="M 289.98 306.76 L 298.49 306.76 Q 307 306.76 307 316.76 L 307 395.47 Q 307 405.47 317 405.47 L 484.73 405.47"
+				fill="none" stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-117"
+				d="M 489.98 405.47 L 482.98 408.97 L 484.73 405.47 L 482.98 401.97 Z" fill="#000000" stroke="#000000"
+				stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-122" d="M 656.53 453.82 L 1004.88 453.82" fill="none" stroke="#000000"
+				stroke-miterlimit="10" stroke-dasharray="5" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-122" d="M 994 459.82 L 1006 453.82 L 994 447.82" fill="none"
+				stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-122" fill="#000000" font-family="Helvetica" pointer-events="none"
+				text-anchor="middle" font-size="12px"><text cell-id="mgmv79S6W2BxHVh3LVs6-122" pointer-events="none"
+					x="930.15" y="443.32">&lt;&lt;dependency&gt;&gt;</text></g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-123"
+				d="M 868.29 395 L 927.47 395 Q 937.47 395 937.47 385 L 937.47 168.53 Q 937.47 158.53 947.47 158.53 L 1004.88 158.53"
+				fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="5" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-123" d="M 994 164.53 L 1006 158.53 L 994 152.53" fill="none"
+				stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-123" fill="#000000" font-family="Helvetica" pointer-events="none"
+				text-anchor="middle" font-size="12px" transform="rotate(270,924.47,275.94)"><text
+					cell-id="mgmv79S6W2BxHVh3LVs6-123" pointer-events="none" x="923.97"
+					y="280.44">&lt;&lt;dependency&gt;&gt;</text></g>
+		</g>
+		<g shape-node="">
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-124"
+				d="M 657.1 602.65 L 977 602.65 Q 987 602.65 987 612.65 L 987 649.47 Q 987 659.47 995.87 659.47 L 1004.74 659.47"
+				fill="none" stroke="#000000" stroke-miterlimit="10" stroke-dasharray="5" pointer-events="none" />
+			<path cell-id="mgmv79S6W2BxHVh3LVs6-124" d="M 993.86 665.47 L 1005.86 659.47 L 993.86 653.47" fill="none"
+				stroke="#000000" stroke-miterlimit="10" pointer-events="none" />
+		</g>
+		<g shape-node="" text-node="">
+			<g cell-id="mgmv79S6W2BxHVh3LVs6-124" fill="#000000" font-family="Helvetica" pointer-events="none"
+				text-anchor="middle" font-size="12px"><text cell-id="mgmv79S6W2BxHVh3LVs6-124" pointer-events="none"
+					x="927.19" y="589.15">&lt;&lt;dependency&gt;&gt;</text></g>
+		</g>
+	</g>
+	<switch>
+		<g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" /><a transform="translate(0,-5)"><text
+				text-anchor="middle" font-size="10px" x="50%" y="100%"></text></a>
+	</switch>
+</svg>

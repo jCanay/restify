@@ -1,0 +1,176 @@
+classDiagram
+direction RL
+    class Account {
+	    - id: Long
+	    - name: String
+	    - surname: String
+	    - profilePicture: String
+	    - onboardingCompleted: String
+	    - addresses: List~Address~
+	    - user: User
+	    + isManager()
+    }
+
+    class Address {
+	    - id: Long
+	    - label: String
+	    - streetAddress: String
+	    - city: String
+	    - country: String
+	    - countryCode: String
+	    - zipCode: String
+	    - floor: String
+	    - latitude: Double
+	    - longitude: Double
+	    - location: Point
+	    - zoneId: ZoneId
+	    - notes: String
+	    - isDefault: Boolean
+	    - account: Account
+	    - restaurant: Restaurant
+	    - validateOwner()
+    }
+
+    class Booking {
+	    - id: Long
+	    - createdAt: Instant
+	    - bookingDate: LocalDateTime
+	    - status: BookingStatus
+	    - account: Account
+	    - restaurant: Restaurant
+	    - onCreate()
+    }
+
+    class Dashboard {
+	    - id: Long
+	    - panelWidth: JsonNode
+	    - restaurant: Restaurant
+	    - pages: List~DashboardPage~
+    }
+
+    class DashboardPage {
+	    - id: Long
+	    - title: String
+	    - slug: String
+	    - sortOrder: Integer
+	    - tabs: JsonNode
+	    - dashboard: Dashboard
+	    - widgets: List~Widget~
+    }
+
+    class Order {
+	    - id: Long
+	    - status: OrderStatus
+	    - items: List~OrderItem~
+	    - restaurant: Restaurant
+	    - account: Account
+	    - payment: Payment
+	    - createdAt: Instant
+	    - updatedAt: Instant
+	    - onCreate()
+	    - onUpdate()
+    }
+
+    class OrderItem {
+	    - id: Long
+	    - name: String
+	    - price: BigDecimal
+	    - quantity: Integer
+	    - order: Order
+    }
+
+    class Payment {
+	    - id: Long
+	    - amount: BigDecimal
+	    - method: PaymentMethod
+	    - status: PaymentStatus
+	    - transactionId: String
+	    - createdAt: Instant
+	    - updatedAt: Instant
+	    - onCreate()
+	    - onUpdate()
+    }
+
+    class Product {
+	    - id: Long
+	    - name: String
+	    - description: String
+	    - category: String
+	    - price: BigDecimal
+	    - restaurant: Restaurant
+    }
+
+    class Restaurant {
+	    - id: Long
+	    - name: String
+	    - slug: String
+	    - isDefault: Boolean
+	    - deliveryRadiusMeters: Double
+	    - address: Address
+	    - account: Account
+	    - dashboard: Dashboard
+	    - onCreate()
+    }
+
+    class User {
+	    - id: Long
+	    - username: String
+	    - password: String
+	    - email: String
+	    - role: UserRole
+	    - isEnabled: Boolean
+	    + getAuthorities() Collection~?~
+	    + isAccountNonExpired() boolean
+	    + isAccountNonLocked() boolean
+	    + isCredentialsNonExpired() boolean
+	    + isEnabled() boolean
+    }
+
+    class UserRole {
+	    - id: Long
+	    - name: String
+    }
+
+    class Widget {
+	    - id: Long
+	    - type: WidgetType
+	    - accessRoles: Set~UserRole~
+	    - dashboardPage: DashboardPage
+	    - layouts: JsonNode
+    }
+
+    Account "1" --> "0..*" Address
+    Account "1" --> "1" User
+    User "0..*" --> "1" UserRole 
+    Restaurant "1" --> "0..*" Address
+    Restaurant "0..*" --> "1" Account 
+    Restaurant "1" --> "1" Dashboard
+    Dashboard "1" --> "0..*" DashboardPage 
+    DashboardPage "1" --> "0..*" Widget
+    Widget "0..*" --> "0..*" UserRole 
+    Booking "0..*" --> "1" Account 
+    Booking "0..*" --> "1" Restaurant 
+    Order "0..*" --> "1" Restaurant 
+    Order "0..*" --> "1" Account
+    Order "1" --> "1" Payment
+    Order "1" --> "0..*" OrderItem
+    Product "0..*" --> "1" Restaurant 
+
+    %% AZUL
+    style Widget fill:oklch(97.1% 0.013 17.38),stroke:oklch(57.7% 0.245 27.325),color:oklch(57.7% 0.245 27.325)
+    style DashboardPage fill:oklch(97.1% 0.013 17.38),stroke:oklch(57.7% 0.245 27.325),color:oklch(57.7% 0.245 27.325)
+	style Dashboard fill:oklch(97.1% 0.013 17.38),stroke:oklch(57.7% 0.245 27.325),color:oklch(57.7% 0.245 27.325)
+    
+    %% VERDE
+    style User fill:oklch(97.7% 0.013 236.62),stroke:oklch(58.8% 0.158 241.966),color:oklch(58.8% 0.158 241.966)
+    style UserRole fill:oklch(97.7% 0.013 236.62),stroke:oklch(58.8% 0.158 241.966),color:oklch(58.8% 0.158 241.966)
+	style Account fill:oklch(97.7% 0.013 236.62),stroke:oklch(58.8% 0.158 241.966),color:oklch(58.8% 0.158 241.966)
+	style Address fill:oklch(97.7% 0.013 236.62),stroke:oklch(58.8% 0.158 241.966),color:oklch(58.8% 0.158 241.966)
+	style User fill:oklch(97.7% 0.013 236.62),stroke:oklch(58.8% 0.158 241.966),color:oklch(58.8% 0.158 241.966)
+
+    style Restaurant fill:oklch(98.2% 0.018 155.826),stroke:oklch(62.7% 0.194 149.214),color:oklch(62.7% 0.194 149.214)
+    style Booking fill:oklch(98.2% 0.018 155.826),stroke:oklch(62.7% 0.194 149.214),color:oklch(62.7% 0.194 149.214)
+	style Order fill:oklch(98.2% 0.018 155.826),stroke:oklch(62.7% 0.194 149.214),color:oklch(62.7% 0.194 149.214)
+	style Payment fill:oklch(98.2% 0.018 155.826),stroke:oklch(62.7% 0.194 149.214),color:oklch(62.7% 0.194 149.214)
+	style Product fill:oklch(98.2% 0.018 155.826),stroke:oklch(62.7% 0.194 149.214),color:oklch(62.7% 0.194 149.214)
+	style OrderItem fill:oklch(98.2% 0.018 155.826),stroke:oklch(62.7% 0.194 149.214),color:oklch(62.7% 0.194 149.214)

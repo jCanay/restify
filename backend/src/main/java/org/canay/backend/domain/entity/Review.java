@@ -22,4 +22,10 @@ public class Review {
     @Min(value = 0, message = "{review.rating.min}")
     @Max(value = 5, message = "{review.rating.max}")
     private Integer rating;
+
+    private String message;
+
+    @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
 }

@@ -96,8 +96,7 @@ public class SetupDataLoader implements CommandLineRunner {
 
             Address savedAdminRestaurantAddress = addressRepository.save(adminRestaurantAddress);
             adminRestaurant.setAddress(savedAdminRestaurantAddress);
-
-
+            
             dashboardService.initializeDashboard(savedAdminRestaurant, adminRole);
         }
 

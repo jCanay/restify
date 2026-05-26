@@ -40,23 +40,31 @@ public class DashboardServiceImpl implements DashboardService {
     @Transactional(readOnly = true)
     public DashboardDTO getDashboardForUser(Long restaurantId, User user) {
         Account account = accountRepository.findByUser(user)
-                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage("not-found.account", null,
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new ResourceNotFoundException(messageSource.getMessage(
+                        "not-found.account", null,
+                        LocaleContextHolder.getLocale()
+                )));
 
         Restaurant restaurant = restaurantRepository.findAllByAccount(account)
                 .stream()
                 .filter(r -> r.getId().equals(restaurantId))
                 .findFirst()
-                .orElseThrow(() -> new AccessDeniedException(messageSource.getMessage("access-denied",
-                        new String[]{messageSource.getMessage("http.get", null,
-                                LocaleContextHolder.getLocale())},
-                        LocaleContextHolder.getLocale())));
+                .orElseThrow(() -> new AccessDeniedException(messageSource.getMessage(
+                        "access-denied",
+                        new String[]{messageSource.getMessage(
+                                "http.get", null,
+                                LocaleContextHolder.getLocale()
+                        )},
+                        LocaleContextHolder.getLocale()
+                )));
 
         Dashboard dashboard = restaurant.getDashboard();
 
         if (dashboard == null) {
-            throw new ResourceNotFoundException(messageSource.getMessage("not-found.dashboard", null,
-                    LocaleContextHolder.getLocale()));
+            throw new ResourceNotFoundException(messageSource.getMessage(
+                    "not-found.dashboard", null,
+                    LocaleContextHolder.getLocale()
+            ));
         }
 
         return dashboardMapper.mapTo(dashboard);
@@ -90,6 +98,13 @@ public class DashboardServiceImpl implements DashboardService {
         DashboardPage savedOrderPage = dashboardPageRepository.save(orderPage);
         savedOrderPage.setWidgets(createOrderWidgets(savedOrderPage, role));
 
+        DashboardPage restaurantPage = createPage("Restaurante", "restaurant", "", 4, savedDashboard, null);
+        restaurantPage.setTabs(createPageTabs("""
+                [{"name": "Horario","path": ""}]
+                """));
+        DashboardPage savedRestaurantPage = dashboardPageRepository.save(restaurantPage);
+        savedRestaurantPage.setWidgets(createRestaurantWidgets(savedRestaurantPage, role));
+
         DashboardPage menuPage = createPage("Menú", "menu", "", 5, savedDashboard, null);
         menuPage.setTabs(createPageTabs("""
                 [{"name": "Products","path": ""}, {"name": "Estadísticas","path": "stats"}]
@@ -97,14 +112,21 @@ public class DashboardServiceImpl implements DashboardService {
         DashboardPage savedMenuPage = dashboardPageRepository.save(menuPage);
         savedMenuPage.setWidgets(createMenuWidgets(savedMenuPage, role));
 
+        DashboardPage staffPage = createPage("Plantilla", "staff", "", 6, savedDashboard, null);
+        staffPage.setTabs(createPageTabs("""
+                [{"name": "Gestionar","path": ""}]
+                """));
+        DashboardPage savedStaffPage = dashboardPageRepository.save(staffPage);
+        savedStaffPage.setWidgets(createStaffWidgets(savedStaffPage, role));
+
         // Agrupar y ordenar las páginas
         List<DashboardPage> pages = new ArrayList<>(List.of(
                 savedHomePage,
                 savedBookingPage,
                 savedOrderPage,
-                createPage("Restaurante", "restaurant", "", 4, dashboard, List.of()),
+                savedRestaurantPage,
                 savedMenuPage,
-                createPage("Plantilla", "staff", "", 6, dashboard, List.of())
+                savedStaffPage
         ));
         pages.sort(Comparator.comparingLong(DashboardPage::getSortOrder));
         savedDashboard.setPages(pages);
@@ -311,6 +333,62 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     private List<Widget> createMenuWidgets(DashboardPage page, UserRole role) {
+        UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("not-found.user.role"));
+
+        UserRole ownerRole = userRoleRepository.findByName("ROLE_OWNER")
+                .orElseThrow(() -> new ResourceNotFoundException("not-found.user.role"));
+
+        List<Widget> widgets = new ArrayList<>();
+
+        Optional<Widget> wOrderCrud = widgetService.createWidgetIfNotFound(
+                WidgetType.CRUD_MANAGER,
+                page,
+                Set.of(adminRole),
+                """
+                        {
+                            "lg": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "md": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wOrderCrud.ifPresent(widgets::add);
+
+        return widgets;
+    }
+
+    private List<Widget> createRestaurantWidgets(DashboardPage page, UserRole role) {
+        UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("not-found.user.role"));
+
+        UserRole ownerRole = userRoleRepository.findByName("ROLE_OWNER")
+                .orElseThrow(() -> new ResourceNotFoundException("not-found.user.role"));
+
+        List<Widget> widgets = new ArrayList<>();
+
+        Optional<Widget> wOrderCrud = widgetService.createWidgetIfNotFound(
+                WidgetType.CRUD_MANAGER,
+                page,
+                Set.of(adminRole),
+                """
+                        {
+                            "lg": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "md": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "sm": {"x": 0,"y": 0,"w": 1,"h": 1},
+                            "xs": {"x": 0,"y": 0,"w": 1,"h": 1}
+                        }
+                        """,
+                role
+        );
+        wOrderCrud.ifPresent(widgets::add);
+
+        return widgets;
+    }
+
+    private List<Widget> createStaffWidgets(DashboardPage page, UserRole role) {
         UserRole adminRole = userRoleRepository.findByName("ROLE_ADMIN")
                 .orElseThrow(() -> new RuntimeException("not-found.user.role"));
 

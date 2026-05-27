@@ -1,0 +1,46 @@
+sequenceDiagram
+    autonumber
+    actor ActorAdmin as Dueño / Administrador
+    participant Vista as Frontend (React / Dashboard)
+    participant Sec as Spring Security (Filtro JWT)
+    participant DashCtrl as DashboardController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+
+    ActorAdmin->>Vista: Accede al Panel de Administración
+    activate Vista
+    
+    Vista->>Sec: GET /api/dashboard/summary (Authorization: Bearer Token)
+    activate Sec
+    
+    Sec->>Sec: Validar firma del JWT y extraer Claims (Roles)
+    
+    alt Usuario con Rol inválido (Cliente/Estándar) (Excepción p)
+        Sec-->>Vista: 403 Forbidden (Acceso Denegado)
+        Vista->>Vista: Interceptar error con Axios Interceptors
+        Vista-->>ActorAdmin: Redirigir a Home con alerta de permisos
+    else Usuario Autorizado (Dueño o Admin)
+        Sec->>DashCtrl: Delegar petición autorizada (Roles, UserID)
+        activate DashCtrl
+        
+        alt Rol es 'Dueño' (Flujo Normal)
+            DashCtrl->>DB: Consultas agrupadas (SUM ventas, COUNT pedidos) filtrando por su RestauranteID
+            activate DB
+            DB-->>DashCtrl: Datos analíticos del restaurante específico
+            deactivate DB
+        else Rol es 'Admin' Global (Flujo Alternativo 3.1)
+            DashCtrl->>DB: Consultas macro globales (Total restaurantes, usuarios nuevos, ingresos globales)
+            activate DB
+            DB-->>DashCtrl: Datos analíticos de toda la plataforma
+            deactivate DB
+        end
+        
+        DashCtrl-->>Sec: 200 OK + JSON (Métricas, Gráficos e Historial diario)
+        deactivate DashCtrl
+        Sec-->>Vista: 200 OK + Payload de Analíticas
+        deactivate Sec
+        
+        Vista->>Vista: Inyectar datos en componentes gráficos (ApexCharts / Chart.js)
+        Vista->>Vista: Volcar listas de control en tablas reactivas (ag-grid)
+        Vista-->>ActorAdmin: Renderiza el Dashboard completo con gráficos interactivos
+    end
+    deactivate Vista

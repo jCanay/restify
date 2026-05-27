@@ -1,0 +1,8 @@
+main.restaurant-checkout-page {
+    display: flex;
+
+    & h2 {
+        font-size: 24pt;
+        font-weight: 600;
+    }
+}

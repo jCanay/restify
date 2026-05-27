@@ -22,10 +22,10 @@
 
 # Planning (23 - 31 mayo)
 - [X] SABADO, DOMINGO: Completar widgets mínimos (5 por página)
-- [ ] LUNES: Diagrama Gantt, Casos de uso, discurso DB, Entidad-Relacion, Mockups
-- [ ] MARTES: Diagrama clases, Diagramas secuencia por caso de uso
-- [ ] MIERCOLES: Diagramas secuencia por caso de uso
-- [ ] JUEVES: Diagrama de despliegue, Alcance aplicación, Memoria, soluciones, referencias
+- [X] LUNES: discurso DB, Entidad-Relacion
+- [X] MARTES: Diagrama clases, Mockups, Diagrama Gantt, Diagrama de despliegue
+- [X] MIERCOLES: Diagramas secuencia por caso de uso, Casos de uso
+- [ ] JUEVES: Alcance aplicación, Memoria, soluciones, referencias
 - [ ] VIERNES: Despliegue
 - [ ] SABADO: Documentacion (Manual de instalacion y de usuario)
 - [ ] DOMINGO: Presentacion

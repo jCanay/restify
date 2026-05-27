@@ -1,0 +1,47 @@
+sequenceDiagram
+    autonumber
+    actor Usuario as Usuario No Registrado
+    participant Vista as Frontend (React / Vite)
+    participant Auth as AuthController (Spring Boot)
+    participant Security as Spring Security / BCrypt
+    participant DB as Base de Datos (MySQL)
+
+    Usuario->>Vista: Introduce correo y contraseña
+    activate Vista
+    Vista->>Vista: Validar formato de los campos
+    
+    alt Formato inválido
+        Vista-->>Usuario: Mostrar error de validación en pantalla
+    else Formato correcto
+        Vista->>Auth: POST /api/auth/login (email, password)
+        activate Auth
+        
+        Auth->>DB: Buscar usuario por email (JPA Repository)
+        activate DB
+        DB-->>Auth: Retorna datos del usuario (User Entity)
+        deactivate DB
+
+        alt Usuario no existe
+            Auth-->>Vista: 401 Unauthorized (Usuario no encontrado)
+            Vista-->>Usuario: Alerta: "Correo o contraseña incorrectos"
+        else Usuario existe
+            Auth->>Security: passwordMatches(rawPassword, encodedPassword)
+            activate Security
+            Security-->>Auth: Resultado de la comparación (boolean)
+            deactivate Security
+
+            alt Contraseña incorrecta
+                Auth-->>Vista: 401 Unauthorized (Credenciales inválidas)
+                Vista-->>Usuario: Alerta: "Correo o contraseña incorrectos"
+            else Contraseña correcta y cuenta activa
+                Auth->>Auth: Generar Token JWT (con ID y Roles RBAC)
+                Auth-->>Vista: 200 OK + JSON (Token JWT, email, roles)
+                deactivate Auth
+                
+                Vista->>Vista: Guardar JWT en localStorage
+                Vista->>Vista: Decodificar roles para cambiar contexto de vistas
+                Vista-->>Usuario: Redirección automática al Dashboard / Home
+            end
+        end
+    end
+    deactivate Vista

@@ -1,0 +1,48 @@
+---
+config:
+  theme: redux-color
+  look: neo
+---
+sequenceDiagram
+    actor Usuario as Usuario No Registrado
+    participant Vista as Frontend (React / Vite)
+    participant RegCtrl as AuthController (Spring Boot)
+    participant Security as Spring Security / BCrypt
+    participant DB as Base de Datos (MySQL)
+    autonumber
+
+    Usuario->>Vista: Introduce datos (Nombre, Email, Contraseña, Confirmación)
+    activate Vista
+    alt Contraseñas no coinciden o campos vacíos
+        Vista-->>Usuario: Mostrar error en la interfaz y vaciar contraseñas
+    else Validación local correcta
+        Vista->>RegCtrl: POST /api/auth/register (registroDTO)
+        activate RegCtrl
+        
+        RegCtrl->>DB: Verificar si el email ya existe (JPA ExistByEmail)
+        activate DB
+        DB-->>RegCtrl: Resultado de la existencia (true / false)
+        deactivate DB
+
+        alt Email ya registrado
+            RegCtrl-->>Vista: 400 Bad Request (Email en uso)
+            Vista-->>Usuario: Alerta: "El correo electrónico ya está registrado"
+        else Email disponible
+            RegCtrl->>Security: encode(rawPassword)
+            activate Security
+            Security-->>RegCtrl: Contraseña cifrada (BCrypt Hash)
+            deactivate Security
+            
+            RegCtrl->>RegCtrl: Asignar rol predeterminado (ROLE_USER / Estándar)
+            RegCtrl->>DB: Guardar nuevo usuario (JPA save)
+            activate DB
+            DB-->>RegCtrl: Confirmación de guardado (User Entity persistido)
+            deactivate DB
+            
+            RegCtrl-->>Vista: 201 Created (Registro completado)
+            deactivate RegCtrl
+            
+            Vista-->>Usuario: Notificación emergente de éxito y redirección al Login
+        end
+    end
+    deactivate Vista

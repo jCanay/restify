@@ -1,0 +1,85 @@
+sequenceDiagram
+    autonumber
+    actor Dueño as Dueño del Restaurante
+    participant Vista as Frontend (React / Formularios)
+    participant Sec as Spring Security (Filtro JWT)
+    participant ScheduleCtrl as ScheduleController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+
+    %% --- BLOQUE DE CARGA DE HORARIOS ---
+    Dueño->>Vista: Entra en "Configuración de Horarios"
+    activate Vista
+    Vista->>Sec: GET /api/restaurants/schedule (Authorization: Bearer Token)
+    activate Sec
+    Sec->>Sec: Validar JWT y verificar rol de 'Dueño'
+    Sec->>ScheduleCtrl: Delegar petición de lectura
+    activate ScheduleCtrl
+    
+    ScheduleCtrl->>DB: Consultar horario actual (Schedule Entity) por RestauranteID
+    activate DB
+    DB-->>ScheduleCtrl: Registro de horarios activos
+    deactivate DB
+    
+    ScheduleCtrl-->>Sec: 200 OK + JSON (Estructura de días y horas)
+    deactivate ScheduleCtrl
+    Sec-->>Vista: 200 OK + Payload
+    deactivate Sec
+    Vista-->>Dueño: Renderiza el formulario con los selectores de horas rellenos
+    deactivate Vista
+
+    %% --- BLOQUE DE GUARDADO Y VALIDACIÓN ---
+    Dueño->>Vista: Modifica tramos (Ej: Cierra un martes o cambia hora de apertura) y pulsa "Guardar"
+    activate Vista
+    
+    Vista->>Vista: Validar que hora_apertura < hora_cierre (Local)
+    
+    alt Error cronológico en cliente (Excepción p)
+        Vista-->>Dueño: Bloquear botón y mostrar alerta: "Hora de cierre incoherente"
+    else Validación local exitosa
+        Vista->>Sec: PUT /api/restaurants/schedule (Nuevos Horarios DTO)
+        activate Sec
+        Sec->>ScheduleCtrl: Delegar actualización autorizada
+        activate ScheduleCtrl
+        
+        ScheduleCtrl->>DB: Verificar si existen reservas activas de clientes en las horas afectadas
+        activate DB
+        DB-->>ScheduleCtrl: Lista de reservas afectadas (si las hay)
+        deactivate DB
+        
+        alt Existen reservas en conflicto y el dueño no ha confirmado (Excepción q)
+            ScheduleCtrl-->>Sec: 409 Conflict + JSON (Lista de reservas en peligro)
+            Sec-->>Vista: 409 Conflict
+            Vista-->>Dueño: Modal: "Hay reservas activas este día. ¿Deseas cerrarlo de todos modos?"
+            
+            alt Dueño cancela la operación
+                Dueño->>Vista: Pulsa "Cancelar"
+                Vista->>Vista: Abortar guardado y mantener pantalla intacta
+            else Dueño acepta forzar el cierre
+                Dueño->>Vista: Pulsa "Confirmar y Continuar"
+                Vista->>Sec: PUT /api/restaurants/schedule?force=true (Reenvío con flag)
+                Sec->>ScheduleCtrl: Delegar guardado forzado
+                
+                ScheduleCtrl->>DB: Cambiar estado de las reservas afectadas a 'PENDIENTE_CANCELACION'
+                activate DB
+                ScheduleCtrl->>DB: Guardar nueva configuración de horario (LocalTime en MySQL)
+                DB-->>ScheduleCtrl: Confirmación de persistencia y actualización total
+                deactivate DB
+                
+                ScheduleCtrl-->>Sec: 200 OK + Horario actualizado
+                Sec-->>Vista: 200 OK
+                Vista-->>Dueño: Notificación emergente: "Horario actualizado. Revise las reservas afectadas"
+            end
+            
+        else No hay conflictos con reservas (Flujo Normal)
+            ScheduleCtrl->>DB: Guardar nueva configuración de horario directamente (JPA save)
+            activate DB
+            DB-->>ScheduleCtrl: Confirmación de persistencia
+            deactivate DB
+            ScheduleCtrl-->>Sec: 200 OK + Horario actualizado
+            deactivate ScheduleCtrl
+            Sec-->>Vista: 200 OK
+            deactivate Sec
+            Vista-->>Dueño: Notificación emergente: "Horario comercial guardado correctamente"
+        end
+    end
+    deactivate Vista

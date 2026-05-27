@@ -1,0 +1,41 @@
+sequenceDiagram
+    autonumber
+    actor Usuario as Cualquier Usuario
+    participant Vista as Frontend (React / Vista Menú)
+    participant ProdCtrl as ProductController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+
+    Usuario->>Vista: Hace clic en un restaurante desde la lista o el mapa
+    activate Vista
+    
+    Vista->>ProdCtrl: GET /api/restaurants/{restaurantId}/products
+    activate ProdCtrl
+    
+    ProdCtrl->>DB: Verificar que el restaurante existe y está activo
+    activate DB
+    DB-->>ProdCtrl: Estado del restaurante (true / false)
+    deactivate DB
+
+    alt Restaurante no existe o está deshabilitado (Excepción q)
+        ProdCtrl-->>Vista: 404 Not Found (Restaurante inválido)
+        Vista->>Vista: Interceptar error con Axios
+        Vista-->>Usuario: Notificación de error y redirección automática a la Búsqueda
+    else Restaurante válido
+        ProdCtrl->>DB: Consultar Categorías y Productos asociados (JPA Join / Eager Load)
+        activate DB
+        DB-->>ProdCtrl: Colección de entidades (Categorías con su lista de Productos)
+        deactivate DB
+        
+        ProdCtrl->>ProdCtrl: Mapear Entidades a ProductoDTO (Filtrar datos administrativos)
+        ProdCtrl-->>Vista: 200 OK + JSON (Menú estructurado por categorías)
+        deactivate ProdCtrl
+        
+        Vista->>Vista: Agrupar platos en la interfaz (Entrantes, Principales, Postres)
+        
+        opt Detecta productos con stock = 0 (Flujo Alternativo 4.2)
+            Vista->>Vista: Atenuar tarjeta visual del producto y deshabilitar botón "Añadir"
+        end
+        
+        Vista-->>Usuario: Renderiza la carta completa del restaurante de forma interactiva
+    end
+    deactivate Vista

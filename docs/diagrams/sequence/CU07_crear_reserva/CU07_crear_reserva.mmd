@@ -1,0 +1,46 @@
+sequenceDiagram
+    actor Usuario as Usuario Estándar
+    participant Vista as Frontend (React / Reserva)
+    participant Sec as Spring Security (Filtro JWT)
+    participant ResCtrl as BookingController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+    autonumber
+
+    Usuario->>Vista: Selecciona Fecha, Hora y Número de Comensales
+    activate Vista
+    Vista->>Sec: POST /api/reservations/verify (Authorization: Bearer Token)
+    activate Sec
+    Sec->>Sec: Validar firma y vigencia del JWT
+    Sec->>ResCtrl: Delegar petición autorizada
+    activate ResCtrl
+    ResCtrl->>DB: COUNT / SUM comensales en esa fecha y tramo horario
+    activate DB
+    DB-->>ResCtrl: Total de asientos ya ocupados
+    deactivate DB
+    ResCtrl->>ResCtrl: Calcular aforo disponible (Aforo Máximo - Ocupado)
+    alt Aforo insuficiente para el grupo (Excepción p)
+        ResCtrl-->>Vista: 400 Bad Request (Aforo superado)
+        Vista-->>Usuario: Alerta: "No hay disponibilidad para esa cantidad de personas"
+    else Disponibilidad confirmada
+        ResCtrl-->>Vista: 200 OK (Tramo disponible)
+        deactivate ResCtrl
+        deactivate Sec
+        
+        Usuario->>Vista: Introduce comentarios opcionales y pulsa "Confirmar Reserva"
+        Vista->>Sec: POST /api/reservations/save (Datos de la Reserva)
+        activate Sec
+        Sec->>ResCtrl: Delegar guardado
+        activate ResCtrl
+        
+        ResCtrl->>DB: Insertar registro de Reserva en estado PENDIENTE (o CONFIRMADA)
+        activate DB
+        DB-->>ResCtrl: Confirmación de persistencia (Reservation Entity)
+        deactivate DB
+        
+        ResCtrl-->>Vista: 201 Created + JSON (Detalles de la Reserva)
+        deactivate ResCtrl
+        deactivate Sec
+        
+        Vista-->>Usuario: Mensaje de éxito y redirección a Mis Reservas
+    end
+    deactivate Vista

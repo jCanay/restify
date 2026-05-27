@@ -1,0 +1,55 @@
+sequenceDiagram
+    autonumber
+    actor Usuario as Usuario Estándar
+    participant Vista as Frontend (React / Checkout)
+    participant Sec as Spring Security (Filtro JWT)
+    participant CheckCtrl as CheckoutController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+
+    Usuario->>Vista: Selecciona datos de envío/pago y pulsa "Confirmar y Pagar"
+    activate Vista
+    
+    Vista->>Sec: POST /api/orders/checkout (Authorization: Bearer Token)
+    activate Sec
+    
+    Sec->>Sec: Validar firma, expiración y roles del JWT
+    
+    alt Token inválido o expirado (Excepción)
+        Sec-->>Vista: 401 Unauthorized / 403 Forbidden
+        Vista-->>Usuario: Redirigir a Login con mensaje de sesión expirada
+    else Token válido
+        Sec->>CheckCtrl: Delegar petición autorizada (UserPrincipal)
+        activate CheckCtrl
+        
+        CheckCtrl->>DB: Consultar coordenadas del restaurante y del usuario
+        activate DB
+        DB-->>CheckCtrl: Datos de ubicación geográficos
+        deactivate DB
+        
+        CheckCtrl->>CheckCtrl: Calcular distancia y costes de envío dinámicos
+        
+        alt Dirección fuera de cobertura (Excepción p)
+            CheckCtrl-->>Vista: 400 Bad Request (Fuera de radio de entrega)
+            Vista-->>Usuario: Alerta: "El restaurante no reparte en esta ubicación"
+        else Ubicación válida
+            CheckCtrl->>CheckCtrl: Procesar pasarela de pago (Validar datos bancarios)
+            
+            alt Pago rechazado por el banco (Excepción q)
+                CheckCtrl-->>Vista: 402 Payment Required (Transacción fallida)
+                Vista-->>Usuario: Alerta: "Pago rechazado. Compruebe los fondos o su tarjeta"
+            else Pago aprobado con éxito
+                CheckCtrl->>DB: Insertar registro de Pedido e histórico de líneas (JPA save)
+                activate DB
+                DB-->>CheckCtrl: Confirmación de persistencia (Order Entity)
+                deactivate DB
+                
+                CheckCtrl-->>Vista: 200 OK + JSON (Detalles del Pedido Creado)
+                deactivate CheckCtrl
+                
+                Vista->>Vista: Vaciar estado de Nanostores / LocalStorage del carrito
+                Vista-->>Usuario: Mostrar pantalla de éxito y número de seguimiento del pedido
+            end
+        end
+    end
+    deactivate Sec
+    deactivate Vista

@@ -1,71 +1,102 @@
 nav.navbar {
-  position: sticky;
-  z-index: 50;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: #fff;
-
-  & div.wrapper {
-    width: 100%;
-    /* max-width: 80em; */
+    position: sticky;
+    z-index: 50;
+    top: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #fff;
 
-    & div.logo {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 1em;
+    & div.wrapper {
+        width: 100%;
+        /* max-width: 80em; */
+        display: flex;
+        align-items: center;
+        gap: 1rem;
 
-      &:hover {
+        & ul {
+            display: flex;
+            align-items: center;
+            gap: 2.5em;
+            margin: 1em;
+
+            & a.link {
+                color: black;
+                font-size: 14pt;
+                text-decoration: none;
+                position: relative;
+
+                &:focus-visible {
+                    outline: none;
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        width: calc(100% + 1.5rem);
+                        left: -0.75rem;
+                        border-radius: 0.25rem;
+                        height: 100%;
+                        outline: solid 2px;
+                    }
+                }
+
+                &.active:focus-visible::before {
+                    color: black;
+                }
+
+                &:hover,
+                &.active {
+                    color: var(--color-primary);
+                }
+            }
+        }
+
+        & div.account-menu {
+            margin-left: auto;
+        }
+
+        & button.menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+    }
+}
+
+#root:has(.navbar) ~ .menu-drawer {
+    display: flex;
+    padding: 2rem;
+    gap: 1rem;
+
+    & button {
+        background-color: var(--light200);
+        border-radius: 0.5rem;
+        padding: 1rem;
         cursor: pointer;
-      }
 
-      & img {
-        color: var(--color-primary);
-        fill: var(--color-primary);
-        background-color: var(--color-primary);
-      }
+        &:hover {
+            background-color: var(--light300);
+        }
+
+        &.register-btn {
+            background-color: var(--color-black);
+            color: var(--color-white);
+
+            &:hover {
+                background-color: var(--color-neutral-700);
+            }
+        }
     }
+}
 
-    & ul {
-      display: flex;
-      align-items: center;
-      gap: 2.5em;
-      margin: 1em;
-
-      & .link {
-        color: black;
-        font-size: 14pt;
-        text-decoration: none;
-        position: relative;
-
-        &:focus-visible {
-          outline: none;
-
-          &:before {
-            content: "";
-            position: absolute;
-            width: calc(100% + 1.5rem);
-            left: -0.75rem;
-            border-radius: 0.25rem;
-            height: 100%;
-            outline: solid 2px;
-          }
+@media screen and (width < 600px) {
+    nav.navbar {
+        & button.menu-toggle {
+            display: flex !important;
+            margin-left: auto;
         }
 
-        &.active:focus-visible::before {
-          color: black;
+        & .account-menu {
+            display: none;
         }
-
-        &:hover,
-        &.active {
-          color: var(--color-primary);
-        }
-      }
     }
-  }
 }

@@ -56,7 +56,7 @@ export default function AccountMenu() {
         setIsUserLoggedIn(false);
     };
 
-    const accountOptions = [
+    const ACCOUNT_OPTIONS = [
         {
             text: "Ir al dashboard",
             access: ["ROLE_ADMIN", "ROLE_OWNER"],
@@ -119,7 +119,7 @@ export default function AccountMenu() {
                         </div>
                         <DropdownMenuSeparator />
                         <ul>
-                            {accountOptions.map((option, i) => {
+                            {ACCOUNT_OPTIONS.map((option, i) => {
                                 if (
                                     option.access[0] != "*" &&
                                     !option.access.includes(user?.role?.name)

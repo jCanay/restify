@@ -1,28 +1,10 @@
 import { Link, useNavigate } from "react-router";
 import "../css/navbar.css";
 import Logo from "./Logo";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
-import RegisterModal from "../../auth/components/RegisterModal/RegisterModal";
-import LoginModal from "../../auth/components/LoginModal/LoginModal";
-import { useStore } from "@nanostores/react";
 import { $userStore, userExists } from "@/modules/dashboard/contexts/userStore";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/modules/auth/hooks/useAuth";
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import {
-    CreditCard,
-    LogOut,
-    PieChart,
-    ReceiptText,
-    Settings,
-    User,
-} from "lucide-react";
+import AccountMenu from "./AccountMenu/AccountMenu";
+import { Drawer, DrawerTrigger, DrawerContent } from "@/components/ui/drawer";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -34,14 +16,36 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import AccountMenu from "./AccountMenu/AccountMenu";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import LoginModal from "@/modules/auth/components/LoginModal/LoginModal";
+import RegisterModal from "@/modules/auth/components/RegisterModal/RegisterModal";
+import { useAuth } from "@/modules/auth/hooks/useAuth";
+import { useStore } from "@nanostores/react";
+import {
+    CreditCard,
+    LogOut,
+    Menu,
+    PieChart,
+    ReceiptText,
+    Settings,
+    User,
+} from "lucide-react";
 
 function Navbar() {
+    const userPfp = "https://i.pravatar.cc/100?u=24";
     const { user, account } = useStore($userStore);
     const { logout } = useAuth();
-    const navigate = useNavigate();
-    const userPfp = "https://i.pravatar.cc/100?u=24";
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+    const navigate = useNavigate();
+    const [loginOpen, setLoginOpen] = useState(false);
+    const [registerOpen, setRegisterOpen] = useState(false);
 
     useEffect(() => {
         const checkUserAuthStatus = () => {
@@ -51,7 +55,12 @@ function Navbar() {
         checkUserAuthStatus();
     }, []);
 
-    const accountOptions = [
+    const handleLogout = () => {
+        logout();
+        setIsUserLoggedIn(false);
+    };
+
+    const ACCOUNT_OPTIONS = [
         {
             text: "Ir al dashboard",
             access: ["ROLE_ADMIN", "ROLE_OWNER"],
@@ -89,11 +98,19 @@ function Navbar() {
         },
     ];
 
+    useEffect(() => {
+        const checkUserAuthStatus = () => {
+            setIsUserLoggedIn(userExists());
+        };
+
+        checkUserAuthStatus();
+    }, []);
+
     return (
         <nav className="navbar">
             <div className="wrapper container">
                 <Logo route={"/"} />
-                <ul>
+                {/* <ul>
                     <Link className="link active" to="/">
                         Inicio
                     </Link>
@@ -106,8 +123,121 @@ function Navbar() {
                     <Link className="link" to="/">
                         Contacto
                     </Link>
-                </ul>
+                </ul> */}
                 <AccountMenu />
+                <Drawer direction="right">
+                    <DrawerTrigger asChild>
+                        <button className="menu-toggle">
+                            <Menu />
+                        </button>
+                    </DrawerTrigger>
+                    {isUserLoggedIn ? (
+                        <DrawerContent className="menu-drawer">
+                            <div className="profile ">
+                                <img src={userPfp} alt="" />
+                                <div className="info">
+                                    <h4>{user?.username}</h4>
+                                    <p>{user?.email}</p>
+                                </div>
+                            </div>
+                            <hr />
+                            <ul>
+                                {ACCOUNT_OPTIONS.map((option, i) => {
+                                    if (
+                                        option.access[0] != "*" &&
+                                        !option.access.includes(
+                                            user?.role?.name,
+                                        )
+                                    ) {
+                                        return;
+                                    }
+
+                                    return (
+                                        <li
+                                            key={i}
+                                            onClick={option.function}
+                                            className={`${option.className}`}
+                                        >
+                                            {option.icon}
+                                            <span>{option.text}</span>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                            <hr />
+                            <ul>
+                                <AlertDialog>
+                                    <AlertDialogTrigger asChild>
+                                        <li
+                                            onSelect={(e) => e.preventDefault()}
+                                            className="menu-item logout-btn"
+                                        >
+                                            <LogOut size={18} />
+                                            <span>Cerrar sesión</span>
+                                        </li>
+                                    </AlertDialogTrigger>
+                                    <AlertDialogContent
+                                        className="logout-dialog"
+                                        size="sm"
+                                    >
+                                        <AlertDialogHeader>
+                                            <AlertDialogTitle>
+                                                Cerrar sesión
+                                            </AlertDialogTitle>
+                                            <AlertDialogDescription>
+                                                ¿Estás seguro de que quieres
+                                                cerrar sesión?
+                                            </AlertDialogDescription>
+                                        </AlertDialogHeader>
+                                        <AlertDialogFooter>
+                                            <AlertDialogCancel>
+                                                No
+                                            </AlertDialogCancel>
+                                            <AlertDialogAction
+                                                onClick={handleLogout}
+                                            >
+                                                Sí
+                                            </AlertDialogAction>
+                                        </AlertDialogFooter>
+                                    </AlertDialogContent>
+                                </AlertDialog>
+                            </ul>
+                        </DrawerContent>
+                    ) : (
+                        <DrawerContent className="menu-drawer">
+                            <Dialog
+                                open={loginOpen}
+                                onOpenChange={setLoginOpen}
+                            >
+                                <DialogTrigger asChild>
+                                    <button className="login-btn">
+                                        Iniciar sesión
+                                    </button>
+                                </DialogTrigger>
+                                <LoginModal
+                                    open={loginOpen}
+                                    setOpen={setLoginOpen}
+                                    onLogged={setIsUserLoggedIn}
+                                />
+                            </Dialog>
+                            <Dialog
+                                open={registerOpen}
+                                onOpenChange={setRegisterOpen}
+                            >
+                                <DialogTrigger asChild>
+                                    <button className="register-btn">
+                                        Registrarse
+                                    </button>
+                                </DialogTrigger>
+                                <RegisterModal
+                                    open={registerOpen}
+                                    setOpen={setRegisterOpen}
+                                    onRegistered={setIsUserLoggedIn}
+                                />
+                            </Dialog>
+                        </DrawerContent>
+                    )}
+                </Drawer>
             </div>
         </nav>
     );

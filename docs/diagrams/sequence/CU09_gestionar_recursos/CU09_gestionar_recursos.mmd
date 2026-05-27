@@ -1,0 +1,86 @@
+sequenceDiagram
+    autonumber
+    actor Dueño as Dueño del Restaurante
+    participant Vista as Frontend (React / ag-grid)
+    participant Sec as Spring Security (Filtro JWT)
+    participant ResourceCtrl as ResourceController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+
+    %% --- BLOQUE DE LECTURA ---
+    Dueño->>Vista: Selecciona módulo (Productos, Pedidos o Reservas)
+    activate Vista
+    Vista->>Sec: GET /api/resources/{tipo} (Authorization: Bearer Token)
+    activate Sec
+    Sec->>Sec: Validar JWT y comprobar rol de 'Dueño'
+    Sec->>ResourceCtrl: Delegar petición de lectura
+    activate ResourceCtrl
+    
+    ResourceCtrl->>DB: Consultar registros activos filtrados por RestauranteID
+    activate DB
+    DB-->>ResourceCtrl: Lista de entidades (JSON estructurado)
+    deactivate DB
+    
+    ResourceCtrl-->>Sec: 200 OK + Payload de datos
+    deactivate ResourceCtrl
+    Sec-->>Vista: 200 OK + Datos del recurso
+    deactivate Sec
+    Vista->>Vista: Volcar registros en tabla reactiva (ag-grid)
+    Vista-->>Dueño: Muestra listado con filtros y acciones disponibles
+    deactivate Vista
+
+    %% --- BLOQUE DE EDICIÓN / ACCIÓN ---
+    Dueño->>Vista: Modifica un recurso (Ej: Cambiar estado pedido, editar precio, eliminar producto)
+    activate Vista
+    
+    alt Acción es dar de baja / eliminar un Producto (Flujo Alternativo 5.2)
+        Vista->>Sec: DELETE /api/resources/products/{id}
+        activate Sec
+        Sec->>ResourceCtrl: Delegar eliminación
+        activate ResourceCtrl
+        ResourceCtrl->>DB: Verificar si el producto tiene historial de pedidos vinculados
+        activate DB
+        DB-->>ResourceCtrl: Tiene historial (true / false)
+        deactivate DB
+        
+        alt Producto tiene historial de ventas
+            ResourceCtrl->>DB: Actualizar columna 'activo' = false (Borrado Lógico)
+            activate DB
+            DB-->>ResourceCtrl: Registro actualizado
+            deactivate DB
+        else Producto es nuevo sin historial
+            ResourceCtrl->>DB: Ejecutar DELETE físico del registro
+            activate DB
+            DB-->>ResourceCtrl: Registro eliminado
+            deactivate DB
+        end
+        ResourceCtrl-->>Sec: 200 OK / 204 No Content
+        deactivate ResourceCtrl
+        Sec-->>Vista: Operación completada
+        deactivate Sec
+    else Acción es actualización común (Ej: Confirmar Reserva / Estado Pedido)
+        Vista->>Sec: PUT /api/resources/{tipo}/{id} (Datos modificados)
+        activate Sec
+        Sec->>ResourceCtrl: Delegar actualización
+        activate ResourceCtrl
+        
+        ResourceCtrl->>DB: Actualizar campos en la tabla correspondiente (JPA save/update)
+        activate DB
+        
+        alt Conflicto de concurrencia (Excepción q - Recurso modificado por cliente)
+            DB-->>ResourceCtrl: Excepción de bloqueo / conflicto
+            ResourceCtrl-->>Sec: 409 Conflict
+            Sec-->>Vista: 409 Error
+            Vista-->>Dueño: Alerta: "Los datos han cambiado. La lista se refrescará."
+        else Transacción exitosa
+            DB-->>ResourceCtrl: Confirmación de persistencia
+            deactivate DB
+            ResourceCtrl-->>Sec: 200 OK + Recurso actualizado
+            deactivate ResourceCtrl
+            Sec-->>Vista: 200 OK
+            deactivate Sec
+        end
+    end
+    
+    Vista->>Vista: Refrescar fila modificada en ag-grid localmente
+    Vista-->>Dueño: Notificación emergente: "Recurso actualizado con éxito"
+    deactivate Vista

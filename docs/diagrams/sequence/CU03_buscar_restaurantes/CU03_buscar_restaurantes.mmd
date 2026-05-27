@@ -1,0 +1,36 @@
+sequenceDiagram
+    actor Usuario as Cualquier Usuario
+    participant Vista as Frontend (React / Vite)
+    participant Mapa as API de Mapas
+    participant RestCtrl as RestaurantController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+    autonumber
+
+    Usuario->>Vista: Introduce texto de búsqueda o aplica filtros (tipo de comida)
+    activate Vista
+    opt Usuario activa localización por GPS
+        Vista->>Usuario: Solicita permiso de ubicación
+        Usuario-->>Vista: Concede permisos de geolocalización
+        Vista->>Vista: Obtener coordenadas actuales del navegador
+    end
+
+    Vista->>RestCtrl: GET /api/restaurants?search=texto&lat=valor&lng=valor
+    activate RestCtrl
+    RestCtrl->>DB: Consulta espacial / filtrado por criterios (Hibernate Spatial)
+    activate DB
+    DB-->>RestCtrl: Lista de entidades de restaurantes coincidentes
+    deactivate DB
+
+    alt No se encuentran resultados
+        RestCtrl-->>Vista: 200 OK + JSON vacío []
+        Vista-->>Usuario: Mostrar mensaje "No se encontraron restaurantes"
+        Vista->>Mapa: Limpiar marcadores existentes
+    else Resultados encontrados con éxito
+        RestCtrl-->>Vista: 200 OK + JSON (Lista de Restaurantes con coordenadas)
+        deactivate RestCtrl
+        
+        Vista->>Mapa: Renderizar nuevos marcadores en las coordenadas recibidas
+        Vista->>Vista: Actualizar listado de tarjetas laterales con los datos comerciales
+        Vista-->>Usuario: Muestra la pantalla actualizada con el mapa y la lista
+    end
+    deactivate Vista

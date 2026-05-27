@@ -1,0 +1,53 @@
+sequenceDiagram
+    autonumber
+    actor Usuario as Usuario / Cliente
+    participant Vista as Frontend (React / Tarjeta Producto)
+    participant CarritoState as Estado Local (Nanostores / LocalStorage)
+    participant ProdCtrl as ProductController (Spring Boot)
+    participant DB as Base de Datos (MySQL)
+
+    Usuario->>Vista: Hace clic en "Añadir al carrito" (indica cantidad)
+    activate Vista
+    
+    Vista->>ProdCtrl: GET /api/products/{id}/stock (Verificación rápida)
+    activate ProdCtrl
+    ProdCtrl->>DB: Consultar disponibilidad actual del producto
+    activate DB
+    DB-->>ProdCtrl: Retorna stock disponible
+    deactivate DB
+    ProdCtrl-->>Vista: Estado del stock (Disponible / Agotado)
+    deactivate ProdCtrl
+
+    alt Producto sin existencias (Excepción q)
+        Vista-->>Usuario: Alerta: "El plato ya no se encuentra disponible"
+    else Producto disponible
+        Vista->>CarritoState: obtenerCarritoActual()
+        activate CarritoState
+        CarritoState-->>Vista: Datos del carrito actual
+        deactivate CarritoState
+
+        alt Carrito contiene productos de OTRO restaurante (Excepción p)
+            Vista-->>Usuario: Ventana modal: ¿Deseas vaciar el carrito anterior?
+            alt Usuario rechaza
+                Vista->>Vista: Abortar operación
+            else Usuario acepta
+                Vista->>CarritoState: vaciarCarrito()
+                Vista->>CarritoState: agregarProducto(id, cantidad, precio)
+                CarritoState->>CarritoState: Recalcular subtotales y total
+                CarritoState-->>Vista: Carrito actualizado
+                Vista->>Vista: Incrementar contador en Navbar
+                Vista-->>Usuario: Notificación emergente: "Producto añadido"
+            end
+        else Carrito vacío o del MISMO restaurante
+            alt El producto ya existía en el carrito (Flujo alternativo 2.1)
+                Vista->>CarritoState: incrementarCantidad(id, cantidad)
+            else El producto es nuevo en el carrito
+                Vista->>CarritoState: agregarProducto(id, cantidad, precio)
+            end
+            CarritoState->>CarritoState: Recalcular subtotales y total
+            CarritoState-->>Vista: Carrito actualizado
+            Vista->>Vista: Incrementar contador en Navbar
+            Vista-->>Usuario: Notificación emergente: "Producto añadido"
+        end
+    end
+    deactivate Vista

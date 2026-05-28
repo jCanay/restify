@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -15,6 +17,7 @@ public class RestaurantDTO {
     private String name;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String slug;
+    private BigDecimal shippingCosts;
     private Double deliveryRadiusMeters;
     private AddressDTO address;
 

@@ -11,6 +11,7 @@ public record OrderRequestDTO(
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         String status,
         List<OrderItemDTO> items,
+        AddressDTO address,
         Long restaurantId,
         Long accountId,
         PaymentDTO payment

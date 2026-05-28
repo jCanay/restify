@@ -3,6 +3,8 @@ package org.canay.backend.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 import static org.canay.backend.util.StringFormatter.normalizeStringUrl;
 
 @Entity
@@ -19,6 +21,8 @@ public class Restaurant {
     private String name;
 
     private String slug;
+
+    private BigDecimal shippingCosts;
 
     @Builder.Default
     private Boolean isDefault = false;

@@ -1,8 +1,216 @@
 main.restaurant-checkout-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  & nav {
     display: flex;
+    gap: 1ch;
+
+    & button {
+      cursor: pointer;
+    }
 
     & h2 {
-        font-size: 24pt;
-        font-weight: 600;
+      font-size: 26pt;
+      font-weight: 600;
     }
+  }
+
+  & div.body {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+
+    & section {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 45rem;
+
+      & div.products {
+        display: flex;
+        /* gap: 0.5rem; */
+        flex-direction: column;
+
+        & h3 {
+          font-weight: 600;
+          font-size: 16pt;
+          display: flex;
+          flex-direction: column;
+
+          & span {
+            font-size: initial;
+            font-weight: 400;
+          }
+        }
+
+        & details {
+          display: flex;
+          flex-direction: column;
+
+          &:not(:last-child) {
+            border-bottom: solid 1px var(--light200);
+          }
+
+          &::details-content {
+            overflow: hidden;
+            block-size: 0;
+            transition:
+              block-size 250ms,
+              content-visibility 250ms;
+            transition-behavior: allow-discrete;
+          }
+
+          &[open]::details-content {
+            block-size: auto;
+          }
+
+          & summary {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: default;
+            position: relative;
+
+            &:hover {
+              background-color: var(--light200);
+              cursor: pointer;
+            }
+
+            & h4 {
+              font-weight: 450;
+            }
+
+            & hr {
+              position: absolute;
+              bottom: -0.5rem;
+              margin-left: 0.5rem;
+              width: calc(100% - 1rem);
+              left: 0;
+              border-radius: 1rem;
+              height: 1.5px;
+              background-color: var(--light200);
+            }
+          }
+
+          & ul {
+            display: flex;
+            flex-direction: column;
+            margin-top: 1rem;
+
+            & li {
+              display: flex;
+              align-items: center;
+              gap: 1rem;
+              padding: 0.5rem 1rem;
+
+              & span.item-count {
+                font-weight: 600;
+              }
+
+              & span.price {
+                font-weight: 600;
+                margin-left: auto;
+              }
+            }
+          }
+        }
+
+        &:has(details[open]) [open] svg {
+          rotate: 180deg;
+        }
+      }
+
+      & div.delivery {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        & h3 {
+          font-weight: 600;
+          font-size: 16pt;
+        }
+      }
+
+      & div.payment {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        & h3 {
+          font-weight: 600;
+          font-size: 16pt;
+        }
+      }
+    }
+
+    & aside {
+      height: fit-content;
+      display: flex;
+      gap: 0.5rem;
+      flex-direction: column;
+      border: solid 1px var(--light200);
+      padding: 1.5rem;
+      padding-top: 1rem;
+      border-radius: 1rem;
+      background-color: var(--light200);
+
+      & h3 {
+        font-size: 18pt;
+        font-weight: 600;
+      }
+
+      & hr {
+        height: 1.5px;
+        background: var(--light300);
+        border-radius: 1rem;
+      }
+
+      & ul {
+        margin: 1rem 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        & li {
+          justify-content: space-between;
+          display: flex;
+          width: 20rem;
+
+          &.total {
+            font-weight: 600;
+            font-size: 16pt;
+          }
+        }
+      }
+
+      & button {
+        background-color: var(--color-primary);
+        color: var(--color-white);
+        border-radius: 0.5rem;
+        padding: 0.5rem 1.5rem;
+        flex-grow: 1;
+        cursor: pointer;
+        font-size: 12pt;
+        font-weight: 500;
+        transition-duration: 750ms;
+        transition-timing-function: var(--transition-bounce);
+        transition-property: scale;
+
+        &:active {
+          scale: 0.95;
+        }
+
+        &:hover {
+          background-color: rgb(
+            from #a8201a calc(r - 2) calc(g - 2) calc(b - 2)
+          );
+        }
+      }
+    }
+  }
 }

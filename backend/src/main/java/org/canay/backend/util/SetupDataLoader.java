@@ -72,6 +72,7 @@ public class SetupDataLoader implements CommandLineRunner {
 
             Restaurant adminRestaurant = Restaurant.builder()
                     .name("Admin Restaurant")
+                    .shippingCosts(BigDecimal.valueOf(1.99))
                     .deliveryRadiusMeters(10000.0)
                     .account(savedAdminAccount)
                     .isDefault(true)
@@ -96,7 +97,7 @@ public class SetupDataLoader implements CommandLineRunner {
 
             Address savedAdminRestaurantAddress = addressRepository.save(adminRestaurantAddress);
             adminRestaurant.setAddress(savedAdminRestaurantAddress);
-            
+
             dashboardService.initializeDashboard(savedAdminRestaurant, adminRole);
         }
 

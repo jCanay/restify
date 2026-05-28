@@ -39,6 +39,29 @@ div.cart {
   border-radius: 1rem;
   max-height: 35rem;
 
+  & div.empty {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-direction: column;
+    align-self: center;
+    text-align: center;
+    max-width: 15rem;
+    margin: 1rem 0;
+    margin-top: 1.5rem;
+    text-wrap: pretty;
+
+    & h4 {
+      font-size: 16pt;
+      font-weight: 500;
+    }
+
+    & p {
+      font-size: 11pt;
+      color: var(--color-neutral-400);
+    }
+  }
+
   & div.title {
     & h3 {
       font-weight: 600;
@@ -90,7 +113,12 @@ div.cart {
     font-weight: 500;
     margin-top: 1rem;
 
-    &:hover {
+    &:disabled {
+      cursor: not-allowed;
+      background-color: var(--light300);
+    }
+
+    &:hover:not(:disabled) {
       background-color: rgb(from #a8201a calc(r - 2) calc(g - 2) calc(b - 2));
     }
   }

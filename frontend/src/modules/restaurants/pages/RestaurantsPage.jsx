@@ -25,14 +25,21 @@ export default function RestaurantsPage({ countryCode, city }) {
 	useEffect(() => {
 		const loadRestaurants = async () => {
 			if (!restaurantsExists()) {
-				const response = await getRestaurants(countryCode, city);
-
-				setLoadedRestaurants(response.content);
-				setFilteredRestaurants(response.content);
+				try {
+					const response = await getRestaurants(countryCode, city);
+					// Aseguramos que la respuesta trae datos válidos antes de setear
+					if (response && response.content) {
+						setLoadedRestaurants(response.content);
+						setFilteredRestaurants(response.content);
+					}
+				} catch (err) {
+					console.error("Error cargando restaurantes desde la API:", err);
+				}
+			} else {
+				// SI SÍ EXISTEN en el store, los cargamos de la memoria directamente (Evita peticiones HTTP extra)
+				setLoadedRestaurants(restaurants);
+				setFilteredRestaurants(restaurants);
 			}
-
-			setLoadedRestaurants(restaurants);
-			setFilteredRestaurants(restaurants);
 		};
 
 		loadRestaurants();

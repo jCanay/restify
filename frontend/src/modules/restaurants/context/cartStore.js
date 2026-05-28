@@ -2,6 +2,8 @@ import { persistentAtom } from "@nanostores/persistent"
 
 const DEFAULT_DATA = {
   restaurantId: "",
+  shippingCosts: 0,
+  paymentMethod: "",
   items: [],
 }
 
@@ -51,6 +53,12 @@ export const removeItemFromCart = (itemId = -1) => {
   $cartStore.set({ ...current, items: newItems })
 }
 
+export const setShippingCosts = (shippingCosts) => {
+  const current = $cartStore.get()
+
+  $cartStore.set({ ...current, shippingCosts })
+}
+
 export const getTotalItems = () => {
   const current = $cartStore.get()
   let total = 0
@@ -85,4 +93,10 @@ export const getItemTotalPrice = () => {
   })
 
   return total
+}
+
+export const getCheckoutTotal = () => {
+  const current = $cartStore.get()
+
+  return getItemTotalPrice() + current.shippingCosts || 0
 }

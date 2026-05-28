@@ -15,6 +15,7 @@ public record OrderDTO(
         RestaurantDTO restaurant,
         AccountDTO account,
         PaymentDTO payment,
+        AddressDTO address,
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)
         Instant createdAt,
         @JsonProperty(access = JsonProperty.Access.READ_ONLY)

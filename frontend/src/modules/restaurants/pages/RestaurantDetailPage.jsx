@@ -10,7 +10,7 @@ import { formatCurrency, normalizeUrlString } from "../utils/stringParser";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { PRODUCT_IMAGES_MOCK, RESTAURANT_IMAGES } from "../utils/constants";
 import Cart from "../components/Cart/Cart";
-import { $cartStore, addItemToCart, getItemCountById } from "../context/cartStore";
+import { $cartStore, addItemToCart, getItemCountById, setShippingCosts } from "../context/cartStore";
 import Stepper from "../components/Stepper/Stepper";
 import { useStore } from "@nanostores/react";
 import ProductCard from "../components/ProductCard/ProductCard";
@@ -43,6 +43,7 @@ export default function RestaurantDetailPage() {
 			setRestaurant(response.restaurant);
 			setProducts(response.products);
 			setFilteredProducts(response.products);
+			setShippingCosts(response.restaurant.shippingCosts);
 		};
 
 		loadProducts();
@@ -61,7 +62,7 @@ export default function RestaurantDetailPage() {
 		setSelectedProduct(product);
 		setProductOpen(true);
 
-		navigate(`/${countryCode}/${city}/${slug}/${normalizeUrlString(product.name)}`);
+		navigate(`/${countryCode}/${city}/${slug}/product/${normalizeUrlString(product.name)}`);
 	};
 
 	const handleProductAddClick = (e, product) => {

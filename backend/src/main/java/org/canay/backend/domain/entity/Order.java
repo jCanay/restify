@@ -34,6 +34,10 @@ public class Order {
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
+    @OneToOne
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_id")
     private Payment payment;

@@ -16,14 +16,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Este paso crea el archivo .env dinámicamente en cada ejecución
-      - name: Create .env file
+      # Copiamos el .env y los certificados existentes desde la carpeta segura de la máquina
+      - name: Copy existing .env and certs
         shell: powershell
         run: |
-          $content = @"
-          ${{ secrets.ENV_FILE }}
-          "@
-          Set-Content -Path .env -Value $content
+          if (Test-Path "C:\restify_backups\.env") {
+            Copy-Item -Path "C:\restify_backups\.env" -Destination ".env" -Force
+            Write-Host "Archivo .env copiado con éxito."
+          } else {
+            Write-Warning "No se encontró .env en C:\restify_backups\"
+          }
+
+          if (Test-Path "C:\restify_backups\certs") {
+            Copy-Item -Path "C:\restify_backups\certs" -Destination "certs" -Recurse -Force
+            Write-Host "Certificados copiados con éxito."
+          } else {
+            Write-Warning "No se encontró la carpeta certs en C:\restify_backups\"
+          }
 
       - name: Restart Docker Containers
         shell: powershell

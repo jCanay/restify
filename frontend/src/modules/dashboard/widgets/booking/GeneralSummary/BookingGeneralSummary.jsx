@@ -1,6 +1,6 @@
 import { GripVertical } from "lucide-react";
 import "./css/booking-general-summary.css";
-import Chart from "../../Chart";
+import BarChart from "./BarChart";
 
 function BookingGeneralSummary() {
 	return (
@@ -15,7 +15,8 @@ function BookingGeneralSummary() {
 				<select name="" id="">
 					<option value="">Última semana</option>
 				</select>
-				<Chart></Chart>
+				{/* <Chart config={chartConfig} data={chartData} /> */}
+				<BarChart />
 			</section>
 		</div>
 	);

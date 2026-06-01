@@ -5,12 +5,12 @@ export const useOrders = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  const addOrder = useCallback(async ({ order, restaurantId }) => {
+  const addOrder = useCallback(async ({ order, restaurantId, addressId }) => {
     try {
       setLoading(true)
 
       const response = await api.post(
-        `/restaurants/${restaurantId}/orders`,
+        `/restaurants/${restaurantId}/orders?addressId=${addressId}`,
         order,
       )
 
@@ -28,5 +28,28 @@ export const useOrders = () => {
     }
   }, [])
 
-  return { addOrder, loading, error }
+  const getAllOrdersByRestaurantId = useCallback(
+    async (restaurantId, { page, size, sort, search } = {}) => {
+      try {
+        setLoading(true)
+
+        const response = await api.get(
+          `/restaurants/${restaurantId}/orders?page=${page || 0}&size=${size || 20}&sort=${sort || ""}`,
+        )
+        const orders = response.data
+
+        setError(null)
+        return orders
+      } catch (err) {
+        console.log(err.response.message || "Error fetching orders")
+        setError(err.response.message || "Error fetching orders")
+        throw err
+      } finally {
+        setLoading(false)
+      }
+    },
+    [],
+  )
+
+  return { addOrder, getAllOrdersByRestaurantId, loading, error }
 }

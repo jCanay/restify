@@ -56,9 +56,10 @@ public class RestaurantController {
     public ResponseEntity<OrderDTO> addOrderToRestaurant(
             @RequestBody OrderDTO orderDTO,
             @PathVariable Long restaurantId,
+            @RequestParam Long addressId,
             @AuthenticationPrincipal User user
     ) {
-        return new ResponseEntity<>(orderService.create(orderDTO, restaurantId, user), HttpStatus.CREATED);
+        return new ResponseEntity<>(orderService.create(orderDTO, restaurantId, addressId, user), HttpStatus.CREATED);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'OWNER', 'WAITER', 'COOK')")
@@ -99,6 +100,15 @@ public class RestaurantController {
             @AuthenticationPrincipal User user
     ) {
         return ResponseEntity.ok(restaurantService.getRestaurantDetail(countryCode, city, slug, user));
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'OWNER', 'WAITER', 'COOK')")
+    @GetMapping("/{restaurantId}")
+    public ResponseEntity<RestaurantDTO> getRestaurant(
+            @PathVariable Long restaurantId,
+            @AuthenticationPrincipal User user
+    ) {
+        return ResponseEntity.ok(restaurantService.getRestaurant(restaurantId, user));
     }
 
     @GetMapping("/nearby")

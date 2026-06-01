@@ -1,7 +1,7 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import Chart from "../../Chart";
 import Widget from "../../general/Widget";
 import "./css/order-sales-performance.css";
+import LineChart from "../GeneralSummary/LineChart";
 
 export default function OrderSalesPerformance() {
 	return (
@@ -22,11 +22,11 @@ export default function OrderSalesPerformance() {
 					</SelectContent>
 				</Select>
 				<div className="money">
-					<h4>23,33€</h4>
+					<h4>932,73€</h4>
 					<span>+ 5,35%</span>
 				</div>
 			</section>
-			<Chart />
+			<LineChart />
 		</Widget>
 	);
 }

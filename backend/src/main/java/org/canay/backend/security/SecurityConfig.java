@@ -56,13 +56,17 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         // Orígenes permitidos
-        configuration.setAllowedOrigins(List.of("http://localhost:8000"));
+        configuration.setAllowedOrigins(
+                List.of("http://localhost:8000", "http://localhost", "https://restify.plexios.es"));
 
         // Métodos permitidos
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
         // Cabeceras permitidas (imprescindible incluir Authorization para el JWT)
         configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Cache-Control"));
+
+        // Exponemos las cabeceras si tu frontend necesita leer el JWT desde la respuesta
+        configuration.setExposedHeaders(List.of("Authorization"));
 
         // Permitir credenciales
         configuration.setAllowCredentials(true);

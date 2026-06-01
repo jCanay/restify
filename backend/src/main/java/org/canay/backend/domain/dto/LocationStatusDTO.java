@@ -7,5 +7,4 @@ public record LocationStatusDTO(
         Boolean countryExists,
         Boolean cityExists,
         Long restaurantCount
-) {
-}
+) {}

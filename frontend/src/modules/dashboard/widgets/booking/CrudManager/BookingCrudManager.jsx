@@ -7,14 +7,14 @@ import "./css/booking-crud-manager.css";
  * @param {"add" | "search" | "edit" | "delete"} [props.type]
  */
 export default function BookingCrudManager({ type, open, setOpen }) {
-    const components = {
-        add: BookingCMAdd,
-        search: BookingCMSearch,
-    };
+	const components = {
+		add: BookingCMAdd,
+		search: BookingCMSearch,
+	};
 
-    const SelectedComponent = components[type];
+	const SelectedComponent = components[type];
 
-    return SelectedComponent ? (
-        <SelectedComponent open={open} setOpen={setOpen} />
-    ) : null;
+	return SelectedComponent ? (
+		<SelectedComponent open={open} setOpen={setOpen} />
+	) : null;
 }

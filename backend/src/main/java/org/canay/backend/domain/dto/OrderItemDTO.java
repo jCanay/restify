@@ -1,13 +1,16 @@
 package org.canay.backend.domain.dto;
 
-import lombok.Builder;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Builder
-public record OrderItemDTO(
-        Long id,
-        String name,
-        BigDecimal price,
-        Integer quantity
-) {}
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class OrderItemDTO {
+    private Long id;
+    private String name;
+    private BigDecimal price;
+    private Integer quantity;
+}

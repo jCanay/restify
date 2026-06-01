@@ -10,7 +10,7 @@ import { formatCurrency, normalizeUrlString } from "../utils/stringParser";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { PRODUCT_IMAGES_MOCK, RESTAURANT_IMAGES } from "../utils/constants";
 import Cart from "../components/Cart/Cart";
-import { $cartStore, addItemToCart, getItemCountById, setShippingCosts } from "../context/cartStore";
+import { $cartStore, addItemToCart, getItemCountById, setRestaurantId, setShippingCosts, updateItemQuantity } from "../context/cartStore";
 import Stepper from "../components/Stepper/Stepper";
 import { useStore } from "@nanostores/react";
 import ProductCard from "../components/ProductCard/ProductCard";
@@ -41,6 +41,7 @@ export default function RestaurantDetailPage() {
 			});
 
 			setRestaurant(response.restaurant);
+			setRestaurantId(response.restaurant.id);
 			setProducts(response.products);
 			setFilteredProducts(response.products);
 			setShippingCosts(response.restaurant.shippingCosts);
@@ -76,6 +77,13 @@ export default function RestaurantDetailPage() {
 		if (productOpen) {
 			navigate(`/${countryCode}/${city}/${slug}`);
 		}
+	};
+
+	const handleProductValueChange = (product, value) => {
+		if (value == 1) {
+			addItemToCart(product);
+		}
+		updateItemQuantity(product.id, value);
 	};
 
 	const handleFAQToggle = (e) => {
@@ -133,9 +141,11 @@ export default function RestaurantDetailPage() {
 								<ProductCard
 									key={i}
 									product={p}
+									quantity={getItemCountById(p.id)}
 									filteredProducts={filteredProducts}
 									onButtonClick={handleProductAddClick}
 									onCardClick={handleProductClick}
+									onValueChange={handleProductValueChange}
 								/>
 							))}
 						</div>

@@ -1,5 +1,6 @@
 import {
 	BadgeCheck,
+	BadgeMinus,
 	BadgeQuestionMark,
 	BadgeX,
 	Calendar,
@@ -10,6 +11,12 @@ import RelativeTime from "../../../components/RelativeTime";
 import "./css/booking-last-card.css";
 
 const STATUS_CONFIG = {
+	PENDING: {
+		label: "Pendiente",
+		className:
+			"bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+		icon: <BadgeMinus strokeWidth={2.75} />,
+	},
 	ACCEPTED: {
 		label: "Aceptada",
 		className:

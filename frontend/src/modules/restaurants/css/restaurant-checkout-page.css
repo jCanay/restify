@@ -28,7 +28,8 @@ main.restaurant-checkout-page {
       gap: 2rem;
       max-width: 45rem;
 
-      & div.products {
+      & div.products,
+      div.payment {
         display: flex;
         /* gap: 0.5rem; */
         flex-direction: column;
@@ -95,6 +96,10 @@ main.restaurant-checkout-page {
               height: 1.5px;
               background-color: var(--light200);
             }
+
+            & svg {
+              transition: rotate 250ms;
+            }
           }
 
           & ul {
@@ -102,7 +107,12 @@ main.restaurant-checkout-page {
             flex-direction: column;
             margin-top: 1rem;
 
-            & li {
+            &:has(label) {
+              gap: 0.5rem;
+            }
+
+            & li,
+            label {
               display: flex;
               align-items: center;
               gap: 1rem;
@@ -115,12 +125,70 @@ main.restaurant-checkout-page {
               & span.price {
                 font-weight: 600;
                 margin-left: auto;
+                display: flex;
+              }
+            }
+
+            & label {
+              border-radius: 0.5rem;
+              outline: solid 1px var(--light200);
+              outline-color: var(--light200);
+              outline-offset: -1px;
+              cursor: pointer;
+              transition: outline-color 150ms;
+
+              &:hover {
+                background-color: var(--light200);
+
+                & input {
+                  background-color: var(--color-white);
+                }
+              }
+
+              &:has(input:checked) {
+                outline-color: var(--color-sky-600);
+                outline-width: 2px;
+                outline-offset: -2px;
+                background-color: var(--color-sky-100);
+              }
+
+              & input {
+                all: unset;
+                width: 1.125rem;
+                height: 1.125rem;
+                border-radius: 3rem;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                aspect-ratio: 1;
+                transition:
+                  background-color 150ms,
+                  outline 150ms;
+
+                &:not(:checked) {
+                  outline: solid 1px var(--light300);
+                  transition: none;
+                }
+
+                &:checked {
+                  background-color: var(--color-sky-600);
+                }
+
+                &::after {
+                  content: "";
+                  position: absolute;
+                  background: var(--color-white);
+                  border-radius: 3rem;
+                  width: 0.625rem;
+                  height: 0.625rem;
+                }
               }
             }
           }
         }
 
-        &:has(details[open]) [open] svg {
+        &:has(details[open]) [open] svg:not(.payment-icon) {
           rotate: 180deg;
         }
       }
@@ -144,6 +212,10 @@ main.restaurant-checkout-page {
         & h3 {
           font-weight: 600;
           font-size: 16pt;
+
+          & span {
+            margin-top: 0.5rem;
+          }
         }
       }
     }
@@ -188,27 +260,67 @@ main.restaurant-checkout-page {
         }
       }
 
-      & button {
+      & button.btn {
+        color: var(--color-red-400);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background-color: var(--color-primary);
         color: var(--color-white);
+        padding: 0.5rem 1rem;
         border-radius: 0.5rem;
-        padding: 0.5rem 1.5rem;
-        flex-grow: 1;
+        margin-top: 0.5rem;
         cursor: pointer;
-        font-size: 12pt;
-        font-weight: 500;
-        transition-duration: 750ms;
-        transition-timing-function: var(--transition-bounce);
-        transition-property: scale;
+        transition:
+          background-color 200ms cubic-bezier(0.78, 0, 0.22, 1),
+          scale 750ms var(--transition-bounce);
 
-        &:active {
-          scale: 0.95;
+        & span {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: 200ms;
+          transition-property: translate opacity;
+          transition-timing-function: cubic-bezier(0.78, 0, 0.22, 1);
+          position: relative;
+
+          & svg {
+            position: absolute;
+            right: 0;
+            translate: 0rem;
+            opacity: 0;
+            transition: 200ms;
+            transition-property: translate opacity;
+            transition-timing-function: cubic-bezier(0.78, 0, 0.22, 1);
+          }
+        }
+
+        &.animation:hover p {
+          translate: -0.75rem;
+        }
+
+        &.animation:hover svg {
+          translate: 1.5rem;
+          opacity: 1;
         }
 
         &:hover {
           background-color: rgb(
             from #a8201a calc(r - 2) calc(g - 2) calc(b - 2)
           );
+        }
+
+        &:active {
+          scale: 0.975;
+        }
+
+        &:disabled {
+          background-color: var(--light300);
+          cursor: not-allowed;
+        }
+
+        & svg {
+          translate: 0.5rem;
         }
       }
     }

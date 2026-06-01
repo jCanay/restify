@@ -1,0 +1,195 @@
+.order-crud-manager.search {
+  width: fit-content;
+
+  & .table {
+    width: 50rem;
+    height: 25rem;
+
+    & .badge {
+      padding: 0.25rem 0.5rem;
+      gap: 0.33rem;
+      font-size: 11pt;
+
+      & svg {
+        scale: 115%;
+      }
+    }
+
+    & .ag-popup-editor,
+    .ag-popup-editor > * {
+      border-radius: 0.5rem;
+    }
+
+    & .ag-root-wrapper {
+      --ag-value-change-delta-up-color: var(--color-primary);
+      --ag-value-change-value-highlight-background-color: var(--color-primary);
+      --ag-cell-focused-border-color: transparent;
+      --ag-range-selection-border-color: transparent;
+
+      & .ag-cell > * {
+        border-color: transparent;
+      }
+    }
+
+    &:has(.editing) .ag-root-wrapper {
+      --ag-cell-focused-border-color: inherit;
+      --ag-range-selection-border-color: inherit;
+      border: solid 1px var(--color-sky-600) !important;
+
+      & .ag-cell-focus:not(.editable-cell-style) {
+        border-color: transparent;
+      }
+
+      /* ROW HOVER */
+      & .ag-row.ag-row-hover {
+        /* border-bottom: dashed 1px var(--color-sky-600); */
+        border-bottom: none;
+        cursor: pointer;
+      }
+
+      .ag-row-hover::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          var(--color-sky-600) 70%,
+          transparent 70%
+        );
+        background-size: 5px 100%;
+        animation: moveLeft 0.4s linear infinite;
+      }
+
+      & .ag-row:has(+ .ag-row-hover) {
+        /* border-bottom: dashed 1px var(--color-sky-600); */
+        border-bottom: none;
+      }
+
+      & .ag-row:has(+ .ag-row-hover)::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          var(--color-sky-600) 70%,
+          transparent 70%
+        );
+        background-size: 5px 100%;
+        animation: moveRight 0.4s linear infinite;
+      }
+
+      & .ag-header:has(~ .ag-body .ag-row-hover:first-child) {
+        border-bottom: none;
+      }
+
+      & .ag-header:has(~ .ag-body .ag-row-hover:first-child) > ::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background-image: linear-gradient(
+          to right,
+          var(--color-sky-600) 70%,
+          transparent 70%
+        );
+        background-size: 5px 100%;
+        animation: moveRight 0.4s linear infinite;
+      }
+
+      & .ag-row-focus.ag-row-selected {
+        border: solid 1px var(--color-sky-600) !important;
+      }
+
+      & [col-id="bookingDate_1"]:has(.ag-row-focus),
+      [col-id="bookingDate"]:has(.ag-row-focus) {
+        background-color: var(--color-gray-300);
+      }
+
+      & .editable-cell-style:has(.ag-row-focus) {
+        background-color: var(--color-gray-200);
+      }
+
+      & .ag-row-focus .ag-cell:not(.editable-cell-style) {
+        /* background-color: #fff; */
+        /* filter: blur(2px); */
+      }
+    }
+  }
+
+  & div.search-bar {
+    display: flex;
+    gap: 1rem;
+
+    & input {
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+      width: 100%;
+      border: solid 1px var(--color-gray-300);
+    }
+
+    & button {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      background-color: transparent;
+      color: var(--color-sky-600);
+      border: dashed 1px var(--color-sky-600);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition:
+        background-color 150ms cubic-bezier(0.78, 0, 0.22, 1),
+        scale 750ms var(--transition-bounce);
+
+      &.editing {
+        background-color: var(--color-sky-50);
+        border-style: solid;
+
+        &:hover {
+          background-color: var(--color-sky-100);
+        }
+      }
+
+      &:hover {
+        background-color: var(--color-sky-50);
+      }
+
+      &:active {
+        scale: 0.9;
+      }
+
+      &:disabled {
+        background-color: #a8201a;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+/* Animaciones */
+@keyframes moveRight {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 10px 0;
+  }
+}
+
+@keyframes moveLeft {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -10px 0;
+  }
+}

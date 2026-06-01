@@ -1,0 +1,23 @@
+name: Restify Local Deployment
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+jobs:
+  deploy:
+    name: Build and Run Docker Locally
+    # Esto le dice a GitHub que ejecute los comandos en tu PC de casa
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restart Docker Containers
+        run: |
+          docker-compose down
+          docker-compose up --build -d

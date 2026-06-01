@@ -10,14 +10,23 @@ on:
 jobs:
   deploy:
     name: Build and Run Docker Locally
-    # Esto le dice a GitHub que ejecute los comandos en tu PC de casa
     runs-on: self-hosted
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # Este paso crea el archivo .env dinámicamente en cada ejecución
+      - name: Create .env file
+        shell: powershell
+        run: |
+          $content = @"
+          ${{ secrets.ENV_FILE }}
+          "@
+          Set-Content -Path .env -Value $content
+
       - name: Restart Docker Containers
+        shell: powershell
         run: |
           docker-compose down
           docker-compose up --build -d

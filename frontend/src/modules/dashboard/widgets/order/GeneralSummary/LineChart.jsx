@@ -4,19 +4,25 @@ import {
 	LinearScale,
 	PointElement,
 	LineElement,
+	BarElement,
+	LineController,
+	BarController,
 	Title,
 	Tooltip,
 	Filler,
 	Legend,
 } from 'chart.js';
 import { useEffect, useState } from 'react';
-import { Bar, Chart, Line } from 'react-chartjs-2';
+import { Chart, Line } from 'react-chartjs-2';
 
 ChartJS.register(
 	CategoryScale,
 	LinearScale,
 	PointElement,
 	LineElement,
+	BarElement,
+	LineController,
+	BarController,
 	Title,
 	Tooltip,
 	Filler,
@@ -73,18 +79,12 @@ const data = {
 			borderColor: '#00a63e',
 			backgroundColor: '#00a63e20',
 		},
-		// {
-		// 	label: 'Cantidad',
-		// 	borderColor: '#e7000b',
-		// 	data: labels.map(() => Math.floor(Math.random() * (300 - 0) + 0)),
-		// 	backgroundColor: '#e7000b50',
-		// },
 	],
 };
 
 export default function LineChart() {
 	return <div className="grow min-h-0 w-full relative">
 		{/* h-48 de Tailwind (12rem o 192px) o pon style={{ height: '190px' }} */}
-		<Chart type='bar' data={data} options={options} />
+		<Line data={data} options={options} />
 	</div>;
 }

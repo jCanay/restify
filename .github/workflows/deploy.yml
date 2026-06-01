@@ -20,10 +20,9 @@ jobs:
       - name: Create .env file
         shell: powershell
         run: |
-          $content = @"
+          @'
           ${{ secrets.ENV_FILE }}
-          "@
-          Set-Content -Path .env -Value $content
+          '@ | Out-File -FilePath .env -Encoding utf8
 
       - name: Restart Docker Containers
         shell: powershell

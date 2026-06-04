@@ -14,4 +14,5 @@ import java.util.List;
 public class RestaurantDetailDTO {
     private RestaurantDTO restaurant;
     private List<ProductDTO> products;
+    private Double rating;
 }

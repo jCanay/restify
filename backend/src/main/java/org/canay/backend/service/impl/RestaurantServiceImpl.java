@@ -14,6 +14,7 @@ import org.canay.backend.mapper.Mapper;
 import org.canay.backend.repository.AccountRepository;
 import org.canay.backend.repository.ProductRepository;
 import org.canay.backend.repository.RestaurantRepository;
+import org.canay.backend.repository.ReviewRepository;
 import org.canay.backend.service.DashboardService;
 import org.canay.backend.service.RestaurantService;
 import org.locationtech.jts.geom.Coordinate;
@@ -35,6 +36,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepository restaurantRepository;
     private final AccountRepository accountRepository;
     private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
 
     private final DashboardService dashboardService;
     private final MessageSource messageSource;
@@ -173,11 +175,15 @@ public class RestaurantServiceImpl implements RestaurantService {
                 slug
         ).orElseThrow(() -> new ResourceNotFoundException("not-found.restaurant"));
 
+        List<Review> reviews = reviewRepository.findAllByRestaurantId(restaurant.getId());
+        Double rating = reviews.stream().mapToInt(Review::getRating).average().orElse(0);
+
         List<Product> products = productRepository.findByRestaurantId(restaurant.getId());
 
         return RestaurantDetailDTO.builder()
                 .restaurant(restaurantMapper.mapTo(restaurant))
                 .products(products.stream().map(productMapper::mapTo).toList())
+                .rating(rating)
                 .build();
     }
 

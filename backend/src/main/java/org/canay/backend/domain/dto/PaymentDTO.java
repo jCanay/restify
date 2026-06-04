@@ -1,20 +1,26 @@
 package org.canay.backend.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.Instant;
 
 @Builder
-public record PaymentDTO(
-        Long id,
-        BigDecimal amount,
-        String method,
-        String status,
-        String transactionId,
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-        Instant createdAt,
-        @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-        Instant updatedAt
-) {}
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class PaymentDTO {
+    private Long id;
+    private BigDecimal amount;
+    private String method;
+    private String status;
+    private String transactionId;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Instant createdAt;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Instant updatedAt;
+}

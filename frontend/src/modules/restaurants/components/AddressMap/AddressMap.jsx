@@ -23,7 +23,7 @@ function MapRecenter({ coords, currentZoom }) {
 	return null;
 }
 
-export default function AddressMap({ address, zoom = 17 }) {
+export default function AddressMap({ latitude, longitude, zoom = 17 }) {
 	const [position, setPosition] = useState(null); // [lat, lon]
 	const [displayName, setDisplayName] = useState('');
 	const [loading, setLoading] = useState(false);
@@ -33,33 +33,35 @@ export default function AddressMap({ address, zoom = 17 }) {
 	const defaultPosition = [40.416775, -3.70379];
 
 	useEffect(() => {
-		if (!address) return;
+		if (latitude === undefined || longitude === undefined || latitude === null || longitude === null) return;
 
 		const fetchCoordinates = async () => {
 			setLoading(true);
 			setError(null);
 			try {
 				const response = await fetch(
-					`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&limit=1`
+					`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
 				);
 				const data = await response.json();
 
-				if (data && data.length > 0) {
-					const { lat, lon, display_name } = data[0];
-					setPosition([parseFloat(lat), parseFloat(lon)]);
-					setDisplayName(display_name);
+				setPosition([parseFloat(latitude), parseFloat(longitude)]);
+
+				if (data && data.display_name) {
+					setDisplayName(data.display_name);
 				} else {
-					setError('No se encontró la dirección especificada.');
+					// Si Nominatim no encuentra una calle exacta, al menos dejamos las coordenadas legibles en el Popup
+					setDisplayName(`Lat: ${latitude}, Lon: ${longitude}`);
 				}
 			} catch (err) {
-				setError('Error al consultar el servicio de geocodificación.');
+				setPosition([parseFloat(latitude), parseFloat(longitude)]);
+				setDisplayName(`Ubicación de entrega`);
 			} finally {
 				setLoading(false);
 			}
 		};
 
 		fetchCoordinates();
-	}, [address]);
+	}, [latitude, longitude]);
 
 	return (
 		<div className='address-map' style={{ width: '100%', height: '200px', position: 'relative' }}>

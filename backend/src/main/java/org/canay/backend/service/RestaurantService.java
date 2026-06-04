@@ -12,6 +12,8 @@ public interface RestaurantService {
 
     Page<RestaurantDTO> getRestaurants(String countryCode, String city, Pageable pageable, User user);
 
+    RestaurantDTO getRestaurant(Long restaurantId, User user);
+
     NearbyRestaurantsResponseDTO findNearbyRestaurants(Double latitude, Double longitude, Pageable pageable, User user);
 
     RestaurantDetailDTO getRestaurantDetail(String countryCode, String city, String slug, User user);

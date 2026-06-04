@@ -79,11 +79,11 @@ export default function RestaurantsPage({ countryCode, city }) {
 				<h3>Comida</h3>
 				<RestaurantCategories />
 				<hr />
-				<div className="sort">
+				{/* <div className="sort">
 					<button type="button" className="bg-gray-200 rounded-2xl">
 						...Ordenar por...
 					</button>
-				</div>
+				</div> */}
 				<h2>Todos los establecimientos</h2>
 				<div className="restaurants-grid">
 					{!loading &&

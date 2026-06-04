@@ -77,6 +77,14 @@ public class RestaurantServiceImpl implements RestaurantService {
     }
 
     @Override
+    public RestaurantDTO getRestaurant(Long restaurantId, User user) {
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new ResourceNotFoundException("not-found.restaurant"));
+
+        return restaurantMapper.mapTo(restaurant);
+    }
+
+    @Override
     public Page<RestaurantDTO> getRestaurants(String countryCode, String city, Pageable pageable, User user) {
         boolean countryCodeEmpty = countryCode == null || countryCode.trim().isEmpty();
         boolean cityEmpty = city == null || city.trim().isEmpty();

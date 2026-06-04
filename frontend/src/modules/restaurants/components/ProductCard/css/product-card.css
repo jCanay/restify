@@ -5,19 +5,51 @@ article.product-card {
   align-items: stretch;
   overflow: hidden;
   position: relative;
-  cursor: pointer;
-
   transition:
     scale 750ms var(--transition-bounce),
     rotate 750ms var(--transition-bounce);
 
-  &:active:not(:has(button:hover)) {
+  &:active:not(.compact):not(:has(button:hover)) {
     scale: 0.975;
     rotate: 1deg;
   }
 
-  &:hover:not(:has(button:hover)) {
+  &:hover:not(.compact):not(:has(button:hover)) {
     background-color: var(--color-gray-100);
+    cursor: pointer;
+  }
+
+  &.compact {
+    gap: 1rem;
+    min-height: 0;
+    border-radius: 0.5rem;
+
+    & div.content {
+      & p {
+        display: none;
+      }
+
+      & header {
+        flex-direction: column;
+      }
+    }
+
+    & img {
+      aspect-ratio: 1;
+      width: 4.5rem;
+      height: auto;
+      order: 2;
+    }
+
+    & .stepper {
+      background-color: var(--light200);
+      position: static;
+
+      & button:hover:not(:disabled) {
+        background-color: var(--light300);
+        border-radius: 5rem;
+      }
+    }
   }
 
   & div.content {

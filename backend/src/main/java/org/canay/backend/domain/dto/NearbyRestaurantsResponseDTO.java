@@ -4,6 +4,10 @@ import lombok.Builder;
 import org.springframework.data.domain.Page;
 
 @Builder
-public record NearbyRestaurantsResponseDTO(String countryCode, String city, Page<RestaurantDTO> restaurants,
-                                           Boolean empty) {
+public record NearbyRestaurantsResponseDTO(
+        String countryCode,
+        String city,
+        Page<RestaurantDTO> restaurants,
+        Boolean empty
+) {
 }

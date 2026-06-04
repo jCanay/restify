@@ -14,7 +14,9 @@ import {
     $cartStore,
     addItemToCart,
     getItemCountById,
+    setRestaurantId,
     setShippingCosts,
+    updateItemQuantity,
 } from "../context/cartStore";
 import Stepper from "../components/Stepper/Stepper";
 import { useStore } from "@nanostores/react";
@@ -47,7 +49,7 @@ export default function RestaurantDetailPage() {
             });
 
             setRestaurant(response.restaurant);
-            setRating(response.rating);
+            setRestaurantId(response.restaurant.id);
             setProducts(response.products);
             setFilteredProducts(response.products);
             setShippingCosts(response.restaurant.shippingCosts);
@@ -85,6 +87,13 @@ export default function RestaurantDetailPage() {
         if (productOpen) {
             navigate(`/${countryCode}/${city}/${slug}`);
         }
+    };
+
+    const handleProductValueChange = (product, value) => {
+        if (value == 1) {
+            addItemToCart(product);
+        }
+        updateItemQuantity(product.id, value);
     };
 
     const handleFAQToggle = (e) => {
@@ -146,9 +155,11 @@ export default function RestaurantDetailPage() {
                                 <ProductCard
                                     key={i}
                                     product={p}
+                                    quantity={getItemCountById(p.id)}
                                     filteredProducts={filteredProducts}
                                     onButtonClick={handleProductAddClick}
                                     onCardClick={handleProductClick}
+                                    onValueChange={handleProductValueChange}
                                 />
                             ))}
                         </div>

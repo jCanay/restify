@@ -6,12 +6,17 @@ import {
 	Calendar,
 	ChevronDown,
 	Clock,
+	ReceiptEuro,
 	X,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import RelativeTime from "../../../components/RelativeTime";
 import "./css/order-last-card.css";
 import { PRODUCT_IMAGES_MOCK } from "@/modules/restaurants/utils/constants";
+import { formatCurrency } from "@/modules/restaurants/utils/stringParser";
+import { useProducts } from "@/modules/restaurants/hooks/useProducts";
+import { getUserDefaultRestaurant } from "@/modules/dashboard/contexts/userStore";
+import { useEffect, useState } from "react";
 
 const STATUS_CONFIG = {
 	PENDING: {
@@ -24,41 +29,65 @@ const STATUS_CONFIG = {
 		label: "Aceptada",
 		className:
 			"bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
-		icon: <BadgeCheck strokeWidth={3.25} />,
+		icon: <BadgeCheck strokeWidth={2.75} />,
 	},
 	CANCELLED: {
 		label: "Cancelada",
 		className:
 			"bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
-		icon: <BadgeX strokeWidth={3.25} />,
+		icon: <BadgeX strokeWidth={2.75} />,
 	},
 	UNKNOWN: {
 		label: "Desconocido",
 		className:
 			"bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300",
-		icon: <BadgeQuestionMark strokeWidth={3.25} />,
+		icon: <BadgeQuestionMark strokeWidth={2.75} />,
+	},
+};
+
+const PAYMENT_STATUS_CONFIG = {
+	PENDING: {
+		label: "Pendiente",
+		className:
+			"bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+		icon: <BadgeMinus strokeWidth={2.75} />,
+	},
+	PAID: {
+		label: "Aceptado",
+		className:
+			"bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300",
+		icon: <BadgeCheck strokeWidth={2.75} />,
+	},
+	FAILED: {
+		label: "Cancelado",
+		className:
+			"bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300",
+		icon: <BadgeX strokeWidth={2.75} />,
+	},
+	UNKNOWN: {
+		label: "Desconocido",
+		className:
+			"bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300",
+		icon: <BadgeQuestionMark strokeWidth={2.75} />,
 	},
 };
 
 /**
  * 
  * @param {object} props
- * @param {"ACCEPTED" | "CANCELLED"} [props.status]
  * @param {string} [props.name]
- * @param {Date} [props.createdAt]
- * @param {Date} [props.bookingDateTime]
+ * @param {object} [props.order]
  * @param {"compact" | "normal"} [props.size]
  * @param {boolean} [props.hideDay]
  * @param {boolean} [props.hideRelativeTime]
  */
 export default function OrderLastCard({
 	name,
-	status,
-	createdAt,
+	order = {},
 	size = "normal",
 	hideRelativeTime = false
 }) {
-	const config = STATUS_CONFIG[status] || STATUS_CONFIG.UNKNOWN;
+	const config = STATUS_CONFIG[order?.status] || STATUS_CONFIG.UNKNOWN;
 	const now = new Date();
 
 	// Calculate relative dates
@@ -68,6 +97,18 @@ export default function OrderLastCard({
 	const tomorrow = new Date(now);
 	tomorrow.setDate(now.getDate() + 1);
 
+	const { getProducts } = useProducts();
+	const [products, setProducts] = useState([]);
+
+	useEffect(() => {
+		const loadProducts = async () => {
+			const response = await getProducts(getUserDefaultRestaurant()?.id);
+			setProducts(response);
+		};
+
+		loadProducts();
+	}, [getProducts]);
+
 	return (
 		<div>
 			<details className="order-last-card" name="order">
@@ -76,7 +117,7 @@ export default function OrderLastCard({
 						<section className="head">
 							{!hideRelativeTime && <div className="time-ago">
 								<Clock strokeWidth={2.5} />
-								<span><RelativeTime timestamp={createdAt} /></span>
+								<span><RelativeTime timestamp={order?.createdAt} /></span>
 							</div>}
 							<Badge className={`badge ${config?.className} ${size === "compact" ? "compact" : ""}`}>
 								{config?.icon}
@@ -84,31 +125,37 @@ export default function OrderLastCard({
 							</Badge>
 						</section>
 						<h4>{name}</h4>
+						<section className="datetime">
+							<div className="time">
+								<ReceiptEuro />{formatCurrency.format(order?.payment?.amount)}
+							</div>
+						</section>
 					</li>
 					<ChevronDown size={30} />
 				</summary>
 				<section className="order-detail">
-					<span>4 productos</span>
+					<span>{order?.items.length} productos</span>
 					<ul>
-						<li>
-							<img src={PRODUCT_IMAGES_MOCK[3]} alt="" />
-							<h5>2<X size={12} /> Hamburguesa</h5>
-							<span>22,50 €</span>
-						</li>
-						<li>
-							<img src={PRODUCT_IMAGES_MOCK[0]} alt="" />
-							<h5>1<X size={12} />Patatas</h5>
-							<span>6,50 €</span>
-						</li>
-						<li>
-							<img src={PRODUCT_IMAGES_MOCK[9]} alt="" />
-							<h5>1<X size={12} />Coca-Cola</h5>
-							<span>2,20 €</span>
-						</li>
+						{order?.items?.map((item, i) => (
+							<li key={i}>
+								<img src={
+									PRODUCT_IMAGES_MOCK[
+									products.findIndex((p) => p.id == item.id) - 1 %
+									PRODUCT_IMAGES_MOCK.length
+									] || PRODUCT_IMAGES_MOCK[0]
+								} alt="" />
+								<h5>
+									{item.quantity}
+									<X size={12} />
+									{item.name}
+								</h5>
+								<span>{formatCurrency.format(item.price)}</span>
+							</li>
+						))}
 					</ul>
 					<div className="total">
 						<span>Total</span>
-						<span className="quantity">31,20€</span>
+						<span className="quantity">{formatCurrency.format(order?.payment?.amount)}</span>
 					</div>
 				</section>
 			</details>

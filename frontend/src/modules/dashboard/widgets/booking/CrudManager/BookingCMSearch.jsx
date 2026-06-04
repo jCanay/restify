@@ -193,7 +193,7 @@ export default function BookingCMSearch() {
 		params.api.setGridOption("datasource", dataSource);
 	};
 
-	// Manejador del buscador
+	// Función del buscador
 	const onFilterTextBoxChanged = (e) => {
 		const value = e.target.value;
 		setSearchText(value);
@@ -204,22 +204,17 @@ export default function BookingCMSearch() {
 		// Obtenemos los nodos seleccionados
 		const selectedNodes = event.api.getSelectedNodes();
 
-		// Obtenemos los datos (el objeto que parseaste en parseBookings)
+		// Obtenemos los datos
 		const selectedData = selectedNodes.map((node) => node.data);
 
 		if (selectedData.length > 0) {
 			console.log("Reserva seleccionada:", selectedData[0]);
-			// Aquí puedes guardar el valor en un estado o ejecutar una acción
-			// setSelectedBooking(selectedData[0]);
 		} else {
 			console.log("No hay nada seleccionado");
 		}
 	};
 
 	const onCellValueChanged = (event) => {
-		// Si usaste setDataValue, este log DEBE aparecer ahora
-		console.log("¡POR FIN! Cambio detectado:", event.newValue);
-
 		if (event.column.getColId() === "bookingDate") {
 			// Lógica de guardado en API
 		}
@@ -237,8 +232,6 @@ export default function BookingCMSearch() {
 
 		if (gridRef.current && gridRef.current.api) {
 			gridRef.current.api.deselectAll();
-
-			// Opcional: También podrías querer limpiar el foco de la celda actual
 			gridRef.current.api.clearFocusedCell();
 		}
 	};

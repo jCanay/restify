@@ -70,7 +70,44 @@ public class SetupDataLoader implements CommandLineRunner {
                     .user(savedAdmin)
                     .onboardingCompleted(true)
                     .build();
+
             Account savedAdminAccount = accountRepository.save(adminAccount);
+
+            Address adminAddress = Address.builder()
+                    .label("Dirección")
+                    .streetAddress("Calle Admin 1")
+                    .city("Ourense")
+                    .country("Spain")
+                    .countryCode("es")
+                    .zipCode("32002")
+                    .floor("1A")
+                    .latitude(42.341032)
+                    .longitude(-7.869657)
+//                    .location()
+                    .zoneId(locationService.getZoneIdByCoordinates(42.341032, -7.869657))
+                    .isDefault(true)
+                    .account(savedAdminAccount)
+                    .build();
+
+            Address adminRealAddress = Address.builder()
+                    .label("Dirección")
+                    .streetAddress("Pura e Dora Vázquez 25")
+                    .city("Ourense")
+                    .country("Spain")
+                    .countryCode("es")
+                    .zipCode("32002")
+                    .floor("1A")
+                    .latitude(42.336000)
+                    .longitude(-7.869383)
+//                    .location()
+                    .zoneId(locationService.getZoneIdByCoordinates(42.341032, -7.869657))
+                    .isDefault(true)
+                    .account(savedAdminAccount)
+                    .build();
+
+            Address savedAdminAddress = addressRepository.save(adminAddress);
+            Address savedRealAdminAddress = addressRepository.save(adminRealAddress);
+            adminAccount.setAddresses(List.of(savedAdminAddress, savedRealAdminAddress));
 
             Restaurant adminRestaurant = Restaurant.builder()
                     .name("Admin Restaurant")

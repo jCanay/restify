@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface OrderService {
-    OrderDTO create(OrderDTO orderDTO, Long restaurantId, User user);
+    OrderDTO create(OrderDTO orderDTO, Long restaurantId, Long addressId, User user);
 
     Page<OrderDTO> getAllByRestaurantId(Long restaurantId, Pageable pageable, User user);
 }

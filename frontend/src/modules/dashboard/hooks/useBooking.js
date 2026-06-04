@@ -41,7 +41,7 @@ export const useBookings = () => {
       } catch (err) {
         console.log(err.response.message || "Error fetching bookings")
         setError(err.response.message || "Error fetching bookings")
-        return []
+        throw err
       } finally {
         setLoading(false)
       }

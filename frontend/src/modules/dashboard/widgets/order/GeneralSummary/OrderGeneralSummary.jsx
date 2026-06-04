@@ -1,6 +1,6 @@
 import "./css/order-general-summary.css";
-import Chart from "../../Chart";
 import Widget from "../../general/Widget";
+import BarChart from "../../booking/GeneralSummary/BarChart";
 
 
 export default function OrderGeneralSummary() {
@@ -9,7 +9,7 @@ export default function OrderGeneralSummary() {
 			<select name="" id="">
 				<option value="">Última semana</option>
 			</select>
-			<Chart></Chart>
+			<BarChart />
 		</Widget>
 	);
 }

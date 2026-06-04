@@ -1,10 +1,7 @@
 package org.canay.backend.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.Instant;
 import java.util.List;
@@ -14,6 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,24 +19,30 @@ public class Order {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private OrderStatus status;
+    @Builder.Default
+    private OrderStatus status = OrderStatus.PENDING;
+
+    private String notes;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "restaurant_id", nullable = false)
     private Restaurant restaurant;
 
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
+    @ToString.Exclude
     private Account account;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)
+    @ToString.Exclude
     private Address address;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "payment_id")
     private Payment payment;
 
@@ -49,6 +53,10 @@ public class Order {
     protected void onCreate() {
         createdAt = Instant.now();
         updatedAt = Instant.now();
+
+        if (this.status == null) {
+            this.status = OrderStatus.PENDING;
+        }
     }
 
     @PreUpdate

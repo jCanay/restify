@@ -59,6 +59,12 @@ export const setShippingCosts = (shippingCosts) => {
   $cartStore.set({ ...current, shippingCosts })
 }
 
+export const setRestaurantId = (restaurantId) => {
+  const current = $cartStore.get()
+
+  $cartStore.set({ ...current, restaurantId })
+}
+
 export const getTotalItems = () => {
   const current = $cartStore.get()
   let total = 0
@@ -99,4 +105,8 @@ export const getCheckoutTotal = () => {
   const current = $cartStore.get()
 
   return getItemTotalPrice() + current.shippingCosts || 0
+}
+export const deleteCartKey = () => {
+  $cartStore.set(DEFAULT_DATA)
+  localStorage.removeItem("cart")
 }

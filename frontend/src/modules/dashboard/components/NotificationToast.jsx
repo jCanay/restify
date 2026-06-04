@@ -8,13 +8,14 @@ import "./notification-toast.css";
  * @param {string} [options.description]
  * @param {"info" | "success" | "error"} [options.variant]
  * @param {boolean} [options.dismissible]
+ * @param {boolean} [options.showCloseButton]
  * @param {import("react").ReactNode} [options.icon]
  * @param {Number} [options.duration]
  * @param {boolean} [options.showAction]
  * @param {string} [options.actionText]
  * @param {Function} [options.handleActionClick]
  */
-export const showToast = ({ title, description, variant, dismissible, icon, duration, showAction, actionText, handleActionClick } = {}) => {
+export const showToast = ({ title, description, variant, dismissible, showCloseButton, icon, duration, showAction, actionText, handleActionClick } = {}) => {
 
 	const variants = {
 		info: {
@@ -41,7 +42,7 @@ export const showToast = ({ title, description, variant, dismissible, icon, dura
 			description: description,
 			icon: variants[variant]?.icon || icon,
 			dismissible,
-			closeButton: !dismissible,
+			closeButton: showCloseButton,
 			duration,
 			action: showAction && buttonGroup,
 		});

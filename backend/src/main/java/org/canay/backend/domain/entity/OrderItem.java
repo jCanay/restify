@@ -1,10 +1,7 @@
 package org.canay.backend.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -26,6 +23,7 @@ public class OrderItem {
     private Integer quantity;
 
     @ManyToOne
+    @ToString.Exclude
     @JoinColumn(name = "order_id")
     private Order order;
 }

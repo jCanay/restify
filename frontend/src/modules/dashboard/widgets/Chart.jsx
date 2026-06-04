@@ -1,8 +1,8 @@
 import { ChartContainer } from "@/components/ui/chart";
 import { Bar, BarChart } from "recharts";
 
-function Chart() {
-	const chartData = [
+function Chart({ data, config }) {
+	const chartData = data || [
 		{ month: "January", desktop: 186, mobile: 80 },
 		{ month: "February", desktop: 305, mobile: 200 },
 		{ month: "March", desktop: 237, mobile: 120 },
@@ -11,7 +11,7 @@ function Chart() {
 		{ month: "June", desktop: 214, mobile: 140 },
 	];
 
-	const chartConfig = {
+	const chartConfig = config || {
 		desktop: {
 			label: "Desktop",
 			color: "#2563eb",
@@ -26,8 +26,10 @@ function Chart() {
 		<div className="chart-wrapper">
 			<ChartContainer config={chartConfig} className="w-full h-full">
 				<BarChart accessibilityLayer data={chartData}>
-					<Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
-					<Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
+					{Object.keys(chartConfig).map((c, i) => (
+						<Bar key={i} dataKey={c} fill={chartConfig[c].color} radius={4} />
+					))}
+
 				</BarChart>
 			</ChartContainer>
 		</div>

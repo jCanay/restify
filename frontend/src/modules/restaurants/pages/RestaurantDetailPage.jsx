@@ -14,6 +14,7 @@ import { $cartStore, addItemToCart, getItemCountById, setRestaurantId, setShippi
 import Stepper from "../components/Stepper/Stepper";
 import { useStore } from "@nanostores/react";
 import ProductCard from "../components/ProductCard/ProductCard";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function RestaurantDetailPage() {
 	const { getProductsByUrl, loading, error } = useProducts();
@@ -119,6 +120,7 @@ export default function RestaurantDetailPage() {
 
 	return (
 		<>
+			<Toaster position="top-center" />
 			<RestaurantsNavbar placeholder={`Buscar en ${restaurant.name}`} rightComponents={[<Cart />]} />
 			<main className="restaurant-detail-page container">
 				<Breadcrums links={links} />

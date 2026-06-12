@@ -59,7 +59,7 @@ function Navbar() {
 			access: ["ROLE_ADMIN", "ROLE_OWNER"],
 			icon: <PieChart size={24} />,
 			className: "dashboard-btn",
-			function: () => navigate("/dashboard"),
+			function: () => navigate("/dashboard/bookings"),
 		},
 		{
 			text: "Perfil",

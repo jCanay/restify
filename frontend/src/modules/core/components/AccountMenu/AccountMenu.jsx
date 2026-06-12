@@ -62,7 +62,7 @@ export default function AccountMenu() {
 			access: ["ROLE_ADMIN", "ROLE_OWNER"],
 			icon: <PieChart size={18} />,
 			className: "dashboard-btn",
-			function: () => navigate("/dashboard"),
+			function: () => navigate("/dashboard/bookings"),
 		},
 		{
 			text: "Perfil",
@@ -76,7 +76,7 @@ export default function AccountMenu() {
 			access: ["ROLE_ADMIN", "ROLE_RIDER", "ROLE_USER"],
 			icon: <ReceiptText size={18} />,
 			className: "",
-			function: () => { },
+			function: () => { navigate("/account/orders"); },
 		},
 		{
 			text: "Facturación",

@@ -116,7 +116,7 @@ export default function RestaurantCheckoutPage() {
 		await new Promise((r) => setTimeout(r, 4000));
 
 		deleteCartKey();
-		navigate(-1);
+		navigate("/account/orders");
 	};
 
 	return (

@@ -17,7 +17,7 @@ export default function RestaurantProduct() {
 
 	useEffect(() => {
 		const loadProduct = () => {
-			setImg(PRODUCT_IMAGES_MOCK[product?.id - 1 % PRODUCT_IMAGES_MOCK.length]);
+			setImg(PRODUCT_IMAGES_MOCK[(product?.id - 1) % PRODUCT_IMAGES_MOCK.length] || PRODUCT_IMAGES_MOCK[0]);
 		};
 
 		loadProduct();

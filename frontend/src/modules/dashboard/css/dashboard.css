@@ -61,21 +61,25 @@
         transition-property: scale;
         transition-timing-function: var(--transition-bounce);
 
+        &[aria-disabled="true"] {
+          cursor: not-allowed;
+        }
+
         & svg {
           height: 20px;
           aspect-ratio: 1;
         }
 
-        &.active {
+        &.active:not([aria-disabled="true"]) {
           background-color: var(--primary);
           color: white;
         }
 
-        &:active {
+        &:active:not([aria-disabled="true"]) {
           scale: 0.95;
         }
 
-        &:hover:not(.active) {
+        &:hover:not(.active):not([aria-disabled="true"]) {
           background-color: var(--light200);
         }
       }

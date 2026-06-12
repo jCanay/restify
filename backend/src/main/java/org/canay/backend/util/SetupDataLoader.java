@@ -1,7 +1,9 @@
 package org.canay.backend.util;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.canay.backend.domain.dto.*;
 import org.canay.backend.domain.entity.*;
 import org.canay.backend.repository.*;
 import org.canay.backend.service.DashboardService;
@@ -9,10 +11,14 @@ import org.canay.backend.service.LocationService;
 import org.jspecify.annotations.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -34,6 +40,8 @@ public class SetupDataLoader implements CommandLineRunner {
 
     private final ObjectMapper objectMapper;
     private final PasswordEncoder passwordEncoder;
+
+    private final Environment environment;
 
     @Value("${initial.admin.username}")
     private String adminUsername;
@@ -138,19 +146,121 @@ public class SetupDataLoader implements CommandLineRunner {
             dashboardService.initializeDashboard(savedAdminRestaurant, adminRole);
         }
 
-        // Setup user
-        if (userRepository.findByUsername("setup").isEmpty()) {
-            User setup = User.builder()
-                    .username("setup")
-                    .password(passwordEncoder.encode(adminPassword))
-                    .email("setup@setup.com")
-                    .role(adminRole)
-                    .build();
+        // Cargar datos iniciales (solo en dev)
+        boolean isDevProfile = Arrays.asList(environment.getActiveProfiles()).contains("dev");
 
-            Account setupAccount = Account.builder().user(setup).onboardingCompleted(false).build();
+        if (isDevProfile) {
+            loadDevelopmentDataset(adminRole);
+        }
+    }
 
-            userRepository.save(setup);
-            accountRepository.save(setupAccount);
+    private void loadDevelopmentDataset(UserRole adminRole) {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/data/data.json");
+            if (inputStream == null) return;
+
+            List<SetupDataDTO> ownersToImport = objectMapper.readValue(
+                    inputStream,
+                    new TypeReference<>() {}
+            );
+
+            for (SetupDataDTO dto : ownersToImport) {
+                UserDTO userDTO = dto.getUser();
+                AccountDTO accountDTO = dto.getAccount();
+                RestaurantDTO restDTO = dto.getRestaurantDetail().getRestaurant();
+                AddressDTO addressDTO = restDTO.getAddress();
+
+                if (userRepository.findByUsername(userDTO.getUsername()).isPresent()) {
+                    continue;
+                }
+
+                // Paso A: Crear el usuario dueño de prueba
+                User user = User.builder()
+                        .username(userDTO.getUsername())
+                        .email(userDTO.getEmail())
+                        .password(passwordEncoder.encode(dto.getPassword()))
+                        .role(adminRole)
+                        .build();
+                User savedUser = userRepository.save(user);
+
+                // Paso B: Crear la cuenta asociada
+                Account account = Account.builder()
+                        .user(savedUser)
+                        .name(accountDTO.getName())
+                        .surname(accountDTO.getSurname())
+                        .onboardingCompleted(accountDTO.getOnboardingCompleted())
+                        .build();
+                Account savedAccount = accountRepository.save(account);
+
+                // Paso C: Dirección de la cuenta
+                Address accountAddress = Address.builder()
+                        .label(addressDTO.getLabel())
+                        .streetAddress(addressDTO.getStreetAddress())
+                        .city(addressDTO.getCity())
+                        .country(addressDTO.getCountry())
+                        .countryCode(addressDTO.getCountryCode())
+                        .zipCode(addressDTO.getZipCode())
+                        .floor(addressDTO.getFloor())
+                        .latitude(addressDTO.getLatitude())
+                        .longitude(addressDTO.getLongitude())
+                        .isDefault(addressDTO.getIsDefault())
+                        .account(savedAccount)
+                        .zoneId(locationService.getZoneIdByCoordinates(addressDTO.getLatitude(),
+                                addressDTO.getLongitude()))
+                        .build();
+                Address savedAccountAddress = addressRepository.save(accountAddress);
+                savedAccount.setAddresses(List.of(savedAccountAddress));
+
+                // Paso D: Crear el restaurante
+                Restaurant restaurant = Restaurant.builder()
+                        .name(restDTO.getName())
+                        .shippingCosts(restDTO.getShippingCosts())
+                        .deliveryRadiusMeters(restDTO.getDeliveryRadiusMeters())
+                        .account(savedAccount)
+                        .isDefault(restDTO.getIsDefault())
+                        .build();
+                Restaurant savedRestaurant = restaurantRepository.save(restaurant);
+
+                // Paso E: Dirección física del restaurante
+                Address restaurantAddress = Address.builder()
+                        .streetAddress(savedAccountAddress.getStreetAddress())
+                        .city(savedAccountAddress.getCity())
+                        .country(savedAccountAddress.getCountry())
+                        .countryCode(savedAccountAddress.getCountryCode())
+                        .zipCode(savedAccountAddress.getZipCode())
+                        .latitude(savedAccountAddress.getLatitude())
+                        .longitude(savedAccountAddress.getLongitude())
+                        .zoneId(savedAccountAddress.getZoneId())
+                        .isDefault(true)
+                        .restaurant(savedRestaurant)
+                        .build();
+                Address savedRestAddress = addressRepository.save(restaurantAddress);
+                savedRestaurant.setAddress(savedRestAddress);
+
+                // Paso F: Cargar catálogo de productos del restaurante
+                List<ProductDTO> productsDTO = dto.getRestaurantDetail().getProducts();
+                if (productsDTO != null && !productsDTO.isEmpty()) {
+                    List<Product> products = productsDTO.stream()
+                            .map(pDto -> Product.builder()
+                                    .name(pDto.getName())
+                                    .description(pDto.getDescription())
+                                    .category(pDto.getCategory())
+                                    .price(pDto.getPrice())
+                                    .restaurant(savedRestaurant)
+                                    .build())
+                            .toList();
+
+                    productRepository.saveAll(products);
+                }
+
+                // Paso G: Inicializar el Dashboard analítico
+                dashboardService.initializeDashboard(savedRestaurant, adminRole);
+            }
+
+            System.out.println(">> [DEV] Ecosistema de pruebas cargado completamente desde el JSON. <<");
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error al inyectar el set de datos de desarrollo", e);
         }
     }
 

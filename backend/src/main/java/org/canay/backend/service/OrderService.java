@@ -9,4 +9,6 @@ public interface OrderService {
     OrderDTO create(OrderDTO orderDTO, Long restaurantId, Long addressId, User user);
 
     Page<OrderDTO> getAllByRestaurantId(Long restaurantId, Pageable pageable, User user);
+
+    Page<OrderDTO> getAllByUser(Pageable pageable, User user);
 }

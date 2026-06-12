@@ -19,6 +19,7 @@ import { getAuthStatus } from "@/modules/auth/utils/authUtils";
 import { $authStore } from "@/modules/auth/contexts/authStore";
 import { $userStore } from "@/modules/dashboard/contexts/userStore";
 import { useNavigate } from "react-router";
+import { showToast } from "@/modules/dashboard/components/NotificationToast";
 
 export default function Cart() {
 	const cart = useStore($cartStore);
@@ -31,7 +32,13 @@ export default function Cart() {
 
 	const handlePayClick = () => {
 		if (!authenticated) {
-			navigate("/login");
+			showToast({
+				dismissible: false,
+				title: "No autenticado",
+				description: "Debes iniciar sesión para finalizar el pedido",
+				variant: "info"
+			});
+			// navigate("/login");
 		} else {
 			navigate("checkout");
 		}

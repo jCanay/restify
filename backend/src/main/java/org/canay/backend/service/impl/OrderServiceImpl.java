@@ -68,4 +68,14 @@ public class OrderServiceImpl implements OrderService {
             return orderDTO;
         }));
     }
+
+    @Override
+    public Page<OrderDTO> getAllByUser(Pageable pageable, User user) {
+        Account account = accountRepository.findByUser(user)
+                .orElseThrow(() -> new ResourceNotFoundException("not-found.account"));
+
+        Page<Order> orders = orderRepository.findAllByAccountId(account.getId(), pageable);
+        
+        return orders.map(orderMapper::mapTo);
+    }
 }

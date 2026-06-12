@@ -51,5 +51,34 @@ export const useOrders = () => {
     [],
   )
 
-  return { addOrder, getAllOrdersByRestaurantId, loading, error }
+  const getAllOrdersByUser = useCallback(
+    async ({ page, size, sort, search } = {}) => {
+      try {
+        setLoading(true)
+
+        const response = await api.get(
+          `/users/orders?page=${page || 0}&size=${size || 20}&sort=${sort || ""}`,
+        )
+        const orders = response.data
+
+        setError(null)
+        return orders
+      } catch (err) {
+        console.log(err.response.message || "Error fetching orders")
+        setError(err.response.message || "Error fetching orders")
+        throw err
+      } finally {
+        setLoading(false)
+      }
+    },
+    [],
+  )
+
+  return {
+    addOrder,
+    getAllOrdersByRestaurantId,
+    getAllOrdersByUser,
+    loading,
+    error,
+  }
 }

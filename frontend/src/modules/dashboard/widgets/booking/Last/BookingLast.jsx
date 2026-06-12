@@ -55,8 +55,8 @@ function BookingLast() {
 				) : (
 					<div className="empty">
 						<BookMarked size={42} strokeWidth={1.5} />
-						<h4>No hay pedidos</h4>
-						<p>Todavía no se han creado pedidos</p>
+						<h4>No hay reservas</h4>
+						<p>Todavía no se han creado reservas</p>
 					</div>
 				)}
 			</section>

@@ -8,6 +8,7 @@ import { useStore } from "@nanostores/react";
 import {
 	$restaurantsStore,
 	restaurantsExists,
+	setRestaurants,
 } from "../context/restaurantsStore";
 import { deburr, flow, kebabCase } from "lodash";
 import { useProducts } from "../hooks/useProducts";
@@ -24,19 +25,32 @@ export default function RestaurantsPage({ countryCode, city }) {
 
 	useEffect(() => {
 		const loadRestaurants = async () => {
-			if (!restaurantsExists()) {
+			// Obtenemos los datos actuales del store para compararlos
+			const currentStoredRestaurants = $restaurantsStore.get();
+
+			// Comprobamos si ya existen y si coinciden con la ciudad/país actuales
+			// (Asumo que tienes algún campo en tu store que identifica la ciudad/país)
+			const isDataForCurrentLocation =
+				restaurantsExists() &&
+				currentStoredRestaurants.city === city &&
+				currentStoredRestaurants.countryCode === countryCode;
+
+			if (!isDataForCurrentLocation) {
 				try {
+					console.log("Cargando nuevos datos para:", countryCode, city);
 					const response = await getRestaurants(countryCode, city);
-					// Aseguramos que la respuesta trae datos válidos antes de setear
+
 					if (response && response.content) {
 						setLoadedRestaurants(response.content);
 						setFilteredRestaurants(response.content);
+
+						setRestaurants({ countryCode, city, restaurants: response.content });
 					}
 				} catch (err) {
-					console.error("Error cargando restaurantes desde la API:", err);
+					console.error("Error cargando restaurantes:", err);
 				}
 			} else {
-				// SI SÍ EXISTEN en el store, los cargamos de la memoria directamente (Evita peticiones HTTP extra)
+				// Los datos coinciden, los cargamos de memoria
 				setLoadedRestaurants(restaurants);
 				setFilteredRestaurants(restaurants);
 			}

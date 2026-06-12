@@ -144,7 +144,7 @@ function Dashboard() {
 					<DashboardLinks />
 				</ul>
 				<div className="notifications">
-					Notificaciones
+					{/* Notificaciones */}
 				</div>
 				<hr />
 				<DropdownMenu>

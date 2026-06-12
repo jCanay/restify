@@ -9,6 +9,7 @@ import { useAuth } from "../../auth/hooks/useAuth";
 import { $userStore } from "../../dashboard/contexts/userStore";
 import { useStore } from "@nanostores/react";
 import { ScrollTop } from "../components/Scroll/ScrollTop";
+import { AccountRoutes } from "@/modules/account/routes/AccountRoutes";
 
 function AppRouter() {
 	const { authenticated, needsOnboarding } = useAuth();
@@ -23,6 +24,9 @@ function AppRouter() {
 			<Route path="/" element={<Homepage />} />
 			{RestaurantRoutes}
 			{AuthRoutes}
+			<Route element={<ProtectedRoute isAllowed={authenticated} navigateTo={authenticated ? "/account" : "/"} />}>
+				{AccountRoutes}
+			</Route>
 			<Route element={<ProtectedRoute isAllowed={authenticated && !needsOnboarding} navigateTo={authenticated ? "/setup" : "/"} />}>
 				{DashboardRoutes}
 			</Route>

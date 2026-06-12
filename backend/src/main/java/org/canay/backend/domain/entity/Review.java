@@ -8,6 +8,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
+
 @Entity
 @Table(name = "reviews")
 @Data
@@ -24,6 +26,8 @@ public class Review {
     private Integer rating;
 
     private String message;
+
+    private Instant createdAt;
 
     @ManyToOne
     @JoinColumn(name = "restaurant_id")

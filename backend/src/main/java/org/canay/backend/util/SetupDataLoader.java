@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -34,6 +35,7 @@ public class SetupDataLoader implements CommandLineRunner {
     private final WidgetRepository widgetRepository;
     private final AddressRepository addressRepository;
     private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
 
     private final DashboardService dashboardService;
     private final LocationService locationService;
@@ -124,6 +126,21 @@ public class SetupDataLoader implements CommandLineRunner {
                     .build();
 
             Restaurant savedAdminRestaurant = restaurantRepository.save(adminRestaurant);
+
+            List<Review> reviews = new ArrayList<>(List.of(
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(5).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(4).restaurant(savedAdminRestaurant).build(),
+                    Review.builder().rating(3).restaurant(savedAdminRestaurant).build()
+            ));
+
+            reviews.forEach(reviewRepository::save);
 
             createAndSaveProducts(savedAdminRestaurant);
 

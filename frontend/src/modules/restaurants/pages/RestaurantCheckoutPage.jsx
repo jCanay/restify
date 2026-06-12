@@ -1,13 +1,29 @@
-import { ChevronDown, ChevronLeft, CreditCard, HandCoins, MapPin } from "lucide-react";
+import {
+	ChevronDown,
+	ChevronLeft,
+	CreditCard,
+	HandCoins,
+	MapPin,
+} from "lucide-react";
 import "../css/restaurant-checkout-page.css";
 import { useNavigate, useParams } from "react-router";
 import { useStore } from "@nanostores/react";
-import { $cartStore, deleteCartKey, getCheckoutTotal, getItemTotalPrice, getTotalItems } from "../context/cartStore";
+import {
+	$cartStore,
+	deleteCartKey,
+	getCheckoutTotal,
+	getItemTotalPrice,
+	getTotalItems,
+} from "../context/cartStore";
 import { formatCurrency } from "../utils/stringParser";
 import { useEffect, useState } from "react";
 import { useProducts } from "../hooks/useProducts";
 import AddressMap from "../components/AddressMap/AddressMap";
-import { SiApplepay, SiGooglepay, SiPaypal } from "@icons-pack/react-simple-icons";
+import {
+	SiApplepay,
+	SiGooglepay,
+	SiPaypal,
+} from "@icons-pack/react-simple-icons";
 import { useAddress } from "../hooks/useAddress";
 import { Spinner } from "@/components/ui/spinner";
 import { useOrders } from "../hooks/useOrders";
@@ -18,34 +34,36 @@ const PAYMENT_METHODS = {
 	CASH: {
 		name: "CASH",
 		label: "Efectivo",
-		icon: <HandCoins size={20} className="payment-icon" />
+		icon: <HandCoins size={20} className="payment-icon" />,
 	},
 	CREDIT_CARD: {
 		name: "CREDIT_CARD",
 		label: "Tarjeta de crédito",
-		icon: <CreditCard size={20} className="payment-icon" />
+		icon: <CreditCard size={20} className="payment-icon" />,
 	},
 	PAYPAL: {
 		name: "PAYPAL",
 		label: "PayPal",
-		icon: <SiPaypal size={20} className="payment-icon" />
+		icon: <SiPaypal size={20} className="payment-icon" />,
 	},
 	GOOGLE_PAY: {
 		name: "GOOGLE_PAY",
 		label: "Google Pay",
-		icon: <SiGooglepay size={20} className="payment-icon" />
+		icon: <SiGooglepay size={20} className="payment-icon" />,
 	},
 	APPLE_PAY: {
 		name: "APPLE_PAY",
 		label: "Apple Pay",
-		icon: <SiApplepay size={20} className="payment-icon" />
+		icon: <SiApplepay size={20} className="payment-icon" />,
 	},
 };
 
 export default function RestaurantCheckoutPage() {
 	const navigate = useNavigate();
 	const { shippingCosts, restaurantId, items } = useStore($cartStore) || 0;
-	const [selectedPayment, setSelectedPayment] = useState(PAYMENT_METHODS.CASH.name);
+	const [selectedPayment, setSelectedPayment] = useState(
+		PAYMENT_METHODS.CASH.name,
+	);
 	const [selectedAddressId, setSelectedAddressId] = useState(-1);
 	const [addresses, setAddresses] = useState([]);
 	const { getAllAddressByUser } = useAddress();
@@ -61,7 +79,6 @@ export default function RestaurantCheckoutPage() {
 				setSelectedAddressId(response[0].id);
 
 				console.log(response);
-
 			} catch (err) {
 				console.error(err);
 			}
@@ -82,7 +99,7 @@ export default function RestaurantCheckoutPage() {
 		return items.map((i) => ({
 			name: i.name,
 			price: i.price,
-			quantity: i.quantity
+			quantity: i.quantity,
 		}));
 	};
 
@@ -94,11 +111,11 @@ export default function RestaurantCheckoutPage() {
 				payment: {
 					amount: getCheckoutTotal(),
 					status: "PAID",
-					method: selectedPayment
-				}
+					method: selectedPayment,
+				},
 			},
 			restaurantId: restaurantId,
-			addressId: selectedAddressId
+			addressId: selectedAddressId,
 		});
 
 		if (!newOrder) return;
@@ -109,8 +126,9 @@ export default function RestaurantCheckoutPage() {
 		showToast({
 			dismissible: false,
 			title: "Pedido creado",
-			description: "No cierres la ventana, estamos confirmando tu pedido...",
-			variant: "success"
+			description:
+				"No cierres la ventana, estamos confirmando tu pedido...",
+			variant: "success",
 		});
 
 		await new Promise((r) => setTimeout(r, 4000));
@@ -133,19 +151,26 @@ export default function RestaurantCheckoutPage() {
 					<div className="products">
 						<details>
 							<summary>
-								<h3>Tu pedido<span>
-									{getTotalItems()} producto
-									{getTotalItems() !== 1 ? "s" : ""}
-								</span></h3>
+								<h3>
+									Tu pedido
+									<span>
+										{getTotalItems()} producto
+										{getTotalItems() !== 1 ? "s" : ""}
+									</span>
+								</h3>
 								<ChevronDown />
 								<hr />
 							</summary>
 							<ul>
 								{items?.map((item, i) => (
 									<li key={i}>
-										<span className="item-count">{item?.quantity}x</span>
+										<span className="item-count">
+											{item?.quantity}x
+										</span>
 										{item?.name}
-										<span className="price">{formatCurrency.format(item?.price)}</span>
+										<span className="price">
+											{formatCurrency.format(item?.price)}
+										</span>
 									</li>
 								))}
 							</ul>
@@ -154,15 +179,31 @@ export default function RestaurantCheckoutPage() {
 					<div className="delivery">
 						<h3>Dirección de entrega</h3>
 						<AddressMap
-							latitude={addresses?.find((a) => a.id == selectedAddressId)?.latitude}
-							longitude={addresses?.find((a) => a.id == selectedAddressId)?.longitude}
+							latitude={
+								addresses?.find(
+									(a) => a.id == selectedAddressId,
+								)?.latitude
+							}
+							longitude={
+								addresses?.find(
+									(a) => a.id == selectedAddressId,
+								)?.longitude
+							}
 						/>
 						<div className="payment">
 							<details>
 								<summary>
 									<span className="flex gap-2 items-center">
-										<MapPin size={20} className="payment-icon" />
-										{addresses?.find((a) => a.id == selectedAddressId)?.streetAddress}
+										<MapPin
+											size={20}
+											className="payment-icon"
+										/>
+										{
+											addresses?.find(
+												(a) =>
+													a.id == selectedAddressId,
+											)?.streetAddress
+										}
 									</span>
 									<ChevronDown />
 									<hr />
@@ -175,9 +216,14 @@ export default function RestaurantCheckoutPage() {
 												<input
 													type="radio"
 													name="address"
-													checked={selectedAddressId == address.id}
+													checked={
+														selectedAddressId ==
+														address.id
+													}
 													value={address.id}
-													onChange={handleAddressSelect}
+													onChange={
+														handleAddressSelect
+													}
 													id={address.name}
 												/>
 											</span>
@@ -191,7 +237,8 @@ export default function RestaurantCheckoutPage() {
 					<div className="payment">
 						<details>
 							<summary>
-								<h3>Método de pago
+								<h3>
+									Método de pago
 									<span className="flex gap-2 items-center">
 										{PAYMENT_METHODS[selectedPayment].icon}
 										{PAYMENT_METHODS[selectedPayment].label}
@@ -201,22 +248,29 @@ export default function RestaurantCheckoutPage() {
 								<hr />
 							</summary>
 							<ul>
-								{Object.values(PAYMENT_METHODS)?.map((method, i) => (
-									<label key={i}>
-										{method.icon}
-										{method.label}
-										<span className="price">
-											<input
-												type="radio"
-												name="payment"
-												checked={selectedPayment == method.name}
-												value={method.name}
-												onChange={handlePaymentSelect}
-												id={method.name}
-											/>
-										</span>
-									</label>
-								))}
+								{Object.values(PAYMENT_METHODS)?.map(
+									(method, i) => (
+										<label key={i}>
+											{method.icon}
+											{method.label}
+											<span className="price">
+												<input
+													type="radio"
+													name="payment"
+													checked={
+														selectedPayment ==
+														method.name
+													}
+													value={method.name}
+													onChange={
+														handlePaymentSelect
+													}
+													id={method.name}
+												/>
+											</span>
+										</label>
+									),
+								)}
 							</ul>
 						</details>
 					</div>
@@ -225,9 +279,22 @@ export default function RestaurantCheckoutPage() {
 					<h3>Resumen</h3>
 					<hr />
 					<ul>
-						<li>Productos<span>{formatCurrency.format(getItemTotalPrice())}</span></li>
-						<li>Gastos de envío<span>{formatCurrency.format(shippingCosts)}</span></li>
-						<li className="total">TOTAL<span>{formatCurrency.format(getCheckoutTotal())}</span></li>
+						<li>
+							Productos
+							<span>
+								{formatCurrency.format(getItemTotalPrice())}
+							</span>
+						</li>
+						<li>
+							Gastos de envío
+							<span>{formatCurrency.format(shippingCosts)}</span>
+						</li>
+						<li className="total">
+							TOTAL
+							<span>
+								{formatCurrency.format(getCheckoutTotal())}
+							</span>
+						</li>
 					</ul>
 					<button
 						onClick={handlePayClick}
@@ -236,7 +303,12 @@ export default function RestaurantCheckoutPage() {
 						type="button"
 					>
 						<span>Pagar</span>
-						{loading && <Spinner className="spinner-svg" data-icon="inline-start" />}
+						{loading && (
+							<Spinner
+								className="spinner-svg"
+								data-icon="inline-start"
+							/>
+						)}
 					</button>
 				</aside>
 			</div>

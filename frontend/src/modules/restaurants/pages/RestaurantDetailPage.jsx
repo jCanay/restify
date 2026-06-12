@@ -10,7 +10,14 @@ import { formatCurrency, normalizeUrlString } from "../utils/stringParser";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { PRODUCT_IMAGES_MOCK, RESTAURANT_IMAGES } from "../utils/constants";
 import Cart from "../components/Cart/Cart";
-import { $cartStore, addItemToCart, getItemCountById, setRestaurantId, setShippingCosts, updateItemQuantity } from "../context/cartStore";
+import {
+	$cartStore,
+	addItemToCart,
+	getItemCountById,
+	setRestaurantId,
+	setShippingCosts,
+	updateItemQuantity,
+} from "../context/cartStore";
 import Stepper from "../components/Stepper/Stepper";
 import { useStore } from "@nanostores/react";
 import ProductCard from "../components/ProductCard/ProductCard";
@@ -25,6 +32,7 @@ export default function RestaurantDetailPage() {
 	const [restaurant, setRestaurant] = useState({});
 	const [productOpen, setProductOpen] = useState(false);
 	const [selectedProduct, setSelectedProduct] = useState(null);
+	const [rating, setRating] = useState(0);
 	const cart = useStore($cartStore);
 
 	const img = RESTAURANT_IMAGES[restaurant.id % RESTAURANT_IMAGES.length];
@@ -64,7 +72,9 @@ export default function RestaurantDetailPage() {
 		setSelectedProduct(product);
 		setProductOpen(true);
 
-		navigate(`/${countryCode}/${city}/${slug}/product/${normalizeUrlString(product.name)}`);
+		navigate(
+			`/${countryCode}/${city}/${slug}/product/${normalizeUrlString(product.name)}`,
+		);
 	};
 
 	const handleProductAddClick = (e, product) => {
@@ -92,7 +102,8 @@ export default function RestaurantDetailPage() {
 			setTimeout(() => {
 				const rect = e.target.getBoundingClientRect();
 
-				const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+				const windowHeight =
+					window.innerHeight || document.documentElement.clientHeight;
 
 				const isBottomOvertaking = rect.bottom > windowHeight;
 
@@ -101,7 +112,7 @@ export default function RestaurantDetailPage() {
 				if (isBottomOvertaking || isTopHidden) {
 					e.target.scrollIntoView({
 						behavior: "smooth",
-						block: "start"
+						block: "start",
 					});
 				}
 			}, 60);
